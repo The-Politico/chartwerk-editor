@@ -1,15 +1,133 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="/css/master.css" media="screen" title="no title" charset="utf-8">
-  </head>
-  <body>
-    <h1>THIS IS THE H1</h1>
-    <h2>This is sub-H2</h2>
-    <div id="example"></div>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <title>ChartWerk</title>
+        
 
-    <script type="text/javascript" src="/js/bundle.js"></script>
-  </body>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+
+    	
+<link rel="stylesheet" href="/css/vendor.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/main.css" media="screen" title="no title" charset="utf-8">
+
+
+    </head>
+    <body>
+
+	    <div class="header">
+    <img src="img/tdmn.png">
+    <h1>
+        <a href="">ChartWerk</a>
+        <span class="header-nav">
+            <a href="">Start</a>
+            <a href="">Browse</a>
+            <a href="">MyWerk</a>
+        </span>
+    </h1>
+</div>
+
+
+    	
+
+    <div id="preview-pane">
+
+<div class="switch-toggle preview-view-toggle">
+    <input id="size-mobile" class="rebuild" name="size-select" type="radio" checked>
+    <label for="size-mobile" onclick="">Single Column / Mobile</label>
+    <input id="size-desktop" class="rebuild" name="size-select" type="radio">
+    <label for="size-desktop" onclick="">Double Column <i class="fa fa-twitter"></i></label>
+    <a></a>
+</div>
+
+
+<p>Patch backpack journalist commenters newsroom cafe paywall he said she said reporting, analytics crowdfunding advertising just across the wire monetization blowing up on Twitter paidContent.</p>
+
+<div id="chart"></div>
+
+<p> Article Skimmer Groupon should isn't a business model digital first location-based Snarkmarket curmudgeon tags. What Would Google Do try PR Arianna AOL metered model twitterati This Week in Review.</p>
+<p> Pictures of Goats section #twittermakesyoustupid, curation Nook newspaper strike gotta grok it before you rock it newsonomics copyright bot paidContent, hot news doctrine media diet audience atomization overcome iPhone app filters horse-race coverage Gutenberg parenthesis. Josh Marshall just across the wire the audience knows more than I do social media Romenesko open source Sulzberger <span class="glyphicon glyphicon-headphones" aria-hidden="true"></span> Pictures of Goats section filters abundance crowdsourcing rubber cement, paidContent startups should isn't a business model.</p>
+
+</div>
+
+
+    <div id="editor-pane" role="tabpanel">
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#data" data-target="#data" aria-controls="data" role="tab" data-toggle="tab">Data</a></li>
+    <li role="presentation"><a href="#config-axis" data-target="#config-axis" aria-controls="config-axis" role="tab" data-toggle="tab">Axes</a></li>
+    <li role="presentation"><a href="#config-misc" data-target="#config-misc" aria-controls="config-misc" role="tab" data-toggle="tab">Layout</a></li>
+    <li id="alpacaTab" role="presentation" style="display:none;"><a href="#config-alpaca" data-target="#config-alpaca" aria-controls="config-alpaca" role="tab" data-toggle="tab">Misc</a></li>
+    <li role="presentation"><a href="#config-txt" data-target="#config-txt" aria-controls="config-txt" role="tab" data-toggle="tab">Text<span class="red">*</span></a></li>
+    <li role="presentation"><a href="#config-js" data-target="#config-js" aria-controls="config-js" role="tab" data-toggle="tab">JS</a></li>
+    <li role="presentation"><a href="#config-css" data-target="#config-css" aria-controls="config-css" role="tab" data-toggle="tab">CSS</a></li>
+    <li role="presentation"><a href="#publish" data-target="#publish" aria-controls="publish" role="tab" data-toggle="tab">Publish</a></li>
+    <li role="presentation"><a href="#help" data-target="#help" aria-controls="help" role="tab" data-toggle="tab"><i style="font-size:18px;" class="fa fa-question-circle"></i></a></li>
+</ul>
+
+
+<div class="tab-content">
+
+<div role="tabpanel" class="tab-pane active" id="data">
+
+    <h4>
+        Paste <b>clean</b> data
+        <span class="glyphicon glyphicon-info-sign helper" data-toggle="modal" >
+        </span>
+    </h4>
+
+    <label class="control-label subtext"><b>Remember:</b> No commas, currency symbols, percent signs or other textual notations on numbers.</label>
+
+    <div id="data-input"></div>
+
+
+<!--
+
+    <div class="data-feedback">
+        <div style="display:none;" class="alert alert-danger" role="alert">That doesn't look like structured data. Try again?</div>
+        <div style="display:none;" class="alert alert-success" role="alert">Parsed your data successfully!<button type="button"  class="btn btn-primary data-preview-btn" data-toggle="modal" data-target=".data-preview-modal" aria-hidden="true">Preview</button></div>
+    </div>
+
+    <div style="display:none;" id="classify-cont">
+        <h4>Classify and color columns in your data
+            <span class="glyphicon glyphicon-info-sign helper" data-toggle="modal" data-target=".help-modal" aria-hidden="true">
+            </span>
+        </h4>
+        <table id="column-classify-options"></table>
+    </div>
+
+    <div style="display:none;" id="colorGroup-cont">
+        <h4>Select Group Colors</h4>
+        <div id="colorGroups">
+        </div>
+    </div>
+
+-->
+
+</div>
+
+
+</div>
+
+</div>
+
+
+    <div id="loading-modal">
+    <div class="loading-overlay"></div>
+    <div class="loading-text"><span>Loading</span><img src="img/eq-red.gif"></div>
+</div>
+
+
+
+    	
+<script type="text/javascript" src="/js/vendor.js"></script>
+<script type="text/javascript" src="/js/bundle.js"></script>
+
+
+    </body>
 </html>

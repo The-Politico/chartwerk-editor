@@ -1,0 +1,39 @@
+#preview-pane{
+	width:650px;
+	height:700px;
+	float:left;
+    padding:0 10px;
+	overflow-y:scroll;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+
+    .switch-toggle.preview-view-toggle{
+    	margin:10px 0;
+    	cursor:pointer;
+    	background-color: $lightgrey;
+      	color: $black;
+      	text-shadow: none;
+      	width:calc(100% - 20px);
+
+        label{
+        	cursor:pointer;
+        	color: grey;
+        }
+
+        a{
+        	background-color:rgb(80, 80, 80);
+        }
+        input:checked + label{
+        	color: white;
+        	text-shadow: none;
+        	cursor:default;
+        }
+    }
+
+    p{
+    	font: $body-font;
+    	margin:18px 0;
+    }
+}

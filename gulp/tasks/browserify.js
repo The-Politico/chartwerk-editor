@@ -6,12 +6,13 @@ var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 var streamify = require('gulp-streamify');
 var reactify = require('reactify');
+// var debowerify = require('debowerify');
+// var shim = require('browserify-shim');
 
 
 module.exports = function(){
   return browserify({
-        entries: ['./src/js/app.js'],
-        transform: [reactify],
+        entries: ['./src/js/app.js']
     })
       .bundle()
       .pipe(source('bundle.js'))

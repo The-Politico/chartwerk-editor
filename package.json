@@ -2,17 +2,39 @@
   "name": "chartwerkstatt",
   "version": "0.0.1",
   "description": "",
-  "main": "app.js",
+  "main": "./src/js/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "global:$",
+    "ckeditor": "global:CKEDITOR",
+    "ace": "global:ace"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "ace-builds": "^1.2.2",
     "alpaca": "^1.5.17",
+    "asyncjs": "0.0.10",
     "bootstrap-sass": "^3.3.6",
+    "bootstrap-table": "^1.10.1",
+    "bower-resolve": "^2.2.1",
     "browser-sync": "^2.11.1",
     "browserify": "^13.0.0",
+    "browserify-shim": "^3.8.12",
+    "ckeditor": "^4.5.7",
+    "csvtojson": "^0.5.2",
+    "d3": "^3.5.16",
+    "debowerify": "^1.4.1",
+    "flux": "^2.1.1",
+    "font-awesome": "^4.5.0",
     "gulp": "^3.9.1",
     "gulp-nunjucks-render": "^2.0.0",
     "gulp-sass": "^2.2.0",
@@ -20,13 +42,17 @@
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.3",
     "jquery": "^2.2.2",
+    "leaflet": "^0.7.7",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.1",
     "reactify": "^1.1.1",
     "redux": "^3.3.1",
     "redux-devtools": "^3.1.1",
+    "typed.js": "^1.1.1",
+    "underscore": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "zeroclipboard": "^2.2.0"
   }
 }
