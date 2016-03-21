@@ -1,2 +1,2 @@
 
-require('./components/data-input');
+require('./components/data/input.jsx');

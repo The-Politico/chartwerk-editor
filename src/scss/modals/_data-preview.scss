@@ -1,4 +1,54 @@
-.data-preview-modal .modal-body {
+#data{
+
+    .parse-success{
+        margin-top: 5px;
+        line-height: 22px;
+        text-align:right;
+        button{
+            margin-left: 10px;
+        }
+    }
+
+    #classify-container{
+
+        #classify-selects{
+            tr{
+                padding:3px 0px;
+            }
+            .column-label{
+                display:inline-block;
+                float:left;
+                line-height: 35px;
+                text-align: right;
+            }
+            .Select{
+                width:175px;
+                float:left;
+                margin-left: 15px;
+            }
+        }
+
+    }
+
+
+}
+
+
+#data-preview-modal .modal-body {
     max-height: calc(100vh - 210px);
     overflow-y: auto;
+
+    table{
+        width:100%;
+        th{
+            border-bottom: 3px solid $grey;
+        }
+        td{
+            border-left:1px solid $lightgrey;
+            padding:2px 5px;
+        }
+        tr:nth-child(even){
+            background:$shadowgrey;
+        }
+    }
 }

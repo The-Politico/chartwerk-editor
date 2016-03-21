@@ -34,6 +34,7 @@ module.exports = {
           './bower_components/bootstrap/dist/css/bootstrap.min.css',
           './bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
           './node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.css',
+          './node_modules/react-select/dist/react-select.min.css',
           './bower_components/font-awesome/css/font-awesome.min.css',
           './bower_components/bootstrap/dist/css/bootstrap.min.css',
           './bower_components/bootstrap-table/dist/bootstrap-table.min.css',

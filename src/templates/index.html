@@ -16,5 +16,10 @@
 
     {% include "partials/editor.html" %}
 
-    {% include "partials/modals/loading.html" %}
+
+{%endblock%}
+
+{%block modals%}
+{% include "partials/modals/loading.html" %}
+{% include "partials/modals/data-preview.html" %}
 {%endblock%}
