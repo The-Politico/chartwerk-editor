@@ -6,7 +6,7 @@ var _           = require("underscore");
 var tableify    = require('tableify');
 
 // Components
-var ClassifySection = require('./classifySection.jsx')
+var ClassifySelects = require('./classifySelects.jsx')
 
 var DataInput = React.createClass({
 
@@ -74,6 +74,8 @@ var DataInput = React.createClass({
 
     },
 
+
+
     render: function(){
         var columns = _.keys(this.state.data[0]);
         var success = !this.state.valid ? "" :
@@ -88,10 +90,11 @@ var DataInput = React.createClass({
                         Preview
                     </button>
                 </p>
-                <ClassifySection columns={columns} />
+                <ClassifySelects columns={columns} />
                 </div>
             );
 
+        // Can probably do this a more declarative way...
         $('#data-preview-modal .modal-body').html(tableify(this.state.data));
 
         return (
