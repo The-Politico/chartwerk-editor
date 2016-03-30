@@ -4,6 +4,10 @@ var $           = require('jquery');
 var Converter   = require("csvtojson").Converter;
 var _           = require("underscore");
 var tableify    = require('tableify');
+var Provider    = require("react-redux").Provider;
+var store       = require("../../stores/index.js");
+var actions     = require('../../actions');
+
 
 // Components
 var ClassifySelects = require('./classifySelects.jsx')
@@ -61,7 +65,8 @@ var DataInput = React.createClass({
          * @param  {obj} jsonObj Obj returned by converter
          */
         function parse(format, jsonObj){
-            this.setState({ data: jsonObj, format: format, valid: true });
+            store.dispatch(actions.attachData(jsonObj));
+            this.setState({ data: store.getState().data, format: format, valid: true });
         };
 
         csvConverter.on("end_parsed",parse.bind(this, 'CSV'));
@@ -113,6 +118,8 @@ var DataInput = React.createClass({
 
 
 ReactDOM.render(
-    <DataInput/>,
+
+        <DataInput/>
+,
     document.getElementById('data-input')
 );
