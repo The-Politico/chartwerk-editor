@@ -10,21 +10,21 @@ var actions     = require('../../actions');
 
 
 // Components
-var ClassifySelects = require('./classifySelects.jsx')
+var ClassifySelects = require('./ClassifySelects.jsx')
 
 var DataInput = React.createClass({
 
     getInitialState: function() {
+
         return {
-                data: '',
                 format:'',
                 valid: false
             };
     },
 
     handleDataChange: function(e){
-
         var data = e.target.value;
+
         var tsvConverter = new Converter({
             delimiter:'	' // tab-delimited
         });
@@ -45,7 +45,8 @@ var DataInput = React.createClass({
             }
             // Try JSON data
             try{
-                this.setState({data: JSON.parse(data), format: 'JSON', valid: true });
+                this.props.actions.attachData(jsonObj);
+                this.setState({format: 'JSON', valid: true });
             } catch(e){
                 // Try TSV
                 if(data.indexOf('	') > -1){ // If tab in data...
@@ -65,24 +66,21 @@ var DataInput = React.createClass({
          * @param  {obj} jsonObj Obj returned by converter
          */
         function parse(format, jsonObj){
-            store.dispatch(actions.attachData(jsonObj));
-            this.setState({ data: store.getState().data, format: format, valid: true });
+            this.props.actions.attachData(jsonObj);
+            this.setState({ format: format, valid: true });
         };
 
         csvConverter.on("end_parsed",parse.bind(this, 'CSV'));
         tsvConverter.on("end_parsed",parse.bind(this, 'TSV'));
 
         typeCheck.bind(this)(data);
+
+
+
     },
-
-    componentWillUpdate: function(nextProps, nextState){
-
-    },
-
 
 
     render: function(){
-        var columns = _.keys(this.state.data[0]);
         var success = !this.state.valid ? "" :
             (
                 <div>
@@ -95,12 +93,12 @@ var DataInput = React.createClass({
                         Preview
                     </button>
                 </p>
-                <ClassifySelects columns={columns} />
+                <ClassifySelects werk={this.props.werk} actions={this.props.actions}/>
                 </div>
             );
 
         // Can probably do this a more declarative way...
-        $('#data-preview-modal .modal-body').html(tableify(this.state.data));
+        $('#data-preview-modal .modal-body').html(tableify(this.props.werk.data));
 
         return (
             <div>
@@ -117,9 +115,4 @@ var DataInput = React.createClass({
 });
 
 
-ReactDOM.render(
-
-        <DataInput/>
-,
-    document.getElementById('data-input')
-);
+module.exports = DataInput;

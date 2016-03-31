@@ -13,10 +13,12 @@ var ClassifySelects = React.createClass({
      * Creates an array of nulls, one for each select component
      */
     getInitialState: function(){
+        var columns = _.keys(this.props.werk.data[0]);
         return {
-            'selections': this.props.columns.map(function(column){
+            'selections': columns.map(function(column){
                 return {
-                    select: null
+                    name: column,
+                    value: null
                 };
             }),
         };
@@ -27,7 +29,7 @@ var ClassifySelects = React.createClass({
      * Select component options, condition for base and group classifications.
      */
     setOptions: function(){
-
+        var datamap = this.props.werk.datamap;
         var opts = [
                 { value: 'base', label: 'Base axis', disabled: false },
                 { value: 'series', label: 'Data series' },
@@ -36,8 +38,8 @@ var ClassifySelects = React.createClass({
                 { value: 'ignore', label: 'Ignore column' }
             ];
 
-        opts[0].disabled = _.contains(this.state.selections.map(function(d){return d.select;}),'base') ? true : false;
-        opts[2].disabled = _.contains(this.state.selections.map(function(d){return d.select;}),'group') ? true : false;
+        opts[0].disabled = datamap.base ? true : false;
+        opts[2].disabled = datamap.group ? true : false;
 
         return opts;
 
@@ -48,24 +50,53 @@ var ClassifySelects = React.createClass({
      * @param  {integer} i Index of Select component
      * @param  {string} v Value selected
      */
-    changeValue: function(i, v){
-        console.log("changeValue",i,v);
-        console.log(this);
-        this.state.selections[i].select = v.value;
-        this.setState(this.state);
-        // switch(v.value){
-        //     case 'base':
-        //         this.props.addBase('thing');
-        //         break;
-        // }
+    changeValue: function(i,v){
+        var select = this.state.selections[i];
+        var actions = this.props.actions;
+        switch(select.value){
+            case 'base':
+                actions.removeBase();
+                break;
+            case 'group':
+                actions.removeGroup();
+                break;
+            case 'series':
+                actions.removeSeries(select.name);
+                break;
+            case 'annotation':
+                actions.removeAnnotations(select.name);
+                break;
+            case 'ignore':
+                actions.removeIgnore(select.name);
+                break;
+        }
+        select.value = v.value;
+        switch(v.value){
+            case 'base':
+                actions.addBase(select.name);
+                break;
+            case 'group':
+                actions.addGroup(select.name);
+                break;
+            case 'series':
+                actions.addSeries(select.name);
+                break;
+            case 'annotation':
+                actions.addAnnotations(select.name);
+                break;
+            case 'ignore':
+                actions.addIgnore(select.name);
+                break;
+        }
 
-    }.bind(this),
+    },
 
     render: function(){
 
-        var classifySelects = this.props.columns.map(function(column, i) {
+        var columns = _.keys(this.props.werk.data[0]);
+        var classifySelects = columns.map(function(column, i) {
 
-            var colorSquare = this.state.selections[i].select == 'series' ?
+            var colorSquare = this.state.selections[i].value == 'series' ?
                         <div className="color-square"></div> : null;
 
             return (
@@ -74,9 +105,9 @@ var ClassifySelects = React.createClass({
                 <td>
                 <Select
                     name={column}
-                    value={this.state.selections[i].select}
+                    value={this.state.selections[i].value}
                     options={this.setOptions()}
-                    onChange={this.changeValue}
+                    onChange={this.changeValue.bind(this,i)}
                     searchable={false}
                     placeholder="Choose one"
                     clearable={false}
@@ -103,16 +134,6 @@ var ClassifySelects = React.createClass({
 
 });
 
-
-function mapStateToProps(state) {
-  return {
-    opts: state
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actionCreators, dispatch) }
-}
 
 
 //module.exports = connect(mapDispatchToProps)(ClassifySelects);
