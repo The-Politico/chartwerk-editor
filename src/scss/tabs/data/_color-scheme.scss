@@ -1,0 +1,53 @@
+#data{
+    .colorscheme-container{
+        margin-top: 30px;
+        margin-bottom: 40px;
+
+        .schemekey-square{
+            display:inline-block;
+            height:18px;
+            width:10px;
+        }
+
+        h4{
+            margin-top: 20px;
+        }
+
+        .radio label{
+            padding-left: 0px;
+        }
+        label{
+            font-weight: normal;
+
+
+
+            input[type="radio"] ~ i.fa{
+                margin-right: 10px;
+                font-size: 22px;
+                width:20px;
+                display:inline-block;
+            }
+            input[type="radio"] ~ i.fa.fa-circle-thin{
+                color: $lightgrey;
+                display: inline-block;
+            }
+            input[type="radio"] ~ i.fa.fa-check{
+                display: none;
+            }
+            input[type="radio"]:checked ~ i.fa.fa-circle-thin{
+                display: none;
+            }
+            input[type="radio"]:checked ~ i.fa.fa-check{
+                color: $grey;
+                display: inline-block;
+            }
+            &:hover input[type="radio"] ~ i.fa {
+                color: $grey;
+            }
+            input[type=radio]{
+                display:none;
+            }
+        }
+
+    }
+}

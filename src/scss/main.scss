@@ -3,6 +3,7 @@
 @import 'colors';
 @import 'variables';
 @import 'styles';
+@import 'buttons';
 
 // Page Components
 @import 'header';
@@ -10,3 +11,8 @@
 @import 'modals/data-preview';
 @import 'preview';
 @import 'editor';
+
+@import 'tabs/data/data-input';
+@import 'tabs/data/data-select';
+@import 'tabs/data/color-picker';
+@import 'tabs/data/color-scheme';

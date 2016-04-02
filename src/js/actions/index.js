@@ -74,3 +74,31 @@ module.exports.attachData = function(data){
         data: data
     };
 }
+
+/**
+ * Sets a path that navigates color object (from constants/colors).
+ * @param  {string} path  A string that represents the path to a color
+ *                          array in constants/colors, accessed via the
+ *                          lodash function _.get .
+ */
+module.exports.setColorScheme = function(path){
+    return {
+        type: types.SET_COLOR_SCHEME,
+        path: path,
+    };
+}
+
+module.exports.setColor = function(column, color){
+    return {
+        type: types.SET_COLOR,
+        column: column,
+        color: color
+    };
+}
+
+module.exports.unsetColor = function(column){
+    return {
+        type: types.UNSET_COLOR,
+        column: column
+    };
+}

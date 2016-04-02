@@ -1,7 +1,16 @@
+"use strict";
 var types = require('../constants/actions');
 
 var initialState = [];
 
+/**
+ * data reducer
+ * @param {Object} data         Previous redux store state tree.
+ * @param {Object} action       Action contains type and payload for reducer.
+ *                              See actions/index.js for descriptions of
+ *                              action params.
+ * @returns {Object} nextState  Next redux store state tree.
+ */
 module.exports = function(data, action){
     if (typeof data === 'undefined') {
         return initialState

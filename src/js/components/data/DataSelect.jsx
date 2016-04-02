@@ -1,16 +1,25 @@
+"use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Select = require('react-select');
-var _ = require('underscore');
-var actionCreators = require('../../actions');
-var connect=require("react-redux").connect;
-var bindActionCreators = require('redux').bindActionCreators;
+var _ = require('lodash');
+
+// Components
+var ColorPicker = require('./ColorPicker.jsx');
+var ColorScheme = require('./ColorScheme.jsx');
 
 
-var ClassifySelects = React.createClass({
+module.exports = React.createClass({
+
+    propTypes: {
+        actions: React.PropTypes.object,
+        werk: React.PropTypes.object
+    },
 
     /**
-     * Creates an array of nulls, one for each select component
+     * Creates an array of nulls, one for each select component.
+     * Props is an antipattern here, but...
+     * @returns {Obj} Initial state object
      */
     getInitialState: function(){
         var columns = _.keys(this.props.werk.data[0]);
@@ -25,8 +34,32 @@ var ClassifySelects = React.createClass({
 
     },
 
+
+    componentWillReceiveProps: function(nextProps) {
+        /**
+         * If data columns change, reset the state selections array to reset
+         * the data selections.
+         */
+        if(
+            !_.isEqual(
+                _.keys(this.props.werk.data[0]).sort(), // Old props
+                _.keys(nextProps.werk.data[0]).sort() // New props
+            )
+        ){
+            this.setState({
+                'selections': _.keys(nextProps.werk.data[0]).map(function(column){
+                    return {
+                        name: column,
+                        value: null
+                    };
+                })
+            });
+        }
+    },
+
     /**
-     * Select component options, condition for base and group classifications.
+     * Select component options. Conditional for base and group classifications.
+     * @returns {array}     Array of options.
      */
     setOptions: function(){
         var datamap = this.props.werk.datamap;
@@ -42,17 +75,21 @@ var ClassifySelects = React.createClass({
         opts[2].disabled = datamap.group ? true : false;
 
         return opts;
-
     },
 
     /**
      * Changes value of Select component via setState
-     * @param  {integer} i Index of Select component
-     * @param  {string} v Value selected
+     * @param  {integer} i  Index of Select component
+     * @param  {string} v   Value selected
+     * @returns {void}
      */
     changeValue: function(i,v){
         var select = this.state.selections[i];
         var actions = this.props.actions;
+
+        /**
+         * Remove the previously selected value from datamap.
+         */
         switch(select.value){
             case 'base':
                 actions.removeBase();
@@ -70,7 +107,12 @@ var ClassifySelects = React.createClass({
                 actions.removeIgnore(select.name);
                 break;
         }
+
         select.value = v.value;
+
+        /**
+         * Update datamap store.
+         */
         switch(v.value){
             case 'base':
                 actions.addBase(select.name);
@@ -88,16 +130,16 @@ var ClassifySelects = React.createClass({
                 actions.addIgnore(select.name);
                 break;
         }
-
     },
 
     render: function(){
 
         var columns = _.keys(this.props.werk.data[0]);
+
         var classifySelects = columns.map(function(column, i) {
 
             var colorSquare = this.state.selections[i].value == 'series' ?
-                        <div className="color-square"></div> : null;
+                        <ColorPicker column={column} werk={this.props.werk} actions={this.props.actions} /> : null;
 
             return (
                 <tr key={i}>
@@ -120,6 +162,7 @@ var ClassifySelects = React.createClass({
 
 
         return (
+            <div>
             <div id="classify-container">
                 <h4>Classify and color columns in your data&nbsp;
                     <span className="glyphicon glyphicon-info-sign helper" data-toggle="modal" data-target=".help-modal" aria-hidden="true">
@@ -129,12 +172,9 @@ var ClassifySelects = React.createClass({
                     <tbody>{classifySelects}</tbody>
                 </table>
             </div>
+            <ColorScheme werk={this.props.werk} actions={this.props.actions} />
+            </div>
         )
     }
 
 });
-
-
-
-//module.exports = connect(mapDispatchToProps)(ClassifySelects);
-module.exports = ClassifySelects;

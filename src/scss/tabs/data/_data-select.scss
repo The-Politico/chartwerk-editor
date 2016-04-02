@@ -1,0 +1,27 @@
+#data{
+
+    #classify-container{
+        #classify-selects{
+            tr{
+                td{
+                    padding:3px 0px;
+
+                    .column-label{
+                        display:inline-block;
+                        float:left;
+                        line-height: 35px;
+                        text-align: right;
+                    }
+
+                    .Select{
+                        width:175px;
+                        float:left;
+                        margin-left: 15px;
+                        border:1px solid $lightgrey;
+                    }
+                }
+            }
+        }
+    }
+    
+}

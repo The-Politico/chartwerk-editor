@@ -1,5 +1,6 @@
+"use strict";
 var React = require('react');
-var DataTab = require('./DataTab');
+var DataTab = require('./DataTab.jsx');
 var Provider=require('react-redux').Provider;
 var store = require('../stores/');
 

@@ -1,3 +1,4 @@
+"use strict";
 var React = require('react');
 var bindActionCreators = require('redux').bindActionCreators;
 var connect=require("react-redux").connect;
@@ -6,7 +7,6 @@ var Actions = require('../actions/');
 
 var DataTab = React.createClass({
   render: function() {
-
     var dispatch=this.props.dispatch;
     var werk=this.props.werk;
     var actions = bindActionCreators(Actions, dispatch);

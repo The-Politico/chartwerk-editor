@@ -1,18 +1,21 @@
+"use strict";
 var React       = require('react');
-var ReactDOM    = require('react-dom');
 var $           = require('jquery');
 var Converter   = require("csvtojson").Converter;
 var _           = require("underscore");
 var tableify    = require('tableify');
-var Provider    = require("react-redux").Provider;
-var store       = require("../../stores/index.js");
 var actions     = require('../../actions');
 
 
 // Components
-var ClassifySelects = require('./ClassifySelects.jsx')
+var DataSelect = require('./DataSelect.jsx');
 
-var DataInput = React.createClass({
+module.exports = React.createClass({
+
+    propTypes: {
+        actions: React.PropTypes.object,
+        werk: React.PropTypes.object
+    },
 
     getInitialState: function() {
 
@@ -37,6 +40,7 @@ var DataInput = React.createClass({
          * Checks in order: JSON, TSV, CSV
          *
          * @param  {str} data User-pasted data as string.
+         * @return {void}
          */
         function typeCheck(data){
             if(data == ''){
@@ -64,6 +68,7 @@ var DataInput = React.createClass({
          *
          * @param  {str} format 'TSV' or 'CSV'
          * @param  {obj} jsonObj Obj returned by converter
+         * @returns {void}
          */
         function parse(format, jsonObj){
             this.props.actions.attachData(jsonObj);
@@ -74,8 +79,6 @@ var DataInput = React.createClass({
         tsvConverter.on("end_parsed",parse.bind(this, 'TSV'));
 
         typeCheck.bind(this)(data);
-
-
 
     },
 
@@ -93,7 +96,7 @@ var DataInput = React.createClass({
                         Preview
                     </button>
                 </p>
-                <ClassifySelects werk={this.props.werk} actions={this.props.actions}/>
+                <DataSelect werk={this.props.werk} actions={this.props.actions}/>
                 </div>
             );
 
@@ -113,6 +116,3 @@ var DataInput = React.createClass({
         )
     }
 });
-
-
-module.exports = DataInput;
