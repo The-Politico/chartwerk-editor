@@ -1,0 +1,55 @@
+.btn{
+
+    background-color: $white;
+    color: $grey;
+    border-radius: 2px;
+    font-size: 14px;
+    box-shadow: $boxshadow;
+    border: 1px solid $lightgrey;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    transition:all .2s;
+    &:hover, &:active,  &:focus{
+        color: $grey;
+    }
+
+    .btn-small{
+
+    }
+
+}
+
+label{
+    font-weight: normal;
+    font-size: 14px;
+    cursor:pointer;
+
+    input[type=checkbox] ~ i.fa{
+        margin-right: 0px;
+        font-size: 20px;
+        width:17px;
+        vertical-align: -3px;
+        display:inline-block;
+    }
+    input[type=checkbox] ~ i.fa.fa-square-o{
+        color: $grey;
+        display: inline-block;
+    }
+    input[type=checkbox] ~ i.fa.fa-check-square-o{
+        display: none;
+    }
+    input[type=checkbox]:checked ~ i.fa.fa-square-o{
+        display: none;
+    }
+    input[type=checkbox]:checked ~ i.fa.fa-check-square-o{
+        color: $blue;
+        display: inline-block;
+    }
+    &:hover input[type=checkbox] ~ i.fa {
+        color: $grey;
+    }
+    input[type=checkbox]{
+        display:none;
+    }
+}

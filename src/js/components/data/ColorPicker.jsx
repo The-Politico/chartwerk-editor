@@ -13,8 +13,17 @@ module.exports = React.createClass({
 
     getInitialState: function(){
             var werk = this.props.werk;
+            var scheme = _.get(colors, werk.axes.color.scheme);
+            var initialColor = scheme[0];
+
+            // Set initial color
+            this.props.actions.setColor(
+                this.props.column,
+                initialColor
+            );
+
             return {
-                selectedColor: _.get(colors, werk.axes.color.scheme)[0],
+                selectedColor: initialColor,
                 pickerVisible: false
             }
     },

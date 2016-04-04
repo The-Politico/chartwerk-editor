@@ -39,7 +39,7 @@ module.exports = React.createClass({
          * typeCheck - Checks type of data pasted by user
          * Checks in order: JSON, TSV, CSV
          *
-         * @param  {str} data User-pasted data as string.
+         * @param  {str} data   User-pasted data as string.
          * @return {void}
          */
         function typeCheck(data){
@@ -49,6 +49,7 @@ module.exports = React.createClass({
             }
             // Try JSON data
             try{
+                var jsonObj = JSON.parse(data);
                 this.props.actions.attachData(jsonObj);
                 this.setState({format: 'JSON', valid: true });
             } catch(e){

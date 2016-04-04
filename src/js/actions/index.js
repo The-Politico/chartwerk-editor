@@ -77,9 +77,10 @@ module.exports.attachData = function(data){
 
 /**
  * Sets a path that navigates color object (from constants/colors).
- * @param  {string} path  A string that represents the path to a color
+ * @param  {string} path    A string that represents the path to a color
  *                          array in constants/colors, accessed via the
  *                          lodash function _.get .
+ * @return {Object}         Action payload.
  */
 module.exports.setColorScheme = function(path){
     return {
@@ -100,5 +101,11 @@ module.exports.unsetColor = function(column){
     return {
         type: types.UNSET_COLOR,
         column: column
+    };
+}
+
+module.exports.resetColor = function(){
+    return {
+        type: types.RESET_COLOR
     };
 }

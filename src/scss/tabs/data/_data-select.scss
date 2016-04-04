@@ -19,9 +19,20 @@
                         margin-left: 15px;
                         border:1px solid $lightgrey;
                     }
+
+                    label{
+                        line-height: 35px;
+                        margin-left: 15px;
+                    }
                 }
             }
         }
     }
-    
+
+    #group-selects{
+        td{
+            padding:2px 0;
+        }
+    }
+
 }

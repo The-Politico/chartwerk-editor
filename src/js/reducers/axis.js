@@ -69,6 +69,11 @@ module.exports = function(axis, action){
             nextState.color.range.splice(i,1);
         }
         break;
+    case types.RESET_COLOR:
+        console.log("RESET_COLOR");
+        nextState.color.domain = [];
+        nextState.color.range = [];
+        break;
     default:
         return axis;
     }

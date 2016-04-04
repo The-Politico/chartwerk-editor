@@ -101,15 +101,19 @@ module.exports = React.createClass({
         var schemeSelect = this.state.schemesVisible ?
             (
                 <div>
-                    <h4>Categorical</h4>
-                    <label><b>Use this scheme for most charts.</b> Categorical schemes do not imply a numeric difference between groups in your data. Instead, colors represent simple categories.</label>
-                        {schemes.categorical}
-                    <h4>Sequential</h4>
-                    <label> Sequential schemes help represent data that run from low to high values. Light colors represent low data values, while dark colors emphasize high data values.</label>
-                        {schemes.sequential}
-                    <h4>Diverging</h4>
-                    <label>Diverging schemes emphasize extremes at both ends of the data range. Values in the middle of the data range are represented with light colors, while low and high extremes are emphasized with dark colors.</label>
-                        {schemes.diverging}
+                    <table>
+                        <tr>
+                            <th>Categorical</th>
+                            <th>Sequential</th>
+                            <th>Diverging</th>
+                        </tr>
+                        <tr>
+                            <td>{schemes.categorical}</td>
+                            <td>{schemes.sequential}</td>
+                            <td>{schemes.diverging}</td>
+                        </tr>
+                    </table>
+
                 </div>
             ) : "";
 
@@ -117,9 +121,26 @@ module.exports = React.createClass({
             <div className="colorscheme-container clearfix">
                 <button className='btn btn-sm' onClick={this.setVisibility}>
                     <i className="fa fa-tint" ></i> Color scheme
-                </button>
+                </button> <span
+                    className="glyphicon glyphicon-info-sign helper"
+                    data-toggle="modal"
+                    data-target=".help-modal"
+                    aria-hidden="true">
+                </span>
                 {schemeSelect}
             </div>
         )
     }
 })
+
+
+
+// <h4>Categorical</h4>
+// <label><b>Use this scheme for most charts.</b> Categorical schemes do not imply a numeric difference between groups in your data. Instead, colors represent simple categories.</label>
+//
+// <h4>Sequential</h4>
+// <label> Sequential schemes help represent data that run from low to high values. Light colors represent low data values, while dark colors emphasize high data values.</label>
+//
+// <h4>Diverging</h4>
+// <label>Diverging schemes emphasize extremes at both ends of the data range. Values in the middle of the data range are represented with light colors, while low and high extremes are emphasized with dark colors.</label>
+//

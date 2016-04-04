@@ -19,3 +19,4 @@ module.exports.ATTACH_DATA = 'ATTACH_DATA';
 module.exports.SET_COLOR_SCHEME = 'SET_COLOR_SCHEME';
 module.exports.SET_COLOR = 'SET_COLOR';
 module.exports.UNSET_COLOR = 'UNSET_COLOR';
+module.exports.RESET_COLOR = 'RESET_COLOR';

@@ -24,12 +24,13 @@ module.exports = React.createClass({
     getInitialState: function(){
         var columns = _.keys(this.props.werk.data[0]);
         return {
-            'selections': columns.map(function(column){
+            selections: columns.map(function(column){
                 return {
                     name: column,
                     value: null
                 };
             }),
+            colorByGroups: false
         };
 
     },
@@ -52,8 +53,10 @@ module.exports = React.createClass({
                         name: column,
                         value: null
                     };
-                })
+                }),
+                colorByGroups: false
             });
+            actions.resetColor();
         }
     },
 
@@ -88,7 +91,8 @@ module.exports = React.createClass({
         var actions = this.props.actions;
 
         /**
-         * Remove the previously selected value from datamap.
+         * Remove the previously selected value from datamap and do any
+         * necessary cleanup.
          */
         switch(select.value){
             case 'base':
@@ -96,9 +100,12 @@ module.exports = React.createClass({
                 break;
             case 'group':
                 actions.removeGroup();
+                actions.resetColor();
+                this.setState({colorByGroups: false});
                 break;
             case 'series':
                 actions.removeSeries(select.name);
+                actions.unsetColor(select.name);
                 break;
             case 'annotation':
                 actions.removeAnnotations(select.name);
@@ -132,14 +139,62 @@ module.exports = React.createClass({
         }
     },
 
+    colorGroupSwitch: function(column,e){
+        if(this.state.colorByGroups){
+            this.props.actions.resetColor();
+        }
+        this.setState({colorByGroups: !this.state.colorByGroups});
+
+    },
+
+    groupColors: function(){
+        var werk = this.props.werk;
+        var column = werk.datamap.group;
+        var groups = _.sortedUniq(werk.data.map(function(datum, i){
+            return datum[column];
+        }));
+        var selects = groups.map(function(group, i){
+            return (
+                <tr key={i}>
+                    <td>
+                        {group}
+                    </td>
+                    <td>
+                        <ColorPicker
+                            column={group}
+                            werk={this.props.werk}
+                            actions={this.props.actions}
+                        />
+                    </td>
+                </tr>
+            );
+        }.bind(this));
+
+        return (
+            <div>
+                <h4>Groups</h4>
+                <table id="group-selects">
+                    <tbody>{selects}</tbody>
+                </table>
+            </div>
+        );
+    },
+
     render: function(){
 
         var columns = _.keys(this.props.werk.data[0]);
 
         var classifySelects = columns.map(function(column, i) {
 
-            var colorSquare = this.state.selections[i].value == 'series' ?
-                        <ColorPicker column={column} werk={this.props.werk} actions={this.props.actions} /> : null;
+            var addOption = this.state.selections[i].value == 'series' && !this.state.colorByGroups ?
+                        <ColorPicker column={column} werk={this.props.werk} actions={this.props.actions} /> :
+                            this.state.selections[i].value == 'group' ?
+                            <label>
+                                <input type="checkbox" value="" onChange={this.colorGroupSwitch} />
+                                <i className="fa fa-square-o"></i>
+                                <i className="fa fa-check-square-o"></i> Color by groups?
+                            </label>
+                        : null;
 
             return (
                 <tr key={i}>
@@ -154,15 +209,18 @@ module.exports = React.createClass({
                     placeholder="Choose one"
                     clearable={false}
                 />
-                {colorSquare}
+                {addOption}
                 </td>
                 </tr>
             );
         }.bind(this));
 
+        var groups = this.state.colorByGroups ? this.groupColors() : null;
+
 
         return (
             <div>
+            <hr />
             <div id="classify-container">
                 <h4>Classify and color columns in your data&nbsp;
                     <span className="glyphicon glyphicon-info-sign helper" data-toggle="modal" data-target=".help-modal" aria-hidden="true">
@@ -172,6 +230,8 @@ module.exports = React.createClass({
                     <tbody>{classifySelects}</tbody>
                 </table>
             </div>
+            {groups}
+            <hr />
             <ColorScheme werk={this.props.werk} actions={this.props.actions} />
             </div>
         )
