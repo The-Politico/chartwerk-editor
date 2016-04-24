@@ -14,7 +14,7 @@
                     }
 
                     .Select{
-                        width:175px;
+                        width:160px;
                         float:left;
                         margin-left: 15px;
                         border:1px solid $lightgrey;
@@ -24,14 +24,43 @@
                         line-height: 35px;
                         margin-left: 15px;
                     }
+                    .base-type{
+                      display: inline-block;
+                      .Select{
+                        width: 135px;
+                        margin-left: 5px;
+                      }
+                      .dateformat{
+                        color:$midgrey;
+                        margin-left: 5px;
+                        margin-top: 2px;
+                        font-style: italic;
+                        float:left;
+                        clear:left;
+
+                        &.error{
+                          background-color: $red;
+                          color:$white;
+                          padding:1px 6px;
+                          border-radius:2px;
+                          display:inline-block;
+                        }
+
+                      }
+
+                    }
                 }
             }
         }
     }
 
+    .alert{
+        margin-top: 10px;
+    }
+
     #group-selects{
         td{
-            padding:2px 0;
+            padding:3px 0;
         }
     }
 

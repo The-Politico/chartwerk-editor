@@ -7,6 +7,7 @@ var _ = require('lodash');
 // Components
 var ColorPicker = require('./ColorPicker.jsx');
 var ColorScheme = require('./ColorScheme.jsx');
+var BaseTypePicker = require('./BaseTypePicker.jsx');
 
 
 module.exports = React.createClass({
@@ -153,6 +154,16 @@ module.exports = React.createClass({
         var groups = _.sortedUniq(werk.data.map(function(datum, i){
             return datum[column];
         }));
+
+        if(groups.length > 8){
+            return (
+                <div className="alert alert-fail">
+                    <strong>Too many groups:</strong> You&rsquo;ve selected a column with more than 8 unique values.
+                    That&rsquo;s more groups than the color scheme can accomodate.
+                </div>
+            )
+        }
+
         var selects = groups.map(function(group, i){
             return (
                 <tr key={i}>
@@ -180,21 +191,45 @@ module.exports = React.createClass({
         );
     },
 
+    changeTab: function(e){
+      e.preventDefault();
+      $('a[href="#axes"]').tab('show');
+    },
+
     render: function(){
 
         var columns = _.keys(this.props.werk.data[0]);
 
         var classifySelects = columns.map(function(column, i) {
 
-            var addOption = this.state.selections[i].value == 'series' && !this.state.colorByGroups ?
-                        <ColorPicker column={column} werk={this.props.werk} actions={this.props.actions} /> :
-                            this.state.selections[i].value == 'group' ?
-                            <label>
-                                <input type="checkbox" value="" onChange={this.colorGroupSwitch} />
-                                <i className="fa fa-square-o"></i>
-                                <i className="fa fa-check-square-o"></i> Color by groups?
-                            </label>
-                        : null;
+
+            switch(this.state.selections[i].value){
+              case 'series':
+                var addOption =   !this.state.colorByGroups ?
+                                  <ColorPicker
+                                    column={column}
+                                    werk={this.props.werk}
+                                    actions={this.props.actions}
+                                  /> : null;
+                break;
+              case 'group':
+                var addOption =   (
+                                    <label>
+                                      <input type="checkbox" value="" onChange={this.colorGroupSwitch} />
+                                      <i className="fa fa-square-o"></i>
+                                      <i className="fa fa-check-square-o"></i> Color by groups?
+                                    </label>
+                                  );
+                break;
+              case 'base':
+                var addOption =   (<BaseTypePicker
+                                    werk={this.props.werk}
+                                    actions={this.props.actions}
+                                  />);
+                break;
+              default:
+                var addOption = null;
+            }
 
             return (
                 <tr key={i}>
@@ -233,7 +268,16 @@ module.exports = React.createClass({
             {groups}
             <hr />
             <ColorScheme werk={this.props.werk} actions={this.props.actions} />
+            <div className="guidepost">
+              <h4>
+                <a onClick={this.changeTab} href="">
+                  <b>Next:</b> Axes
+                  <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+                </a>
+              </h4>
             </div>
+            </div>
+
         )
     }
 

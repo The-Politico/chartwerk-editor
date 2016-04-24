@@ -102,16 +102,20 @@ module.exports = React.createClass({
             (
                 <div>
                     <table>
+                      <thead>
                         <tr>
                             <th>Categorical</th>
                             <th>Sequential</th>
                             <th>Diverging</th>
                         </tr>
+                      </thead>
+                      <tbody>
                         <tr>
                             <td>{schemes.categorical}</td>
                             <td>{schemes.sequential}</td>
                             <td>{schemes.diverging}</td>
                         </tr>
+                      </tbody>
                     </table>
 
                 </div>
@@ -136,10 +140,10 @@ module.exports = React.createClass({
 
 
 // <h4>Categorical</h4>
-// <label><b>Use this scheme for most charts.</b> Categorical schemes do not imply a numeric difference between groups in your data. Instead, colors represent simple categories.</label>
+// <label><b>Use this scheme for most charts.</b> Colors represent simple categories.</label>
 //
 // <h4>Sequential</h4>
-// <label> Sequential schemes help represent data that run from low to high values. Light colors represent low data values, while dark colors emphasize high data values.</label>
+// <label> Help represent data that run from low to high values. Light colors represent low data values, while dark colors emphasize high data values.</label>
 //
 // <h4>Diverging</h4>
 // <label>Diverging schemes emphasize extremes at both ends of the data range. Values in the middle of the data range are represented with light colors, while low and high extremes are emphasized with dark colors.</label>

@@ -4,7 +4,7 @@ var nunjucksRender = require('gulp-nunjucks-render');
 module.exports = function () {
   return gulp.src('src/templates/*.html')
     .pipe(nunjucksRender({
-      path: ['src/templates/'] // String or Array
+      path: ['src/templates/']
     }))
     .pipe(gulp.dest('dist'));
 };

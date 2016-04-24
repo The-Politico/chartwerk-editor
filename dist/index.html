@@ -56,11 +56,11 @@
 </div>
 
 
-    <div id="editor-pane" role="tabpanel">
+    <div id="editor-pane" class="clearfix" role="tabpanel">
 
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#data" data-target="#data" aria-controls="data" role="tab" data-toggle="tab">Data</a></li>
-    <li role="presentation"><a href="#config-axis" data-target="#config-axis" aria-controls="config-axis" role="tab" data-toggle="tab">Axes</a></li>
+    <li role="presentation"><a href="#axes" data-target="#axes" aria-controls="axes" role="tab" data-toggle="tab">Axes</a></li>
     <li role="presentation"><a href="#config-misc" data-target="#config-misc" aria-controls="config-misc" role="tab" data-toggle="tab">Layout</a></li>
     <li id="alpacaTab" role="presentation" style="display:none;"><a href="#config-alpaca" data-target="#config-alpaca" aria-controls="config-alpaca" role="tab" data-toggle="tab">Misc</a></li>
     <li role="presentation"><a href="#config-txt" data-target="#config-txt" aria-controls="config-txt" role="tab" data-toggle="tab">Text<span class="red">*</span></a></li>
@@ -73,7 +73,7 @@
 
 <div class="tab-content">
 
-<div role="tabpanel" class="tab-pane active" id="data">
+<div role="tabpanel" class="tab-pane active clearfix" id="data">
 
     <h4>
         Paste <b>clean</b> data
@@ -85,30 +85,11 @@
 
     <div id="data-input"></div>
 
+</div>
 
-<!--
 
-    <div class="data-feedback">
-        <div style="display:none;" class="alert alert-danger" role="alert">That doesn't look like structured data. Try again?</div>
-        <div style="display:none;" class="alert alert-success" role="alert">Parsed your data successfully!<button type="button"  class="btn btn-primary data-preview-btn" data-toggle="modal" data-target=".data-preview-modal" aria-hidden="true">Preview</button></div>
-    </div>
-
-    <div style="display:none;" id="classify-cont">
-        <h4>Classify and color columns in your data
-            <span class="glyphicon glyphicon-info-sign helper" data-toggle="modal" data-target=".help-modal" aria-hidden="true">
-            </span>
-        </h4>
-        <table id="column-classify-options"></table>
-    </div>
-
-    <div style="display:none;" id="colorGroup-cont">
-        <h4>Select Group Colors</h4>
-        <div id="colorGroups">
-        </div>
-    </div>
-
--->
-
+<div role="tabpanel" class="tab-pane" id="axes">
+  <h1>Axes</h1>
 </div>
 
 

@@ -41,3 +41,18 @@ p{
 table{
 	margin-left: 25px;
 }
+
+.alert-fail{
+	background-color: $yellow;
+	color:$grey;
+	box-shadow: $boxshadow;
+	border-radius:0px;
+}
+
+.guidepost{
+	text-align: right;
+	i{
+		margin-left:5px;
+		font-size: 20px;
+	}
+}

@@ -20,3 +20,8 @@ module.exports.SET_COLOR_SCHEME = 'SET_COLOR_SCHEME';
 module.exports.SET_COLOR = 'SET_COLOR';
 module.exports.UNSET_COLOR = 'UNSET_COLOR';
 module.exports.RESET_COLOR = 'RESET_COLOR';
+
+// BASE AXIS CATEGORIZATION
+module.exports.SET_BASE_TYPE = 'SET_BASE_TYPE';
+module.exports.SET_DATE_FORMAT = 'SET_DATE_FORMAT';
+module.exports.UNSET_DATE_FORMAT = 'UNSET_DATE_FORMAT';

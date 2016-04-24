@@ -12,6 +12,7 @@ var initialState = {
     base: {
         annotations: [],
         customTicks: [],
+        dateFormat: null,
         freqTicks: "",
         label: "",
         max: null,
@@ -43,17 +44,18 @@ var initialState = {
  */
 module.exports = function(axis, action){
     if (typeof axis === 'undefined') {
-        return initialState
+        return initialState;
     }
 
-    var nextState = assign({},axis);
+    var nextState = assign({},axis),
+        i;
 
     switch(action.type){
     case types.SET_COLOR_SCHEME:
         nextState.color.scheme = action.path;
         break;
     case types.SET_COLOR:
-        var i = nextState.color.domain.indexOf(action.column);
+        i = nextState.color.domain.indexOf(action.column);
         if(i > -1){
             nextState.color.range[i] = action.color;
         }else{
@@ -63,16 +65,24 @@ module.exports = function(axis, action){
 
         break;
     case types.UNSET_COLOR:
-        var i = nextState.color.domain.indexOf(action.column);
+        i = nextState.color.domain.indexOf(action.column);
         if(i > -1){
             nextState.color.domain.splice(i,1);
             nextState.color.range.splice(i,1);
         }
         break;
     case types.RESET_COLOR:
-        console.log("RESET_COLOR");
         nextState.color.domain = [];
         nextState.color.range = [];
+        break;
+    case types.SET_BASE_TYPE:
+        nextState.base.type = action.datatype;
+        break;
+    case types.SET_DATE_FORMAT:
+        nextState.base.dateFormat = action.dateFormat;
+        break;
+    case types.UNSET_DATE_FORMAT:
+        nextState.base.dateFormat = null;
         break;
     default:
         return axis;

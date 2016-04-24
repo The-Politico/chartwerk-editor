@@ -45,7 +45,15 @@ module.exports = React.createClass({
             var divStyle = {
                 backgroundColor: color
             };
-            return (<div className="color-square" color={color} style={divStyle} onClick={this.selectColor} key={i}></div>)
+            return (
+              <div
+                className="color-square"
+                color={color}
+                style={divStyle}
+                onClick={this.selectColor}
+                key={i}
+              ></div>
+            )
         }.bind(this));
 
         var picker = this.state.pickerVisible ?
