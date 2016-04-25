@@ -61,10 +61,14 @@ module.exports = React.createClass({
 
   /**
    * Sniff for date format using moment.js.
-   * @return {Integer} Index of object in datetime array.
+   * @param  {Boolean} force  Whether to force dateSniffing. Used to avoid
+   *                          	setState race conditions, e.g., setDateFormat.
+   * @return {Integer} i      Index of object in datetime array.
    */
-  dateSniffer: function(){
-    if(this.state.type != 'date'){
+  dateSniffer: function(force){
+    var force = typeof force == 'undefined' ? false : force;
+
+    if(this.state.type != 'date'&& !force){
       return null;
     }
 
@@ -107,7 +111,7 @@ module.exports = React.createClass({
    * Pass d3-friendly date format string back to state tree.
    */
   setDateFormat: function(){
-    var i = this.dateSniffer();
+    var i = this.dateSniffer(true);
     this.props.actions.setDateFormat(
       _.map(datetime, 'd3')[i]
     );

@@ -10,27 +10,45 @@ var initialState = {
         scheme: 'categorical.default'
     },
     base: {
-        annotations: [],
-        customTicks: [],
+        type: null,
         dateFormat: null,
-        freqTicks: "",
-        label: "",
-        max: null,
         min: null,
-        numTicks: null,
+        max: null,
+        label: "",
         prefix: "",
         suffix: "",
-        type: ""
+        format: {
+          double:{
+            dateType: null,
+            frequency: null,
+            number: null,
+            ticks: []
+          },
+          single:{
+            dateType: null,
+            frequency: null,
+            number: null,
+            ticks: []
+          }
+        }
     },
     value: {
-        annotations: [],
-        customTicks: [],
-        label: "",
-        max: null,
-        min: null,
-        numTicks: null,
-        prefix: "",
-        suffix: ""
+      type: null,
+      min: null,
+      max: null,
+      label: "",
+      prefix: "",
+      suffix: "",
+      format: {
+        double:{
+          number: null,
+          ticks: []
+        },
+        single:{
+          number: null,
+          ticks: []
+        }
+      }
     }
 };
 

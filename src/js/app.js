@@ -6,5 +6,5 @@ var React = require('react');
 
 ReactDOM.render(
   <App />,
-  document.getElementById('data-input')
+  document.getElementById('editor-app')
 );
