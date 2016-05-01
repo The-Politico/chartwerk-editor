@@ -293,6 +293,7 @@ module.exports = React.createClass({
             dragThreshold={ this.dragThreshold }
           />
           <table>
+            <tbody>
             <tr>
               <td>
                 <ReactCSSTransitionGroup
@@ -315,6 +316,7 @@ module.exports = React.createClass({
                 </div>
               </td>
             </tr>
+            </tbody>
           </table>
 
         </div>

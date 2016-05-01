@@ -1,5 +1,6 @@
 "use strict";
 var React           = require('react');
+var ReactDOM        = require('react-dom');
 var _               = require('lodash');
 var colors          = require('../../constants/colors');
 var viz             = require('./QuantizerViz-d3');
@@ -47,7 +48,7 @@ module.exports = React.createClass({
    * @return {void}
    */
   componentDidMount: function(){
-    var el = this.getDOMNode();
+    var el = ReactDOM.findDOMNode(this);
     viz.create(
       el,
       this.state.chartProps,
@@ -61,7 +62,7 @@ module.exports = React.createClass({
    * @return {void}
    */
   componentDidUpdate: function(){
-      var el = this.getDOMNode();
+      var el = ReactDOM.findDOMNode(this);
       viz.update(
         el,
         this.state.chartProps,

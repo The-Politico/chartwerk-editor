@@ -145,7 +145,7 @@ module.exports = React.createClass({
      * of a datetime object, add humanized label. If it didn't but date
      * format was picked, add parse error. Otherwise, null.
      */
-    var dateLabel = i ?
+    var dateLabel = i != null ?
         ( <div className="dateformat">
             Format: {_.map(datetime, 'human')[i]}
           </div>

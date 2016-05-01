@@ -3,14 +3,6 @@ var types = require('../constants/actions');
 var assign = require('object-assign');
 var _ = require('lodash');
 
-var initialState = {
-    base: null,
-    group: null,
-    series: [],
-    annotations: [],
-    ignore: []
-};
-
 /**
  * datamap reducer
  * @param {Object} datamap      Previous redux store state tree.
@@ -20,6 +12,15 @@ var initialState = {
  * @returns {Object} nextState  Next redux store state tree.
  */
 module.exports = function(datamap, action){
+
+    var initialState = {
+        base: null,
+        group: null,
+        series: [],
+        annotations: [],
+        ignore: []
+    };
+
     if (typeof datamap === 'undefined') {
         return initialState
     }
@@ -66,8 +67,11 @@ module.exports = function(datamap, action){
                 return n == action.column;
         });
         break;
+    case types.RESET_DATAMAP:
+        nextState = initialState;
+        break;
     default:
         return datamap;
     }
     return nextState;
-}
+};

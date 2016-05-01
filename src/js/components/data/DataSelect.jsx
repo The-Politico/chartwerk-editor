@@ -39,6 +39,7 @@ module.exports = React.createClass({
 
 
     componentWillReceiveProps: function(nextProps) {
+        var actions = this.props.actions;
         /**
          * If data columns change, reset the state selections array to reset
          * the data selections.
@@ -58,6 +59,7 @@ module.exports = React.createClass({
                 }),
                 colorByGroups: false
             });
+            actions.resetDatamap();
             actions.resetColor();
         }
     },

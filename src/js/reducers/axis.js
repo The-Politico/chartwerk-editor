@@ -3,56 +3,6 @@ var types = require('../constants/actions');
 var assign = require('object-assign');
 var _ = require('lodash');
 
-var initialState = {
-    color: {
-        domain: [],
-        range: [],
-        scheme: 'categorical.default',
-        quantize: false
-    },
-    base: {
-        type: null,
-        dateFormat: null,
-        min: null,
-        max: null,
-        label: "",
-        prefix: "",
-        suffix: "",
-        format: {
-          double:{
-            dateType: null,
-            frequency: null,
-            number: null,
-            ticks: []
-          },
-          single:{
-            dateType: null,
-            frequency: null,
-            number: null,
-            ticks: []
-          }
-        }
-    },
-    value: {
-      type: null,
-      min: null,
-      max: null,
-      label: "",
-      prefix: "",
-      suffix: "",
-      format: {
-        double:{
-          number: null,
-          ticks: []
-        },
-        single:{
-          number: null,
-          ticks: []
-        }
-      }
-    }
-};
-
 /**
  * datamap reducer
  * @param {Object} axis         Previous redux store state tree.
@@ -62,6 +12,57 @@ var initialState = {
  * @returns {Object} nextState  Next redux store state tree.
  */
 module.exports = function(axis, action){
+
+    var initialState = {
+        color: {
+            domain: [],
+            range: [],
+            scheme: 'categorical.default',
+            quantize: false
+        },
+        base: {
+            type: null,
+            dateFormat: null,
+            min: null,
+            max: null,
+            label: "",
+            prefix: "",
+            suffix: "",
+            format: {
+              double:{
+                dateType: null,
+                frequency: null,
+                number: null,
+                ticks: []
+              },
+              single:{
+                dateType: null,
+                frequency: null,
+                number: null,
+                ticks: []
+              }
+            }
+        },
+        value: {
+          type: null,
+          min: null,
+          max: null,
+          label: "",
+          prefix: "",
+          suffix: "",
+          format: {
+            double:{
+              number: null,
+              ticks: []
+            },
+            single:{
+              number: null,
+              ticks: []
+            }
+          }
+        }
+    };
+
     if (typeof axis === 'undefined') {
         return initialState;
     }
@@ -118,4 +119,4 @@ module.exports = function(axis, action){
         return axis;
     }
     return nextState;
-}
+};

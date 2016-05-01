@@ -12,6 +12,8 @@ module.exports.REMOVE_SERIES = 'REMOVE_SERIES';
 module.exports.REMOVE_IGNORE = 'REMOVE_IGNORE';
 module.exports.REMOVE_ANNOTATIONS = 'REMOVE_ANNOTATIONS';
 
+module.exports.RESET_DATAMAP = 'RESET_DATAMAP';
+
 // ATTACH DATA
 module.exports.ATTACH_DATA = 'ATTACH_DATA';
 

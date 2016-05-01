@@ -1,8 +1,6 @@
 "use strict";
 var types = require('../constants/actions');
 
-var initialState = [];
-
 /**
  * data reducer
  * @param {Object} data         Previous redux store state tree.
@@ -12,6 +10,9 @@ var initialState = [];
  * @returns {Object} nextState  Next redux store state tree.
  */
 module.exports = function(data, action){
+
+    var initialState = [];
+
     if (typeof data === 'undefined') {
         return initialState
     }

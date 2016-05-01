@@ -68,6 +68,12 @@ module.exports.removeAnnotations = function(column){
     };
 };
 
+module.exports.resetDatamap = function(){
+  return {
+    type: types.RESET_DATAMAP
+  };
+};
+
 module.exports.attachData = function(data){
     return {
         type: types.ATTACH_DATA,
