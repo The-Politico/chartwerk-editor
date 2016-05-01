@@ -16,16 +16,17 @@ module.exports = React.createClass({
             var scheme = _.get(colors, werk.axes.color.scheme);
             var initialColor = scheme[0];
 
-            // Set initial color
-            this.props.actions.setColor(
-                this.props.column,
-                initialColor
-            );
-
             return {
                 selectedColor: initialColor,
                 pickerVisible: false
             }
+    },
+
+    componentDidMount: function(){
+      this.props.actions.setColor(
+          this.props.column,
+          this.state.selectedColor
+      );
     },
 
     showPicker: function(){

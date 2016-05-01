@@ -3,6 +3,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Select = require('react-select');
 var _ = require('lodash');
+var ellipsize = require('ellipsize');
 
 // Components
 var ColorPicker = require('./ColorPicker.jsx');
@@ -168,7 +169,7 @@ module.exports = React.createClass({
             return (
                 <tr key={i}>
                     <td>
-                        {group}
+                        {ellipsize(group,8)}
                     </td>
                     <td>
                         <ColorPicker
@@ -205,12 +206,14 @@ module.exports = React.createClass({
 
             switch(this.state.selections[i].value){
               case 'series':
-                var addOption =   !this.state.colorByGroups ?
+                var addOption =   !this.state.colorByGroups &&
+                                  !this.props.werk.axes.color.quantize ?
                                   <ColorPicker
                                     column={column}
                                     werk={this.props.werk}
                                     actions={this.props.actions}
-                                  /> : null;
+                                  />
+                                  : null;
                 break;
               case 'group':
                 var addOption =   (
@@ -233,7 +236,7 @@ module.exports = React.createClass({
 
             return (
                 <tr key={i}>
-                <td className="column-label">{column}</td>
+                <td className="column-label">{ellipsize(column,12)}</td>
                 <td>
                 <Select
                     name={column}
@@ -267,7 +270,9 @@ module.exports = React.createClass({
             </div>
             {groups}
             <hr />
+
             <ColorScheme werk={this.props.werk} actions={this.props.actions} />
+
             <div className="guidepost">
               <h4>
                 <a onClick={this.changeTab} href="">

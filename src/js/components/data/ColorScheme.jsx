@@ -2,6 +2,8 @@
 var React   = require('react');
 var colors  = require('../../constants/colors');
 
+var Quantizer = require('./Quantizer.jsx');
+
 
 module.exports = React.createClass({
 
@@ -54,6 +56,7 @@ module.exports = React.createClass({
                 </div>
             );
         }.bind(this));
+
         var sequential = Object.keys(colors.sequential).map(function(key, i){
             return (
                 <div className="radio" key={i}>
@@ -71,6 +74,7 @@ module.exports = React.createClass({
                 </div>
             );
         }.bind(this));
+
         var diverging = Object.keys(colors.diverging).map(function(key, i){
             return (
                 <div className="radio" key={i}>
@@ -96,8 +100,51 @@ module.exports = React.createClass({
         }
     },
 
+    setQuantize: function(e){
+      var actions = this.props.actions;
+      if(this.props.werk.axes.color.quantize){
+        actions.resetColor();
+        actions.unsetQuantize();
+      }else{
+        actions.setQuantize();
+      }
+    },
+
     render: function(){
+        var werk = this.props.werk;
+
         var schemes = this.parseSchemes();
+
+        var quantizeInstruct = werk.axes.color.quantize ?
+                  werk.datamap.series.length != 1 ?
+                    (
+                      <div className="alert alert-fail">
+                          <strong>One data series:</strong> You must have one and only one data series column above.
+                      </div>
+                    ) :
+                      <Quantizer werk={this.props.werk} actions={this.props.actions} />
+                  :
+                    (
+                      <div>
+                        <small>Quantizing a data series reduces your data
+                        to color buckets that range from low to high values. This is
+                        used for choropleth maps.</small>
+                      </div>
+                    );
+
+        var quantize = werk.axes.color.scheme.substring(0,11) != 'categorical' ?
+                      (
+                        <div className="quantize-select">
+                          <label>
+                            Quantize a data series?
+                            <input type="checkbox" checked={this.props.werk.axes.color.quantize} onChange={this.setQuantize} />
+                            <i className="fa fa-square-o"></i>
+                            <i className="fa fa-check-square-o"></i>
+                          </label>
+                          {quantizeInstruct}
+                        </div>
+                      ) : null;
+
         var schemeSelect = this.state.schemesVisible ?
             (
                 <div>
@@ -117,7 +164,7 @@ module.exports = React.createClass({
                         </tr>
                       </tbody>
                     </table>
-
+                    {quantize}
                 </div>
             ) : "";
 
@@ -136,15 +183,3 @@ module.exports = React.createClass({
         )
     }
 })
-
-
-
-// <h4>Categorical</h4>
-// <label><b>Use this scheme for most charts.</b> Colors represent simple categories.</label>
-//
-// <h4>Sequential</h4>
-// <label> Help represent data that run from low to high values. Light colors represent low data values, while dark colors emphasize high data values.</label>
-//
-// <h4>Diverging</h4>
-// <label>Diverging schemes emphasize extremes at both ends of the data range. Values in the middle of the data range are represented with light colors, while low and high extremes are emphasized with dark colors.</label>
-//

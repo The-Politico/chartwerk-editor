@@ -7,7 +7,8 @@ var initialState = {
     color: {
         domain: [],
         range: [],
-        scheme: 'categorical.default'
+        scheme: 'categorical.default',
+        quantize: false
     },
     base: {
         type: null,
@@ -72,6 +73,18 @@ module.exports = function(axis, action){
     case types.SET_COLOR_SCHEME:
         nextState.color.scheme = action.path;
         break;
+    case types.SET_QUANTIZE:
+        nextState.color.quantize = true;
+        break;
+    case types.UNSET_QUANTIZE:
+        nextState.color.quantize = false;
+        break;
+    case types.SET_QUANTIZE_DOMAIN:
+        nextState.color.domain = action.domain;
+        break;
+    case types.SET_QUANTIZE_RANGE:
+        nextState.color.range = action.range;
+        break;
     case types.SET_COLOR:
         i = nextState.color.domain.indexOf(action.column);
         if(i > -1){
@@ -80,7 +93,6 @@ module.exports = function(axis, action){
             nextState.color.domain.push(action.column);
             nextState.color.range.push(action.color);
         }
-
         break;
     case types.UNSET_COLOR:
         i = nextState.color.domain.indexOf(action.column);

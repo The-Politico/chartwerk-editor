@@ -89,6 +89,32 @@ module.exports.setColorScheme = function(path){
     };
 };
 
+module.exports.setQuantize = function(){
+    return {
+        type: types.SET_QUANTIZE
+    };
+};
+
+module.exports.unsetQuantize = function(){
+    return {
+        type: types.UNSET_QUANTIZE
+    };
+};
+
+module.exports.setQuantizeDomain = function(domain){
+  return {
+    type: types.SET_QUANTIZE_DOMAIN,
+    domain: domain
+  };
+};
+
+module.exports.setQuantizeRange = function(range){
+  return {
+    type: types.SET_QUANTIZE_RANGE,
+    range: range
+  };
+};
+
 module.exports.setColor = function(column, color){
     return {
         type: types.SET_COLOR,

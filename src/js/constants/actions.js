@@ -20,6 +20,10 @@ module.exports.SET_COLOR_SCHEME = 'SET_COLOR_SCHEME';
 module.exports.SET_COLOR = 'SET_COLOR';
 module.exports.UNSET_COLOR = 'UNSET_COLOR';
 module.exports.RESET_COLOR = 'RESET_COLOR';
+module.exports.SET_QUANTIZE = 'SET_QUANTIZE';
+module.exports.UNSET_QUANTIZE = 'UNSET_QUANTIZE';
+module.exports.SET_QUANTIZE_DOMAIN = 'SET_QUANTIZE_DOMAIN';
+module.exports.SET_QUANTIZE_RANGE = 'SET_QUANTIZE_RANGE';
 
 // BASE AXIS CATEGORIZATION
 module.exports.SET_BASE_TYPE = 'SET_BASE_TYPE';

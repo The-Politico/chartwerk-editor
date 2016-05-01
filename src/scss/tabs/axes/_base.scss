@@ -1,4 +1,5 @@
 #axes{
+  height:100%;
 
   .basename{
     background-color: $grey;
@@ -12,6 +13,49 @@
     background-color: $white;
     border-top: 3px dashed $lightgrey;
   }
+
+  .date-format{
+
+    .form-group{
+      float:left;
+      &.clearleft{
+        clear:left;
+      }
+
+      label{
+        font-weight: bold;
+      }
+
+      .Select{
+        width:150px;
+        margin-right: 5px;
+        border-radius:1px;
+      }
+      input{
+        width:60px;
+        margin:23px 5px 0 0;
+        height: 37px;
+
+      }
+
+      &.disabled{
+        input, .Select-placeholder,
+        .Select, .Select-control,
+        .Select-value, .Select-value-label{
+          background-color: $lightgrey;
+          color:#aaa;
+        }
+        label{
+          color:$lightgrey;
+        }
+      }
+
+
+    }
+
+
+  }
+
 
 
 }

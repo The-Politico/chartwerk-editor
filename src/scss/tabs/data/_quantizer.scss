@@ -1,0 +1,97 @@
+#data{
+  #quantize-viz{
+    .quant-axis {
+      font: 10px sans-serif;
+      shape-rendering: crispEdges;
+      path, line {
+        display: none;
+      }
+
+      text{
+        fill:$grey;
+      }
+    }
+    .quant-lines{
+      stroke: white;
+      stroke-width: 5px;
+      cursor: pointer;
+    }
+
+    .quant-distribs{
+      stroke: black;
+      stroke-width: 1px;
+      opacity:0.4;
+    }
+  }
+
+  .quantize-select{
+    input[type='number']{
+      width:100px;
+      margin: 0px 0px 5px;
+      padding: 0 0 0 5px;
+    }
+
+    table{
+      width:400px;
+      margin-left: 10px;
+      margin-top: 0px;
+      td:first-child{
+        width:110px;
+      }
+    }
+
+    .quantize-group-buttons{
+      div{
+        float: left;
+        display: inline-block;
+        padding:5px 15px;
+        margin:0 4px;
+        border: 1px solid $lightgrey;
+        color:grey;
+        border-radius:2px;
+        cursor:pointer;
+        text-align: center;
+        transition:all .2s;
+        line-height: 22px;
+        &.disabled{
+          background-color: lightgrey;
+          color:white;
+          pointer-events: none;
+        }
+        &:hover{
+          background-color: $lightgrey;
+        }
+      }
+    }
+
+
+
+  }
+}
+
+.slide-enter {
+  opacity: 0.01;
+  max-height: 0px;
+  transition: max-height 1s ease;
+  overflow: hidden;
+}
+
+.slide-enter.slide-enter-active {
+  height: auto;
+  max-height: 100%;
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.slide-leave {
+  max-height: 100%;
+  transition: max-height 1s ease;
+  opacity: 1;
+}
+
+.slide-leave.slide-leave-active {
+  overflow: hidden;
+  max-height: 0px;
+  opacity: 0.01;
+  transition: opacity 250ms ease-in;
+}

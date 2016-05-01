@@ -2,9 +2,14 @@
 
     #classify-container{
         #classify-selects{
+          width:100%;
             tr{
                 td{
                     padding:3px 0px;
+
+                    &:first-child{
+                      width:100px;
+                    }
 
                     .column-label{
                         display:inline-block;
