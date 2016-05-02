@@ -260,7 +260,7 @@ module.exports = React.createClass({
 
         return (
             <div>
-            <hr />
+            
             <div id="classify-container">
                 <h4>Classify and color columns in your data&nbsp;
                     <span className="glyphicon glyphicon-info-sign helper" data-toggle="modal" data-target=".help-modal" aria-hidden="true">
@@ -271,7 +271,7 @@ module.exports = React.createClass({
                 </table>
             </div>
             {groups}
-            <hr />
+
 
             <ColorScheme werk={this.props.werk} actions={this.props.actions} />
 

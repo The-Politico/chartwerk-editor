@@ -3,6 +3,17 @@
         margin-top: 30px;
         margin-bottom: 40px;
 
+        label{
+          font-size: 16px;
+          font-weight: bold;
+          i.fa-check-square-o,
+          i.fa-square-o{
+            margin-right: 10px;
+            margin-top: -1px;
+          }
+        }
+
+
         .schemekey-square{
             display:inline-block;
             height:20px;
@@ -70,7 +81,7 @@
             font-size: 16px;
             font-weight:bold;
             i{
-              margin-left: 10px;
+              margin-left: 0px;
             }
           }
 

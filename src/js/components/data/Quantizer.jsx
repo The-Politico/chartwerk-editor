@@ -95,7 +95,7 @@ module.exports = React.createClass({
         var midHex = chroma.scale([
           scheme[scheme.length / 2],
           scheme[(scheme.length / 2) - 1]
-        ])(0.5).hex();
+        ]).mode('lab')(0.5).hex();
       }else{
         var midHex = scheme[Math.floor(scheme.length / 2)];
       }
@@ -273,7 +273,7 @@ module.exports = React.createClass({
 
     return (
         <div>
-          <hr />
+          
           <h4>
             Quantize thresholds <span className="column-label">
               {ellipsize(this.props.werk.datamap.series[0],12)}

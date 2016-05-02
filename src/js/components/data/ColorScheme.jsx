@@ -135,11 +135,12 @@ module.exports = React.createClass({
         var quantize = werk.axes.color.scheme.substring(0,11) != 'categorical' ?
                       (
                         <div className="quantize-select">
-                          <label>
-                            Quantize a data series?
+                          <label className="section">
+
                             <input type="checkbox" checked={this.props.werk.axes.color.quantize} onChange={this.setQuantize} />
                             <i className="fa fa-square-o"></i>
                             <i className="fa fa-check-square-o"></i>
+                             Quantize a data series?
                           </label>
                           {quantizeInstruct}
                         </div>
@@ -148,6 +149,10 @@ module.exports = React.createClass({
         var schemeSelect = this.state.schemesVisible ?
             (
                 <div>
+                    <h4>Color schemes</h4>
+                    <small>For most charts, you shouldn't change the default
+                    color scheme. If you want to use color to show the relative difference
+                  in values within a data series, then you may want to use a sequential or diverging scheme.</small>
                     <table>
                       <thead>
                         <tr>
@@ -170,14 +175,14 @@ module.exports = React.createClass({
 
         return (
             <div className="colorscheme-container clearfix">
-                <button className='btn btn-sm' onClick={this.setVisibility}>
-                    <i className="fa fa-tint" ></i> Color scheme
-                </button> <span
-                    className="glyphicon glyphicon-info-sign helper"
-                    data-toggle="modal"
-                    data-target=".help-modal"
-                    aria-hidden="true">
-                </span>
+                <label className="section">
+
+                  <input type="checkbox" onClick={this.setVisibility} />
+                  <i className="fa fa-square-o"></i>
+                  <i className="fa fa-check-square-o"></i>
+                    Adjust color scheme?
+                </label>
+
                 {schemeSelect}
             </div>
         )

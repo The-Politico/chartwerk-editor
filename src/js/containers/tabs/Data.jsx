@@ -16,11 +16,12 @@ module.exports = React.createClass({
       <div role="tabpanel" className="tab-pane active clearfix" id="data">
         <h4>
             Paste <b>clean</b> data
-            <span className="glyphicon glyphicon-info-sign helper" data-toggle="modal" >
-            </span>
         </h4>
 
-        <label className="control-label subtext"><b>Remember:</b> No commas, currency symbols, percent signs or other textual notations on numbers.</label>
+        <small>
+          No commas, currency symbols, percent signs or
+          other textual notations on numbers. Your data <b>must</b> have a header row.
+        </small>
 
         <DataInput werk={this.props.werk} actions={this.props.actions} />
       </div>

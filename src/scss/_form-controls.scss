@@ -60,3 +60,10 @@ label{
 .form-control{
   border-radius:1px;
 }
+
+label.section{
+  width:100%;
+  padding: 5px 10px 5px 0;
+  color:$grey;
+  border-bottom: 1px solid $lightgrey;
+}
