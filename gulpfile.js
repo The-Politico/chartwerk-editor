@@ -3,7 +3,8 @@ var gulp = require('./gulp')([
     'sass',
     'browserify',
     'server',
-    'vendor'
+    'vendor',
+    'docs'
 ]);
 
 gulp.task('build', ['nunjucks','sass','browserify','server']);

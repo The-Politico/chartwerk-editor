@@ -78,9 +78,10 @@ module.exports = React.createClass({
    * @param  {Float} v New threshold value
    * @return {void}
    */
-  dragThreshold: function(i,v){
-    this.props.dragThreshold(i,v);
-  },
+  dragThreshold: _.debounce(
+    function(i,v){
+      this.props.dragThreshold(i,v);
+    }, 100),
 
   /**
    * Renders SVG container.

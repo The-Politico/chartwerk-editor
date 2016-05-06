@@ -6,6 +6,7 @@ var d3              = require('d3');
 var chroma          = require('chroma-js');
 var colors          = require('../../constants/colors');
 var ellipsize       = require('ellipsize');
+var geostats        = require('geostats');
 
 var QuantizerViz    = require('./QuantizerViz.jsx');
 
@@ -14,7 +15,8 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {
       groups: 4,
-      thresholds: this.equalGroups(4)
+      thresholds: this.equalGroups(4),
+      reverseRange: false
     }
   },
 
@@ -69,6 +71,58 @@ module.exports = React.createClass({
         });
   },
 
+  logGroups: function(groups){
+    var werk = this.props.werk,
+        series = _.map(werk.data,werk.datamap.series[0]),
+        extent = d3.extent(series);
+
+    var logScale = d3.scale.log()
+        .range(extent)
+        .domain(extent);
+
+    return _.map(this.equalGroups(groups), function(d){
+      return parseFloat(logScale(d).toPrecision(2));
+    });
+  },
+
+  sqrGroups: function(groups){
+    var werk = this.props.werk,
+        series = _.map(werk.data,werk.datamap.series[0]),
+        extent = d3.extent(series);
+
+    var sqrScale = d3.scale.pow().exponent(2)
+        .range(extent)
+        .domain(extent);
+
+    return _.map(this.equalGroups(groups), function(d){
+      return parseFloat(sqrScale(d).toPrecision(2));
+    });
+  },
+
+  sqtGroups: function(groups){
+    var werk = this.props.werk,
+        series = _.map(werk.data,werk.datamap.series[0]),
+        extent = d3.extent(series);
+
+    var sqtScale = d3.scale.pow().exponent(.5)
+        .range(extent)
+        .domain(extent);
+
+    return _.map(this.equalGroups(groups), function(d){
+      return parseFloat(sqtScale(d).toPrecision(2));
+    });
+  },
+
+  jnkGroups: function(groups){
+    var werk = this.props.werk,
+        series = _.map(werk.data,werk.datamap.series[0]),
+        statSeries = new geostats(series),
+        bounds = statSeries.getJenks(groups);
+        bounds.shift();
+        bounds.pop();
+    return bounds;
+  },
+
   /**
    * Creates a color range of equidistant hues from lightest and darkest
    * color in scheme.
@@ -78,35 +132,14 @@ module.exports = React.createClass({
    */
   equidistantColors: function(groups){
     var color = this.props.werk.axes.color,
-        scheme = _.get(colors, color.scheme),
-        minHex = scheme[0],
-        maxHex = scheme[scheme.length-1];
+        scheme = _.get(colors, color.scheme);
 
-    /**
-     * Diverging schemes should define a midpoint in chroma scale
-     */
-    if(color.scheme.slice(0,1) === 'd'){
-
-      /**
-       * If scheme has even number of members, take a midpoint interpolated
-       * between the two middle colors. Otherwise take the middle color.
-       */
-      if(scheme.length % 2 == 0){
-        var midHex = chroma.scale([
-          scheme[scheme.length / 2],
-          scheme[(scheme.length / 2) - 1]
-        ]).mode('lab')(0.5).hex();
-      }else{
-        var midHex = scheme[Math.floor(scheme.length / 2)];
-      }
-
-      var scale = chroma.scale([minHex, midHex, maxHex]).classes(groups).colors();
-
-    }else{
-      var scale = chroma.scale([minHex, maxHex]).classes(groups).colors();
+    // Reverse the color range
+    if(this.state.reverseRange){
+      var scheme = _.clone(scheme).reverse();
     }
 
-    return scale;
+    return chroma.scale(scheme).mode('lab').classes(groups).colors();
   },
 
   /**
@@ -227,15 +260,55 @@ module.exports = React.createClass({
   },
 
   /**
-   * Reset to equidistant quantile thresholds.
+   * Set groupings
+   * @param  {String} transform A type of transform to do on groups
    * @return {void}
    */
-  resetGroups: function(){
-    this.setState({
-      thresholds: this.equalGroups(this.state.groups)
-    });
-    this.setQuantizeDomain(this.equalGroups(this.state.groups));
+  setGroups: function(transform){
+
+    switch(transform){
+      case 'log':
+        this.setState({
+          thresholds: this.logGroups(this.state.groups)
+        })
+        this.setQuantizeDomain(this.logGroups(this.state.groups));
+        break;
+      case 'sqr':
+        this.setState({
+          thresholds: this.sqrGroups(this.state.groups)
+        })
+        this.setQuantizeDomain(this.sqrGroups(this.state.groups));
+        break;
+      case 'sqt':
+        this.setState({
+          thresholds: this.sqtGroups(this.state.groups)
+        })
+        this.setQuantizeDomain(this.sqtGroups(this.state.groups));
+        break;
+      case 'jnk':
+        this.setState({
+          thresholds: this.jnkGroups(this.state.groups)
+        })
+        this.setQuantizeDomain(this.jnkGroups(this.state.groups));
+        break;
+      default:
+        this.setState({
+          thresholds: this.equalGroups(this.state.groups)
+        });
+        this.setQuantizeDomain(this.equalGroups(this.state.groups));
+    };
+    return ;
   },
+
+  reverseColor: function(){
+    this.setState({
+      reverseRange: !this.state.reverseRange
+    });
+    this.props.actions.setQuantizeRange(
+      this.equidistantColors(this.state.groups)
+    );
+  },
+
 
   /**
    * Utility to determine active/inactive button state.
@@ -243,15 +316,41 @@ module.exports = React.createClass({
    * @return {String}      Disabled class or null.
    */
   activeButton: function(type){
-    if(type === 'max'){
-      return this.state.groups >= 8 ? "disabled" : null;
-    } else if(type === 'min'){
-      return this.state.groups <= 2 ? "disabled" : null;
-    }else if(type === 'reset'){
-      return _.isEqual(this.state.thresholds, this.equalGroups(this.state.groups)) ?
-        "disabled" : null;
+    var classed;
+    switch(type){
+      case 'max':
+        classed = this.state.groups >= 8 ? "disabled" : null;
+        break;
+      case 'min':
+        classed = this.state.groups <= 2 ? "disabled" : null;
+        break;
+      case 'eql':
+        classed = _.isEqual(this.state.thresholds, this.equalGroups(this.state.groups)) ?
+          "disabled": null;
+        break;
+      case 'sqr':
+        classed = _.isEqual(this.state.thresholds, this.sqrGroups(this.state.groups)) ?
+          "disabled": null;
+        break;
+      case 'sqt':
+        classed = _.isEqual(this.state.thresholds, this.sqtGroups(this.state.groups)) ?
+          "disabled": null;
+        break;
+      case 'log':
+        var werk = this.props.werk,
+            series = _.map(werk.data,werk.datamap.series[0]),
+            extent = d3.extent(series);
+        // Log scales also can't have a domain that spans 0.
+        classed = _.isEqual(this.state.thresholds, this.logGroups(this.state.groups)) ||
+          ((extent[0] > 0 && extent[1] <= 0) || (extent[0] < 0 && extent[1] >= 0)) ?
+          "disabled": null;
+        break;
+      case 'jnk':
+        classed = _.isEqual(this.state.thresholds, this.jnkGroups(this.state.groups)) ?
+          "disabled": null;
+        break;
     }
-    return null;
+    return classed;
   },
 
   render: function(){
@@ -273,7 +372,7 @@ module.exports = React.createClass({
 
     return (
         <div>
-          
+
           <h4>
             Quantize thresholds <span className="column-label">
               {ellipsize(this.props.werk.datamap.series[0],12)}
@@ -301,18 +400,45 @@ module.exports = React.createClass({
                   transitionEnterTimeout={250}
                   transitionLeaveTimeout={250}
                 >
+                  <h5>Thresholds</h5>
                   {groupInputs}
                 </ReactCSSTransitionGroup>
               </td>
               <td>
                 <div className="quantize-group-buttons clearfix">
+                  <h5>Groups</h5>
                   <div onClick={this.addGroup} className={this.activeButton('max')}>
                     <i className="fa fa-plus" aria-hidden="true"></i>
                   </div>
                   <div onClick={this.removeGroup} className={this.activeButton('min')}>
                     <i className="fa fa-minus" aria-hidden="true"></i>
                   </div>
-                  <div onClick={this.resetGroups} className={this.activeButton('reset')}>Reset</div>
+                  <div onClick={this.reverseColor}>Reverse</div>
+                </div>
+                <div className="quantize-group-buttons clearfix">
+                  <h5>Calculate thresholds</h5>
+                  <div
+                    onClick={this.setGroups.bind(this,'eql')}
+                    className={this.activeButton('eql')}
+                  >Equal</div>
+                  <div
+                    onClick={this.setGroups.bind(this,'log')}
+                    className={this.activeButton('log')}
+                  >Log</div>
+                  <div
+                    onClick={this.setGroups.bind(this,'sqr')}
+                    className={this.activeButton('sqr')}
+                  >Squared</div>
+                </div>
+                <div className="quantize-group-buttons clearfix">
+                  <div
+                    onClick={this.setGroups.bind(this,'sqt')}
+                    className={this.activeButton('sqt')}
+                  >Square root</div>
+                  <div
+                    onClick={this.setGroups.bind(this,'jnk')}
+                    className={this.activeButton('jnk')}
+                  >Natural breaks</div>
                 </div>
               </td>
             </tr>

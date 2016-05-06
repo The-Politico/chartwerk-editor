@@ -13,6 +13,5 @@ module.exports = function(){
 
   gulp.watch(['./src/templates/**/*.html'], ['nunjucks']);
   gulp.watch(['./src/scss/**/*.scss'], ['sass']);
-  gulp.watch(['./src/js/**/*.js*'], ['browserify']);
 
 };

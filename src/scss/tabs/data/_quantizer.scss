@@ -41,11 +41,16 @@
     }
 
     .quantize-group-buttons{
+      &:nth-child(2){
+        div{
+          width:85px;
+        }
+      }
       div{
         float: left;
         display: inline-block;
         padding:5px 15px;
-        margin:0 4px;
+        margin:0 2px 5px;
         border: 1px solid $lightgrey;
         color:grey;
         border-radius:2px;
