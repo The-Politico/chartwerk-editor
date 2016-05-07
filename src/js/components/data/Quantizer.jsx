@@ -12,6 +12,12 @@ var QuantizerViz    = require('./QuantizerViz.jsx');
 
 module.exports = React.createClass({
 
+  propTypes: {
+      actions: React.PropTypes.object,
+      werk: React.PropTypes.object,
+      data: React.PropTypes.object
+  },
+
   getInitialState: function(){
     return {
       groups: 4,
@@ -51,73 +57,82 @@ module.exports = React.createClass({
   },
 
   /**
-   * [function description]
+   * Calculate equidistant thresholds.
    * @param  {Number} groups Number of quantize groups
    * @return {Array}        Array of thresholds of length groups - 1.
    */
   equalGroups: function(groups){
-    // Consider implementing other quantize methods, e.g. chroma-js
-    // k-means, log, etc.
-    // https://github.com/gka/chroma.js/blob/f1b7ca5cc4156f7d766e45e13ed6496c7b8ff7da/src/limits.coffee#L46-L168
 
-    var werk = this.props.werk,
-        series = _.map(werk.data,werk.datamap.series[0]),
-        extent = d3.extent(series),
-        range = extent[1] - extent[0],
+    var data = this.props.data,
+        range = data.extent[1] - data.extent[0],
         band = range / groups;
 
     return _.map(new Array( groups - 1 ), function(k,i){
-          return parseFloat((extent[0] + (band * (i+1))).toPrecision(2))
+          return parseFloat((data.extent[0] + (band * (i+1))).toPrecision(4))
         });
   },
 
+  /**
+   * Calcualte logarithmic thresholds.
+   * @param  {Integer} groups Number of quantize groups
+   * @return {Array}        Array of thresholds of length groups - 1.
+   */
   logGroups: function(groups){
-    var werk = this.props.werk,
-        series = _.map(werk.data,werk.datamap.series[0]),
-        extent = d3.extent(series);
+    var data = this.props.data;
 
     var logScale = d3.scale.log()
-        .range(extent)
-        .domain(extent);
+        .range(data.extent)
+        .domain(data.extent);
 
     return _.map(this.equalGroups(groups), function(d){
-      return parseFloat(logScale(d).toPrecision(2));
+      return parseFloat(logScale(d).toPrecision(4));
     });
   },
 
+  /**
+   * Calculate squared thresholds.
+   * @param  {Integer} groups Number of quantize groups
+   * @return {Array}        Array of thresholds of length groups - 1.
+   */
   sqrGroups: function(groups){
-    var werk = this.props.werk,
-        series = _.map(werk.data,werk.datamap.series[0]),
-        extent = d3.extent(series);
+    var data = this.props.data;
 
     var sqrScale = d3.scale.pow().exponent(2)
-        .range(extent)
-        .domain(extent);
+        .range(data.extent)
+        .domain(data.extent);
 
     return _.map(this.equalGroups(groups), function(d){
-      return parseFloat(sqrScale(d).toPrecision(2));
+      return parseFloat(sqrScale(d).toPrecision(4));
     });
   },
 
+  /**
+   * Calcualted sqaure root thresholds.
+   * @param  {Integer} groups Number of quantize groups
+   * @return {Array}        Array of thresholds of length groups - 1.
+   */
   sqtGroups: function(groups){
-    var werk = this.props.werk,
-        series = _.map(werk.data,werk.datamap.series[0]),
-        extent = d3.extent(series);
+    var data = this.props.data;
 
     var sqtScale = d3.scale.pow().exponent(.5)
-        .range(extent)
-        .domain(extent);
+        .range(data.extent)
+        .domain(data.extent);
 
     return _.map(this.equalGroups(groups), function(d){
-      return parseFloat(sqtScale(d).toPrecision(2));
+      return parseFloat(sqtScale(d).toPrecision(4));
     });
   },
 
+  /**
+   * Calculate thresholds by Jenks natural breaks formula.
+   * @param  {Integer} groups Number of quantize groups
+   * @return {Array}        Array of thresholds of length groups - 1.
+   */
   jnkGroups: function(groups){
-    var werk = this.props.werk,
-        series = _.map(werk.data,werk.datamap.series[0]),
-        statSeries = new geostats(series),
+    var data = this.props.data,
+        statSeries = new geostats(data.series),
         bounds = statSeries.getJenks(groups);
+        // Remove max and min thresholds
         bounds.shift();
         bounds.pop();
     return bounds;
@@ -147,10 +162,8 @@ module.exports = React.createClass({
    * @return {Float} 2% offset
    */
   offset: function(){
-    var werk = this.props.werk,
-        series = _.map(werk.data,werk.datamap.series[0]),
-        extent = d3.extent(series);
-    return (extent[1] - extent[0]) * 0.02 // 2% offset minimum
+    var data = this.props.data;
+    return (data.extent[1] - data.extent[0]) * 0.02 // 2% offset minimum
   },
 
   /**
@@ -158,11 +171,8 @@ module.exports = React.createClass({
    * @return {Float} Max input value
    */
   maxCeil: function(){
-    var werk = this.props.werk,
-        series = _.map(werk.data,werk.datamap.series[0]),
-        extent = d3.extent(series),
-        offset = (extent[1] - extent[0]) * 0.02;
-    return extent[1] - offset;
+    var data = this.props.data;
+    return data.extent[1] - this.offset();
   },
 
   /**
@@ -170,11 +180,8 @@ module.exports = React.createClass({
    * @return {Float} Min input value
    */
   minCeil: function(){
-    var werk = this.props.werk,
-        series = _.map(werk.data,werk.datamap.series[0]),
-        extent = d3.extent(series),
-        offset = (extent[1] - extent[0]) * 0.02;
-    return extent[0] + offset;
+    var data = this.props.data;
+    return data.extent[0] + this.offset();
   },
 
   /**
@@ -240,7 +247,6 @@ module.exports = React.createClass({
       groups: this.state.groups + 1,
       thresholds: this.equalGroups(this.state.groups + 1)
     });
-
   },
 
   /**
@@ -300,6 +306,10 @@ module.exports = React.createClass({
     return ;
   },
 
+  /**
+   * Reverse the color range.
+   * @return {void}
+   */
   reverseColor: function(){
     this.setState({
       reverseRange: !this.state.reverseRange
@@ -311,7 +321,7 @@ module.exports = React.createClass({
 
 
   /**
-   * Utility to determine active/inactive button state.
+   * Determine active/inactive button states.
    * @param  {String} type Type of input to check.
    * @return {String}      Disabled class or null.
    */
@@ -337,12 +347,11 @@ module.exports = React.createClass({
           "disabled": null;
         break;
       case 'log':
-        var werk = this.props.werk,
-            series = _.map(werk.data,werk.datamap.series[0]),
-            extent = d3.extent(series);
+        var data = this.props.data;
         // Log scales also can't have a domain that spans 0.
         classed = _.isEqual(this.state.thresholds, this.logGroups(this.state.groups)) ||
-          ((extent[0] > 0 && extent[1] <= 0) || (extent[0] < 0 && extent[1] >= 0)) ?
+          ((data.extent[0] > 0 && data.extent[1] <= 0) ||
+              (data.extent[0] < 0 && data.extent[1] >= 0)) ?
           "disabled": null;
         break;
       case 'jnk':
@@ -351,6 +360,14 @@ module.exports = React.createClass({
         break;
     }
     return classed;
+  },
+
+  /**
+   * Remove quantize column (ie, ask user to pick data series again)
+   * @return {void}
+   */
+  resetSeries: function(){
+    this.props.actions.unsetQuantizeColumn();
   },
 
   render: function(){
@@ -370,13 +387,19 @@ module.exports = React.createClass({
       );
     }.bind(this))
 
+    var reSelectSeries = this.props.werk.datamap.series.length > 1 ?
+        <i
+          className="fa fa-times"
+          title="Choose a different data series"
+          onClick={this.resetSeries}
+        ></i> : null;
+
     return (
         <div>
-
           <h4>
             Quantize thresholds <span className="column-label">
-              {ellipsize(this.props.werk.datamap.series[0],12)}
-            </span>
+              {ellipsize(this.props.werk.axes.color.quantizeColumn,12)}
+            </span> {reSelectSeries}
           </h4>
           <small>
             Add or remove quantize groups. While in most cases the default

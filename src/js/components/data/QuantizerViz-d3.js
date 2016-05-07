@@ -1,4 +1,6 @@
+"use strict";
 var d3 = require('d3');
+var _  = require('lodash');
 
 module.exports = {
 
@@ -17,7 +19,7 @@ module.exports = {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("class", "chart")
+      .attr("class", "quant-chart")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     svg
@@ -54,7 +56,7 @@ module.exports = {
     return {
       x: x,
       color: color
-    }
+    };
   },
 
   _draw: function(el, props, scales, data, thresholds, that){
@@ -116,7 +118,7 @@ module.exports = {
                 that.dragThreshold(i, sigFigs(scales.x.invert(newX),4));
                });
 
-    var svg = d3.select(el).select(".chart");
+    var svg = d3.select(el).select(".quant-chart");
 
     var xAxis = d3.svg.axis()
       .scale(scales.x)
@@ -194,4 +196,4 @@ module.exports = {
         .call(xAxis);
 
   }
-}
+};

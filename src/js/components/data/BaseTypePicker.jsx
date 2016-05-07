@@ -80,7 +80,7 @@ module.exports = React.createClass({
 
     /**
      * Check that datetime format parses all row-wise data.
-     * @param  {string} format  A moment.js datetime format.
+     * @param  {String} format  A moment.js datetime format.
      * @return {Integer}        If dateformat parses all data,
      *                             the index of the datetime
      *                             object.
@@ -109,6 +109,7 @@ module.exports = React.createClass({
 
   /**
    * Pass d3-friendly date format string back to state tree.
+   * @return {void}
    */
   setDateFormat: function(){
     var i = this.dateSniffer(true);

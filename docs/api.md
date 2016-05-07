@@ -6,9 +6,9 @@ Because of the many types of data schema ChartWerk has to ingest while creating 
 
 Most representations don't span the gap between these two domains. For example, using a mapping between data columns and traditional X and Y axes is tied too closely to the hard rules of a chart's coordinate plane. What happens when we want to use the same logic in terms of X & Y to draw both a horizontal and a vertical bar chart?
 
-ChartWerk uses a coarse, high-level grammar to describe tabular data in terms that describe a column-wise mapping to chart dimensions.
+ChartWerk uses a coarse, high-level grammar to describe tabular data in terms that describe a column-wise mapping to chart dimensions. That grammar describes the schema with the bare minimum of encoded information needed to identify chart features.
 
-Because users are asked to classify columns in their data according to this grammar, it's described as colloquially as possible.
+Put more formally, the grammar minimizes schema entropy, but because users are asked to classify columns in their data according to this grammar, its features are colloquial.
 
 There are four ways to classify a data column:
 
@@ -24,14 +24,10 @@ For example, these may be values plotted on the Y axis in horizontal line and ba
 
 #### Grouping column
 
-Grouping columns are always categorical data used to create sub-groups or facets in a chart. They can be represented by color.
+Grouping columns are always categorical data used to create sub-groups or facets in a chart. They can be represented by color or used to facet charts.
 
 #### Annotation column
 
 Annotations are textual labels paired with data points.
-
-#### Faceting column
-
-A column of values used on some charts to create faceted charts, i.e., small multiples.
 
 Users are also given the option to ignore a column in the data, in which case the column is not made available through the Werk API.

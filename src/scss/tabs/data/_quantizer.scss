@@ -25,6 +25,16 @@
   }
 
   .quantize-select{
+     h4{
+       i.fa-times{
+         color:$lightgrey;
+         cursor:pointer;
+         &:hover{
+           color:$red;
+         }
+       }
+     }
+
     input[type='number']{
       width:100px;
       margin: 0px 0px 5px;

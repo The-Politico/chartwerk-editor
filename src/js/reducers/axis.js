@@ -18,7 +18,8 @@ module.exports = function(axis, action){
             domain: [],
             range: [],
             scheme: 'categorical.default',
-            quantize: false
+            quantize: false,
+            quantizeColumn: null
         },
         base: {
             type: null,
@@ -71,6 +72,7 @@ module.exports = function(axis, action){
         i;
 
     switch(action.type){
+    // COLOR AXIS
     case types.SET_COLOR_SCHEME:
         nextState.color.scheme = action.path;
         break;
@@ -79,6 +81,13 @@ module.exports = function(axis, action){
         break;
     case types.UNSET_QUANTIZE:
         nextState.color.quantize = false;
+        nextState.color.quantizeColumn = null;
+        break;
+    case types.SET_QUANTIZE_COLUMN:
+        nextState.color.quantizeColumn = action.column;
+        break;
+    case types.UNSET_QUANTIZE_COLUMN:
+        nextState.color.quantizeColumn = null;
         break;
     case types.SET_QUANTIZE_DOMAIN:
         nextState.color.domain = action.domain;
@@ -109,6 +118,7 @@ module.exports = function(axis, action){
     case types.SET_BASE_TYPE:
         nextState.base.type = action.datatype;
         break;
+    // BASE AXIS
     case types.SET_DATE_FORMAT:
         nextState.base.dateFormat = action.dateFormat;
         break;

@@ -31,7 +31,7 @@ module.exports = React.createClass({
   getChartState: function() {
     var data = _.map(
       this.props.werk.data,
-      this.props.werk.datamap.series[0]
+      this.props.werk.axes.color.quantizeColumn
     );
 
     var dataMin = _.min(data);
@@ -81,7 +81,8 @@ module.exports = React.createClass({
   dragThreshold: _.debounce(
     function(i,v){
       this.props.dragThreshold(i,v);
-    }, 100),
+    }, 100
+  ),
 
   /**
    * Renders SVG container.
@@ -90,7 +91,7 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div id="quantize-viz"></div>
-    )
+    );
   }
 
 })

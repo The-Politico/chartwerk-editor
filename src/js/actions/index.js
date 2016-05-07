@@ -107,6 +107,19 @@ module.exports.unsetQuantize = function(){
     };
 };
 
+module.exports.setQuantizeColumn = function(column){
+    return {
+        type: types.SET_QUANTIZE_COLUMN,
+        column: column
+    };
+};
+
+module.exports.unsetQuantizeColumn = function(){
+    return {
+        type: types.SET_QUANTIZE_COLUMN
+    };
+};
+
 module.exports.setQuantizeDomain = function(domain){
   return {
     type: types.SET_QUANTIZE_DOMAIN,
