@@ -22,30 +22,8 @@ module.exports = function(axis, action){
             quantizeColumn: null
         },
         base: {
-            type: null,
-            dateFormat: null,
-            min: null,
-            max: null,
-            label: "",
-            prefix: "",
-            suffix: "",
-            format: {
-              double:{
-                dateType: null,
-                frequency: null,
-                number: null,
-                ticks: []
-              },
-              single:{
-                dateType: null,
-                frequency: null,
-                number: null,
-                ticks: []
-              }
-            }
-        },
-        value: {
           type: null,
+          dateFormat: null,
           min: null,
           max: null,
           label: "",
@@ -53,12 +31,33 @@ module.exports = function(axis, action){
           suffix: "",
           format: {
             double:{
-              number: null,
-              ticks: []
+              dateString: "Y",
+              frequency: 1,
+              ticks: 7,
+              customTicks: []
             },
             single:{
-              number: null,
-              ticks: []
+              dateString: "Y",
+              frequency: 1,
+              ticks: 7,
+              customTicks: []
+            }
+          }
+        },
+        value: {
+          min: null,
+          max: null,
+          label: "",
+          prefix: "",
+          suffix: "",
+          format: {
+            double:{
+              ticks: 7,
+              customTicks: []
+            },
+            single:{
+              ticks: 7,
+              customTicks: []
             }
           }
         }
@@ -72,7 +71,9 @@ module.exports = function(axis, action){
         i;
 
     switch(action.type){
-    // COLOR AXIS
+    /**
+     * COLOR AXIS
+     */
     case types.SET_COLOR_SCHEME:
         nextState.color.scheme = action.path;
         break;
@@ -115,15 +116,86 @@ module.exports = function(axis, action){
         nextState.color.domain = [];
         nextState.color.range = [];
         break;
+    /**
+     * BASE AXIS
+     */
     case types.SET_BASE_TYPE:
         nextState.base.type = action.datatype;
         break;
-    // BASE AXIS
     case types.SET_DATE_FORMAT:
         nextState.base.dateFormat = action.dateFormat;
         break;
     case types.UNSET_DATE_FORMAT:
         nextState.base.dateFormat = null;
+        break;
+    case types.SET_BASE_SINGLE_DATESTRING:
+        nextState.base.format.single.dateString = action.dateString;
+        break;
+    case types.SET_BASE_DOUBLE_DATESTRING:
+        nextState.base.format.double.dateString = action.dateString;
+        break;
+    case types.SET_BASE_SINGLE_FREQUENCY:
+        nextState.base.format.single.frequency = action.frequency;
+        break;
+    case types.SET_BASE_DOUBLE_FREQUENCY:
+        nextState.base.format.double.frequency = action.frequency;
+        break;
+    case types.SET_BASE_SINGLE_TICKS:
+        nextState.base.format.single.ticks = action.ticks;
+        break;
+    case types.SET_BASE_SINGLE_CUSTOMTICKS:
+        nextState.base.format.single.customTicks = action.ticks;
+        break;
+    case types.SET_BASE_DOUBLE_TICKS:
+        nextState.base.format.double.ticks = action.ticks;
+        break;
+    case types.SET_BASE_DOUBLE_CUSTOMTICKS:
+        nextState.base.format.double.customTicks = action.ticks;
+        break;
+    case types.SET_BASE_MIN:
+        nextState.base.min = action.min;
+        break;
+    case types.SET_BASE_MAX:
+        nextState.base.max = action.max;
+        break;
+    case types.SET_BASE_LABEL:
+        nextState.base.label = action.label;
+        break;
+    case types.SET_BASE_PREFIX:
+        nextState.base.prefix = action.prefix;
+        break;
+    case types.SET_BASE_SUFFIX:
+        nextState.base.suffix = action.suffix;
+        break;
+    /**
+     * VALUE AXIS
+     */
+    case types.SET_VALUE_SINGLE_TICKS:
+        nextState.value.format.single.ticks = action.ticks;
+        break;
+    case types.SET_VALUE_SINGLE_CUSTOMTICKS:
+        nextState.value.format.single.customTicks = action.ticks;
+        break;
+    case types.SET_VALUE_DOUBLE_TICKS:
+        nextState.value.format.double.ticks = action.ticks;
+        break;
+    case types.SET_VALUE_DOUBLE_CUSTOMTICKS:
+        nextState.value.format.double.customTicks = action.ticks;
+        break;
+    case types.SET_VALUE_MIN:
+        nextState.value.min = action.min;
+        break;
+    case types.SET_VALUE_MAX:
+        nextState.value.max = action.max;
+        break;
+    case types.SET_VALUE_LABEL:
+        nextState.value.label = action.label;
+        break;
+    case types.SET_VALUE_PREFIX:
+        nextState.value.prefix = action.prefix;
+        break;
+    case types.SET_VALUE_SUFFIX:
+        nextState.value.suffix = action.suffix;
         break;
     default:
         return axis;

@@ -14,43 +14,98 @@
     border-top: 3px dashed $lightgrey;
   }
 
-  .date-format{
+  .inline-exclusive-format{
 
     .form-group{
       float:left;
-      &.clearleft{
-        clear:left;
-      }
 
-      label{
-        font-weight: bold;
-      }
-
-      .Select{
-        width:150px;
-        margin-right: 5px;
-        border-radius:1px;
-      }
-      input{
-        width:60px;
-        margin:23px 5px 0 0;
-        height: 37px;
-
-      }
-
+      opacity:1;
+      transition: opacity 250ms ease-in-out;
       &.disabled{
+        opacity:0;
         input, .Select-placeholder,
         .Select, .Select-control,
         .Select-value, .Select-value-label{
           background-color: $lightgrey;
           color:#aaa;
+          display:none;
         }
         label{
           color:$lightgrey;
+          display:none;
         }
       }
 
 
+      &.clearleft{
+        clear:left;
+      }
+      &.size-switch{
+        margin-right: 5px;
+        label{
+          display:block;
+        }
+      }
+
+
+      label{
+        font-weight: bold;
+        transition: all 2s;
+      }
+
+      .Select{
+        width:150px;
+        margin-right: 10px;
+        border-radius:1px;
+      }
+      input{
+        width:60px;
+        margin:0px 5px 0 0;
+        height: 37px;
+        opacity:1;
+        transition: opacity 2s;
+
+        &.minmax{
+          width:100px;
+        }
+
+        &[type='text']{
+          width:150px;
+
+          &.presuffix{
+            width:75px;
+          }
+        }
+
+      }
+
+      img{
+        height:35px;
+        margin:0 5px 1px 0;
+        cursor:pointer;
+        padding:2px;
+        box-shadow: $boxshadow;
+        border:1px solid $lightgrey;
+        opacity:.5;
+        &:hover, &.active{
+          border:1px solid $grey;
+        }
+        &.active{
+          opacity:1;
+          border:1px solid $red;
+        }
+        &:active{
+          margin:1px 4px 0 1px;
+        }
+      }
+
+
+    }
+
+    &.numeric{
+      input{
+        margin:0 10px 5px 0;
+      }
     }
 
 

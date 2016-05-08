@@ -114,7 +114,7 @@ module.exports = React.createClass({
   sqtGroups: function(groups){
     var data = this.props.data;
 
-    var sqtScale = d3.scale.pow().exponent(.5)
+    var sqtScale = d3.scale.pow().exponent(0.5)
         .range(data.extent)
         .domain(data.extent);
 

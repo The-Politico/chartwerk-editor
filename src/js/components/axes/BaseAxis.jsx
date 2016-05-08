@@ -2,7 +2,9 @@
 var React           = require('react');
 var _               = require('lodash');
 var Select          = require('react-select');
+
 var DateFormat      = require('./DateFormat.jsx');
+var NumericFormat   = require('./NumericFormat.jsx');
 
 module.exports = React.createClass({
 
@@ -15,7 +17,7 @@ module.exports = React.createClass({
       if(!this.props.werk.datamap.base){
         return (
           <div>
-            <h4>Waiting for data</h4>
+            <h4>Waiting for a base axis from the Data tab.</h4>
           <hr />
           </div>
         );
@@ -36,7 +38,15 @@ module.exports = React.createClass({
               actions={this.props.actions}
             />
           )
+          break;
         case 'numerical':
+          baseAxis = (
+            <NumericFormat
+              werk={this.props.werk}
+              actions={this.props.actions}
+              type="base"
+            />
+          )
           break;
       }
 

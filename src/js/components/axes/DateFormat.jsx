@@ -16,53 +16,114 @@ module.exports = React.createClass({
 
   getInitialState: function(){
     return {
-      disableOpts: true,
-      singleFormat: null,
-      singleFrequency: 1,
-      doubleFormat: null,
-      doubleFrequency: 1
+      mirrorOpts: true,
+      activeOpts: 'single'
     }
   },
 
-  enableInputs: function(){
-    if(this.state.disableOpts){
-      this.setState({disableOpts: false});
+  /**
+   * Switch between single and double-column opts.
+   * @param  {String} size Ie, 'single' or 'double'
+   * @return {void}
+   */
+  switchOpts: function(size){
+    switch(size){
+      case 'single':
+        this.setState({
+          activeOpts: 'single'
+        })
+        break;
+      case 'double':
+        this.setState({
+          mirrorOpts: false,
+          activeOpts: 'double'
+        });
+        break;
     }
   },
 
-  disabledClass: function(){
-    return this.state.disableOpts ? 'disabled form-group' : 'form-group';
+  /**
+   * Determine whether size selector is active.
+   * @param  {String} size Ie, 'single' or 'double'
+   * @return {String}   Class names
+   */
+  activeClass: function(size){
+    return size == this.state.activeOpts ? 'active' : null;
   },
 
+  /**
+   * Determine if opts are disabled, ie, not shown.
+   * @param  {String} size Ie, 'single' or 'double'
+   * @return {String}   Class names
+   */
+  disabledClass: function(size){
+    var active = this.state.activeOpts;
+    var mirror = this.state.mirrorOpts;
+
+    switch(size){
+      case 'single':
+        return active === 'single' ?
+          'form-group' : 'disabled form-group';
+      case 'double':
+        return mirror ?
+          'disabled form-group' :
+            (
+              active === 'double' ?
+                'form-group' : 'disabled form-group'
+            );
+    }
+  },
+
+  /**
+   * Change single column date format
+   * @param  {Object} e Selected value
+   * @return {void}
+   */
   changeSingleFormat: function(e){
-    if(this.state.disableOpts){
-      this.setState({
-        singleFormat: e.value,
-        doubleFormat: e.value
-      });
+    var actions = this.props.actions;
+    if(this.state.mirrorOpts){
+      actions.setBaseSingleDateString(e.value);
+      actions.setBaseDoubleDateString(e.value);
     }else{
-      this.setState({ singleFormat: e.value });
+      actions.setBaseSingleDateString(e.value);
     }
   },
 
+  /**
+   * Change single column frequency
+   * @param  {Object} e Change event
+   * @return {void}
+   */
   changeSingleFrequency: function(e){
-    console.log(e);
-    if(this.state.disableOpts){
-      this.setState({
-        singleFrequency: e.target.value,
-        doubleFrequency: e.target.value
-      });
+    var actions = this.props.actions,
+        value = parseInt(e.target.value);
+    if(this.state.mirrorOpts){
+      actions.setBaseSingleFrequency(value);
+      actions.setBaseDoubleFrequency(value);
     }else{
-      this.setState({ singleFrequency: e.target.value });
+      actions.setBaseSingleFrequency(value);
     }
   },
 
+  /**
+   * Change double column date format
+   * @param  {Object} e Selected value
+   * @return {void}
+   */
   changeDoubleFormat: function(e){
-    this.setState({doubleFormat:e.value});
+    var actions = this.props.actions;
+    actions.setBaseDoubleDateString(e.value);
   },
 
+  /**
+   * Change double column frequency
+   * @param  {Object} e Change event
+   * @return {void}
+   */
   changeDoubleFrequency: function(e){
-    this.setState({doubleFrequency:e.value});
+    var actions = this.props.actions,
+        value = parseInt(e.target.value);
+    actions.setBaseDoubleFrequency(value);
   },
 
   render: function(){
@@ -77,39 +138,58 @@ module.exports = React.createClass({
     ]
 
     return (
-      <div className="date-format clearfix">
-        <h5>Date format</h5>
-        <div className="form-group">
-          <label for="dateTickFormat-double">Single column</label>
+      <div className="inline-exclusive-format clearfix">
+        <small>Select the format type and frequency of dates on the axis. Formats for
+          the single-column chart are used for the double-column chart by default.
+          Click the double-column options to set those formats independently.
+        </small>
+        <div className="form-group size-switch">
+          <label>Size</label>
+          <img
+            onClick={this.switchOpts.bind(this,'single')}
+            src="img/icons/singleColumn.png"
+            title="Single column"
+            className={this.activeClass('single')}
+          />
+          <img
+            onClick={this.switchOpts.bind(this,'double')}
+            src="img/icons/doubleColumn.png"
+            title="Double column"
+            className={this.activeClass('double')}
+          />
+        </div>
+        <div className={this.disabledClass('single')}>
+          <label for="dateTickFormat-single">Format</label>
           <Select
-              name="dateTickFormat-double"
+              name="dateTickFormat-single"
               options={dateOptions}
-              value={this.state.singleFormat}
+              value={this.props.werk.axes.base.format.single.dateString}
               searchable={false}
               placeholder="Tick format"
               clearable={false}
               onChange={this.changeSingleFormat}
           />
         </div>
-        <div className="form-group">
+        <div className={this.disabledClass('single')}>
+            <label for="dateTickFrequency-single">Frequency</label>
             <input
-              name="dateTickFrequency-double"
+              name="dateTickFrequency-single"
               type="number"
               min="1"
               max="16"
               step="1"
-              value={this.state.singleFrequency}
+              value={this.props.werk.axes.base.format.single.frequency}
               defaultValue="1"
               className="form-control"
               onChange={this.changeSingleFrequency}
             />
         </div>
-        <div className={this.disabledClass()} onClick={this.enableInputs}>
-          <label for="dateTickFormat-single">Double column</label>
+        <div className={this.disabledClass('double')}>
+          <label for="dateTickFormat-double">Format</label>
           <Select
-              name="dateTickFormat-single"
+              name="dateTickFormat-double"
               options={dateOptions}
-              value={this.state.doubleFormat}
+              value={this.props.werk.axes.base.format.double.dateString}
               searchable={false}
               placeholder="Tick format"
               clearable={false}
@@ -117,14 +197,15 @@ module.exports = React.createClass({
               onChange={this.changeDoubleFormat}
           />
         </div>
-        <div className={this.disabledClass()} onClick={this.enableInputs}>
+        <div className={this.disabledClass('double')}>
+            <label for="dateTickFrequency-double">Frequency</label>
             <input
-              name="dateTickFrequency-single"
+              name="dateTickFrequency-double"
               type="number"
               min="1"
               max="16"
               step="1"
-              value={this.state.doubleFrequency}
+              value={this.props.werk.axes.base.format.double.frequency}
               defaultValue="1"
               className="form-control"
               disabled={this.state.disableOpts}

@@ -67,3 +67,13 @@ label.section{
   color:$grey;
   border-bottom: 1px solid $lightgrey;
 }
+input[type='number']{
+  padding: 0 0 0 5px;
+}
+input[type='text']{
+  padding: 0 5px;
+}
+input.disabled{
+  background-color:$lightgrey;
+  color:$disabledgrey;
+}
