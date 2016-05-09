@@ -424,7 +424,7 @@ module.exports = React.createClass({
           />
         </div>
         <br />
-        <small>Choose min and max values for the axis. In many cases, the min should be 0. <b>In all cases</b>, the min should be below your lowest data value and the max, above the highest.</small>
+        <small>Optionally, choose min and max values for the axis. In many cases, the min should be 0. <b>In all cases</b>, the min should be below your lowest data value and the max, above the highest.</small>
         <div className="form-group">
           <label for="axis-min">Min</label>
           <input

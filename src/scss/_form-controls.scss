@@ -77,3 +77,42 @@ input.disabled{
   background-color:$lightgrey;
   color:$disabledgrey;
 }
+
+
+.form-group{
+
+  label{
+    font-weight: bold;
+  }
+
+  /**
+   * Single/Double-column switches
+   */
+   &.size-switch{
+     margin-right: 5px;
+     label{
+       display:block;
+     }
+   }
+  img{
+    height:35px;
+    margin:0 5px 1px 0;
+    cursor:pointer;
+    padding:2px;
+    box-shadow: $boxshadow;
+    border:1px solid $lightgrey;
+    opacity:.5;
+    &:hover, &.active{
+      border:1px solid $grey;
+    }
+    &.active{
+      opacity:1;
+      border:1px solid $grey;
+    }
+    &:active{
+      margin:1px 4px 0 1px;
+    }
+  }
+
+
+}

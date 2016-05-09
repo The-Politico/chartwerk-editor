@@ -1,0 +1,26 @@
+#layout{
+
+  #margin-viz{
+    .margin-background{
+      fill:$lightgrey;
+    }
+    .margin-foreground{
+      fill:$red;
+      opacity:.6;
+    }
+    .margin-handle{
+      fill:$red;
+      opacity:.2;
+      &.left, &.right{
+        cursor:ew-resize;
+      }
+      &.top, &.bottom{
+        cursor:ns-resize;
+      }
+    }
+    .margin-label{
+      fill:$grey;
+    }
+  }
+
+}

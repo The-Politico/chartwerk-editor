@@ -7,6 +7,7 @@ var store = createStore(reducer);
 
 
 var unsubscribe = store.subscribe(function () {
+  window.chartConfig = store.getState();
   return console.log(store.getState());
 });
 

@@ -6,6 +6,7 @@ var Actions = require('../../actions/');
 // Components
 var DataTab = require('./Data.jsx');
 var AxesTab = require('./Axes.jsx');
+var LayoutTab = require('./Layout.jsx');
 
 
 var Tabs = React.createClass({
@@ -18,6 +19,7 @@ var Tabs = React.createClass({
       <div className="tab-content">
         <DataTab werk={werk} actions={actions} />
         <AxesTab werk={werk} actions={actions} />
+        <LayoutTab werk={werk} actions={actions} />
       </div>
     );
   },

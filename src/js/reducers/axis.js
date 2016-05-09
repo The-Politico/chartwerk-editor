@@ -4,7 +4,7 @@ var assign = require('object-assign');
 var _ = require('lodash');
 
 /**
- * datamap reducer
+ * axis reducer
  * @param {Object} axis         Previous redux store state tree.
  * @param {Object} action       Action contains type and payload for reducer.
  *                              See actions/index.js for descriptions of

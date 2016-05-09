@@ -40,18 +40,7 @@
       &.clearleft{
         clear:left;
       }
-      &.size-switch{
-        margin-right: 5px;
-        label{
-          display:block;
-        }
-      }
 
-
-      label{
-        font-weight: bold;
-        transition: all 2s;
-      }
 
       .Select{
         width:150px;
@@ -64,41 +53,16 @@
         height: 37px;
         opacity:1;
         transition: opacity 2s;
-
         &.minmax{
           width:100px;
         }
-
         &[type='text']{
           width:150px;
-
           &.presuffix{
             width:75px;
           }
         }
-
       }
-
-      img{
-        height:35px;
-        margin:0 5px 1px 0;
-        cursor:pointer;
-        padding:2px;
-        box-shadow: $boxshadow;
-        border:1px solid $lightgrey;
-        opacity:.5;
-        &:hover, &.active{
-          border:1px solid $grey;
-        }
-        &.active{
-          opacity:1;
-          border:1px solid $red;
-        }
-        &:active{
-          margin:1px 4px 0 1px;
-        }
-      }
-
 
     }
 

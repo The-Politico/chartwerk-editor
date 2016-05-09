@@ -1,5 +1,6 @@
 "use strict";
 var React           = require('react');
+var $               = require('jquery');
 
 var NumericFormat   = require('./NumericFormat.jsx');
 
@@ -8,6 +9,11 @@ module.exports = React.createClass({
     propTypes: {
         actions: React.PropTypes.object,
         werk: React.PropTypes.object
+    },
+
+    changeTab: function(e){
+      e.preventDefault();
+      $('a[href="#layout"]').tab('show');
     },
 
     render: function(){
@@ -27,6 +33,16 @@ module.exports = React.createClass({
             actions={this.props.actions}
             type="value"
           />
+
+          <div className="guidepost">
+            <h4>
+              <a onClick={this.changeTab} href="">
+                <b>Next:</b> Layout
+                <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              </a>
+            </h4>
+          </div>
+
         </div>
       );
     }
