@@ -2,9 +2,20 @@
 var ReactDOM = require('react-dom');
 var App = require('./containers/App.jsx');
 var React = require('react');
+var Provider=require('react-redux').Provider;
+var store = require('./stores/');
 
+var ChartWerk = React.createClass({
+  render: function(){
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+  }
+});
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('editor-app')
+  <ChartWerk />,
+  document.getElementById('chartwerk-app')
 );

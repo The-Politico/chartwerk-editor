@@ -41,7 +41,7 @@ module.exports = React.createClass({
     }else{
       actions.setDrawScript(script);
     }
-  },150),
+  }, 150),
 
   openModal: function(){
     this.setState({modalIsOpen:true});
@@ -82,7 +82,7 @@ module.exports = React.createClass({
         werk.scripts.helper : werk.scripts.draw;
       eval.apply(null, [script]);
     }
-    return ;
+
   },
 
   activeClass: function(type){
@@ -148,7 +148,7 @@ module.exports = React.createClass({
 
   render: function(){
 
-    var customStyles = {
+    var modalStyles = {
       overlay : {
          position           : 'fixed',
          top                : 0,
@@ -168,38 +168,37 @@ module.exports = React.createClass({
 
     return (
       <div>
+
         <div className="alert alert-danger" role="alert">
           <i className="fa fa-diamond first"></i> This feature is for advanced users.
         </div>
+
         <div className="right-align clearfix">
           <small>Customize the chart scripts and styles.</small>
-        <button
-          className={this.activeClass('JS')}
-          onClick={this.switchScript.bind(this, 'JS')}
-        >
-          JS
-        </button>
-        <button
-          className={this.activeClass('CSS')}
-          onClick={this.switchScript.bind(this, 'CSS')}
-        >
-          CSS
-        </button>
-        <button className='btn btn-sm' onClick={this.applyScript}>
-          <i className="fa fa-play" aria-hidden="true"></i> Apply
-        </button>
-        <button className='btn btn-sm' onClick={this.openModal}>
-          <i className="fa fa-arrows-alt" aria-hidden="true"></i>
-        </button>
+          <button
+            className={this.activeClass('JS')}
+            onClick={this.switchScript.bind(this, 'JS')}
+          >JS</button>
+          <button
+            className={this.activeClass('CSS')}
+            onClick={this.switchScript.bind(this, 'CSS')}
+          >CSS</button>
+          <button className='btn btn-sm' onClick={this.applyScript}>
+            <i className="fa fa-play" aria-hidden="true"></i> Apply
+          </button>
+          <button className='btn btn-sm' onClick={this.openModal}>
+            <i className="fa fa-arrows-alt" aria-hidden="true"></i>
+          </button>
         </div>
 
-      {this.getEditor('panel')}
-      {this.getJSSwitch()}
+        {this.getEditor('panel')}
+
+        {this.getJSSwitch()}
 
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
-          style={customStyles} >
+          style={modalStyles} >
 
           <h4><span className="display">ChartWerk</span> Editor</h4>
 
@@ -212,6 +211,7 @@ module.exports = React.createClass({
                 <i className="fa fa-play" aria-hidden="true"></i> Apply
               </button>
             </div>
+
             {this.getJSSwitch()}
 
         </Modal>

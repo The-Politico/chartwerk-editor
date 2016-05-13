@@ -1,18 +1,33 @@
 "use strict";
 var React = require('react');
-var Provider=require('react-redux').Provider;
-var store = require('../stores/');
+var bindActionCreators = require('redux').bindActionCreators;
+var connect=require("react-redux").connect;
+var Actions = require('./../actions/');
 
-var Tabs = require('./tabs/index.jsx');
+var Editor = require('./panes/Editor.jsx');
+var Preview = require('./panes/Preview.jsx');
 
 var App = React.createClass({
   render: function() {
+    var dispatch=this.props.dispatch;
+    var werk=this.props.werk;
+    var actions = bindActionCreators(Actions, dispatch);
+
     return (
-      <Provider store={store}>
-        <Tabs />
-      </Provider>
+      <div>
+        <Preview werk={werk} actions={actions} />
+        <Editor werk={werk} actions={actions} />
+      </div>
     );
   }
 });
 
-module.exports = App;
+
+function mapStateToProps(state) {
+  return {
+    werk: state
+  };
+}
+
+
+module.exports = connect(mapStateToProps)(App);

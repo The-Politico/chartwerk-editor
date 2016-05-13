@@ -109,7 +109,7 @@ module.exports = React.createClass({
             <textarea
                 rows="7"
                 className="form-control"
-                placeholder="Paste data here with header row."
+                placeholder="Paste your data here with a header row."
                 onChange={this.handleDataChange}
             ></textarea>
             {success}

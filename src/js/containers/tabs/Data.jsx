@@ -15,13 +15,15 @@ module.exports = React.createClass({
     return (
       <div role="tabpanel" className="tab-pane active clearfix" id="data">
         <h4>
-            Paste <b>clean</b> data
+            <i className="fa fa-clipboard" aria-hidden="true"></i> Paste <b>clean</b> data
         </h4>
 
+        <img src="img/icons/disallowed.png" />
         <small>
           No commas, currency symbols, percent signs or
           other textual notations on numbers. Your data <b>must</b> have a header row.
         </small>
+
 
         <DataInput werk={this.props.werk} actions={this.props.actions} />
       </div>
