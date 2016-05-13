@@ -1,0 +1,82 @@
+#js{
+
+  .alert.alert-danger{
+    color:$white;
+    text-align: center;
+    padding:5px;
+    background:$red;
+  }
+
+  .btn{
+    margin-right: 5px;
+    margin-bottom: 10px;
+    &.script-switch{
+      margin-right: 0px;
+      border-radius:0px;
+
+      &:nth-child(3){
+        margin-right: 15px;
+        border-radius:0px;
+      }
+    }
+  }
+
+  .right-align{
+    text-align: right;
+    small{
+      margin-right: 15px;
+    }
+    &.editing{
+      font-family: $monospace;
+      .react-toggle{
+        margin-top: 10px;
+        margin-bottom: -7px;
+      }
+    }
+  }
+
+}
+
+.ReactModalPortal{
+
+  h4{
+    .display{
+      font-family: 'kraftwerk';
+      font-size: 22px;
+      color:$grey;
+    }
+  }
+
+  .left{
+    float:left;
+    display:block;
+    padding:10px 0;
+  }
+
+  i.fa-times{
+    font-size: 22px;
+    color:$grey;
+    position:absolute;
+    top:12px;
+    right:15px;
+    cursor:pointer;
+    &:hover{
+      color:$red;
+    }
+  }
+
+  .right-align{
+    text-align: right;
+    small{
+      margin-right: 15px;
+    }
+    &.editing{
+      font-family: $monospace;
+      .react-toggle{
+        margin-top: 10px;
+        margin-bottom: -7px;
+      }
+    }
+  }
+
+}

@@ -14,8 +14,7 @@
   },
   "browserify-shim": {
     "jquery": "global:$",
-    "ckeditor": "global:CKEDITOR",
-    "ace": "global:ace"
+    "ckeditor": "global:CKEDITOR"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +25,7 @@
     "bootstrap-sass": "^3.3.6",
     "bootstrap-table": "^1.10.1",
     "bower-resolve": "^2.2.1",
+    "brace": "^0.8.0",
     "browser-sync": "^2.11.1",
     "browserify": "^13.0.0",
     "browserify-shim": "^3.8.12",
@@ -57,10 +57,14 @@
     "moment": "^2.13.0",
     "object-assign": "^4.0.1",
     "react": "^0.14.8",
+    "react-ace": "^3.4.1",
     "react-addons-css-transition-group": "^15.0.2",
     "react-dom": "^0.14.7",
+    "react-modal": "^1.2.1",
     "react-redux": "^4.4.1",
     "react-select": "^1.0.0-beta11",
+    "react-toggle": "^2.1.0",
+    "react-toggle-switch": "^2.0.0",
     "reactify": "^1.1.1",
     "redux": "^3.3.1",
     "redux-devtools": "^3.1.1",
@@ -74,5 +78,8 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0",
     "zeroclipboard": "^2.2.0"
+  },
+  "dependencies": {
+    "brace": "^0.8.0"
   }
 }

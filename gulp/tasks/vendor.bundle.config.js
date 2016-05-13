@@ -3,7 +3,6 @@ module.exports = {
     'js/vendor': {
       scripts: [
         './bower_components/jquery/dist/jquery.min.js',
-        './bower_components/ace-builds/src-min-noconflict/ace.js',
         './bower_components/ckeditor/ckeditor.js',
         './bower_components/zeroclipboard/dist/ZeroClipboard.min.js',
         './node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.js',
