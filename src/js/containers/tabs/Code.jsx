@@ -14,7 +14,7 @@ module.exports = React.createClass({
   render: function() {
 
     return (
-      <div role="tabpanel" className="tab-pane" id="js">
+      <div role="tabpanel" className="tab-pane" id="code">
         <Editor werk={this.props.werk} actions={this.props.actions} />
       </div>
     );

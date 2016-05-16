@@ -71,6 +71,9 @@ module.exports = function(axis, action){
         i;
 
     switch(action.type){
+    case types.API_AXES:
+        nextState = _.merge({}, nextState, action.axes);
+        break;
     /**
      * COLOR AXIS
      */

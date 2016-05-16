@@ -1,5 +1,7 @@
 "use strict";
+
 // DATA COLUMN MAPPING
+module.exports.API_DATAMAP = 'API_DATAMAP';
 module.exports.ADD_BASE = 'ADD_BASE';
 module.exports.ADD_GROUP = 'ADD_GROUP';
 module.exports.ADD_SERIES = 'ADD_SERIES';
@@ -15,7 +17,11 @@ module.exports.REMOVE_ANNOTATIONS = 'REMOVE_ANNOTATIONS';
 module.exports.RESET_DATAMAP = 'RESET_DATAMAP';
 
 // ATTACH DATA
+module.exports.API_DATA = 'API_DATA';
 module.exports.ATTACH_DATA = 'ATTACH_DATA';
+
+// AXES
+module.exports.API_AXES = 'API_AXES';
 
 // COLOR AXIS
 module.exports.SET_COLOR_SCHEME = 'SET_COLOR_SCHEME';
@@ -59,6 +65,7 @@ module.exports.SET_VALUE_SUFFIX = 'SET_VALUE_SUFFIX';
 module.exports.SET_VALUE_PREFIX = 'SET_VALUE_PREFIX';
 
 // MARGINS
+module.exports.API_MARGINS = 'API_MARGINS';
 module.exports.SET_MARGIN_SINGLE_TOP = 'SET_MARGIN_SINGLE_TOP';
 module.exports.SET_MARGIN_SINGLE_BOTTOM = 'SET_MARGIN_SINGLE_BOTTOM';
 module.exports.SET_MARGIN_SINGLE_RIGHT = 'SET_MARGIN_SINGLE_RIGHT';
@@ -68,7 +75,17 @@ module.exports.SET_MARGIN_DOUBLE_BOTTOM = 'SET_MARGIN_DOUBLE_BOTTOM';
 module.exports.SET_MARGIN_DOUBLE_RIGHT = 'SET_MARGIN_DOUBLE_RIGHT';
 module.exports.SET_MARGIN_DOUBLE_LEFT = 'SET_MARGIN_DOUBLE_LEFT';
 
+// TEXT
+module.exports.API_TEXT = 'API_TEXT';
+module.exports.SET_HEADLINE = 'SET_HEADLINE';
+module.exports.SET_CHATTER = 'SET_CHATTER';
+module.exports.SET_FOOTNOTE = 'SET_FOOTNOTE';
+module.exports.SET_DATASOURCE = 'SET_DATASOURCE';
+module.exports.SET_AUTHOR = 'SET_AUTHOR';
+
 // SCRIPTS
+module.exports.API_SCRIPTS = 'API_SCRIPTS';
 module.exports.SET_DRAW_SCRIPT = 'SET_DRAW_SCRIPT';
 module.exports.SET_HELPER_SCRIPT = 'SET_HELPER_SCRIPT';
 module.exports.SET_STYLES = 'SET_STYLES';
+module.exports.SET_HTML = 'SET_HTML';

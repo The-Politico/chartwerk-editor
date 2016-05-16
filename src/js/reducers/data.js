@@ -1,5 +1,6 @@
 "use strict";
 var types = require('../constants/actions');
+var _ = require('lodash');
 
 /**
  * data reducer
@@ -14,12 +15,15 @@ module.exports = function(data, action){
     var initialState = [];
 
     if (typeof data === 'undefined') {
-        return initialState
+        return initialState;
     }
 
     var nextState = data.slice();
 
     switch(action.type){
+    case types.API_DATA:
+        nextState = _.merge({}, nextState, action.data);
+        break;
     case types.ATTACH_DATA:
         nextState = action.data;
         break;

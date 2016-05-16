@@ -1,5 +1,19 @@
 var types = require('../constants/actions.js');
 
+module.exports.apiData = function(data){
+    return {
+        type: types.API_DATA,
+        data: data
+    };
+};
+
+module.exports.apiDatamap = function(datamap){
+    return {
+        type: types.API_DATAMAP,
+        datamap: datamap
+    };
+};
+
 module.exports.addBase = function(column){
     return {
         type: types.ADD_BASE,

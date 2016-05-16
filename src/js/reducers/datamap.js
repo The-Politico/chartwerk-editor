@@ -28,6 +28,9 @@ module.exports = function(datamap, action){
     var nextState = assign({},datamap);
 
     switch(action.type){
+    case types.API_DATAMAP:
+        nextState = _.merge({}, nextState, action.datamap);
+        break;
     case types.ADD_BASE:
         nextState.base = action.column;
         break;

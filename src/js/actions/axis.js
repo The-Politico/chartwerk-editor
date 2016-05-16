@@ -1,5 +1,13 @@
 var types = require('../constants/actions.js');
 
+
+module.exports.apiAxes = function(axes){
+  return {
+      type: types.API_AXES,
+      axes: axes
+  };
+};
+
 // COLOR AXIS
 
 /**

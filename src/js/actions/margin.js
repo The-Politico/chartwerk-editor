@@ -1,5 +1,12 @@
 var types = require('../constants/actions.js');
 
+module.exports.apiMargins = function(margins){
+    return{
+      type: types.API_MARGINS,
+      margins: margins
+    };
+};
+
 module.exports.setMarginSingleTop = function(percent){
     return {
         type: types.SET_MARGIN_SINGLE_TOP,

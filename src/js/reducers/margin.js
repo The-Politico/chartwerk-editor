@@ -35,6 +35,9 @@ module.exports = function(margins, action){
   var nextState = assign({},margins);
 
   switch(action.type){
+  case types.API_MARGINS:
+      nextState = _.merge({}, nextState, action.margins);
+      break;
   case types.SET_MARGIN_SINGLE_TOP:
       nextState.single.top = action.percent;
       break;

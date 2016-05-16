@@ -1,0 +1,12 @@
+{
+  "scripts":{
+    "draw":"function draw(){\n\talert(\"This template is under construction.\");\n}",
+    "styles": "#chartWerk h1{ font-family:serif; font-size:28px; }",
+    "html": "<h1>Hello world!</h1>"
+  },
+  "margins":{
+    "double":{
+      "bottom":0.22
+    }
+  }
+}

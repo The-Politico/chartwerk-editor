@@ -8,6 +8,7 @@ var _               = require('lodash');
 
 require('brace/mode/javascript');
 require('brace/mode/scss');
+require('brace/mode/html');
 require('brace/theme/monokai');
 
 module.exports = React.createClass({
@@ -32,14 +33,21 @@ module.exports = React.createClass({
 
   onChange: _.throttle(function(script){
     var actions = this.props.actions;
-    if(this.state.editing === 'CSS'){
-      actions.setStyles(script);
-      return;
-    }
-    if(this.state.editHelper){
-      actions.setHelperScript(script);
-    }else{
-      actions.setDrawScript(script);
+
+    switch(this.state.editing){
+      case 'CSS':
+        actions.setStyles(script);
+        break;
+      case 'JS':
+        if(this.state.editHelper){
+          actions.setHelperScript(script);
+        }else{
+          actions.setDrawScript(script);
+        }
+        break;
+      case 'HTML':
+        actions.setHTML(script);
+        break;
     }
   }, 150),
 
@@ -60,6 +68,7 @@ module.exports = React.createClass({
   applyScript: function(){
     var werk = this.props.werk;
     var styleEl = document.getElementById("injected-chart-styles");
+    var chartWerkEl = document.getElementById("chartWerk");
 
     function addStyleEl(){
       var node = document.createElement('style');
@@ -75,14 +84,19 @@ module.exports = React.createClass({
         styleEl.innerHTML = str;
     }
 
-    if(this.state.editing === 'CSS'){
-      addStyleString(werk.scripts.styles);
-    }else{
-      var script = this.state.editHelper ?
-        werk.scripts.helper : werk.scripts.draw;
-      eval.apply(null, [script]);
+    switch(this.state.editing){
+      case 'CSS':
+        addStyleString(werk.scripts.styles);
+        break;
+      case 'JS':
+        var script = this.state.editHelper ?
+          werk.scripts.helper : werk.scripts.draw;
+        eval.apply(null, [script]);
+        break;
+      case 'HTML':
+        chartWerkEl.innerHTML = werk.scripts.html;
+        break;
     }
-
   },
 
   activeClass: function(type){
@@ -101,41 +115,60 @@ module.exports = React.createClass({
         name = type + "-code-editor",
         height = type === 'panel' ? "600px" : "80%",
         jsScript = this.state.editHelper ?
-            werk.scripts.helper :
-            werk.scripts.draw;
+            werk.scripts.helper : werk.scripts.draw;
 
-    return this.state.editing === 'JS' ?
-      <AceEditor
-        mode='javascript'
-        theme="monokai"
-        value={jsScript}
-        onChange={this.onChange}
-        highlightActiveLine={true}
-        enableBasicAutocompletion={true}
-        fontSize={16}
-        name={name}
-        width="100%"
-        height={height}
-        editorProps={{$blockScrolling: true}}
-      /> :
-      <AceEditor
-        mode='scss'
-        theme="monokai"
-        value={werk.scripts.styles}
-        onChange={this.onChange}
-        highlightActiveLine={true}
-        enableBasicAutocompletion={true}
-        fontSize={16}
-        name={name}
-        width="100%"
-        height={height}
-        editorProps={{$blockScrolling: true}}
-      />;
+    var editor;
+    switch(this.state.editing){
+      case 'JS':
+        editor = (<AceEditor
+          mode='javascript'
+          theme="monokai"
+          value={jsScript}
+          onChange={this.onChange}
+          highlightActiveLine={true}
+          enableBasicAutocompletion={true}
+          fontSize={16}
+          name={name}
+          width="100%"
+          height={height}
+        />);
+      break;
+      case 'CSS':
+        editor = (<AceEditor
+          mode='scss'
+          theme="monokai"
+          value={werk.scripts.styles}
+          onChange={this.onChange}
+          highlightActiveLine={true}
+          enableBasicAutocompletion={true}
+          fontSize={16}
+          name={name}
+          width="100%"
+          height={height}
+        />);
+        break;
+      case 'HTML':
+        editor = (<AceEditor
+          mode='html'
+          theme="monokai"
+          value={werk.scripts.html}
+          onChange={this.onChange}
+          highlightActiveLine={true}
+          enableBasicAutocompletion={true}
+          fontSize={16}
+          name={name}
+          width="100%"
+          height={height}
+        />);
+        break;
+    }
+
+    return editor;
   },
 
   getJSSwitch: function(){
     var editing = this.state.editHelper ? "helper object" : "draw function";
-    return this.state.editing === 'CSS' ? null :
+    return this.state.editing !== 'JS' ? null :
       <div className="right-align clearfix editing">
         <small>{editing}</small>
         <Toggle
@@ -174,7 +207,8 @@ module.exports = React.createClass({
         </div>
 
         <div className="right-align clearfix">
-          <small>Customize the chart scripts and styles.</small>
+          <small>Customize scripts and styles.</small>
+
           <button
             className={this.activeClass('JS')}
             onClick={this.switchScript.bind(this, 'JS')}
@@ -183,6 +217,11 @@ module.exports = React.createClass({
             className={this.activeClass('CSS')}
             onClick={this.switchScript.bind(this, 'CSS')}
           >CSS</button>
+          <button
+            className={this.activeClass('HTML')}
+            onClick={this.switchScript.bind(this, 'HTML')}
+          >HTML</button>
+
           <button className='btn btn-sm' onClick={this.applyScript}>
             <i className="fa fa-play" aria-hidden="true"></i> Apply
           </button>
@@ -206,10 +245,29 @@ module.exports = React.createClass({
 
             {this.getEditor('modal')}
 
+
+
             <div className="left inline">
+
               <button className='btn btn-sm' onClick={this.applyScript}>
                 <i className="fa fa-play" aria-hidden="true"></i> Apply
               </button>
+
+              <button
+                className={this.activeClass('JS')}
+                onClick={this.switchScript.bind(this, 'JS')}
+              >JS</button>
+              <button
+                className={this.activeClass('CSS')}
+                onClick={this.switchScript.bind(this, 'CSS')}
+              >CSS</button>
+              <button
+                className={this.activeClass('HTML')}
+                onClick={this.switchScript.bind(this, 'HTML')}
+              >HTML</button>
+
+
+
             </div>
 
             {this.getJSSwitch()}
