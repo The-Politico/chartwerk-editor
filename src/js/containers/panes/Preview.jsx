@@ -13,7 +13,7 @@ module.exports = React.createClass({
     return (
       <div id="preview-pane">
 
-      <SizeSwitch werk={this.props.werk} actions={this.props.actions} />
+      <SizeSwitch {...this.props} />
 
       <p>Patch backpack journalist commenters newsroom cafe paywall he said she said reporting, analytics crowdfunding advertising just across the wire monetization blowing up on Twitter paidContent.</p>
 

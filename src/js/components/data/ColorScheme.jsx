@@ -16,7 +16,7 @@ module.exports = React.createClass({
     getInitialState: function(){
         return {
             schemesVisible: false,
-        }
+        };
     },
 
     /**
@@ -52,8 +52,8 @@ module.exports = React.createClass({
                 return (
                     <div className="schemekey-square" style={divStyle} key={i}></div>
                 );
-            })
-        };
+            });
+        }
 
         var categorical = Object.keys(colors.categorical).map(function(key, i){
             return (
@@ -113,7 +113,7 @@ module.exports = React.createClass({
             categorical: categorical,
             sequential: sequential,
             diverging: diverging
-        }
+        };
     },
 
     /**
@@ -179,7 +179,7 @@ module.exports = React.createClass({
       if(!werk.axes.color.quantizeColumn){
 
         // If no data series selected, give warning.
-        if(werk.datamap.series.length == 0){
+        if(werk.datamap.series.length === 0){
           return (
             <div className="alert alert-fail">
                 <strong>No data series:</strong> You must have at least one data series column above.
@@ -284,6 +284,6 @@ module.exports = React.createClass({
                 </label>
                 {schemeSelect}
             </div>
-        )
+        );
     }
-})
+});

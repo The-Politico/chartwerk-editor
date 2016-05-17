@@ -25,7 +25,7 @@ module.exports = React.createClass({
         </small>
 
 
-        <DataInput werk={this.props.werk} actions={this.props.actions} />
+        <DataInput {...this.props} />
       </div>
     );
   },

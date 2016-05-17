@@ -14,10 +14,14 @@ var _ = require('lodash');
 module.exports = function(scripts, action){
 
   var initialState = {
-    draw: "function draw(){\n\talert(\"This template is under construction.\");\n}",
+    draw: "function draw(){\n}",
     helper: "var werkHelper = {};",
     styles: "",
-    html: ""
+    html: "",
+    dependencies: {
+      scripts: [],
+      styles: []
+    }
   };
 
   if (typeof scripts === 'undefined') {

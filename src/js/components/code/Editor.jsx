@@ -19,37 +19,73 @@ module.exports = React.createClass({
   },
 
   getInitialState: function(){
+    var werk = this.props.werk;
     return {
       modalIsOpen: false,
       editHelper: false,
-      editing: 'JS'
-    }
+      editing: 'JS',
+      scripts: {
+        draw: werk.scripts.draw,
+        helper: werk.scripts.helper,
+        styles: werk.scripts.styles,
+        html: werk.scripts.html
+      }
+    };
   },
 
   componentDidMount: function(){
-    var werk = this.props.werk;
-    eval.apply(null, [werk.scripts.draw, werk.scripts.helper]);
+    var scripts = this.state.scripts;
+    eval.apply(null, [scripts.draw, scripts.helper]);
   },
 
-  onChange: _.throttle(function(script){
-    var actions = this.props.actions;
+  /**
+   * This is an antipattern for the sake of accomodating the API, which needs
+   * to re-seed state after fetching a ChartWerk object.
+   * https://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html
+   * @param  {[type]} nextProps [description]
+   * @return {[type]}           [description]
+   */
+  componentWillReceiveProps: function(nextProps){
+    if(nextProps.werk.scripts != this.state.scripts){
+      this.setState({
+        scripts: nextProps.werk.scripts
+      });
+    }
+  },
 
+  onChange: function(script){
     switch(this.state.editing){
       case 'CSS':
-        actions.setStyles(script);
+        this.setState({
+          scripts: {
+            styles: script
+          }
+        });
         break;
       case 'JS':
         if(this.state.editHelper){
-          actions.setHelperScript(script);
+          this.setState({
+            scripts: {
+              helper: script
+            }
+          });
         }else{
-          actions.setDrawScript(script);
+          this.setState({
+            scripts: {
+              draw: script
+            }
+          });
         }
         break;
       case 'HTML':
-        actions.setHTML(script);
+        this.setState({
+          scripts: {
+            html: script
+          }
+        });
         break;
     }
-  }, 150),
+  },
 
   openModal: function(){
     this.setState({modalIsOpen:true});
@@ -66,14 +102,17 @@ module.exports = React.createClass({
   },
 
   applyScript: function(){
-    var werk = this.props.werk;
+    var actions = this.props.actions,
+        werk = this.props.werk,
+        scripts = this.state.scripts;
+
     var styleEl = document.getElementById("injected-chart-styles");
     var chartWerkEl = document.getElementById("chartWerk");
 
     function addStyleEl(){
       var node = document.createElement('style');
-          node.id = 'injected-chart-styles';
-          document.head.appendChild(node);
+      node.id = 'injected-chart-styles';
+      document.head.appendChild(node);
       return node;
     }
 
@@ -86,15 +125,25 @@ module.exports = React.createClass({
 
     switch(this.state.editing){
       case 'CSS':
-        addStyleString(werk.scripts.styles);
+        actions.setStyles(scripts.styles);
+        console.log("CSS>>",JSON.stringify(werk.scripts.styles));
+        addStyleString(scripts.styles);
         break;
       case 'JS':
+        if(this.state.editHelper){
+          actions.setHelperScript(scripts.helper);
+        }else{
+          actions.setDrawScript(scripts.draw);
+        }
         var script = this.state.editHelper ?
           werk.scripts.helper : werk.scripts.draw;
+        console.log("JS>>",JSON.stringify(script));
         eval.apply(null, [script]);
         break;
       case 'HTML':
-        chartWerkEl.innerHTML = werk.scripts.html;
+        actions.setHTML(scripts.html);
+        console.log("HTML>>",JSON.stringify(scripts.html));
+        chartWerkEl.innerHTML = scripts.html;
         break;
     }
   },
@@ -114,8 +163,9 @@ module.exports = React.createClass({
     var werk = this.props.werk,
         name = type + "-code-editor",
         height = type === 'panel' ? "600px" : "80%",
+        scripts = this.state.scripts,
         jsScript = this.state.editHelper ?
-            werk.scripts.helper : werk.scripts.draw;
+          scripts.helper : scripts.draw;
 
     var editor;
     switch(this.state.editing){
@@ -128,37 +178,43 @@ module.exports = React.createClass({
           highlightActiveLine={true}
           enableBasicAutocompletion={true}
           fontSize={16}
+          wrapEnabled={true}
           name={name}
           width="100%"
           height={height}
+          editorProps={{$blockScrolling: true}}
         />);
       break;
       case 'CSS':
         editor = (<AceEditor
           mode='scss'
           theme="monokai"
-          value={werk.scripts.styles}
+          value={scripts.styles}
           onChange={this.onChange}
           highlightActiveLine={true}
           enableBasicAutocompletion={true}
           fontSize={16}
+          wrapEnabled={true}
           name={name}
           width="100%"
           height={height}
+          editorProps={{$blockScrolling: true}}
         />);
         break;
       case 'HTML':
         editor = (<AceEditor
           mode='html'
           theme="monokai"
-          value={werk.scripts.html}
+          value={scripts.html}
           onChange={this.onChange}
           highlightActiveLine={true}
           enableBasicAutocompletion={true}
           fontSize={16}
+          wrapEnabled={true}
           name={name}
           width="100%"
           height={height}
+          editorProps={{$blockScrolling: true}}
         />);
         break;
     }
@@ -265,8 +321,6 @@ module.exports = React.createClass({
                 className={this.activeClass('HTML')}
                 onClick={this.switchScript.bind(this, 'HTML')}
               >HTML</button>
-
-
 
             </div>
 

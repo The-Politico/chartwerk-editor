@@ -1,7 +1,9 @@
 "use strict";
 var React = require('react');
 // Components
-
+var Editor = require('./Editor.jsx');
+var $ = require('jquery');
+var marked = require('./../../misc/utils').marked;
 
 
 module.exports = React.createClass({
@@ -26,8 +28,8 @@ module.exports = React.createClass({
 
   getInitialState: function(){
     return {
-      focus: null
-    }
+      focus: null,
+    };
   },
 
   changeText: function(type, e){
@@ -35,18 +37,33 @@ module.exports = React.createClass({
     switch(type){
       case 'head':
         actions.setHeadline(e.target.value);
+        $("#chartWerk #headline").html(
+          marked.inlineLexer(e.target.value, [])
+        );
         break;
       case 'chat':
         actions.setChatter(e.target.value);
+        $("#chartWerk #chatter").html(
+          marked.inlineLexer(e.target.value, [])
+        );
         break;
       case 'foot':
         actions.setFootnote(e.target.value);
+        $("#chartWerk #footnote").html(
+          marked.inlineLexer(e.target.value, [])
+        );
         break;
       case 'data':
         actions.setDataSource(e.target.value);
+        $("#chartWerk #source").html(
+          marked.inlineLexer(e.target.value, [])
+        );
         break;
       case 'auth':
         actions.setAuthor(e.target.value);
+        $("#chartWerk #author").html(
+          marked.inlineLexer(e.target.value, [])
+        );
         break;
     }
   },
@@ -157,7 +174,8 @@ module.exports = React.createClass({
             value={werk.text.author}
           />
         </div>
-
+        <h4>Test Draft.js Editor</h4>
+        <Editor {...this.props} />
       </div>
     );
   },

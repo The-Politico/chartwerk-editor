@@ -7,6 +7,7 @@ var dataActions   = require('./data');
 var axisActions   = require('./axis');
 var marginActions = require('./margin');
 var scriptActions = require('./script');
+var textActions = require('./text');
 
 
 module.exports.fetchWerk = function () {
@@ -35,35 +36,12 @@ module.exports.fetchWerk = function () {
           if(data.margins){
             dispatch(marginActions.apiMargins(data.margins));
           }
+          if(data.text){
+            dispatch(textActions.apiText(data.text));
+          }
         }
       ).catch(function(error){
         console.log("API ERROR", error);
       });
   };
-};
-
-module.exports.applyScripts = function(scripts){
-
-  function applyCSS(styles){
-    var node = document.createElement('style');
-        node.id = 'injected-chart-styles';
-        document.head.appendChild(node);
-    node.innerHTML = styles;
-  }
-
-  function applyJS(script){
-    eval.apply(null, [script]);
-  }
-
-  function applyHTML(html){
-    document
-      .getElementById("chartWerk")
-      .innerHTML = html;
-  }
-
-  applyCSS(scripts.styles);
-  applyJS(scripts.draw);
-  applyJS(scripts.helper);
-  applyHTML(scripts.html);
-
 };

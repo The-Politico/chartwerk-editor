@@ -15,7 +15,7 @@ module.exports = React.createClass({
 
     return (
       <div role="tabpanel" className="tab-pane" id="text">
-        <Inputs werk={this.props.werk} actions={this.props.actions} />
+        <Inputs {...this.props} />
       </div>
     );
   },

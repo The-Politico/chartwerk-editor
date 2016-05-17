@@ -15,8 +15,8 @@ module.exports = React.createClass({
 
     return (
       <div role="tabpanel" className="tab-pane" id="axes">
-        <BaseAxis werk={this.props.werk} actions={this.props.actions} />
-        <ValueAxis werk={this.props.werk} actions={this.props.actions} />
+        <BaseAxis {...this.props} />
+        <ValueAxis {...this.props} />
       </div>
     );
   },

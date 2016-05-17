@@ -66,7 +66,7 @@ module.exports = React.createClass({
    * @return {Integer} i      Index of object in datetime array.
    */
   dateSniffer: function(force){
-    var force = typeof force == 'undefined' ? false : force;
+    var force = typeof force === 'undefined' ? false : force;
 
     if(this.state.type != 'date'&& !force){
       return null;
@@ -88,7 +88,7 @@ module.exports = React.createClass({
     function rowCheck(format){
       var valid = true,
           i = 0;
-      while(valid && i< this.props.werk.data.length){
+      while(valid && i < this.props.werk.data.length){
         valid = moment(
           this.props.werk.data[i][base],
           format,
@@ -102,7 +102,7 @@ module.exports = React.createClass({
     while(!valid && i <= momentFormats.length){
       valid = rowCheck.bind(this)(momentFormats[i]);
       i = valid ? i : i + 1;
-    };
+    }
 
     return valid ? i : null;
   },
@@ -146,7 +146,7 @@ module.exports = React.createClass({
      * of a datetime object, add humanized label. If it didn't but date
      * format was picked, add parse error. Otherwise, null.
      */
-    var dateLabel = i != null ?
+    var dateLabel = i !== null ?
         ( <div className="dateformat">
             Format: {_.map(datetime, 'human')[i]}
           </div>
@@ -176,4 +176,4 @@ module.exports = React.createClass({
 
   }
 
-})
+});

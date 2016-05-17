@@ -4,25 +4,27 @@ var createStore = require('redux').createStore;
 var applyMiddleware = require('redux').applyMiddleware;
 var actions = require('../actions');
 var thunk = require('redux-thunk').default;
+var _ = require('lodash');
+
+var api = require('../misc/api');
 
 var store = createStore(reducer,
   applyMiddleware(thunk)
 );
 
-
 var unsubscribe = store.subscribe(function () {
-  window.chartConfig = store.getState();
+  window.chartWerk = store.getState();
+  api.redraw();
   return console.log(store.getState());
 });
 
-
 //unsubscribe();
 
+store.dispatch(actions.fetchWerk())
+    .then(function(){
+      api.injectDependencies(window.chartWerk.scripts.dependencies);
+      api.applyScripts(window.chartWerk.scripts);
+      api.initialize();
+    });
 
 module.exports = store;
-
-store.dispatch(actions.fetchWerk())
-    // For scripts, we apply after setting via API
-    .then(function(){
-      actions.applyScripts(window.chartConfig.scripts);
-    });

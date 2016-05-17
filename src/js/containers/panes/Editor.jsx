@@ -14,7 +14,7 @@ module.exports = React.createClass({
     return (
       <div id="editor-pane" className="clearfix" role="tabpanel">
         <Nav />
-        <Tabs werk={this.props.werk} actions={this.props.actions} />
+        <Tabs {...this.props} />
       </div>
     );
   }

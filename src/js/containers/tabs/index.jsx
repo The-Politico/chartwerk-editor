@@ -6,6 +6,7 @@ var DataTab = require('./Data.jsx');
 var AxesTab = require('./Axes.jsx');
 var LayoutTab = require('./Layout.jsx');
 var TextTab = require('./Text.jsx');
+var AnnotationsTab = require('./Annotations.jsx');
 var CodeTab = require('./Code.jsx');
 
 
@@ -19,11 +20,12 @@ module.exports = React.createClass({
 
     return (
       <div className="tab-content">
-        <DataTab werk={this.props.werk} actions={this.props.actions} />
-        <AxesTab werk={this.props.werk} actions={this.props.actions} />
-        <LayoutTab werk={this.props.werk} actions={this.props.actions} />
-        <TextTab werk={this.props.werk} actions={this.props.actions} />
-        <CodeTab werk={this.props.werk} actions={this.props.actions} />
+        <DataTab {...this.props} />
+        <AxesTab {...this.props} />
+        <LayoutTab {...this.props} />
+        <TextTab {...this.props} />
+        <AnnotationsTab {...this.props} />
+        <CodeTab {...this.props} />
       </div>
     );
   }

@@ -15,7 +15,7 @@ module.exports = React.createClass({
 
     return (
       <div role="tabpanel" className="tab-pane" id="layout">
-        <Margin werk={this.props.werk} actions={this.props.actions} />
+        <Margin {...this.props} />
       </div>
     );
   },

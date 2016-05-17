@@ -19,7 +19,7 @@ module.exports = React.createClass({
             return {
                 selectedColor: initialColor,
                 pickerVisible: false
-            }
+            };
     },
 
     componentDidMount: function(){
@@ -54,7 +54,7 @@ module.exports = React.createClass({
                 onClick={this.selectColor}
                 key={i}
               ></div>
-            )
+            );
         }.bind(this));
 
         var picker = this.state.pickerVisible ?
@@ -69,6 +69,6 @@ module.exports = React.createClass({
         return (<div className="colorpicker">
             <div className="color-square" style={divStyle} onClick={this.showPicker}></div>
             {picker}
-        </div>)
+        </div>);
     }
-})
+});

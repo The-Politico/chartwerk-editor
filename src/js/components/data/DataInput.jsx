@@ -43,7 +43,7 @@ module.exports = React.createClass({
          * @return {void}
          */
         function typeCheck(data){
-            if(data == ''){
+            if(data === ''){
                 this.setState(this.getInitialState());
                 return;
             }
@@ -61,7 +61,7 @@ module.exports = React.createClass({
                     csvConverter.fromString(data);
                 }
             }
-        };
+        }
 
 
         /**
@@ -74,7 +74,7 @@ module.exports = React.createClass({
         function parse(format, jsonObj){
             this.props.actions.attachData(jsonObj);
             this.setState({ format: format, valid: true });
-        };
+        }
 
         csvConverter.on("end_parsed",parse.bind(this, 'CSV'));
         tsvConverter.on("end_parsed",parse.bind(this, 'TSV'));
@@ -114,6 +114,6 @@ module.exports = React.createClass({
             ></textarea>
             {success}
             </div>
-        )
+        );
     }
 });
