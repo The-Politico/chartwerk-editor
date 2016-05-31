@@ -1,21 +1,23 @@
 "use strict";
-var reducer = require('../reducers');
-var createStore = require('redux').createStore;
-var applyMiddleware = require('redux').applyMiddleware;
-var actions = require('../actions');
-var thunk = require('redux-thunk').default;
-var _ = require('lodash');
+const reducer = require('../reducers');
+const createStore = require('redux').createStore;
+const applyMiddleware = require('redux').applyMiddleware;
+const actions = require('../actions');
+const thunk = require('redux-thunk').default;
+const _ = require('lodash');
 
-var api = require('../misc/api');
+const api = require('../misc/api');
 
-var store = createStore(reducer,
+const store = createStore(reducer,
   applyMiddleware(thunk)
 );
 
-var unsubscribe = store.subscribe(function () {
+const unsubscribe = store.subscribe(function () {
   window.chartWerk = store.getState();
   api.redraw();
-  return console.log(store.getState());
+  console.log(store.getState());
+  console.log( JSON.stringify(store.getState(), null, '\t' ) );
+  return ;
 });
 
 //unsubscribe();

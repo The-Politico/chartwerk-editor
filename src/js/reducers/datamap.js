@@ -30,6 +30,9 @@ module.exports = function(datamap, action){
     switch(action.type){
     case types.API_DATAMAP:
         nextState = _.merge({}, nextState, action.datamap);
+        nextState.series = _.uniq(nextState.series);
+        nextState.ignore = _.uniq(nextState.ignore);
+        nextState.annotations = _.uniq(nextState.annotations);
         break;
     case types.ADD_BASE:
         nextState.base = action.column;

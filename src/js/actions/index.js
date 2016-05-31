@@ -4,6 +4,7 @@ var marginActions = require('./margin');
 var textActions   = require('./text');
 var scriptActions = require('./script');
 var apiActions    = require('./api');
+var uiActions    = require('./ui');
 
 var _ = require('lodash');
 
@@ -13,5 +14,6 @@ module.exports = _.assign({},
   marginActions,
   textActions,
   scriptActions,
-  apiActions
+  apiActions,
+  uiActions
 );

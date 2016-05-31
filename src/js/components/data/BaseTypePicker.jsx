@@ -43,7 +43,7 @@ module.exports = React.createClass({
     }
 
     return {
-      type: typeSniffer.bind(this)()
+      type: werk.axes.base.type || typeSniffer.bind(this)()
     };
   },
 
@@ -130,6 +130,8 @@ module.exports = React.createClass({
 
   render: function(){
 
+    var werk = this.props.werk;
+
     var typeOptions = [
       { value: 'categorical', label: 'Categorical' },
       { value: 'numerical', label: 'Numerical' },
@@ -137,7 +139,7 @@ module.exports = React.createClass({
     ];
 
     var i = null; // Index for datetime array
-    if(this.state.type == 'date'){
+    if(werk.axes.base.type === 'date'){
       i = this.dateSniffer();
     }
 
@@ -151,7 +153,7 @@ module.exports = React.createClass({
             Format: {_.map(datetime, 'human')[i]}
           </div>
         )
-      : this.state.type == 'date' ?
+      : werk.axes.base.type === 'date' ?
         (
           <div className="dateformat error">
             Date parse error!

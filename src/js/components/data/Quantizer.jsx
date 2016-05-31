@@ -18,21 +18,18 @@ module.exports = React.createClass({
       data: React.PropTypes.object
   },
 
-  getInitialState: function(){
-    return {
-      groups: 4,
-      thresholds: this.equalGroups(4),
-      reverseRange: false
-    }
-  },
 
   /**
    * Set initial state tree
    * @return {void}
    */
-  componentDidMount: function(){
-    this.setQuantizeDomain(this.state.thresholds);
-    this.setQuantizeRange(this.state.groups);
+  componentWillMount: function(){
+    var actions = this.props.actions,
+        werk = this.props.werk;
+    if(werk.axes.color.quantizeProps.groups === 0){
+      actions.setQuantizeGroups(4);
+      this.setQuantizeRange(4);
+    }
   },
 
   /**
@@ -146,11 +143,12 @@ module.exports = React.createClass({
    *                        quantize group.
    */
   equidistantColors: function(groups){
-    var color = this.props.werk.axes.color,
+    var quantizeProps = this.props.werk.axes.color.quantizeProps,
+        color = this.props.werk.axes.color,
         scheme = _.get(colors, color.scheme);
 
     // Reverse the color range
-    if(this.state.reverseRange){
+    if(quantizeProps.reverseColors){
       var scheme = _.clone(scheme).reverse();
     }
 
@@ -190,9 +188,9 @@ module.exports = React.createClass({
    * @return {Number}           Maximum value for group, or null of last group.
    */
   inputMax: function(threshold){
-    var i = this.state.thresholds.indexOf(threshold);
-    return i < this.state.thresholds.length - 1 ?
-      this.state.thresholds[i+1] - this.offset()
+    var i = this.props.werk.axes.color.domain.indexOf(threshold);
+    return i < this.props.werk.axes.color.domain.length - 1 ?
+      this.props.werk.axes.color.domain[i+1] - this.offset()
       : this.maxCeil();
   },
 
@@ -202,9 +200,9 @@ module.exports = React.createClass({
    * @return {Number}           Minimum value for group, or null of first group.
    */
   inputMin: function(threshold){
-    var i = this.state.thresholds.indexOf(threshold);
+    var i = this.props.werk.axes.color.domain.indexOf(threshold);
     return i > 0 ?
-      this.state.thresholds[i-1] + this.offset()
+      this.props.werk.axes.color.domain[i-1] + this.offset()
       : this.minCeil();
   },
 
@@ -215,9 +213,9 @@ module.exports = React.createClass({
    * @return {void}
    */
   changeThreshold: function(i, e){
-    var thresholds = this.state.thresholds;
+    var actions = this.props.actions,
+        thresholds = this.props.werk.axes.color.domain;
     thresholds[i] = Number(e.target.value);
-    this.setState({thresholds: thresholds});
     this.setQuantizeDomain(thresholds);
   },
 
@@ -228,9 +226,9 @@ module.exports = React.createClass({
    * @return {void}
    */
   dragThreshold: function(i,v){
-    var thresholds = this.state.thresholds;
+    var actions = this.props.actions,
+        thresholds = this.props.werk.axes.color.domain;
     thresholds[i] = Number(v);
-    this.setState({thresholds: thresholds});
     this.setQuantizeDomain(thresholds);
   },
 
@@ -239,14 +237,15 @@ module.exports = React.createClass({
    * @return {void}
    */
   addGroup: function(){
-    if(this.state.groups >= 8){
+    var actions = this.props.actions,
+        quantizeProps = this.props.werk.axes.color.quantizeProps;
+
+    if(quantizeProps.groups >= 8){
       return;
     }
-    this.setQuantizeRange(this.state.groups + 1);
-    this.setState({
-      groups: this.state.groups + 1,
-      thresholds: this.equalGroups(this.state.groups + 1)
-    });
+    var groups = quantizeProps.groups + 1;
+    this.setQuantizeRange(groups);
+    actions.setQuantizeGroups(groups);
   },
 
   /**
@@ -254,15 +253,15 @@ module.exports = React.createClass({
    * @return {void}
    */
   removeGroup: function(){
-    if(this.state.groups<=2){
+    var actions = this.props.actions,
+        quantizeProps = this.props.werk.axes.color.quantizeProps;
+
+    if(quantizeProps.groups <= 2){
       return;
     }
-    this.setQuantizeRange(this.state.groups - 1);
-    this.setState({
-      groups: this.state.groups - 1,
-      thresholds: this.equalGroups(this.state.groups - 1)
-    });
-
+    var groups = quantizeProps.groups - 1;
+    this.setQuantizeRange(groups);
+    actions.setQuantizeGroups(groups);
   },
 
   /**
@@ -271,37 +270,24 @@ module.exports = React.createClass({
    * @return {void}
    */
   setGroups: function(transform){
+    var actions = this.props.actions,
+        quantizeProps = this.props.werk.axes.color.quantizeProps;
 
     switch(transform){
       case 'log':
-        this.setState({
-          thresholds: this.logGroups(this.state.groups)
-        })
-        this.setQuantizeDomain(this.logGroups(this.state.groups));
+        this.setQuantizeDomain(this.logGroups(quantizeProps.groups));
         break;
       case 'sqr':
-        this.setState({
-          thresholds: this.sqrGroups(this.state.groups)
-        })
-        this.setQuantizeDomain(this.sqrGroups(this.state.groups));
+        this.setQuantizeDomain(this.sqrGroups(quantizeProps.groups));
         break;
       case 'sqt':
-        this.setState({
-          thresholds: this.sqtGroups(this.state.groups)
-        })
-        this.setQuantizeDomain(this.sqtGroups(this.state.groups));
+        this.setQuantizeDomain(this.sqtGroups(quantizeProps.groups));
         break;
       case 'jnk':
-        this.setState({
-          thresholds: this.jnkGroups(this.state.groups)
-        })
-        this.setQuantizeDomain(this.jnkGroups(this.state.groups));
+        this.setQuantizeDomain(this.jnkGroups(quantizeProps.groups));
         break;
       default:
-        this.setState({
-          thresholds: this.equalGroups(this.state.groups)
-        });
-        this.setQuantizeDomain(this.equalGroups(this.state.groups));
+        this.setQuantizeDomain(this.equalGroups(quantizeProps.groups));
     };
     return ;
   },
@@ -311,11 +297,13 @@ module.exports = React.createClass({
    * @return {void}
    */
   reverseColor: function(){
-    this.setState({
-      reverseRange: !this.state.reverseRange
-    });
-    this.props.actions.setQuantizeRange(
-      this.equidistantColors(this.state.groups)
+    var actions = this.props.actions,
+        quantizeProps = this.props.werk.axes.color.quantizeProps;
+
+    actions.setQuantizeReverse();
+
+    actions.setQuantizeRange(
+      this.equidistantColors(quantizeProps.groups)
     );
   },
 
@@ -326,36 +314,38 @@ module.exports = React.createClass({
    * @return {String}      Disabled class or null.
    */
   activeButton: function(type){
-    var classed;
+    var classed,
+        werk = this.props.werk,
+        quantizeProps = werk.axes.color.quantizeProps;
     switch(type){
       case 'max':
-        classed = this.state.groups >= 8 ? "disabled" : null;
+        classed = quantizeProps.groups >= 8 ? "disabled" : null;
         break;
       case 'min':
-        classed = this.state.groups <= 2 ? "disabled" : null;
+        classed = quantizeProps.groups <= 2 ? "disabled" : null;
         break;
       case 'eql':
-        classed = _.isEqual(this.state.thresholds, this.equalGroups(this.state.groups)) ?
+        classed = _.isEqual(werk.axes.color.domain, this.equalGroups(quantizeProps.groups)) ?
           "disabled": null;
         break;
       case 'sqr':
-        classed = _.isEqual(this.state.thresholds, this.sqrGroups(this.state.groups)) ?
+        classed = _.isEqual(werk.axes.color.domain, this.sqrGroups(quantizeProps.groups)) ?
           "disabled": null;
         break;
       case 'sqt':
-        classed = _.isEqual(this.state.thresholds, this.sqtGroups(this.state.groups)) ?
+        classed = _.isEqual(werk.axes.color.domain, this.sqtGroups(quantizeProps.groups)) ?
           "disabled": null;
         break;
       case 'log':
         var data = this.props.data;
         // Log scales also can't have a domain that spans 0.
-        classed = _.isEqual(this.state.thresholds, this.logGroups(this.state.groups)) ||
+        classed = _.isEqual(werk.axes.color.domain, this.logGroups(quantizeProps.groups)) ||
           ((data.extent[0] > 0 && data.extent[1] <= 0) ||
               (data.extent[0] < 0 && data.extent[1] >= 0)) ?
           "disabled": null;
         break;
       case 'jnk':
-        classed = _.isEqual(this.state.thresholds, this.jnkGroups(this.state.groups)) ?
+        classed = _.isEqual(werk.axes.color.domain, this.jnkGroups(quantizeProps.groups)) ?
           "disabled": null;
         break;
     }
@@ -371,7 +361,10 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    var thresholds = this.state.thresholds;
+    var werk = this.props.werk,
+        thresholds = werk.axes.color.domain,
+        quantizeProps = werk.axes.color.quantizeProps;
+
     var groupInputs = _.map(thresholds,function(n, i){
       return (
         <div key={i}>
@@ -387,7 +380,7 @@ module.exports = React.createClass({
       );
     }.bind(this))
 
-    var reSelectSeries = this.props.werk.datamap.series.length > 1 ?
+    var reSelectSeries = werk.datamap.series.length > 1 ?
         <i
           className="fa fa-times"
           title="Choose a different data series"
@@ -398,7 +391,7 @@ module.exports = React.createClass({
         <div>
           <h4>
             Quantize thresholds <span className="column-label">
-              {ellipsize(this.props.werk.axes.color.quantizeColumn,12)}
+              {ellipsize(werk.axes.color.quantizeProps.column, 12)}
             </span> {reSelectSeries}
           </h4>
           <small>
@@ -409,9 +402,9 @@ module.exports = React.createClass({
           </small>
 
           <QuantizerViz
-            werk={this.props.werk}
-            thresholds={this.state.thresholds}
-            colorRange={this.equidistantColors(this.state.groups)}
+            werk={werk}
+            thresholds={thresholds}
+            colorRange={this.equidistantColors(quantizeProps.groups)}
             dragThreshold={ this.dragThreshold }
           />
           <table>

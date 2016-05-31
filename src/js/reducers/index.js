@@ -6,6 +6,7 @@ var axisReducer = require('./axis');
 var marginReducer = require('./margin');
 var textReducer = require('./text');
 var scriptReducer = require('./script');
+var uiReducer = require('./ui');
 
 module.exports = combineReducers({
     datamap: datamapReducer,
@@ -13,5 +14,6 @@ module.exports = combineReducers({
     axes: axisReducer,
     margins: marginReducer,
     text: textReducer,
-    scripts: scriptReducer
+    scripts: scriptReducer,
+    ui: uiReducer
 });

@@ -22,7 +22,7 @@ module.exports = function(data, action){
 
     switch(action.type){
     case types.API_DATA:
-        nextState = _.merge({}, nextState, action.data);
+        nextState = action.data;
         break;
     case types.ATTACH_DATA:
         nextState = action.data;

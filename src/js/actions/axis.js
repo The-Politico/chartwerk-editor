@@ -24,6 +24,12 @@ module.exports.setColorScheme = function(path){
     };
 };
 
+module.exports.colorByGroup = function(){
+  return {
+    type: types.COLOR_BY_GROUP
+  };
+};
+
 module.exports.setQuantize = function(){
     return {
         type: types.SET_QUANTIZE
@@ -45,7 +51,7 @@ module.exports.setQuantizeColumn = function(column){
 
 module.exports.unsetQuantizeColumn = function(){
     return {
-        type: types.SET_QUANTIZE_COLUMN
+        type: types.UNSET_QUANTIZE_COLUMN
     };
 };
 
@@ -60,6 +66,19 @@ module.exports.setQuantizeRange = function(range){
   return {
     type: types.SET_QUANTIZE_RANGE,
     range: range
+  };
+};
+
+module.exports.setQuantizeGroups = function(groups){
+  return {
+    type: types.SET_QUANTIZE_GROUPS,
+    groups: groups
+  };
+};
+
+module.exports.setQuantizeReverse = function(){
+  return {
+    type: types.SET_QUANTIZE_REVERSE
   };
 };
 

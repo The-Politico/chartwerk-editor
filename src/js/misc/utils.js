@@ -1,8 +1,3 @@
-
-
-
-
-
 var marked = require('marked');
 
 // Enable smart quotes

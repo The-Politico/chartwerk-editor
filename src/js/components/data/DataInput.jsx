@@ -18,15 +18,18 @@ module.exports = React.createClass({
     },
 
     getInitialState: function() {
-
         return {
-                format:'',
-                valid: false
+                format: null
             };
     },
 
+
     handleDataChange: function(e){
-        var data = e.target.value;
+
+        var data = e.target.value,
+          actions = this.props.actions;
+
+        actions.setRawData(data);
 
         var tsvConverter = new Converter({
             delimiter:'	' // tab-delimited
@@ -50,8 +53,8 @@ module.exports = React.createClass({
             // Try JSON data
             try{
                 var jsonObj = JSON.parse(data);
-                this.props.actions.attachData(jsonObj);
-                this.setState({format: 'JSON', valid: true });
+                actions.attachData(jsonObj);
+                this.setState({format: 'JSON'});
             } catch(e){
                 // Try TSV
                 if(data.indexOf('	') > -1){ // If tab in data...
@@ -72,12 +75,12 @@ module.exports = React.createClass({
          * @returns {void}
          */
         function parse(format, jsonObj){
-            this.props.actions.attachData(jsonObj);
-            this.setState({ format: format, valid: true });
+            actions.attachData(jsonObj);
+            this.setState({ format: format });
         }
 
-        csvConverter.on("end_parsed",parse.bind(this, 'CSV'));
-        tsvConverter.on("end_parsed",parse.bind(this, 'TSV'));
+        csvConverter.on("end_parsed", parse.bind(this, 'CSV'));
+        tsvConverter.on("end_parsed", parse.bind(this, 'TSV'));
 
         typeCheck.bind(this)(data);
 
@@ -85,7 +88,7 @@ module.exports = React.createClass({
 
 
     render: function(){
-        var success = !this.state.valid ? "" :
+        var success = this.props.werk.data.length < 1 ? "" :
             (
                 <div>
                 <p className='parse-success'>
@@ -110,6 +113,7 @@ module.exports = React.createClass({
                 rows="7"
                 className="form-control"
                 placeholder="Paste your data here with a header row."
+                value={this.props.werk.ui.rawData}
                 onChange={this.handleDataChange}
             ></textarea>
             {success}

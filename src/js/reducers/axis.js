@@ -18,8 +18,13 @@ module.exports = function(axis, action){
             domain: [],
             range: [],
             scheme: 'categorical.default',
+            byGroup: false,
             quantize: false,
-            quantizeColumn: null
+            quantizeProps: {
+              column: null,
+              groups: 0,
+              reverseColors: false
+            }
         },
         base: {
           type: null,
@@ -80,24 +85,33 @@ module.exports = function(axis, action){
     case types.SET_COLOR_SCHEME:
         nextState.color.scheme = action.path;
         break;
+    case types.COLOR_BY_GROUP:
+        nextState.color.byGroup = !nextState.color.byGroup;
+        break;
     case types.SET_QUANTIZE:
         nextState.color.quantize = true;
         break;
     case types.UNSET_QUANTIZE:
         nextState.color.quantize = false;
-        nextState.color.quantizeColumn = null;
+        nextState.color.quantizeProps = initialState.color.quantizeProps;
         break;
     case types.SET_QUANTIZE_COLUMN:
-        nextState.color.quantizeColumn = action.column;
+        nextState.color.quantizeProps.column = action.column;
         break;
     case types.UNSET_QUANTIZE_COLUMN:
-        nextState.color.quantizeColumn = null;
+        nextState.color.quantizeProps = initialState.color.quantizeProps;
         break;
     case types.SET_QUANTIZE_DOMAIN:
         nextState.color.domain = action.domain;
         break;
     case types.SET_QUANTIZE_RANGE:
         nextState.color.range = action.range;
+        break;
+    case types.SET_QUANTIZE_GROUPS:
+        nextState.color.quantizeProps.groups = action.groups;
+        break;
+    case types.SET_QUANTIZE_REVERSE:
+        nextState.color.quantizeProps.reverseColors = !nextState.color.quantizeProps.reverseColors;
         break;
     case types.SET_COLOR:
         i = nextState.color.domain.indexOf(action.column);

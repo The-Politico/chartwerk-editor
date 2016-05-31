@@ -31,7 +31,7 @@ module.exports = React.createClass({
   getChartState: function() {
     var data = _.map(
       this.props.werk.data,
-      this.props.werk.axes.color.quantizeColumn
+      this.props.werk.axes.color.quantizeProps.column
     );
 
     var dataMin = _.min(data);

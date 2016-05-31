@@ -28,12 +28,15 @@ module.exports.SET_COLOR_SCHEME = 'SET_COLOR_SCHEME';
 module.exports.SET_COLOR = 'SET_COLOR';
 module.exports.UNSET_COLOR = 'UNSET_COLOR';
 module.exports.RESET_COLOR = 'RESET_COLOR';
+module.exports.COLOR_BY_GROUP = 'COLOR_BY_GROUP';
 module.exports.SET_QUANTIZE = 'SET_QUANTIZE';
 module.exports.UNSET_QUANTIZE = 'UNSET_QUANTIZE';
 module.exports.SET_QUANTIZE_COLUMN = 'SET_QUANTIZE_COLUMN';
 module.exports.UNSET_QUANTIZE_COLUMN = 'UNSET_QUANTIZE_COLUMN';
 module.exports.SET_QUANTIZE_DOMAIN = 'SET_QUANTIZE_DOMAIN';
 module.exports.SET_QUANTIZE_RANGE = 'SET_QUANTIZE_RANGE';
+module.exports.SET_QUANTIZE_GROUPS = 'SET_QUANTIZE_GROUPS';
+module.exports.SET_QUANTIZE_REVERSE = 'SET_QUANTIZE_REVERSE';
 
 // BASE AXIS
 module.exports.SET_BASE_TYPE = 'SET_BASE_TYPE';
@@ -89,3 +92,7 @@ module.exports.SET_DRAW_SCRIPT = 'SET_DRAW_SCRIPT';
 module.exports.SET_HELPER_SCRIPT = 'SET_HELPER_SCRIPT';
 module.exports.SET_STYLES = 'SET_STYLES';
 module.exports.SET_HTML = 'SET_HTML';
+
+// UI
+module.exports.API_UI = 'API_UI';
+module.exports.SET_RAW_DATA = 'SET_RAW_DATA';

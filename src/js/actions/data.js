@@ -1,6 +1,7 @@
 var types = require('../constants/actions.js');
 
 module.exports.apiData = function(data){
+    console.log("ACTION DATA",data);
     return {
         type: types.API_DATA,
         data: data

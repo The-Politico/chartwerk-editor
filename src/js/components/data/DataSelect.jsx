@@ -18,24 +18,6 @@ module.exports = React.createClass({
         werk: React.PropTypes.object
     },
 
-    /**
-     * Creates an array of nulls, one for each select component.
-     * Props is an antipattern here, but...
-     * @returns {Obj} Initial state object
-     */
-    getInitialState: function(){
-        var columns = _.keys(this.props.werk.data[0]);
-        return {
-            selections: columns.map(function(column){
-                return {
-                    name: column,
-                    value: null
-                };
-            }),
-            colorByGroups: false
-        };
-
-    },
 
 
     componentWillReceiveProps: function(nextProps) {
@@ -50,15 +32,9 @@ module.exports = React.createClass({
                 _.keys(nextProps.werk.data[0]).sort() // New props
             )
         ){
-            this.setState({
-                'selections': _.keys(nextProps.werk.data[0]).map(function(column){
-                    return {
-                        name: column,
-                        value: null
-                    };
-                }),
-                colorByGroups: false
-            });
+            if(this.props.werk.axes.color.byGroup){
+              this.props.actions.colorByGroup();
+            }
             actions.resetDatamap();
             actions.resetColor();
         }
@@ -86,68 +62,87 @@ module.exports = React.createClass({
 
     /**
      * Changes value of Select component via setState
-     * @param  {integer} i  Index of Select component
+     * @param  {string} column  column name
      * @param  {string} v   Value selected
      * @returns {void}
      */
-    changeValue: function(i,v){
-        var select = this.state.selections[i];
+    changeValue: function(column,v){
+
         var actions = this.props.actions;
 
         /**
          * Remove the previously selected value from datamap and do any
          * necessary cleanup.
          */
-        switch(select.value){
+        switch(this.traverseDatamap(column)){
             case 'base':
                 actions.removeBase();
                 break;
             case 'group':
                 actions.removeGroup();
                 actions.resetColor();
-                this.setState({colorByGroups: false});
+                if(this.props.werk.axes.color.byGroup){
+                  actions.colorByGroup();
+                }
                 break;
             case 'series':
-                actions.removeSeries(select.name);
-                actions.unsetColor(select.name);
+                actions.removeSeries(column);
+                actions.unsetColor(column);
                 break;
             case 'annotation':
-                actions.removeAnnotations(select.name);
+                actions.removeAnnotations(column);
                 break;
             case 'ignore':
-                actions.removeIgnore(select.name);
+                actions.removeIgnore(column);
                 break;
         }
-
-        select.value = v.value;
 
         /**
          * Update datamap store.
          */
         switch(v.value){
             case 'base':
-                actions.addBase(select.name);
+                actions.addBase(column);
                 break;
             case 'group':
-                actions.addGroup(select.name);
+                actions.addGroup(column);
                 break;
             case 'series':
-                actions.addSeries(select.name);
+                actions.addSeries(column);
                 break;
             case 'annotation':
-                actions.addAnnotations(select.name);
+                actions.addAnnotations(column);
                 break;
             case 'ignore':
-                actions.addIgnore(select.name);
+                actions.addIgnore(column);
                 break;
         }
     },
 
+    /**
+     * Traverses the data map API and returns the type for the column
+     * @param  {String} column column name
+     * @return {String}        Data type
+     */
+    traverseDatamap: function(column){
+      var datamap = this.props.werk.datamap;
+
+      if(datamap.base === column){ return 'base'; }
+      if(datamap.group === column){ return 'group'; }
+      if(datamap.annotations.indexOf(column) > -1){ return 'annotation'; }
+      if(datamap.series.indexOf(column) > -1){ return 'series'; }
+      if(datamap.ignore.indexOf(column) > -1){ return 'ignore'; }
+
+      return null;
+
+    },
+
+
     colorGroupSwitch: function(column,e){
-        if(this.state.colorByGroups){
+        if(this.props.werk.axes.color.byGroup){
             this.props.actions.resetColor();
         }
-        this.setState({colorByGroups: !this.state.colorByGroups});
+        this.props.actions.colorByGroup();
 
     },
 
@@ -200,15 +195,13 @@ module.exports = React.createClass({
     },
 
     render: function(){
+        var werk = this.props.werk;
 
-        var columns = _.keys(this.props.werk.data[0]);
+        var classifySelects = _.keys(werk.data[0]).map(function(column, i) {
 
-        var classifySelects = columns.map(function(column, i) {
-
-
-            switch(this.state.selections[i].value){
+            switch(this.traverseDatamap(column)){
               case 'series':
-                var addOption =   !this.state.colorByGroups &&
+                var addOption =   !this.props.werk.axes.color.byGroup &&
                                   !this.props.werk.axes.color.quantize ?
                                   <ColorPicker
                                     column={column}
@@ -242,9 +235,9 @@ module.exports = React.createClass({
                 <td>
                 <Select
                     name={column}
-                    value={this.state.selections[i].value}
+                    value={this.traverseDatamap(column)}
                     options={this.setOptions()}
-                    onChange={this.changeValue.bind(this,i)}
+                    onChange={this.changeValue.bind(this, column)}
                     searchable={false}
                     placeholder="Choose one"
                     clearable={false}
@@ -255,12 +248,12 @@ module.exports = React.createClass({
             );
         }.bind(this));
 
-        var groups = this.state.colorByGroups ? this.groupColors() : null;
+        var groups = this.props.werk.axes.color.byGroup ? this.groupColors() : null;
 
 
         return (
             <div>
-            
+
             <div id="classify-container">
                 <h4>Classify and color columns in your data&nbsp;
                     <span className="glyphicon glyphicon-info-sign helper" data-toggle="modal" data-target=".help-modal" aria-hidden="true">

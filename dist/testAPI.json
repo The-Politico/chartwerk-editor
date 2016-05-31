@@ -1,25 +1,159 @@
 {
-  "scripts":{
-    "draw":"function draw(){\n    var config = window.chartWerk;\n\td3.select(\"#chart\")\n\t    .append(\"svg\")\n\t    .attr({\n\t        \"width\": (600 * (1 - config.margins.double.bottom)),\n\t        \"height\": 300\n\t    })\n\t    .style({\n\t        \"background\": \"pink\"\n\t    });\n}",
-    "styles": "@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);\n\n#chartWerk {\n    font-family:'Montserrat', arial, sans-serif; \n}\n#chartWerk #headline { \n    font: bold 28px 'Montserrat', arial;\n}\n#chartWerk #chatter {\n    font: normal 14px/17px 'Montserrat', arial;\n    margin-top:5px;\n}\n#chartWerk #footnote, #chartWerk #source {\n    font: normal 12px/15px arial, sans-serif;\n    color:grey;\n}\n#chartWerk #credit {\n    font: italic 14px/17px arial, sans-serif;\n    color:grey;\n}",
-    "html": "<div id='chart-header'>\n\t<h2 id='headline'>Headline</h2>\n\t<div id='chatter'>Chat chat chatter.</div> \n</div> \n<div id='chart-ui'>\n\t<!--You can put any necessary buttons, etc., here.-->\n</div> \n<div id='chart'></div> \n<div id='chart-footer'> \n\t<div id='footnote'>Footy footy footnote</div> \n\t<div id='source'>U.S. Department of Agriculture</div> \n\t<div id='author'>Jon McClure</div> \n</div>",
-    "dependencies":{
-      "scripts":[
-        "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"
-      ],
-      "styles":[
-        "http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"
-      ]
-    }
-  },
-  "margins":{
-    "double":{
-      "bottom":0.22
-    }
-  },
-  "text":{
-    "headline": "This isn't my headline",
-    "author": "Jon McClure",
-    "source": "U.S. Department of Agriculture"
-  }
+	"datamap": {
+		"base": "Date",
+		"group": null,
+		"series": [
+			"CBM",
+			"GPS"
+		],
+		"annotations": [],
+		"ignore": []
+	},
+	"data": [
+		{
+			"Date": "2015-08-24",
+			"CBM": 45.47,
+			"GPS": 32.84
+		},
+		{
+			"Date": "2015-08-17",
+			"CBM": 45.14,
+			"GPS": 32.19
+		},
+		{
+			"Date": "2015-08-10",
+			"CBM": 49.05,
+			"GPS": 34.23
+		},
+		{
+			"Date": "2015-08-03",
+			"CBM": 50.32,
+			"GPS": 34.89
+		},
+		{
+			"Date": "2015-07-27",
+			"CBM": 49.25,
+			"GPS": 36.48
+		},
+		{
+			"Date": "2015-07-20",
+			"CBM": 48.91,
+			"GPS": 35.98
+		},
+		{
+			"Date": "2015-07-13",
+			"CBM": 49.04,
+			"GPS": 37.64
+		},
+		{
+			"Date": "2015-07-06",
+			"CBM": 45.61,
+			"GPS": 37.58
+		}
+	],
+	"axes": {
+		"color": {
+			"domain": [
+				45.47,
+				45.61,
+				48.91,
+				49.05,
+				49.25
+			],
+			"range": [
+				"#08306b",
+				"#155ea6",
+				"#3c8bc3",
+				"#76b4d8",
+				"#b6d4e9",
+				"#deebf7"
+			],
+			"scheme": "sequential.blue",
+			"byGroup": false,
+			"quantize": true,
+			"quantizeProps": {
+				"column": "CBM",
+				"groups": 6,
+				"reverseColors": true
+			}
+		},
+		"base": {
+			"type": "date",
+			"dateFormat": "%Y-%m-%d",
+			"min": null,
+			"max": null,
+			"label": "",
+			"prefix": "",
+			"suffix": "",
+			"format": {
+				"double": {
+					"dateString": "Y",
+					"frequency": 1,
+					"ticks": 7,
+					"customTicks": []
+				},
+				"single": {
+					"dateString": "Y",
+					"frequency": 1,
+					"ticks": 7,
+					"customTicks": []
+				}
+			}
+		},
+		"value": {
+			"min": null,
+			"max": null,
+			"label": "",
+			"prefix": "",
+			"suffix": "",
+			"format": {
+				"double": {
+					"ticks": 7,
+					"customTicks": []
+				},
+				"single": {
+					"ticks": 7,
+					"customTicks": []
+				}
+			}
+		}
+	},
+	"margins": {
+		"single": {
+			"top": 0.05,
+			"right": 0.02,
+			"bottom": 0.05,
+			"left": 0.02
+		},
+		"double": {
+			"top": 0.05,
+			"right": 0.02,
+			"bottom": 0.22,
+			"left": 0.02
+		}
+	},
+	"text": {
+		"headline": "This isn't my headline",
+		"chatter": "",
+		"footnote": "",
+		"source": "U.S. Department of Agriculture",
+		"author": "Jon McClure"
+	},
+	"scripts": {
+		"draw": "function draw(){\n    var config = window.chartWerk;\n\td3.select(\"#chart\")\n\t    .append(\"svg\")\n\t    .attr({\n\t        \"width\": (600 * (1 - config.margins.double.bottom)),\n\t        \"height\": 300\n\t    })\n\t    .style({\n\t        \"background\": \"pink\"\n\t    });\n}",
+		"helper": "var werkHelper = {};",
+		"styles": "@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);\n\n#chartWerk {\n    font-family:'Montserrat', arial, sans-serif; \n}\n#chartWerk #headline { \n    font: bold 28px 'Montserrat', arial;\n}\n#chartWerk #chatter {\n    font: normal 14px/17px 'Montserrat', arial;\n    margin-top:5px;\n}\n#chartWerk #footnote, #chartWerk #source {\n    font: normal 12px/15px arial, sans-serif;\n    color:grey;\n}\n#chartWerk #credit {\n    font: italic 14px/17px arial, sans-serif;\n    color:grey;\n}",
+		"html": "<div id='chart-header'>\n\t<h2 id='headline'>Headline</h2>\n\t<div id='chatter'>Chat chat chatter.</div> \n</div> \n<div id='chart-ui'>\n\t<!--You can put any necessary buttons, etc., here.-->\n</div> \n<div id='chart'></div> \n<div id='chart-footer'> \n\t<div id='footnote'>Footy footy footnote</div> \n\t<div id='source'>U.S. Department of Agriculture</div> \n\t<div id='author'>Jon McClure</div> \n</div>",
+		"dependencies": {
+			"scripts": [
+				"https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"
+			],
+			"styles": [
+				"http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"
+			]
+		}
+	},
+	"ui": {
+		"rawData": "Date\tCBM\tGPS\n2015-08-24\t45.47\t32.84\n2015-08-17\t45.14\t32.19\n2015-08-10\t49.05\t34.23\n2015-08-03\t50.32\t34.89\n2015-07-27\t49.25\t36.48\n2015-07-20\t48.91\t35.98\n2015-07-13\t49.04\t37.64\n2015-07-06\t45.61\t37.58\n"
+	}
 }

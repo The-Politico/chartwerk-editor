@@ -14,8 +14,9 @@ module.exports = React.createClass({
     },
 
     getInitialState: function(){
+        var scheme = this.props.werk.axes.color.scheme;
         return {
-            schemesVisible: false,
+            schemesVisible: scheme === 'categorical.default' ? false : true
         };
     },
 
@@ -136,7 +137,7 @@ module.exports = React.createClass({
      */
     getQuantizeData: function(){
       var werk = this.props.werk,
-          series = _.map(werk.data, werk.axes.color.quantizeColumn),
+          series = _.map(werk.data, werk.axes.color.quantizeProps.column),
           extent = [
             _.min(series),
             _.max(series)
@@ -176,7 +177,7 @@ module.exports = React.createClass({
         );
       }
 
-      if(!werk.axes.color.quantizeColumn){
+      if(!werk.axes.color.quantizeProps.column){
 
         // If no data series selected, give warning.
         if(werk.datamap.series.length === 0){
@@ -187,7 +188,7 @@ module.exports = React.createClass({
           );
         }
 
-        // If only one data series selected, set that one to quantizeColumn
+        // If only one data series selected, set that one to quantize column
         if(werk.datamap.series.length == 1){
           actions.setQuantizeColumn(werk.datamap.series[0]);
           return null;
@@ -205,7 +206,7 @@ module.exports = React.createClass({
           <div>
             <Select
                 name="quant-series-select"
-                value={werk.axes.color.quantizeColumn}
+                value={werk.axes.color.quantizeProps.column}
                 options={seriesOpts}
                 onChange={this.setQuantizeSeries}
                 searchable={false}
@@ -216,7 +217,7 @@ module.exports = React.createClass({
         );
       }
 
-      // Once quantizeColumn set, render Quantizer component
+      // Once quantize column set, render Quantizer component
       return (
         <Quantizer
           werk={this.props.werk}

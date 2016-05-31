@@ -3,6 +3,7 @@ var fetch = require('isomorphic-fetch');
 
 var types = require('../constants/actions.js');
 
+var uiActions    = require('./ui');
 var dataActions   = require('./data');
 var axisActions   = require('./axis');
 var marginActions = require('./margin');
@@ -21,17 +22,20 @@ module.exports.fetchWerk = function () {
       .then(
         function(data){
           // Dispatch API actions for data props
+          if(data.data){
+            dispatch(dataActions.apiData(data.data));
+          }
           if(data.scripts){
             dispatch(scriptActions.apiScripts(data.scripts));
+          }
+          if(data.ui){
+            dispatch(uiActions.apiUI(data.ui));
           }
           if(data.axes){
             dispatch(axisActions.apiAxes(data.axes));
           }
           if(data.datamap){
             dispatch(dataActions.apiDatamap(data.datamap));
-          }
-          if(data.data){
-            dispatch(dataActions.apiData(data.data));
           }
           if(data.margins){
             dispatch(marginActions.apiMargins(data.margins));
@@ -42,6 +46,7 @@ module.exports.fetchWerk = function () {
         }
       ).catch(function(error){
         console.log("API ERROR", error);
+        console.log("ERROR STACK", error.stack);
       });
   };
 };

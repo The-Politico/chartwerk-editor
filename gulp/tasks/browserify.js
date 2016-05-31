@@ -9,6 +9,7 @@ var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var watchify = require('watchify');
 var gutil = require('gulp-util');
+var babelify = require("babelify");
 
 
 module.exports = function(){
@@ -21,7 +22,7 @@ module.exports = function(){
         debug: true
   };
 
-  var bundler = watchify(browserify(props));
+  var bundler = watchify(browserify(props).transform(babelify, {presets: ["es2015", "react"]}));
 
   bundler.on('log', gutil.log);
   bundler.on('update', bundle);

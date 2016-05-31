@@ -16,8 +16,14 @@ module.exports = React.createClass({
             var scheme = _.get(colors, werk.axes.color.scheme);
             var initialColor = scheme[0];
 
+            // Color from the API
+            function getPresetColor(column){
+              var i = werk.axes.color.domain.indexOf(column);
+              return i >= 0 ? werk.axes.color.range[i] : null;
+            }
+
             return {
-                selectedColor: initialColor,
+                selectedColor: getPresetColor(this.props.column) || initialColor,
                 pickerVisible: false
             };
     },
