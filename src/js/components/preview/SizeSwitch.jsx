@@ -9,33 +9,23 @@ module.exports = React.createClass({
       werk: React.PropTypes.object
   },
 
-  getInitialState: function(){
-    return {
-      single: true
-    }
-  },
-
   changeSize: function(size){
-    this.setState({
-      single: size === 'single' ? true : false
-    });
+    var actions = this.props.actions;
+    actions.changePreview(size);
   },
 
   getChecked: function(size){
-    if(size === 'single'){
-      return this.state.single;
-    }else{
-      return !this.state.single;
-    }
+    return size === this.props.werk.ui.size ?
+      true : false;
   },
 
   render: function() {
     return (
       <div className="switch-toggle preview-view-toggle">
           <input id="size-mobile" className="rebuild" name="size-select" type="radio" checked={this.getChecked('single')} />
-          <label for="size-mobile" onClick={this.changeSize.bind(this,'single')}>Single Column</label>
+          <label for="size-mobile" onClick={() => this.changeSize('single')}>Single Column</label>
           <input id="size-desktop" className="rebuild" name="size-select" type="radio" checked={this.getChecked('double')} />
-          <label for="size-desktop" onClick={this.changeSize.bind(this,'double')}>Double Column</label>
+          <label for="size-desktop" onClick={() => this.changeSize('double')}>Double Column</label>
           <a></a>
       </div>
     );

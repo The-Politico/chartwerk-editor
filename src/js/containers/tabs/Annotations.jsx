@@ -1,7 +1,7 @@
 "use strict";
 var React = require('react');
 // Components
-
+var Editor = require('./../../components/annotations/Editor.jsx');
 
 
 module.exports = React.createClass({
@@ -15,7 +15,7 @@ module.exports = React.createClass({
 
     return (
       <div role="tabpanel" className="tab-pane" id="annotations">
-        <h1>Annotations</h1>
+        <Editor {...this.props} />
       </div>
     );
   },

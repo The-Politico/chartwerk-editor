@@ -28,9 +28,6 @@ module.exports.fetchWerk = function () {
           if(data.scripts){
             dispatch(scriptActions.apiScripts(data.scripts));
           }
-          if(data.ui){
-            dispatch(uiActions.apiUI(data.ui));
-          }
           if(data.axes){
             dispatch(axisActions.apiAxes(data.axes));
           }
@@ -39,6 +36,10 @@ module.exports.fetchWerk = function () {
           }
           if(data.margins){
             dispatch(marginActions.apiMargins(data.margins));
+          }
+
+          if(data.ui){
+            dispatch(uiActions.apiUI(data.ui));
           }
           if(data.text){
             dispatch(textActions.apiText(data.text));

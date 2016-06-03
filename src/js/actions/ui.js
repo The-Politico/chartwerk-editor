@@ -13,3 +13,10 @@ module.exports.setRawData = function(data){
         data: data
     };
 };
+
+module.exports.changePreview = function(size){
+  return {
+      type: types.CHANGE_PREVIEW,
+      size: size
+  };
+};

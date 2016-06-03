@@ -58,8 +58,10 @@ module.exports.injectDependencies = function(dependencies){
 };
 
 var redraw = _.throttle(function(){
-    var chart = document.getElementById("chart");
-    if(chart){ chart.innerHTML = "" };
+    // Remove all drawn elements before redraw, not including free annotations
+    if(document.getElementById("chart")){ 
+      $("#chart").children().not('.annotation.label').remove();
+    };
     draw();
 },1000);
 
@@ -68,15 +70,13 @@ module.exports.initialize = function(){
   setTimeout(function(){
     redraw();
     $('#loading-modal').fadeOut(250);
-  },3500);
+  },3000);
 
   $("#chartWerk #headline").html(marked.inlineLexer(window.chartWerk.text.headline, []));
   $("#chartWerk #chatter").html(marked.inlineLexer(window.chartWerk.text.chatter, []));
   $("#chartWerk #footnote").html(marked.inlineLexer(window.chartWerk.text.footnote, []));
   $("#chartWerk #source").html(marked.inlineLexer(window.chartWerk.text.source, []));
   $("#chartWerk #author").html(marked.inlineLexer(window.chartWerk.text.author, []));
-
-
 
 }
 

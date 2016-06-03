@@ -16,7 +16,7 @@ const unsubscribe = store.subscribe(function () {
   window.chartWerk = store.getState();
   api.redraw();
   console.log(store.getState());
-  console.log( JSON.stringify(store.getState(), null, '\t' ) );
+  // console.log( JSON.stringify(store.getState(), null, '\t' ) );
   return ;
 });
 

@@ -174,8 +174,6 @@ module.exports = React.createClass({
             value={werk.text.author}
           />
         </div>
-        <h4>Test Draft.js Editor</h4>
-        <Editor {...this.props} />
       </div>
     );
   },

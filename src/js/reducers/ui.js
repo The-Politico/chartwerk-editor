@@ -15,6 +15,7 @@ module.exports = function(ui, action){
 
     var initialState = {
       rawData: null,
+      size: 'single'
     };
 
     if (typeof ui === 'undefined') {
@@ -29,6 +30,9 @@ module.exports = function(ui, action){
         break;
     case types.SET_RAW_DATA:
         nextState.rawData = action.data;
+        break;
+    case types.CHANGE_PREVIEW:
+        nextState.size = action.size;
         break;
     default:
         return ui;

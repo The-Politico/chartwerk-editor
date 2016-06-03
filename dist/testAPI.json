@@ -137,11 +137,33 @@
 		"chatter": "",
 		"footnote": "",
 		"source": "U.S. Department of Agriculture",
-		"author": "Jon McClure"
+		"author": "Jon McClure",
+		"annotations": [
+			{
+				"size": "s",
+				"w": 96,
+				"x": 353,
+				"y": 256,
+				"align": "l",
+				"fontSize": "m",
+				"background": false,
+				"text": "This is the note that tells it all."
+			},
+			{
+				"size": "d",
+				"w": 97,
+				"x": 9,
+				"y": 7,
+				"align": "l",
+				"fontSize": "m",
+				"background": false,
+				"text": "This is the other point."
+			}
+		]
 	},
 	"scripts": {
-		"draw": "function draw(){\n    var config = window.chartWerk;\n\td3.select(\"#chart\")\n\t    .append(\"svg\")\n\t    .attr({\n\t        \"width\": (600 * (1 - config.margins.double.bottom)),\n\t        \"height\": 300\n\t    })\n\t    .style({\n\t        \"background\": \"pink\"\n\t    });\n}",
-		"helper": "var werkHelper = {};",
+		"draw": "function draw(){\n    \n    var config = window.chartWerk;\n    \n\tvar svg = d3.select(\"#chart\")\n\t    .append(\"svg\")\n\t    .attr({\n\t        \"width\": (600 * (1 - config.margins.double.bottom)),\n\t        \"height\": 300\n\t    })\n\t    .style({\n\t        \"background\": \"pink\"\n\t    });\n\t\n\twerkHelper.dataX.map(function(d, i){\n\t    svg.append(\"rect\")\n\t        .attr({\n\t            x: d,\n\t            y: werkHelper.dataY[i],\n\t            width: 40,\n\t            height: 40\n\t        })\n\t        .style({\n\t            fill: \"rgb(110,140,250)\"\n\t        });\n\t})\n}",
+		"helper": "var werkHelper = {\n    dataX: [0,60,120,180,240],\n    dataY: [0,40,80,120,160]\n};",
 		"styles": "@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);\n\n#chartWerk {\n    font-family:'Montserrat', arial, sans-serif; \n}\n#chartWerk #headline { \n    font: bold 28px 'Montserrat', arial;\n}\n#chartWerk #chatter {\n    font: normal 14px/17px 'Montserrat', arial;\n    margin-top:5px;\n}\n#chartWerk #footnote, #chartWerk #source {\n    font: normal 12px/15px arial, sans-serif;\n    color:grey;\n}\n#chartWerk #credit {\n    font: italic 14px/17px arial, sans-serif;\n    color:grey;\n}",
 		"html": "<div id='chart-header'>\n\t<h2 id='headline'>Headline</h2>\n\t<div id='chatter'>Chat chat chatter.</div> \n</div> \n<div id='chart-ui'>\n\t<!--You can put any necessary buttons, etc., here.-->\n</div> \n<div id='chart'></div> \n<div id='chart-footer'> \n\t<div id='footnote'>Footy footy footnote</div> \n\t<div id='source'>U.S. Department of Agriculture</div> \n\t<div id='author'>Jon McClure</div> \n</div>",
 		"dependencies": {
@@ -154,6 +176,7 @@
 		}
 	},
 	"ui": {
-		"rawData": "Date\tCBM\tGPS\n2015-08-24\t45.47\t32.84\n2015-08-17\t45.14\t32.19\n2015-08-10\t49.05\t34.23\n2015-08-03\t50.32\t34.89\n2015-07-27\t49.25\t36.48\n2015-07-20\t48.91\t35.98\n2015-07-13\t49.04\t37.64\n2015-07-06\t45.61\t37.58\n"
+		"rawData": "Date\tCBM\tGPS\n2015-08-24\t45.47\t32.84\n2015-08-17\t45.14\t32.19\n2015-08-10\t49.05\t34.23\n2015-08-03\t50.32\t34.89\n2015-07-27\t49.25\t36.48\n2015-07-20\t48.91\t35.98\n2015-07-13\t49.04\t37.64\n2015-07-06\t45.61\t37.58\n",
+		"size": "single"
 	}
 }

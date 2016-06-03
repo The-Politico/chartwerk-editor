@@ -1,0 +1,80 @@
+// Courtesy Gregor Aisch @driven_by_data and @nytgraphics
+
+#chart  {
+
+  .annotation {
+    position: absolute;
+    cursor: auto;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    cursor:move;
+    overflow: hidden;
+
+    .inner {
+      position: relative;
+      padding:4px;
+      margin:2px;
+      width:calc(100% - 4px);
+      height:calc(100% - 4px);
+      border: 1px solid transparent;
+
+      p{
+        pointer-events: none;
+        color:$black;
+        white-space: normal;
+      }
+    }
+
+    .handle {
+      width: 5px;
+      height: 20px;
+      background: $red;
+      position: absolute;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      pointer-events: all;
+      top: 50%;
+      margin-top: -10px;
+      right: -3px;
+      cursor: ew-resize;
+      display:none;
+    }
+
+    &.editing .inner, &:hover .inner{
+      border: 1px dotted red;
+      .handle{
+          display:inline-block;
+      }
+    }
+
+    // Background
+    &.bg{
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    // Text alignment
+    &.l .inner > p{
+      text-align: left;
+    }
+    &.c .inner > p{
+      text-align: center;
+    }
+    &.r .inner > p{
+      text-align: right;
+    }
+
+    // Font size
+    &.s .inner > p{
+      font: 10px/12px arial, sans-serif;
+    }
+
+    &.m .inner > p{
+      font: 12px/13px arial, sans-serif;
+    }
+
+
+  }
+}

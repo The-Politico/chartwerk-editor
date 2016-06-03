@@ -1,0 +1,57 @@
+#annotations{
+  .form-control{
+    width:90%;
+    display:inline-block;
+  }
+  .fa-times{
+    cursor:pointer;
+    color:$lightgrey;
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 22px;
+    vertical-align: -3px;
+    &:hover{
+      color:$red;
+    }
+  }
+
+  .annotations{
+    margin-top: 20px;
+
+    .annotation-editor{
+      margin-top:10px;
+    }
+
+    .annotation-formats{
+      margin-top: 2px;
+      display:none;
+
+      .btn-group{
+        margin-right: 5px;
+      }
+      .btn.btn-sm{
+        padding:2px 7px;
+        box-shadow: none;
+      }
+
+      .size-switch{
+        display:inline;
+        margin-left: 5px;
+        img{
+          height:25px;
+          margin-top: 2px;
+        }
+      }
+
+      span{
+        color:$lightgrey;
+        vertical-align: -1px;
+        margin-left: 10px;
+      }
+    }
+
+
+
+  }
+
+}

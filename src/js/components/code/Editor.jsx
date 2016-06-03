@@ -56,33 +56,21 @@ module.exports = React.createClass({
   onChange: function(script){
     switch(this.state.editing){
       case 'CSS':
-        this.setState({
-          scripts: {
-            styles: script
-          }
-        });
+        var newScripts = _.merge(this.state.scripts,{styles:script});
+        this.setState({scripts: newScripts});
         break;
       case 'JS':
         if(this.state.editHelper){
-          this.setState({
-            scripts: {
-              helper: script
-            }
-          });
+          var newScripts = _.merge(this.state.scripts,{helper:script});
+          this.setState({scripts: newScripts});
         }else{
-          this.setState({
-            scripts: {
-              draw: script
-            }
-          });
+          var newScripts = _.merge(this.state.scripts,{draw:script});
+          this.setState({scripts: newScripts});
         }
         break;
       case 'HTML':
-        this.setState({
-          scripts: {
-            html: script
-          }
-        });
+        var newScripts = _.merge(this.state.scripts,{html:script});
+        this.setState({scripts: newScripts});
         break;
     }
   },
@@ -130,15 +118,15 @@ module.exports = React.createClass({
         addStyleString(scripts.styles);
         break;
       case 'JS':
+        var script = this.state.editHelper ?
+          this.state.scripts.helper : this.state.scripts.draw;
+        console.log("JS>>",JSON.stringify(script));
+        eval.apply(null, [script]);
         if(this.state.editHelper){
           actions.setHelperScript(scripts.helper);
         }else{
           actions.setDrawScript(scripts.draw);
         }
-        var script = this.state.editHelper ?
-          werk.scripts.helper : werk.scripts.draw;
-        console.log("JS>>",JSON.stringify(script));
-        eval.apply(null, [script]);
         break;
       case 'HTML':
         actions.setHTML(scripts.html);
