@@ -20,10 +20,28 @@
 
     .annotation-editor{
       margin-top:10px;
+
+      .size-switch{
+        display:inline-block;
+        margin-right: 2px;
+        padding-top: 2px;
+        margin-bottom: 0px;
+        float:left;
+        img{
+          height:26px;
+          margin-top: 2px;
+        }
+      }
+
+      input{
+        width:calc(90% - 65px);
+      }
+
     }
 
     .annotation-formats{
       margin-top: 2px;
+      margin-left: 65px;
       display:none;
 
       .btn-group{
@@ -34,14 +52,7 @@
         box-shadow: none;
       }
 
-      .size-switch{
-        display:inline;
-        margin-left: 5px;
-        img{
-          height:25px;
-          margin-top: 2px;
-        }
-      }
+
 
       span{
         color:$lightgrey;

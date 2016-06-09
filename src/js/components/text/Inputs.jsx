@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import { marked } from './../../misc/utils';
+import marked from './../../misc/utils';
 
 
 module.exports = React.createClass({

@@ -172,6 +172,22 @@ export default React.createClass({
 
     const notes = werk.text.annotations.map((d, i) => (
       <div key={i} id={`annotation-editor-${i}`} className="annotation-editor">
+        <div className="form-group size-switch">
+          <img
+            src="img/icons/singleColumn.png"
+            title="Single column"
+            className={(() => (d.size === 's' ? 'active' : 'inactive'))()}
+            onClick={() => actions.changeAnnotationSize(i, 's')}
+            alt="Single column"
+          />
+          <img
+            src="img/icons/doubleColumn.png"
+            title="Double column"
+            className={(() => (d.size === 'd' ? 'active' : 'inactive'))()}
+            onClick={() => actions.changeAnnotationSize(i, 'd')}
+            alt="Double column"
+          />
+        </div>
         <div>
           <input
             type="text"
@@ -222,22 +238,6 @@ export default React.createClass({
             >
               <i className="fa fa-square-o fa-lg" aria-hidden="true"></i>
             </button>
-          </div>
-          <div className="form-group size-switch">
-            <img
-              src="img/icons/singleColumn.png"
-              title="Single column"
-              className={(() => (d.size === 's' ? 'active' : 'inactive'))()}
-              onClick={() => actions.changeAnnotationSize(i, 's')}
-              alt="Single column"
-            />
-            <img
-              src="img/icons/doubleColumn.png"
-              title="Double column"
-              className={(() => (d.size === 'd' ? 'active' : 'inactive'))()}
-              onClick={() => actions.changeAnnotationSize(i, 'd')}
-              alt="Double column"
-            />
           </div>
           <span>
             <em>_italic_</em> <strong>**bold**</strong>
