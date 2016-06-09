@@ -1,7 +1,6 @@
-"use strict";
-var types = require('../constants/actions');
-var assign = require('object-assign');
-var _ = require('lodash');
+import * as types from '../constants/actions';
+import assign from 'object-assign';
+import _ from 'lodash';
 
 /**
  * data reducer
@@ -11,31 +10,30 @@ var _ = require('lodash');
  *                              action params.
  * @returns {Object} nextState  Next redux store state tree.
  */
-module.exports = function(ui, action){
+export default (ui, action) => {
+  const initialState = {
+    rawData: null,
+    size: 'single',
+  };
 
-    var initialState = {
-      rawData: null,
-      size: 'single'
-    };
+  if (typeof ui === 'undefined') {
+    return initialState;
+  }
 
-    if (typeof ui === 'undefined') {
-        return initialState;
-    }
+  let nextState = assign({}, ui);
 
-    var nextState = assign({},ui);
-
-    switch(action.type){
+  switch (action.type) {
     case types.API_UI:
-        nextState = _.merge({}, nextState, action.ui);
-        break;
+      nextState = _.merge({}, nextState, action.ui);
+      break;
     case types.SET_RAW_DATA:
-        nextState.rawData = action.data;
-        break;
+      nextState.rawData = action.data;
+      break;
     case types.CHANGE_PREVIEW:
-        nextState.size = action.size;
-        break;
+      nextState.size = action.size;
+      break;
     default:
-        return ui;
-    }
-    return nextState;
+      return ui;
+  }
+  return nextState;
 };

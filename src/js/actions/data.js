@@ -1,97 +1,68 @@
-var types = require('../constants/actions.js');
+import * as types from '../constants/actions.js';
 
-module.exports.apiData = function(data){
-    console.log("ACTION DATA",data);
-    return {
-        type: types.API_DATA,
-        data: data
-    };
-};
+export const apiData = data => ({
+  type: types.API_DATA,
+  data,
+});
 
-module.exports.apiDatamap = function(datamap){
-    return {
-        type: types.API_DATAMAP,
-        datamap: datamap
-    };
-};
+export const apiDatamap = datamap => ({
+  type: types.API_DATAMAP,
+  datamap,
+});
 
-module.exports.addBase = function(column){
-    return {
-        type: types.ADD_BASE,
-        column: column
-    };
-};
+export const addBase = column => ({
+  type: types.ADD_BASE,
+  column,
+});
 
-module.exports.addGroup = function(column){
-    return {
-        type: types.ADD_GROUP,
-        column: column
-    };
-};
+export const addGroup = column => ({
+  type: types.ADD_GROUP,
+  column,
+});
 
-module.exports.addSeries = function(column){
-    return {
-        type: types.ADD_SERIES,
-        column: column
-    };
-};
+export const addSeries = column => ({
+  type: types.ADD_SERIES,
+  column,
+});
 
-module.exports.addIgnore = function(column){
-    return {
-        type: types.ADD_IGNORE,
-        column: column
-    };
-};
+export const addIgnore = column => ({
+  type: types.ADD_IGNORE,
+  column,
+});
 
-module.exports.addAnnotations = function(column){
-    return {
-        type: types.ADD_ANNOTATIONS,
-        column: column
-    };
-};
+export const addAnnotations = column => ({
+  type: types.ADD_ANNOTATIONS,
+  column,
+});
 
-module.exports.removeBase = function(){
-    return {
-        type: types.REMOVE_BASE
-    };
-};
+export const removeBase = () => ({
+  type: types.REMOVE_BASE,
+});
 
-module.exports.removeGroup = function(){
-    return {
-        type: types.REMOVE_GROUP
-    };
-};
+export const removeGroup = () => ({
+  type: types.REMOVE_GROUP,
+});
 
-module.exports.removeSeries = function(column){
-    return {
-        type: types.REMOVE_SERIES,
-        column: column
-    };
-};
+export const removeSeries = column => ({
+  type: types.REMOVE_SERIES,
+  column,
+});
 
-module.exports.removeIgnore = function(column){
-    return {
-        type: types.REMOVE_IGNORE,
-        column: column
-    };
-};
+export const removeIgnore = column => ({
+  type: types.REMOVE_IGNORE,
+  column,
+});
 
-module.exports.removeAnnotations = function(column){
-    return {
-        type: types.REMOVE_ANNOTATIONS,
-        column: column
-    };
-};
+export const removeAnnotations = column => ({
+  type: types.REMOVE_ANNOTATIONS,
+  column,
+});
 
-module.exports.resetDatamap = function(){
-  return {
-    type: types.RESET_DATAMAP
-  };
-};
+export const resetDatamap = () => ({
+  type: types.RESET_DATAMAP,
+});
 
-module.exports.attachData = function(data){
-    return {
-        type: types.ATTACH_DATA,
-        data: data
-    };
-};
+export const attachData = data => ({
+  type: types.ATTACH_DATA,
+  data,
+});

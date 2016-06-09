@@ -1,36 +1,26 @@
-var types = require('../constants/actions.js');
+import * as types from '../constants/actions.js';
 
-module.exports.apiScripts = function(scripts){
-    return{
-      type: types.API_SCRIPTS,
-      scripts: scripts
-    };
-};
+export const apiScripts = scripts => ({
+  type: types.API_SCRIPTS,
+  scripts,
+});
 
-module.exports.setDrawScript = function(script){
-    return {
-        type: types.SET_DRAW_SCRIPT,
-        script: script
-    };
-};
+export const setDrawScript = script => ({
+  type: types.SET_DRAW_SCRIPT,
+  script,
+});
 
-module.exports.setHelperScript = function(script){
-    return {
-        type: types.SET_HELPER_SCRIPT,
-        script: script
-    };
-};
+export const setHelperScript = script => ({
+  type: types.SET_HELPER_SCRIPT,
+  script,
+});
 
-module.exports.setStyles = function(styles){
-    return {
-        type: types.SET_STYLES,
-        styles: styles
-    };
-};
+export const setStyles = styles => ({
+  type: types.SET_STYLES,
+  styles,
+});
 
-module.exports.setHTML = function(html){
-    return {
-        type: types.SET_HTML,
-        html: html
-    };
-};
+export const setHTML = html => ({
+  type: types.SET_HTML,
+  html,
+});

@@ -1,64 +1,46 @@
-var types = require('../constants/actions.js');
+import * as types from '../constants/actions.js';
 
-module.exports.apiMargins = function(margins){
-    return{
-      type: types.API_MARGINS,
-      margins: margins
-    };
-};
+export const apiMargins = margins => ({
+  type: types.API_MARGINS,
+  margins,
+});
 
-module.exports.setMarginSingleTop = function(percent){
-    return {
-        type: types.SET_MARGIN_SINGLE_TOP,
-        percent: percent
-    };
-};
+export const setMarginSingleTop = percent => ({
+  type: types.SET_MARGIN_SINGLE_TOP,
+  percent,
+});
 
-module.exports.setMarginSingleBottom = function(percent){
-    return {
-        type: types.SET_MARGIN_SINGLE_BOTTOM,
-        percent: percent
-    };
-};
+export const setMarginSingleBottom = percent => ({
+  type: types.SET_MARGIN_SINGLE_BOTTOM,
+  percent,
+});
 
-module.exports.setMarginSingleRight = function(percent){
-    return {
-        type: types.SET_MARGIN_SINGLE_RIGHT,
-        percent: percent
-    };
-};
+export const setMarginSingleRight = percent => ({
+  type: types.SET_MARGIN_SINGLE_RIGHT,
+  percent,
+});
 
-module.exports.setMarginSingleLeft = function(percent){
-    return {
-        type: types.SET_MARGIN_SINGLE_LEFT,
-        percent: percent
-    };
-};
+export const setMarginSingleLeft = percent => ({
+  type: types.SET_MARGIN_SINGLE_LEFT,
+  percent,
+});
 
-module.exports.setMarginDoubleTop = function(percent){
-    return {
-        type: types.SET_MARGIN_DOUBLE_TOP,
-        percent: percent
-    };
-};
+export const setMarginDoubleTop = percent => ({
+  type: types.SET_MARGIN_DOUBLE_TOP,
+  percent,
+});
 
-module.exports.setMarginDoubleBottom = function(percent){
-    return {
-        type: types.SET_MARGIN_DOUBLE_BOTTOM,
-        percent: percent
-    };
-};
+export const setMarginDoubleBottom = percent => ({
+  type: types.SET_MARGIN_DOUBLE_BOTTOM,
+  percent,
+});
 
-module.exports.setMarginDoubleRight = function(percent){
-    return {
-        type: types.SET_MARGIN_DOUBLE_RIGHT,
-        percent: percent
-    };
-};
+export const setMarginDoubleRight = percent => ({
+  type: types.SET_MARGIN_DOUBLE_RIGHT,
+  percent,
+});
 
-module.exports.setMarginDoubleLeft = function(percent){
-    return {
-        type: types.SET_MARGIN_DOUBLE_LEFT,
-        percent: percent
-    };
-};
+export const setMarginDoubleLeft = percent => ({
+  type: types.SET_MARGIN_DOUBLE_LEFT,
+  percent,
+});

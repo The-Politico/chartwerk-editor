@@ -1,53 +1,47 @@
 require('es6-promise').polyfill();
-var fetch = require('isomorphic-fetch');
+import fetch from 'isomorphic-fetch';
 
-var types = require('../constants/actions.js');
-
-var uiActions    = require('./ui');
-var dataActions   = require('./data');
-var axisActions   = require('./axis');
-var marginActions = require('./margin');
-var scriptActions = require('./script');
-var textActions = require('./text');
+import * as uiActions from './ui';
+import * as dataActions from './data';
+import * as axisActions from './axis';
+import * as marginActions from './margin';
+import * as scriptActions from './script';
+import * as textActions from './text';
 
 
-module.exports.fetchWerk = function () {
-  return function(dispatch){
-    return fetch('./testAPI.json')
-      .then(
-        function(response){
-          return response.json();
+export function fetchWerk() {
+  return dispatch => fetch('./testAPI.json')
+    .then(
+      response => response.json()
+    )
+    .then(
+      data => {
+        // Dispatch API actions for data props
+        if (data.data) {
+          dispatch(dataActions.apiData(data.data));
         }
-      )
-      .then(
-        function(data){
-          // Dispatch API actions for data props
-          if(data.data){
-            dispatch(dataActions.apiData(data.data));
-          }
-          if(data.scripts){
-            dispatch(scriptActions.apiScripts(data.scripts));
-          }
-          if(data.axes){
-            dispatch(axisActions.apiAxes(data.axes));
-          }
-          if(data.datamap){
-            dispatch(dataActions.apiDatamap(data.datamap));
-          }
-          if(data.margins){
-            dispatch(marginActions.apiMargins(data.margins));
-          }
-
-          if(data.ui){
-            dispatch(uiActions.apiUI(data.ui));
-          }
-          if(data.text){
-            dispatch(textActions.apiText(data.text));
-          }
+        if (data.scripts) {
+          dispatch(scriptActions.apiScripts(data.scripts));
         }
-      ).catch(function(error){
-        console.log("API ERROR", error);
-        console.log("ERROR STACK", error.stack);
-      });
-  };
-};
+        if (data.axes) {
+          dispatch(axisActions.apiAxes(data.axes));
+        }
+        if (data.datamap) {
+          dispatch(dataActions.apiDatamap(data.datamap));
+        }
+        if (data.margins) {
+          dispatch(marginActions.apiMargins(data.margins));
+        }
+        if (data.ui) {
+          dispatch(uiActions.apiUI(data.ui));
+        }
+        if (data.text) {
+          dispatch(textActions.apiText(data.text));
+        }
+      }
+    )
+    .catch(error => {
+      console.log('API ERROR', error);
+      console.log('ERROR STACK', error.stack);
+    });
+}

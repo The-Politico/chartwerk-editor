@@ -1,33 +1,27 @@
-"use strict";
-var React = require('react');
-var DataInput = require('../../components/data/DataInput.jsx');
+import React from 'react';
 
-module.exports = React.createClass({
+import DataInput from '../../components/data/DataInput.jsx';
 
-  propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object
-  },
+const Data = (props) => (
+  <div role="tabpanel" className="tab-pane active clearfix" id="data">
+    <h4>
+      <i className="fa fa-clipboard" aria-hidden="true"></i>
+      Paste <b>clean</b> data
+    </h4>
 
-  render: function() {
+    <img src="img/icons/disallowed.png" alt="disallowed" />
+    <small>
+      No commas, currency symbols, percent signs or
+      other textual notations on numbers. Your data <b>must</b> have a header row.
+    </small>
 
+    <DataInput {...props} />
+  </div>
+);
 
-    return (
-      <div role="tabpanel" className="tab-pane active clearfix" id="data">
-        <h4>
-            <i className="fa fa-clipboard" aria-hidden="true"></i> Paste <b>clean</b> data
-        </h4>
+Data.propTypes = {
+  actions: React.PropTypes.object,
+  werk: React.PropTypes.object,
+};
 
-        <img src="img/icons/disallowed.png" />
-        <small>
-          No commas, currency symbols, percent signs or
-          other textual notations on numbers. Your data <b>must</b> have a header row.
-        </small>
-
-
-        <DataInput {...this.props} />
-      </div>
-    );
-  },
-
-});
+export default Data;

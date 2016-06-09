@@ -1,59 +1,54 @@
-"use strict";
-var React           = require('react');
-var Select          = require('react-select');
-var actionCreators  = require('../../actions');
-var _               = require('lodash');
-var moment          = require('moment');
-// Add additional datetimes to constants/datetime.
-var datetime        = require('../../constants/datetime');
+import React from 'react';
+import Select from 'react-select';
+import _ from 'lodash';
+import moment from 'moment';
+import datetime from '../../constants/datetime';
 
-module.exports = React.createClass({
+export default React.createClass({
 
   propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object
+    actions: React.PropTypes.object,
+    werk: React.PropTypes.object,
   },
 
-  getInitialState: function(){
-    var werk = this.props.werk,
-        base = werk.datamap.base;
+  getInitialState() {
+    const werk = this.props.werk;
+    const base = werk.datamap.base;
 
     /**
      * Sniff data type of first data object's base property.
      * @return {String} The data type sniffed
      */
-    function typeSniffer(){
-      if(
+    function typeSniffer() {
+      if (
         moment(
           werk.data[0][base],
           _.map(datetime, 'moment'), // An array of datetime formats
           true
         ).isValid()
-      ){
+      ) {
         return 'date';
       }
-      else if(
+      if (
         typeof werk.data[0][base] === 'number'
-      ){
+      ) {
         return 'numerical';
       }
-      else {
-        return 'categorical';
-      }
+
+      return 'categorical';
     }
 
     return {
-      type: werk.axes.base.type || typeSniffer.bind(this)()
+      type: werk.axes.base.type || typeSniffer.bind(this)(),
     };
   },
 
-  componentDidMount: function(){
-
+  componentDidMount() {
     this.props.actions.setBaseType(
       this.state.type
     );
 
-    if(this.state.type == 'date'){
+    if (this.state.type === 'date') {
       this.setDateFormat();
     }
   },
@@ -65,18 +60,16 @@ module.exports = React.createClass({
    *                          	setState race conditions, e.g., setDateFormat.
    * @return {Integer} i      Index of object in datetime array.
    */
-  dateSniffer: function(force){
-    var force = typeof force === 'undefined' ? false : force;
-
-    if(this.state.type != 'date'&& !force){
+  dateSniffer(force = false) {
+    if (this.state.type !== 'date' && !force) {
       return null;
     }
 
-    var werk = this.props.werk,
-        base = werk.datamap.base,
-        valid = false,
-        i = 0,
-        momentFormats = _.map(datetime, 'moment');
+    const werk = this.props.werk;
+    const base = werk.datamap.base;
+    const momentFormats = _.map(datetime, 'moment');
+    let valid = false;
+    let i = 0;
 
     /**
      * Check that datetime format parses all row-wise data.
@@ -85,21 +78,21 @@ module.exports = React.createClass({
      *                             the index of the datetime
      *                             object.
      */
-    function rowCheck(format){
-      var valid = true,
-          i = 0;
-      while(valid && i < this.props.werk.data.length){
-        valid = moment(
-          this.props.werk.data[i][base],
+    function rowCheck(format) {
+      let stillValid = true;
+      let rowI = 0;
+      while (stillValid && rowI < this.props.werk.data.length) {
+        stillValid = moment(
+          this.props.werk.data[rowI][base],
           format,
           true
         ).isValid();
-        i++;
+        rowI++;
       }
-      return valid;
+      return stillValid;
     }
 
-    while(!valid && i <= momentFormats.length){
+    while (!valid && i <= momentFormats.length) {
       valid = rowCheck.bind(this)(momentFormats[i]);
       i = valid ? i : i + 1;
     }
@@ -111,35 +104,34 @@ module.exports = React.createClass({
    * Pass d3-friendly date format string back to state tree.
    * @return {void}
    */
-  setDateFormat: function(){
-    var i = this.dateSniffer(true);
+  setDateFormat() {
+    const i = this.dateSniffer(true);
     this.props.actions.setDateFormat(
       _.map(datetime, 'd3')[i]
     );
   },
 
-  changeType: function(e){
-        this.props.actions.setBaseType(e.value);
-        this.setState({type: e.value});
-        if(e.value == 'date'){
-          this.setDateFormat();
-        }else{
-          this.props.actions.unsetDateFormat();
-        }
+  changeType(e) {
+    this.props.actions.setBaseType(e.value);
+    this.setState({ type: e.value });
+    if (e.value === 'date') {
+      this.setDateFormat();
+    } else {
+      this.props.actions.unsetDateFormat();
+    }
   },
 
-  render: function(){
+  render() {
+    const werk = this.props.werk;
 
-    var werk = this.props.werk;
-
-    var typeOptions = [
+    const typeOptions = [
       { value: 'categorical', label: 'Categorical' },
       { value: 'numerical', label: 'Numerical' },
-      { value: 'date', label: 'Date' }
+      { value: 'date', label: 'Date' },
     ];
 
-    var i = null; // Index for datetime array
-    if(werk.axes.base.type === 'date'){
+    let i = null; // Index for datetime array
+    if (werk.axes.base.type === 'date') {
       i = this.dateSniffer();
     }
 
@@ -148,34 +140,35 @@ module.exports = React.createClass({
      * of a datetime object, add humanized label. If it didn't but date
      * format was picked, add parse error. Otherwise, null.
      */
-    var dateLabel = i !== null ?
-        ( <div className="dateformat">
-            Format: {_.map(datetime, 'human')[i]}
-          </div>
-        )
-      : werk.axes.base.type === 'date' ?
-        (
-          <div className="dateformat error">
-            Date parse error!
-          </div>
-        )
-      : null;
+    let dateLabel = null;
+    if (i !== null) {
+      dateLabel = (
+        <div className="dateformat">
+          Format: {_.map(datetime, 'human')[i]}
+        </div>
+      );
+    } else if (werk.axes.base.type === 'date') {
+      dateLabel = (
+        <div className="dateformat error">
+          Date parse error!
+        </div>
+      );
+    }
 
     return (
-      <div className='base-type'>
-      <Select
-        name='base'
-        value={this.state.type}
-        options={typeOptions}
-        searchable={false}
-        onChange={this.changeType}
-        placeholder="What data type?"
-        clearable={false}
-      />
-      {dateLabel}
+      <div className="base-type">
+        <Select
+          name="base"
+          value={this.state.type}
+          options={typeOptions}
+          searchable={false}
+          onChange={this.changeType}
+          placeholder="What data type?"
+          clearable={false}
+        />
+        {dateLabel}
       </div>
     );
-
-  }
+  },
 
 });

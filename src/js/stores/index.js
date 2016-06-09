@@ -1,32 +1,31 @@
-"use strict";
-const reducer = require('../reducers');
-const createStore = require('redux').createStore;
-const applyMiddleware = require('redux').applyMiddleware;
-const actions = require('../actions');
-const thunk = require('redux-thunk').default;
-const _ = require('lodash');
+import reducer from '../reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
+import actions from '../actions';
+import thunk from 'redux-thunk';
 
-const api = require('../misc/api');
+import * as api from '../misc/api';
 
-const store = createStore(reducer,
-  applyMiddleware(thunk)
-);
+const store = createStore(reducer, compose(
+  applyMiddleware(thunk),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
 
-const unsubscribe = store.subscribe(function () {
+// const unsubscribe =
+store.subscribe(() => {
   window.chartWerk = store.getState();
   api.redraw();
   console.log(store.getState());
   // console.log( JSON.stringify(store.getState(), null, '\t' ) );
-  return ;
+  return;
 });
 
-//unsubscribe();
+// unsubscribe();
 
 store.dispatch(actions.fetchWerk())
-    .then(function(){
+    .then(() => {
       api.injectDependencies(window.chartWerk.scripts.dependencies);
       api.applyScripts(window.chartWerk.scripts);
       api.initialize();
     });
 
-module.exports = store;
+export default store;

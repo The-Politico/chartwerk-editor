@@ -1,121 +1,89 @@
-var types = require('../constants/actions.js');
+import * as types from '../constants/actions.js';
 
-module.exports.apiText = function(texts){
-    return {
-      type: types.API_TEXT,
-      texts: texts
-    };
-};
+export const apiText = texts => ({
+  type: types.API_TEXT,
+  texts,
+});
 
-module.exports.setHeadline = function(headline){
-  return {
-    type: types.SET_HEADLINE,
-    headline: headline
-  };
-};
+export const setHeadline = headline => ({
+  type: types.SET_HEADLINE,
+  headline,
+});
 
-module.exports.setChatter = function(chatter){
-  return {
-    type: types.SET_CHATTER,
-    chatter: chatter
-  };
-};
+export const setChatter = chatter => ({
+  type: types.SET_CHATTER,
+  chatter,
+});
 
-module.exports.setFootnote = function(footnote){
-  return {
-    type: types.SET_FOOTNOTE,
-    footnote: footnote
-  };
-};
+export const setFootnote = footnote => ({
+  type: types.SET_FOOTNOTE,
+  footnote,
+});
 
-module.exports.setDataSource = function(source){
-  return {
-    type: types.SET_DATASOURCE,
-    source: source
-  };
-};
+export const setDataSource = source => ({
+  type: types.SET_DATASOURCE,
+  source,
+});
 
-module.exports.setAuthor = function(author){
-  return {
-    type: types.SET_AUTHOR,
-    author: author
-  };
-};
+export const setAuthor = author => ({
+  type: types.SET_AUTHOR,
+  author,
+});
 
-module.exports.addAnnotation = function(annotation){
-  return {
-    type: types.ADD_ANNOTATION,
-    annotation: annotation
-  };
-};
+export const addAnnotation = annotation => ({
+  type: types.ADD_ANNOTATION,
+  annotation,
+});
 
-module.exports.removeAnnotation = function(index){
-  return {
-    type: types.REMOVE_ANNOTATION,
-    index: index
-  };
-};
+export const removeAnnotation = index => ({
+  type: types.REMOVE_ANNOTATION,
+  index,
+});
 
-module.exports.changeAnnotation = function(index, annotation){
-  return {
-    type: types.CHANGE_ANNOTATION,
-    index: index,
-    annotation: annotation
-  };
-};
+export const changeAnnotation = (index, annotation) => ({
+  type: types.CHANGE_ANNOTATION,
+  index,
+  annotation,
+});
 
-module.exports.changeAnnotationText = function(index, text){
-  return {
-    type: types.CHANGE_ANNOTATION_TEXT,
-    index: index,
-    text: text
-  };
-};
+export const changeAnnotationText = (index, text) => ({
+  type: types.CHANGE_ANNOTATION_TEXT,
+  index,
+  text,
+});
 
-module.exports.changeAnnotationPosition = function(index, x, y){
-  return {
-    type: types.CHANGE_ANNOTATION_POSITION,
-    index: index,
-    x: x,
-    y: y
-  };
-};
+export const changeAnnotationPosition = (index, x, y) => ({
+  type: types.CHANGE_ANNOTATION_POSITION,
+  index,
+  x,
+  y,
+});
 
-module.exports.changeAnnotationDimensions = function(index, width){
-  return {
-    type: types.CHANGE_ANNOTATION_DIMENSIONS,
-    index: index,
-    width: width
-  };
-};
+export const changeAnnotationDimensions = (index, width) => ({
+  type: types.CHANGE_ANNOTATION_DIMENSIONS,
+  index,
+  width,
+});
 
-module.exports.changeAnnotationAlign = function(index, align){
-  return {
-    type: types.CHANGE_ANNOTATION_ALIGN,
-    index: index,
-    align: align
-  };
-};
+export const changeAnnotationAlign = (index, align) => ({
+  type: types.CHANGE_ANNOTATION_ALIGN,
+  index,
+  align,
+});
 
-module.exports.changeAnnotationFontSize = function(index, size){
-  return {
-    type: types.CHANGE_ANNOTATION_FONT_SIZE,
-    index: index,
-    size: size
-  };
-};
+export const changeAnnotationFontSize = (index, size) => ({
+  type: types.CHANGE_ANNOTATION_FONT_SIZE,
+  index,
+  size,
+});
 
-module.exports.changeAnnotationBackground = function(index){
-  return {
-    type: types.CHANGE_ANNOTATION_BACKGROUND,
-    index: index
-  };
-};
+export const changeAnnotationBackground = index => ({
+  type: types.CHANGE_ANNOTATION_BACKGROUND,
+  index,
+});
 
-module.exports.changeAnnotationSize = function(index, size){
-  return {
-    type: types.CHANGE_ANNOTATION_SIZE,
-    index: index,
-    size: size
-  };
-};
+export const changeAnnotationSize = (index, size) => ({
+  type: types.CHANGE_ANNOTATION_SIZE,
+  index,
+  size,
+});

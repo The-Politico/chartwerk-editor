@@ -1,33 +1,29 @@
-"use strict";
-var React = require('react');
-var bindActionCreators = require('redux').bindActionCreators;
-var connect=require("react-redux").connect;
-var Actions = require('./../actions/');
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Actions from './../actions/';
 
-var Editor = require('./panes/Editor.jsx');
-var Preview = require('./panes/Preview.jsx');
+import Editor from './panes/Editor.jsx';
+import Preview from './panes/Preview.jsx';
 
-var App = React.createClass({
-  render: function() {
-    var dispatch=this.props.dispatch;
-    var werk=this.props.werk;
-    var actions = bindActionCreators(Actions, dispatch);
+const App = (props) => {
+  const actions = bindActionCreators(Actions, props.dispatch);
+  return (
+    <div>
+      <Preview werk={props.werk} actions={actions} />
+      <Editor werk={props.werk} actions={actions} />
+    </div>
+  );
+};
 
-    return (
-      <div>
-        <Preview werk={werk} actions={actions} />
-        <Editor werk={werk} actions={actions} />
-      </div>
-    );
-  }
+App.propTypes = {
+  dispatch: React.PropTypes.object,
+  actions: React.PropTypes.object,
+  werk: React.PropTypes.object,
+};
+
+const mapStateToProps = state => ({
+  werk: state,
 });
 
-
-function mapStateToProps(state) {
-  return {
-    werk: state
-  };
-}
-
-
-module.exports = connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App);

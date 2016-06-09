@@ -1,28 +1,27 @@
-"use strict";
-var React           = require('react');
-var MarginViz       = require('./MarginViz.jsx');
+import React from 'react';
+import MarginViz from './MarginViz.jsx';
 
-module.exports = React.createClass({
+export default React.createClass({
 
   propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object,
+    actions: React.PropTypes.object,
+    werk: React.PropTypes.object,
   },
 
-  getInitialState: function(){
+  getInitialState() {
     return {
       mirrorOpts: true,
-      activeOpts: 'single'
-    }
+      activeOpts: 'single',
+    };
   },
 
   /**
    * Enable independent double-column options.
    * @return {void}
    */
-  enableOpts: function(){
-    if(this.state.mirrorOpts){
-      this.setState({mirrorOpts: false});
+  enableOpts() {
+    if (this.state.mirrorOpts) {
+      this.setState({ mirrorOpts: false });
     }
   },
 
@@ -31,18 +30,20 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {void}
    */
-  switchOpts: function(size){
-    switch(size){
+  switchOpts(size) {
+    switch (size) {
       case 'single':
         this.setState({
-          activeOpts: 'single'
-        })
+          activeOpts: 'single',
+        });
         break;
       case 'double':
         this.setState({
           mirrorOpts: false,
-          activeOpts: 'double'
+          activeOpts: 'double',
         });
+        break;
+      default:
         break;
     }
   },
@@ -52,59 +53,61 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {String}   Class names
    */
-  activeClass: function(size){
-    return size == this.state.activeOpts ? 'active' : null;
+  activeClass(size) {
+    return size === this.state.activeOpts ? 'active' : null;
   },
 
-  dragMargin: function(percent, margin){
-    var actions = this.props.actions,
-        activeOpts = this.state.activeOpts,
-        mirrorOpts = this.state.mirrorOpts;
-    switch(margin){
+  dragMargin(percent, margin) {
+    const actions = this.props.actions;
+    const activeOpts = this.state.activeOpts;
+    const mirrorOpts = this.state.mirrorOpts;
+    switch (margin) {
       case 'left':
-        if(activeOpts === 'single' && mirrorOpts){
+        if (activeOpts === 'single' && mirrorOpts) {
           actions.setMarginSingleLeft(percent);
           actions.setMarginDoubleLeft(percent);
-        }else if(activeOpts === 'single'){
+        } else if (activeOpts === 'single') {
           actions.setMarginSingleLeft(percent);
-        }else{
+        } else {
           actions.setMarginDoubleLeft(percent);
         }
         break;
       case 'right':
-        if(activeOpts === 'single' && mirrorOpts){
+        if (activeOpts === 'single' && mirrorOpts) {
           actions.setMarginSingleRight(percent);
           actions.setMarginDoubleRight(percent);
-        }else if(activeOpts === 'single'){
+        } else if (activeOpts === 'single') {
           actions.setMarginSingleRight(percent);
-        }else{
+        } else {
           actions.setMarginDoubleRight(percent);
         }
         break;
       case 'top':
-        if(activeOpts === 'single' && mirrorOpts){
+        if (activeOpts === 'single' && mirrorOpts) {
           actions.setMarginSingleTop(percent);
           actions.setMarginDoubleTop(percent);
-        }else if(activeOpts === 'single'){
+        } else if (activeOpts === 'single') {
           actions.setMarginSingleTop(percent);
-        }else{
+        } else {
           actions.setMarginDoubleTop(percent);
         }
         break;
       case 'bottom':
-        if(activeOpts === 'single' && mirrorOpts){
+        if (activeOpts === 'single' && mirrorOpts) {
           actions.setMarginSingleBottom(percent);
           actions.setMarginDoubleBottom(percent);
-        }else if(activeOpts === 'single'){
+        } else if (activeOpts === 'single') {
           actions.setMarginSingleBottom(percent);
-        }else{
+        } else {
           actions.setMarginDoubleBottom(percent);
         }
+        break;
+      default:
         break;
     }
   },
 
-  render: function(){
+  render() {
     return (
       <div className="inline-exclusive-format clearfix">
         <h4>Margins</h4>
@@ -116,16 +119,18 @@ module.exports = React.createClass({
         <div className="form-group size-switch">
           <label>Size</label>
           <img
-            onClick={this.switchOpts.bind(this,'single')}
+            onClick={this.switchOpts.bind(this, 'single')}
             src="img/icons/singleColumn.png"
             title="Single column"
             className={this.activeClass('single')}
+            alt="Single column"
           />
           <img
-            onClick={this.switchOpts.bind(this,'double')}
+            onClick={this.switchOpts.bind(this, 'double')}
             src="img/icons/doubleColumn.png"
             title="Double column"
             className={this.activeClass('double')}
+            alt="Double column"
           />
         </div>
         <div>
@@ -138,5 +143,5 @@ module.exports = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });

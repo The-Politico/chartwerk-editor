@@ -1,6 +1,4 @@
-"use strict";
-var types = require('../constants/actions');
-var _ = require('lodash');
+import * as types from '../constants/actions';
 
 /**
  * data reducer
@@ -10,25 +8,24 @@ var _ = require('lodash');
  *                              action params.
  * @returns {Object} nextState  Next redux store state tree.
  */
-module.exports = function(data, action){
+export default (data, action) => {
+  const initialState = [];
 
-    var initialState = [];
+  if (typeof data === 'undefined') {
+    return initialState;
+  }
 
-    if (typeof data === 'undefined') {
-        return initialState;
-    }
+  let nextState = data.slice();
 
-    var nextState = data.slice();
-
-    switch(action.type){
+  switch (action.type) {
     case types.API_DATA:
-        nextState = action.data;
-        break;
+      nextState = action.data;
+      break;
     case types.ATTACH_DATA:
-        nextState = action.data;
-        break;
+      nextState = action.data;
+      break;
     default:
-        return data;
-    }
-    return nextState;
+      return data;
+  }
+  return nextState;
 };

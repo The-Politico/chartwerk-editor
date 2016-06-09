@@ -1,12 +1,9 @@
-var types = require('../constants/actions.js');
+import * as types from '../constants/actions.js';
 
-
-module.exports.apiAxes = function(axes){
-  return {
-      type: types.API_AXES,
-      axes: axes
-  };
-};
+export const apiAxes = axes => ({
+  type: types.API_AXES,
+  axes,
+});
 
 // COLOR AXIS
 
@@ -17,266 +14,190 @@ module.exports.apiAxes = function(axes){
  *                          lodash function _.get .
  * @return {Object}         Action payload.
  */
-module.exports.setColorScheme = function(path){
-    return {
-        type: types.SET_COLOR_SCHEME,
-        path: path,
-    };
-};
+export const setColorScheme = path => ({
+  type: types.SET_COLOR_SCHEME,
+  path,
+});
 
-module.exports.colorByGroup = function(){
-  return {
-    type: types.COLOR_BY_GROUP
-  };
-};
+export const colorByGroup = () => ({
+  type: types.COLOR_BY_GROUP,
+});
 
-module.exports.setQuantize = function(){
-    return {
-        type: types.SET_QUANTIZE
-    };
-};
+export const setQuantize = () => ({
+  type: types.SET_QUANTIZE,
+});
 
-module.exports.unsetQuantize = function(){
-    return {
-        type: types.UNSET_QUANTIZE
-    };
-};
+export const unsetQuantize = () => ({
+  type: types.UNSET_QUANTIZE,
+});
 
-module.exports.setQuantizeColumn = function(column){
-    return {
-        type: types.SET_QUANTIZE_COLUMN,
-        column: column
-    };
-};
+export const setQuantizeColumn = column => ({
+  type: types.SET_QUANTIZE_COLUMN,
+  column,
+});
 
-module.exports.unsetQuantizeColumn = function(){
-    return {
-        type: types.UNSET_QUANTIZE_COLUMN
-    };
-};
+export const unsetQuantizeColumn = () => ({
+  type: types.UNSET_QUANTIZE_COLUMN,
+});
 
-module.exports.setQuantizeDomain = function(domain){
-  return {
-    type: types.SET_QUANTIZE_DOMAIN,
-    domain: domain
-  };
-};
+export const setQuantizeDomain = domain => ({
+  type: types.SET_QUANTIZE_DOMAIN,
+  domain,
+});
 
-module.exports.setQuantizeRange = function(range){
-  return {
-    type: types.SET_QUANTIZE_RANGE,
-    range: range
-  };
-};
+export const setQuantizeRange = range => ({
+  type: types.SET_QUANTIZE_RANGE,
+  range,
+});
 
-module.exports.setQuantizeGroups = function(groups){
-  return {
-    type: types.SET_QUANTIZE_GROUPS,
-    groups: groups
-  };
-};
+export const setQuantizeGroups = groups => ({
+  type: types.SET_QUANTIZE_GROUPS,
+  groups,
+});
 
-module.exports.setQuantizeReverse = function(){
-  return {
-    type: types.SET_QUANTIZE_REVERSE
-  };
-};
+export const setQuantizeReverse = () => ({
+  type: types.SET_QUANTIZE_REVERSE,
+});
 
-module.exports.setColor = function(column, color){
-    return {
-        type: types.SET_COLOR,
-        column: column,
-        color: color
-    };
-};
+export const setColor = (column, color) => ({
+  type: types.SET_COLOR,
+  column,
+  color,
+});
 
-module.exports.unsetColor = function(column){
-    return {
-        type: types.UNSET_COLOR,
-        column: column
-    };
-};
+export const unsetColor = column => ({
+  type: types.UNSET_COLOR,
+  column,
+});
 
-module.exports.resetColor = function(){
-    return {
-        type: types.RESET_COLOR
-    };
-};
+export const resetColor = () => ({
+  type: types.RESET_COLOR,
+});
 
 // BASE AXIS
 
-module.exports.setBaseType = function(datatype){
-    return {
-        type: types.SET_BASE_TYPE,
-        datatype: datatype
-    };
-};
+export const setBaseType = datatype => ({
+  type: types.SET_BASE_TYPE,
+  datatype,
+});
 
-module.exports.setDateFormat = function(dateFormat){
-    return {
-        type: types.SET_DATE_FORMAT,
-        dateFormat: dateFormat
-    };
-};
+export const setDateFormat = dateFormat => ({
+  type: types.SET_DATE_FORMAT,
+  dateFormat,
+});
 
-module.exports.unsetDateFormat = function(){
-    return {
-        type: types.UNSET_DATE_FORMAT,
-    };
-};
+export const unsetDateFormat = () => ({
+  type: types.UNSET_DATE_FORMAT,
+});
 
-module.exports.setBaseSingleDateString = function(dateString){
-  return {
-    type: types.SET_BASE_SINGLE_DATESTRING,
-    dateString: dateString
-  };
-};
+export const setBaseSingleDateString = dateString => ({
+  type: types.SET_BASE_SINGLE_DATESTRING,
+  dateString,
+});
 
-module.exports.setBaseDoubleDateString = function(dateString){
-  return {
-    type: types.SET_BASE_DOUBLE_DATESTRING,
-    dateString: dateString
-  };
-};
+export const setBaseDoubleDateString = dateString => ({
+  type: types.SET_BASE_DOUBLE_DATESTRING,
+  dateString,
+});
 
-module.exports.setBaseSingleFrequency = function(frequency){
-  return {
-    type: types.SET_BASE_SINGLE_FREQUENCY,
-    frequency: frequency
-  };
-};
+export const setBaseSingleFrequency = frequency => ({
+  type: types.SET_BASE_SINGLE_FREQUENCY,
+  frequency,
+});
 
-module.exports.setBaseDoubleFrequency = function(frequency){
-  return {
-    type: types.SET_BASE_DOUBLE_FREQUENCY,
-    frequency: frequency
-  };
-};
+export const setBaseDoubleFrequency = frequency => ({
+  type: types.SET_BASE_DOUBLE_FREQUENCY,
+  frequency,
+});
 
-module.exports.setBaseSingleTicks = function(ticks){
-  return {
-    type: types.SET_BASE_SINGLE_TICKS,
-    ticks: ticks
-  };
-};
+export const setBaseSingleTicks = ticks => ({
+  type: types.SET_BASE_SINGLE_TICKS,
+  ticks,
+});
 
-module.exports.setBaseDoubleTicks = function(ticks){
-  return {
-    type: types.SET_BASE_DOUBLE_TICKS,
-    ticks: ticks
-  };
-};
+export const setBaseDoubleTicks = ticks => ({
+  type: types.SET_BASE_DOUBLE_TICKS,
+  ticks,
+});
 
-module.exports.setBaseSingleCustomTicks = function(ticks){
-  return {
-    type: types.SET_BASE_SINGLE_CUSTOMTICKS,
-    ticks: ticks
-  };
-};
+export const setBaseSingleCustomTicks = ticks => ({
+  type: types.SET_BASE_SINGLE_CUSTOMTICKS,
+  ticks,
+});
 
-module.exports.setBaseDoubleCustomTicks = function(ticks){
-  return {
-    type: types.SET_BASE_DOUBLE_CUSTOMTICKS,
-    ticks: ticks
-  };
-};
+export const setBaseDoubleCustomTicks = ticks => ({
+  type: types.SET_BASE_DOUBLE_CUSTOMTICKS,
+  ticks,
+});
 
-module.exports.setBaseMin = function(min){
-  return {
-    type: types.SET_BASE_MIN,
-    min: min
-  };
-};
+export const setBaseMin = min => ({
+  type: types.SET_BASE_MIN,
+  min,
+});
 
-module.exports.setBaseMax = function(max){
-  return {
-    type: types.SET_BASE_MAX,
-    max: max
-  };
-};
+export const setBaseMax = max => ({
+  type: types.SET_BASE_MAX,
+  max,
+});
 
-module.exports.setBaseLabel = function(label){
-  return {
-    type: types.SET_BASE_LABEL,
-    label: label
-  };
-};
+export const setBaseLabel = label => ({
+  type: types.SET_BASE_LABEL,
+  label,
+});
 
-module.exports.setBasePrefix = function(prefix){
-  return {
-    type: types.SET_BASE_PREFIX,
-    prefix: prefix
-  };
-};
+export const setBasePrefix = prefix => ({
+  type: types.SET_BASE_PREFIX,
+  prefix,
+});
 
-module.exports.setBaseSuffix = function(suffix){
-  return {
-    type: types.SET_BASE_SUFFIX,
-    suffix: suffix
-  };
-};
+export const setBaseSuffix = suffix => ({
+  type: types.SET_BASE_SUFFIX,
+  suffix,
+});
 
 // VALUE AXIS
 
-module.exports.setValueSingleTicks = function(ticks){
-  return {
-    type: types.SET_VALUE_SINGLE_TICKS,
-    ticks: ticks
-  };
-};
+export const setValueSingleTicks = ticks => ({
+  type: types.SET_VALUE_SINGLE_TICKS,
+  ticks,
+});
 
-module.exports.setValueDoubleTicks = function(ticks){
-  return {
-    type: types.SET_VALUE_DOUBLE_TICKS,
-    ticks: ticks
-  };
-};
+export const setValueDoubleTicks = ticks => ({
+  type: types.SET_VALUE_DOUBLE_TICKS,
+  ticks,
+});
 
-module.exports.setValueSingleCustomTicks = function(ticks){
-  return {
-    type: types.SET_VALUE_SINGLE_CUSTOMTICKS,
-    ticks: ticks
-  };
-};
+export const setValueSingleCustomTicks = ticks => ({
+  type: types.SET_VALUE_SINGLE_CUSTOMTICKS,
+  ticks,
+});
 
-module.exports.setValueDoubleCustomTicks = function(ticks){
-  return {
-    type: types.SET_VALUE_DOUBLE_CUSTOMTICKS,
-    ticks: ticks
-  };
-};
+export const setValueDoubleCustomTicks = ticks => ({
+  type: types.SET_VALUE_DOUBLE_CUSTOMTICKS,
+  ticks,
+});
 
-module.exports.setValueMin = function(min){
-  return {
-    type: types.SET_VALUE_MIN,
-    min: min
-  };
-};
+export const setValueMin = min => ({
+  type: types.SET_VALUE_MIN,
+  min,
+});
 
-module.exports.setValueMax = function(max){
-  return {
-    type: types.SET_VALUE_MAX,
-    max: max
-  };
-};
+export const setValueMax = max => ({
+  type: types.SET_VALUE_MAX,
+  max,
+});
 
-module.exports.setValueLabel = function(label){
-  return {
-    type: types.SET_VALUE_LABEL,
-    label: label
-  };
-};
+export const setValueLabel = label => ({
+  type: types.SET_VALUE_LABEL,
+  label,
+});
 
-module.exports.setValuePrefix = function(prefix){
-  return {
-    type: types.SET_VALUE_PREFIX,
-    prefix: prefix
-  };
-};
+export const setValuePrefix = prefix => ({
+  type: types.SET_VALUE_PREFIX,
+  prefix,
+});
 
-module.exports.setValueSuffix = function(suffix){
-  return {
-    type: types.SET_VALUE_SUFFIX,
-    suffix: suffix
-  };
-};
+export const setValueSuffix = suffix => ({
+  type: types.SET_VALUE_SUFFIX,
+  suffix,
+});

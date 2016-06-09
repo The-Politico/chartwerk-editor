@@ -1,23 +1,14 @@
 {
-  "env": {
-    "browser": true,
-    "mocha": true,
-    "node": true
-  },
+  "extends": "airbnb",
   "rules": {
-    "valid-jsdoc": 2,
-    "react/jsx-uses-react": 1,
-    "react/jsx-no-undef": 2,
-    "react/wrap-multilines": 2
-  },
-  "plugins": [
-    "react"
-  ],
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "no-unsafe-finally": 0,
+    "no-useless-computed-key": 0,
+    "react/require-render-return": 0,
+    "react/jsx-first-prop-new-line": 0,
+    "no-console": 0,
+    "react/prefer-es6-class": 0,
+    "no-eval": 0,
+    "react/jsx-no-bind": 0,
+    "react/sort-comp": 0,
   }
 }

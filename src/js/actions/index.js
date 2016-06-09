@@ -1,14 +1,14 @@
-var dataActions   = require('./data');
-var axisActions   = require('./axis');
-var marginActions = require('./margin');
-var textActions   = require('./text');
-var scriptActions = require('./script');
-var apiActions    = require('./api');
-var uiActions    = require('./ui');
+import * as dataActions from './data';
+import * as axisActions from './axis';
+import * as marginActions from './margin';
+import * as textActions from './text';
+import * as scriptActions from './script';
+import * as apiActions from './api';
+import * as uiActions from './ui';
 
-var _ = require('lodash');
+import _ from 'lodash';
 
-module.exports = _.assign({},
+export default _.assign({},
   dataActions,
   axisActions,
   marginActions,

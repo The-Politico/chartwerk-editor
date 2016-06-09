@@ -1,83 +1,77 @@
-var _ = require('lodash');
-var $ = require('jquery');
-var marked = require('./utils').marked;
+import _ from 'lodash';
+import $ from 'jquery';
+import marked from './utils';
 
-module.exports.applyScripts = function(scripts){
-
-  function applyCSS(styles){
-    var node = document.createElement('style');
-        node.id = 'injected-chart-styles';
-        document.head.appendChild(node);
+export const applyScripts = (scripts) => {
+  const applyCSS = (styles) => {
+    const node = document.createElement('style');
+    node.id = 'injected-chart-styles';
+    document.head.appendChild(node);
     node.innerHTML = styles;
-  }
+  };
 
-  function applyJS(script){
+  const applyJS = (script) => {
     eval.apply(null, [script]);
-  }
+  };
 
-  function applyHTML(html){
+  const applyHTML = (html) => {
     document
-      .getElementById("chartWerk")
+      .getElementById('chartWerk')
       .innerHTML = html;
-  }
+  };
 
   applyCSS(scripts.styles);
   applyJS(scripts.draw);
   applyJS(scripts.helper);
   applyHTML(scripts.html);
-
 };
 
-module.exports.injectDependencies = function(dependencies){
-
-  _.forEach(dependencies.scripts, function(src){
-    var script = document.querySelector('script[src="'+ src +'"]');
-    if(!script){
-      script = document.createElement("script");
-      script.type = "text/javascript";
+export const injectDependencies = (dependencies) => {
+  _.forEach(dependencies.scripts, src => {
+    let script = document.querySelector(`script[src="${src}"]`);
+    if (!script) {
+      script = document.createElement('script');
+      script.type = 'text/javascript';
       script.src = src;
       document.body.appendChild(script);
     }
   });
 
-  _.forEach(dependencies.styles, function(href){
-    var stylesheet = document.querySelector('link[href="'+ href +'"]');
-    if(!stylesheet){
-      stylesheet = document.createElement("link");
-      stylesheet.rel = "stylesheet";
+  _.forEach(dependencies.styles, (href) => {
+    let stylesheet = document.querySelector(`link[href="${href}"]`);
+    if (!stylesheet) {
+      stylesheet = document.createElement('link');
+      stylesheet.rel = 'stylesheet';
       stylesheet.href = href;
       document.head.appendChild(stylesheet);
     }
   });
 
-  var injectedStyles = document.getElementById('injected-chart-styles');
-  if(injectedStyles){
+  const injectedStyles = document.getElementById('injected-chart-styles');
+  if (injectedStyles) {
     document.head.appendChild(injectedStyles);
   }
-
 };
 
-var redraw = _.throttle(function(){
+export const redraw = _.throttle(() => {
     // Remove all drawn elements before redraw, not including free annotations
-    if(document.getElementById("chart")){ 
-      $("#chart").children().not('.annotation.label').remove();
-    };
-    draw();
-},1000);
+  if (document.getElementById('chart')) {
+    $('#chart').children().not('.annotation.label')
+      .remove();
+  }
+  draw(); // eslint-disable-line no-undef
+}, 1000);
 
-module.exports.initialize = function(){
-
-  setTimeout(function(){
+export const initialize = () => {
+  setTimeout(() => {
     redraw();
     $('#loading-modal').fadeOut(250);
-  },3000);
+  }, 3000);
 
-  $("#chartWerk #headline").html(marked.inlineLexer(window.chartWerk.text.headline, []));
-  $("#chartWerk #chatter").html(marked.inlineLexer(window.chartWerk.text.chatter, []));
-  $("#chartWerk #footnote").html(marked.inlineLexer(window.chartWerk.text.footnote, []));
-  $("#chartWerk #source").html(marked.inlineLexer(window.chartWerk.text.source, []));
-  $("#chartWerk #author").html(marked.inlineLexer(window.chartWerk.text.author, []));
 
-}
-
-module.exports.redraw = redraw;
+  $('#chartWerk #headline').html(marked.inlineLexer(window.chartWerk.text.headline, []));
+  $('#chartWerk #chatter').html(marked.inlineLexer(window.chartWerk.text.chatter, []));
+  $('#chartWerk #footnote').html(marked.inlineLexer(window.chartWerk.text.footnote, []));
+  $('#chartWerk #source').html(marked.inlineLexer(window.chartWerk.text.source, []));
+  $('#chartWerk #author').html(marked.inlineLexer(window.chartWerk.text.author, []));
+};

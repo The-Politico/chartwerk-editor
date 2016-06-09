@@ -1,24 +1,18 @@
-"use strict";
-var React           = require('react');
-var Select          = require('react-select');
-var _               = require('lodash');
-var moment          = require('moment');
-// Add additional datetimes to constants/datetime.
-var datetime        = require('../../constants/datetime');
-var $               = require('jquery');
+import React from 'react';
+import Select from 'react-select';
 
-module.exports = React.createClass({
+export default React.createClass({
 
   propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object
+    actions: React.PropTypes.object,
+    werk: React.PropTypes.object,
   },
 
-  getInitialState: function(){
+  getInitialState() {
     return {
       mirrorOpts: true,
-      activeOpts: 'single'
-    }
+      activeOpts: 'single',
+    };
   },
 
   /**
@@ -26,18 +20,20 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {void}
    */
-  switchOpts: function(size){
-    switch(size){
+  switchOpts(size) {
+    switch (size) {
       case 'single':
         this.setState({
-          activeOpts: 'single'
-        })
+          activeOpts: 'single',
+        });
         break;
       case 'double':
         this.setState({
           mirrorOpts: false,
-          activeOpts: 'double'
+          activeOpts: 'double',
         });
+        break;
+      default:
         break;
     }
   },
@@ -47,8 +43,8 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {String}   Class names
    */
-  activeClass: function(size){
-    return size == this.state.activeOpts ? 'active' : null;
+  activeClass(size) {
+    return size === this.state.activeOpts ? 'active' : null;
   },
 
   /**
@@ -56,21 +52,20 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {String}   Class names
    */
-  disabledClass: function(size){
-    var active = this.state.activeOpts;
-    var mirror = this.state.mirrorOpts;
+  disabledClass(size) {
+    const active = this.state.activeOpts;
+    const mirror = this.state.mirrorOpts;
 
-    switch(size){
+    switch (size) {
       case 'single':
         return active === 'single' ?
           'form-group' : 'disabled form-group';
       case 'double':
-        return mirror ?
-          'disabled form-group' :
-            (
-              active === 'double' ?
-                'form-group' : 'disabled form-group'
-            );
+        if (mirror) return 'disabled form-group';
+        if (active === 'double') return 'form-group';
+        return 'disabled form-group';
+      default:
+        return 'disabled form-group';
     }
   },
 
@@ -79,12 +74,12 @@ module.exports = React.createClass({
    * @param  {Object} e Selected value
    * @return {void}
    */
-  changeSingleFormat: function(e){
-    var actions = this.props.actions;
-    if(this.state.mirrorOpts){
+  changeSingleFormat(e) {
+    const actions = this.props.actions;
+    if (this.state.mirrorOpts) {
       actions.setBaseSingleDateString(e.value);
       actions.setBaseDoubleDateString(e.value);
-    }else{
+    } else {
       actions.setBaseSingleDateString(e.value);
     }
   },
@@ -94,13 +89,13 @@ module.exports = React.createClass({
    * @param  {Object} e Change event
    * @return {void}
    */
-  changeSingleFrequency: function(e){
-    var actions = this.props.actions,
-        value = parseInt(e.target.value);
-    if(this.state.mirrorOpts){
+  changeSingleFrequency(e) {
+    const actions = this.props.actions;
+    const value = parseInt(e.target.value, 10);
+    if (this.state.mirrorOpts) {
       actions.setBaseSingleFrequency(value);
       actions.setBaseDoubleFrequency(value);
-    }else{
+    } else {
       actions.setBaseSingleFrequency(value);
     }
   },
@@ -110,8 +105,8 @@ module.exports = React.createClass({
    * @param  {Object} e Selected value
    * @return {void}
    */
-  changeDoubleFormat: function(e){
-    var actions = this.props.actions;
+  changeDoubleFormat(e) {
+    const actions = this.props.actions;
     actions.setBaseDoubleDateString(e.value);
   },
 
@@ -120,22 +115,22 @@ module.exports = React.createClass({
    * @param  {Object} e Change event
    * @return {void}
    */
-  changeDoubleFrequency: function(e){
-    var actions = this.props.actions,
-        value = parseInt(e.target.value);
+  changeDoubleFrequency(e) {
+    const actions = this.props.actions;
+    const value = parseInt(e.target.value, 10);
     actions.setBaseDoubleFrequency(value);
   },
 
-  render: function(){
-    var dateOptions = [
-      { value: 'Y', label: 'Year'         },
-      { value: 'y', label: 'Short year'   },
-      { value: 'M', label: 'Month'        },
-      { value: 'm', label: 'Short month'  },
-      { value: 'W', label: 'Week'         },
-      { value: 'w', label: 'Short week'   },
-      { value: 'D', label: 'Date'         },
-    ]
+  render() {
+    const dateOptions = [
+      { value: 'Y', label: 'Year' },
+      { value: 'y', label: 'Short year' },
+      { value: 'M', label: 'Month' },
+      { value: 'm', label: 'Short month' },
+      { value: 'W', label: 'Week' },
+      { value: 'w', label: 'Short week' },
+      { value: 'D', label: 'Date' },
+    ];
 
     return (
       <div className="inline-exclusive-format clearfix">
@@ -146,77 +141,77 @@ module.exports = React.createClass({
         <div className="form-group size-switch">
           <label>Size</label>
           <img
-            onClick={this.switchOpts.bind(this,'single')}
+            onClick={this.switchOpts.bind(this,'single')} // eslint-disable-line
             src="img/icons/singleColumn.png"
             title="Single column"
             className={this.activeClass('single')}
+            alt="Single column"
           />
           <img
-            onClick={this.switchOpts.bind(this,'double')}
+            onClick={this.switchOpts.bind(this,'double')} // eslint-disable-line
             src="img/icons/doubleColumn.png"
             title="Double column"
             className={this.activeClass('double')}
+            alt="Double column"
           />
         </div>
         <div className={this.disabledClass('single')}>
-          <label for="dateTickFormat-single">Format</label>
+          <label htmlFor="dateTickFormat-single">Format</label>
           <Select
-              name="dateTickFormat-single"
-              options={dateOptions}
-              value={this.props.werk.axes.base.format.single.dateString}
-              searchable={false}
-              placeholder="Tick format"
-              clearable={false}
-              onChange={this.changeSingleFormat}
+            name="dateTickFormat-single"
+            options={dateOptions}
+            value={this.props.werk.axes.base.format.single.dateString}
+            searchable={false}
+            placeholder="Tick format"
+            clearable={false}
+            onChange={this.changeSingleFormat}
           />
         </div>
         <div className={this.disabledClass('single')}>
-            <label for="dateTickFrequency-single">Frequency</label>
-            <input
-              name="dateTickFrequency-single"
-              type="number"
-              min="1"
-              max="16"
-              step="1"
-              value={this.props.werk.axes.base.format.single.frequency}
-              defaultValue="1"
-              className="form-control"
-              onChange={this.changeSingleFrequency}
-            />
-        </div>
-        <div className={this.disabledClass('double')}>
-          <label for="dateTickFormat-double">Format</label>
-          <Select
-              name="dateTickFormat-double"
-              options={dateOptions}
-              value={this.props.werk.axes.base.format.double.dateString}
-              searchable={false}
-              placeholder="Tick format"
-              clearable={false}
-              disabled={this.state.disableOpts}
-              onChange={this.changeDoubleFormat}
+          <label htmlFor="dateTickFrequency-single">Frequency</label>
+          <input
+            name="dateTickFrequency-single"
+            type="number"
+            min="1"
+            max="16"
+            step="1"
+            value={this.props.werk.axes.base.format.single.frequency}
+            defaultValue="1"
+            className="form-control"
+            onChange={this.changeSingleFrequency}
           />
         </div>
         <div className={this.disabledClass('double')}>
-            <label for="dateTickFrequency-double">Frequency</label>
-            <input
-              name="dateTickFrequency-double"
-              type="number"
-              min="1"
-              max="16"
-              step="1"
-              value={this.props.werk.axes.base.format.double.frequency}
-              defaultValue="1"
-              className="form-control"
-              disabled={this.state.disableOpts}
-              onChange={this.changeDoubleFrequency}
-            />
+          <label htmlFor="dateTickFormat-double">Format</label>
+          <Select
+            name="dateTickFormat-double"
+            options={dateOptions}
+            value={this.props.werk.axes.base.format.double.dateString}
+            searchable={false}
+            placeholder="Tick format"
+            clearable={false}
+            disabled={this.state.disableOpts}
+            onChange={this.changeDoubleFormat}
+          />
+        </div>
+        <div className={this.disabledClass('double')}>
+          <label htmlFor="dateTickFrequency-double">Frequency</label>
+          <input
+            name="dateTickFrequency-double"
+            type="number"
+            min="1"
+            max="16"
+            step="1"
+            value={this.props.werk.axes.base.format.double.frequency}
+            defaultValue="1"
+            className="form-control"
+            disabled={this.state.disableOpts}
+            onChange={this.changeDoubleFrequency}
+          />
         </div>
 
       </div>
     );
-
-  }
-
+  },
 
 });

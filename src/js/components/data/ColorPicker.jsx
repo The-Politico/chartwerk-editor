@@ -1,80 +1,81 @@
-"use strict";
-var React           = require('react');
-var colors          = require('../../constants/colors');
-var actionCreators  = require('../../actions');
-var _               = require('lodash');
+import React from 'react';
+import colors from '../../constants/colors';
+import _ from 'lodash';
 
-module.exports = React.createClass({
+export default React.createClass({
 
-    propTypes: {
-        actions: React.PropTypes.object,
-        column: React.PropTypes.string
-    },
+  propTypes: {
+    actions: React.PropTypes.object,
+    werk: React.PropTypes.object,
+    column: React.PropTypes.string,
+  },
 
-    getInitialState: function(){
-            var werk = this.props.werk;
-            var scheme = _.get(colors, werk.axes.color.scheme);
-            var initialColor = scheme[0];
+  getInitialState() {
+    const werk = this.props.werk;
+    const scheme = _.get(colors, werk.axes.color.scheme);
+    const initialColor = scheme[0];
 
-            // Color from the API
-            function getPresetColor(column){
-              var i = werk.axes.color.domain.indexOf(column);
-              return i >= 0 ? werk.axes.color.range[i] : null;
-            }
-
-            return {
-                selectedColor: getPresetColor(this.props.column) || initialColor,
-                pickerVisible: false
-            };
-    },
-
-    componentDidMount: function(){
-      this.props.actions.setColor(
-          this.props.column,
-          this.state.selectedColor
-      );
-    },
-
-    showPicker: function(){
-        this.setState({pickerVisible: true});
-    },
-
-    selectColor: function(e){
-        var actions = this.props.actions,
-            color = e.target.getAttribute('color');
-        actions.setColor(this.props.column, color);
-        this.setState({pickerVisible: false, selectedColor: color});
-    },
-
-    render: function(){
-        var werk = this.props.werk;
-        var choices = _.get(colors, werk.axes.color.scheme).map(function(color,i){
-            var divStyle = {
-                backgroundColor: color
-            };
-            return (
-              <div
-                className="color-square"
-                color={color}
-                style={divStyle}
-                onClick={this.selectColor}
-                key={i}
-              ></div>
-            );
-        }.bind(this));
-
-        var picker = this.state.pickerVisible ?
-            <div className="colorpicker-panel clearfix">
-                {choices}
-            </div> : "";
-
-        var divStyle = {
-            backgroundColor: this.state.selectedColor
-        };
-
-        return (<div className="colorpicker">
-            <div className="color-square" style={divStyle} onClick={this.showPicker}></div>
-            {picker}
-        </div>);
+    // Color from the API
+    function getPresetColor(column) {
+      const i = werk.axes.color.domain.indexOf(column);
+      return i >= 0 ? werk.axes.color.range[i] : null;
     }
+
+    return {
+      selectedColor: getPresetColor(this.props.column) || initialColor,
+      pickerVisible: false,
+    };
+  },
+
+  componentDidMount() {
+    this.props.actions.setColor(
+      this.props.column,
+      this.state.selectedColor
+    );
+  },
+
+  showPicker() {
+    this.setState({ pickerVisible: true });
+  },
+
+  selectColor(e) {
+    const actions = this.props.actions;
+    const color = e.target.getAttribute('color');
+    actions.setColor(this.props.column, color);
+    this.setState({ pickerVisible: false, selectedColor: color });
+  },
+
+  render() {
+    const werk = this.props.werk;
+    const choices = _.get(colors, werk.axes.color.scheme).map((color, i) => {
+      const divStyle = {
+        backgroundColor: color,
+      };
+      return (
+        <div
+          className="color-square"
+          color={color}
+          style={divStyle}
+          onClick={this.selectColor}
+          key={i}
+        ></div>
+      );
+    });
+
+    const picker = this.state.pickerVisible ?
+      <div className="colorpicker-panel clearfix">
+          {choices}
+      </div> : '';
+
+    const divStyle = {
+      backgroundColor: this.state.selectedColor,
+    };
+
+    return (
+      <div className="colorpicker">
+        <div className="color-square" style={divStyle} onClick={this.showPicker}></div>
+        {picker}
+      </div>
+    );
+  },
 });

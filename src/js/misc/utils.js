@@ -1,8 +1,8 @@
-var marked = require('marked');
+import marked from 'marked';
 
 // Enable smart quotes
 marked.setOptions({
-  smartypants: true
+  smartypants: true,
 });
 
-module.exports.marked = marked;
+export default marked;

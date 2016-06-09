@@ -1,23 +1,16 @@
-"use strict";
-var React = require('react');
-// Components
-var Margin = require('./../../components/layout/Margin.jsx');
+import React from 'react';
 
+import Margin from './../../components/layout/Margin.jsx';
 
-module.exports = React.createClass({
+const Layout = (props) => (
+  <div role="tabpanel" className="tab-pane" id="layout">
+    <Margin {...props} />
+  </div>
+);
 
-  propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object
-  },
+Layout.propTypes = {
+  actions: React.PropTypes.object,
+  werk: React.PropTypes.object,
+};
 
-  render: function() {
-
-    return (
-      <div role="tabpanel" className="tab-pane" id="layout">
-        <Margin {...this.props} />
-      </div>
-    );
-  },
-
-});
+export default Layout;

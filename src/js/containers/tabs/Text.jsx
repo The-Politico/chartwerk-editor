@@ -1,23 +1,17 @@
-"use strict";
-var React = require('react');
-// Components
-var Inputs = require('./../../components/text/Inputs.jsx');
+import React from 'react';
+
+import Inputs from './../../components/text/Inputs.jsx';
 
 
-module.exports = React.createClass({
+const Text = (props) => (
+  <div role="tabpanel" className="tab-pane" id="text">
+    <Inputs {...props} />
+  </div>
+);
 
-  propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object
-  },
+Text.propTypes = {
+  actions: React.PropTypes.object,
+  werk: React.PropTypes.object,
+};
 
-  render: function() {
-
-    return (
-      <div role="tabpanel" className="tab-pane" id="text">
-        <Inputs {...this.props} />
-      </div>
-    );
-  },
-
-});
+export default Text;

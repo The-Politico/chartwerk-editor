@@ -1,22 +1,16 @@
-var types = require('../constants/actions.js');
+import * as types from '../constants/actions.js';
 
-module.exports.apiUI = function(ui){
-    return {
-        type: types.API_UI,
-        ui: ui
-    };
-};
+export const apiUI = ui => ({
+  type: types.API_UI,
+  ui,
+});
 
-module.exports.setRawData = function(data){
-    return {
-        type: types.SET_RAW_DATA,
-        data: data
-    };
-};
+export const setRawData = data => ({
+  type: types.SET_RAW_DATA,
+  data,
+});
 
-module.exports.changePreview = function(size){
-  return {
-      type: types.CHANGE_PREVIEW,
-      size: size
-  };
-};
+export const changePreview = size => ({
+  type: types.CHANGE_PREVIEW,
+  size,
+});

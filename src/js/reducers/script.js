@@ -1,7 +1,6 @@
-"use strict";
-var types = require('../constants/actions');
-var assign = require('object-assign');
-var _ = require('lodash');
+import * as types from '../constants/actions';
+import assign from 'object-assign';
+import _ from 'lodash';
 
 /**
  * script reducer
@@ -11,41 +10,40 @@ var _ = require('lodash');
  *                              action params.
  * @returns {Object} nextState  Next redux store state tree.
  */
-module.exports = function(scripts, action){
-
-  var initialState = {
-    draw: "function draw(){\n}",
-    helper: "var werkHelper = {};",
-    styles: "",
-    html: "",
+export default (scripts, action) => {
+  const initialState = {
+    draw: 'function draw(){\n}',
+    helper: 'var werkHelper = {};',
+    styles: '',
+    html: '',
     dependencies: {
       scripts: [],
-      styles: []
-    }
+      styles: [],
+    },
   };
 
   if (typeof scripts === 'undefined') {
-      return initialState;
+    return initialState;
   }
 
-  var nextState = assign({}, scripts);
-  switch(action.type){
-  case types.API_SCRIPTS:
+  let nextState = assign({}, scripts);
+  switch (action.type) {
+    case types.API_SCRIPTS:
       nextState = _.merge({}, nextState, action.scripts);
       break;
-  case types.SET_DRAW_SCRIPT:
+    case types.SET_DRAW_SCRIPT:
       nextState.draw = action.script;
       break;
-  case types.SET_HELPER_SCRIPT:
+    case types.SET_HELPER_SCRIPT:
       nextState.helper = action.script;
       break;
-  case types.SET_STYLES:
+    case types.SET_STYLES:
       nextState.styles = action.styles;
       break;
-  case types.SET_HTML:
+    case types.SET_HTML:
       nextState.html = action.html;
       break;
-  default:
+    default:
       return scripts;
   }
 

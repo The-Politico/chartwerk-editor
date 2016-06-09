@@ -1,23 +1,16 @@
-"use strict";
-var React = require('react');
-// Components
-var Editor = require('./../../components/annotations/Editor.jsx');
+import React from 'react';
 
+import Editor from './../../components/annotations/Editor.jsx';
 
-module.exports = React.createClass({
+const Annotations = (props) => (
+  <div role="tabpanel" className="tab-pane" id="annotations">
+    <Editor {...props} />
+  </div>
+);
 
-  propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object
-  },
+Annotations.propTypes = {
+  actions: React.PropTypes.object,
+  werk: React.PropTypes.object,
+};
 
-  render: function() {
-
-    return (
-      <div role="tabpanel" className="tab-pane" id="annotations">
-        <Editor {...this.props} />
-      </div>
-    );
-  },
-
-});
+export default Annotations;

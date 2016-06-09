@@ -1,33 +1,27 @@
-"use strict";
-var React = require('react');
+import React from 'react';
 
-// Components
-var DataTab = require('./Data.jsx');
-var AxesTab = require('./Axes.jsx');
-var LayoutTab = require('./Layout.jsx');
-var TextTab = require('./Text.jsx');
-var AnnotationsTab = require('./Annotations.jsx');
-var CodeTab = require('./Code.jsx');
+import DataTab from './Data.jsx';
+import AxesTab from './Axes.jsx';
+import LayoutTab from './Layout.jsx';
+import TextTab from './Text.jsx';
+import AnnotationsTab from './Annotations.jsx';
+import CodeTab from './Code.jsx';
 
 
-module.exports = React.createClass({
-  propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object
-  },
+const Tabs = (props) => (
+  <div className="tab-content">
+    <DataTab {...props} />
+    <AxesTab {...props} />
+    <LayoutTab {...props} />
+    <TextTab {...props} />
+    <AnnotationsTab {...props} />
+    <CodeTab {...props} />
+  </div>
+);
 
-  render: function() {
+Tabs.propTypes = {
+  actions: React.PropTypes.object,
+  werk: React.PropTypes.object,
+};
 
-    return (
-      <div className="tab-content">
-        <DataTab {...this.props} />
-        <AxesTab {...this.props} />
-        <LayoutTab {...this.props} />
-        <TextTab {...this.props} />
-        <AnnotationsTab {...this.props} />
-        <CodeTab {...this.props} />
-      </div>
-    );
-  }
-
-});
+export default Tabs;

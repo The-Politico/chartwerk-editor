@@ -1,19 +1,13 @@
-"use strict";
-var ReactDOM = require('react-dom');
-var App = require('./containers/App.jsx');
-var React = require('react');
-var Provider=require('react-redux').Provider;
-var store = require('./stores/');
+import ReactDOM from 'react-dom';
+import App from './containers/App.jsx';
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './stores/';
 
-var ChartWerk = React.createClass({
-  render: function(){
-    return (
-      <Provider store={store}>
-        <App />
-      </Provider>
-    );
-  }
-});
+const ChartWerk = () =>
+  <Provider store={store}>
+    <App />
+  </Provider>;
 
 ReactDOM.render(
   <ChartWerk />,

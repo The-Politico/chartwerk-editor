@@ -1,35 +1,33 @@
-"use strict";
-var React           = require('react');
-var Select          = require('react-select');
-var _               = require('lodash');
-var $               = require('jquery');
+import React from 'react';
+import _ from 'lodash';
 
-module.exports = React.createClass({
+
+export default React.createClass({
 
   propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object,
-      type: React.PropTypes.string
+    actions: React.PropTypes.object,
+    werk: React.PropTypes.object,
+    type: React.PropTypes.string,
   },
 
-  getInitialState: function(){
+  getInitialState() {
     return {
       mirrorOpts: true,
       activeOpts: 'single',
       // We keep custom ticks as text values for the input in state, but parse
       // them as an array of numbers to send to state tree.
       singleCustomValue: null,
-      doubleCustomValue: null
-    }
+      doubleCustomValue: null,
+    };
   },
 
   /**
    * Enable independent double-column options.
    * @return {void}
    */
-  enableOpts: function(){
-    if(this.state.mirrorOpts){
-      this.setState({mirrorOpts: false});
+  enableOpts() {
+    if (this.state.mirrorOpts) {
+      this.setState({ mirrorOpts: false });
     }
   },
 
@@ -38,18 +36,20 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {void}
    */
-  switchOpts: function(size){
-    switch(size){
+  switchOpts(size) {
+    switch (size) {
       case 'single':
         this.setState({
-          activeOpts: 'single'
-        })
+          activeOpts: 'single',
+        });
         break;
       case 'double':
         this.setState({
           mirrorOpts: false,
-          activeOpts: 'double'
+          activeOpts: 'double',
         });
+        break;
+      default:
         break;
     }
   },
@@ -59,21 +59,20 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {String}   Class names
    */
-  disabledClass: function(size){
-    var active = this.state.activeOpts;
-    var mirror = this.state.mirrorOpts;
+  disabledClass(size) {
+    const active = this.state.activeOpts;
+    const mirror = this.state.mirrorOpts;
 
-    switch(size){
+    switch (size) {
       case 'single':
         return active === 'single' ?
           'form-group' : 'disabled form-group';
       case 'double':
-        return mirror ?
-          'disabled form-group' :
-            (
-              active === 'double' ?
-                'form-group' : 'disabled form-group'
-            );
+        if (mirror) return 'disabled form-group';
+        if (active === 'double') return 'form-group';
+        return 'disabled form-group';
+      default:
+        return 'disabled form-group';
     }
   },
 
@@ -82,8 +81,8 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {String}   Class names
    */
-  activeClass: function(size){
-    return size == this.state.activeOpts ? 'active' : null;
+  activeClass(size) {
+    return size === this.state.activeOpts ? 'active' : null;
   },
 
   /**
@@ -91,16 +90,18 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {String}      Class names
    */
-  disableInput: function(size){
-    var werk = this.props.werk;
-    switch(size){
+  disableInput(size) {
+    switch (size) {
       case 'single':
         return this.state.singleCustomValue ?
           'disabled form-control' : 'form-control';
       case 'double':
         return this.state.doubleCustomValue ?
           'disabled form-control' : 'form-control';
+      default:
+        break;
     }
+    return false;
   },
 
   /**
@@ -108,14 +109,12 @@ module.exports = React.createClass({
    * @param  {String} tickString String of comma-separated values from input.
    * @return {Array}            Parsed numeric values.
    */
-  parseCustomTicks: function(tickString){
-    var ticks = _.map(tickString.split(','), function(d){
-      return parseFloat(d);
+  parseCustomTicks(tickString) {
+    const ticks = _.map(tickString.split(','), (d) => {
+      parseFloat(d);
     });
 
-    return _.filter(ticks, function(d){
-      return !isNaN(d);
-    });
+    return _.filter(ticks, (d) => !isNaN(d));
   },
 
   /**
@@ -123,9 +122,9 @@ module.exports = React.createClass({
    * @param  {String} size Ie, 'single' or 'double'
    * @return {Integer} Number of ticks
    */
-  getTicks: function(size){
-    var werk = this.props.werk;
-    switch(size){
+  getTicks(size) {
+    const werk = this.props.werk;
+    switch (size) {
       case 'single':
         return this.props.type === 'base' ?
           werk.axes.base.format.single.ticks :
@@ -134,6 +133,8 @@ module.exports = React.createClass({
         return this.props.type === 'base' ?
           werk.axes.base.format.double.ticks :
           werk.axes.value.format.double.ticks;
+      default:
+        return false;
     }
   },
 
@@ -142,25 +143,27 @@ module.exports = React.createClass({
    * @param  {Object} e change event
    * @return {void}
    */
-  setSingleTicks: function(e){
-    var actions = this.props.actions,
-        value = parseFloat(e.target.value);
-    switch(this.props.type){
+  setSingleTicks(e) {
+    const actions = this.props.actions;
+    const value = parseFloat(e.target.value);
+    switch (this.props.type) {
       case 'base':
-        if(this.state.mirrorOpts){
+        if (this.state.mirrorOpts) {
           actions.setBaseSingleTicks(value);
           actions.setBaseDoubleTicks(value);
-        }else{
+        } else {
           actions.setBaseSingleTicks(value);
         }
         break;
       case 'value':
-        if(this.state.mirrorOpts){
+        if (this.state.mirrorOpts) {
           actions.setValueSingleTicks(value);
           actions.setValueDoubleTicks(value);
-        }else{
+        } else {
           actions.setValueSingleTicks(value);
         }
+        break;
+      default:
         break;
     }
   },
@@ -170,12 +173,12 @@ module.exports = React.createClass({
    * @param  {Object} e change event
    * @return {void}
    */
-  setDoubleTicks: function(e){
-    var actions = this.props.actions,
-        value = pareFloat(e.target.value);
-    if(this.props.type === 'base'){
+  setDoubleTicks(e) {
+    const actions = this.props.actions;
+    const value = parseFloat(e.target.value);
+    if (this.props.type === 'base') {
       actions.setBaseDoubleTicks(value);
-    }else{
+    } else {
       actions.setValueDoubleTicks(value);
     }
   },
@@ -185,29 +188,31 @@ module.exports = React.createClass({
    * @param  {Object} e Change event
    * @return {void}
    */
-  setSingleCustom: function(e){
-    var actions = this.props.actions,
-        ticks = this.parseCustomTicks(e.target.value);
-    switch(this.props.type){
+  setSingleCustom(e) {
+    const actions = this.props.actions;
+    const ticks = this.parseCustomTicks(e.target.value);
+    switch (this.props.type) {
       case 'base':
-        if(this.state.mirrorOpts){
+        if (this.state.mirrorOpts) {
           actions.setBaseSingleCustomTicks(ticks);
           actions.setBaseDoubleCustomTicks(ticks);
-        }else{
+        } else {
           actions.setBaseSingleCustomTicks(ticks);
         }
         break;
       case 'value':
-        if(this.state.mirrorOpts){
+        if (this.state.mirrorOpts) {
           actions.setValueSingleCustomTicks(ticks);
           actions.setValueDoubleCustomTicks(ticks);
-        }else{
+        } else {
           actions.setValueSingleCustomTicks(ticks);
         }
         break;
+      default:
+        break;
     }
     this.setState({
-      singleCustomValue: e.target.value
+      singleCustomValue: e.target.value,
     });
   },
 
@@ -216,16 +221,16 @@ module.exports = React.createClass({
    * @param  {Object} e Change event
    * @return {void}
    */
-  setDoubleCustom: function(e){
-    var actions = this.props.actions,
-        ticks = this.parseCustomTicks(e.target.value);
-    if(this.props.type === 'base'){
+  setDoubleCustom(e) {
+    const actions = this.props.actions;
+    const ticks = this.parseCustomTicks(e.target.value);
+    if (this.props.type === 'base') {
       actions.setBaseDoubleCustomTicks(ticks);
-    }else{
+    } else {
       actions.setValueDoubleCustomTicks(ticks);
     }
     this.setState({
-      doubleCustomValue: e.target.value
+      doubleCustomValue: e.target.value,
     });
   },
 
@@ -234,16 +239,19 @@ module.exports = React.createClass({
    * @param  {String} m Either min or max
    * @return {Number}   Min or max value
    */
-  getMinMax: function(m){
-    var werk = this.props.werk;
-    switch(this.props.type){
+  getMinMax(m) {
+    const werk = this.props.werk;
+    switch (this.props.type) {
       case 'base':
         return m === 'min' ?
           werk.axes.base.min : werk.axes.base.max;
       case 'value':
         return m === 'min' ?
           werk.axes.value.min : werk.axes.value.max;
+      default:
+        break;
     }
+    return false;
   },
 
   /**
@@ -252,23 +260,25 @@ module.exports = React.createClass({
    * @param  {Object} e Change event
    * @return {void}
    */
-  setMinMax: function(m, e){
-    var actions = this.props.actions,
-        value = parseFloat(e.target.value);
-    switch(this.props.type){
+  setMinMax(m, e) {
+    const actions = this.props.actions;
+    const value = parseFloat(e.target.value);
+    switch (this.props.type) {
       case 'base':
-        if(m === 'min'){
+        if (m === 'min') {
           actions.setBaseMin(value);
-        }else{
+        } else {
           actions.setBaseMax(value);
         }
         break;
       case 'value':
-        if(m === 'min'){
+        if (m === 'min') {
           actions.setValueMin(value);
-        }else{
+        } else {
           actions.setValueMax(value);
         }
+        break;
+      default:
         break;
     }
   },
@@ -278,14 +288,16 @@ module.exports = React.createClass({
    * @param  {Object} e Change event
    * @return {void}
    */
-  setLabel: function(e){
-    var actions = this.props.actions;
-    switch(this.props.type){
+  setLabel(e) {
+    const actions = this.props.actions;
+    switch (this.props.type) {
       case 'base':
         actions.setBaseLabel(e.target.value);
         break;
       case 'value':
         actions.setValueLabel(e.target.value);
+        break;
+      default:
         break;
     }
   },
@@ -294,8 +306,8 @@ module.exports = React.createClass({
    * Get either base or value axis label.
    * @return {String} The label
    */
-  getLabel: function(){
-    var werk = this.props.werk;
+  getLabel() {
+    const werk = this.props.werk;
     return this.props.type === 'base' ?
       werk.axes.base.label : werk.axes.value.label;
   },
@@ -305,14 +317,16 @@ module.exports = React.createClass({
    * @param  {Object} e Change event
    * @return {void}
    */
-  setPrefix: function(e){
-    var actions = this.props.actions;
-    switch(this.props.type){
+  setPrefix(e) {
+    const actions = this.props.actions;
+    switch (this.props.type) {
       case 'base':
         actions.setBasePrefix(e.target.value);
         break;
       case 'value':
         actions.setValuePrefix(e.target.value);
+        break;
+      default:
         break;
     }
   },
@@ -321,8 +335,8 @@ module.exports = React.createClass({
    * Get either base or value axis prefix.
    * @return {String} The prefix
    */
-  getPrefix: function(){
-    var werk = this.props.werk;
+  getPrefix() {
+    const werk = this.props.werk;
     return this.props.type === 'base' ?
       werk.axes.base.prefix : werk.axes.value.prefix;
   },
@@ -332,14 +346,16 @@ module.exports = React.createClass({
    * @param  {Object} e Change event
    * @return {void}
    */
-  setSuffix: function(e){
-    var actions = this.props.actions;
-    switch(this.props.type){
+  setSuffix(e) {
+    const actions = this.props.actions;
+    switch (this.props.type) {
       case 'base':
         actions.setBaseSuffix(e.target.value);
         break;
       case 'value':
         actions.setValueSuffix(e.target.value);
+        break;
+      default:
         break;
     }
   },
@@ -348,46 +364,54 @@ module.exports = React.createClass({
    * Get either base or value axis suffix.
    * @return {String} The suffix
    */
-  getSuffix: function(){
-    var werk = this.props.werk;
+  getSuffix() {
+    const werk = this.props.werk;
     return this.props.type === 'base' ?
       werk.axes.base.suffix : werk.axes.value.suffix;
   },
 
-  render: function(){
+  render() {
     return (
       <div className="inline-exclusive-format clearfix numeric">
-        <small>Pick how many ticks you would like on the axis. You can also set custom ticks by entering them into the text box, separated by commas. Tick options for the single-column chart are used for the double-column chart by default. Click the double-column size button to set ticks independently.</small>
+        <small>
+          Pick how many ticks you would like on the axis. You can also set
+          custom ticks by entering them into the text box, separated by commas.
+          Tick options for the single-column chart are used for the
+          double-column chart by default. Click the double-column size button
+          to set ticks independently.
+        </small>
         <div className="form-group size-switch">
           <label>Size</label>
           <img
-            onClick={this.switchOpts.bind(this,'single')}
+            onClick={this.switchOpts.bind(this,'single')} // eslint-disable-line
             src="img/icons/singleColumn.png"
             title="Single column"
             className={this.activeClass('single')}
+            alt="Single column"
           />
           <img
-            onClick={this.switchOpts.bind(this,'double')}
+            onClick={this.switchOpts.bind(this,'double')} // eslint-disable-line
             src="img/icons/doubleColumn.png"
             title="Double column"
             className={this.activeClass('double')}
+            alt="Double column"
           />
         </div>
         <div className={this.disabledClass('single')} >
-            <label for="numTicks-single">Number</label>
-            <input
-              name="numTicks-single"
-              type="number"
-              min="4"
-              max="10"
-              step="1"
-              value={this.getTicks('single')}
-              className={this.disableInput('single')}
-              onChange={this.setSingleTicks}
-            />
+          <label htmlFor="numTicks-single">Number</label>
+          <input
+            name="numTicks-single"
+            type="number"
+            min="4"
+            max="10"
+            step="1"
+            value={this.getTicks('single')}
+            className={this.disableInput('single')}
+            onChange={this.setSingleTicks}
+          />
         </div>
         <div className={this.disabledClass('single')} >
-          <label for="customTicks-single">Custom ticks</label>
+          <label htmlFor="customTicks-single">Custom ticks</label>
           <input
             name="customTicks-single"
             type="text"
@@ -399,7 +423,7 @@ module.exports = React.createClass({
           />
         </div>
         <div className={this.disabledClass('double')}>
-          <label for="numTicks-double">Number</label>
+          <label htmlFor="numTicks-double">Number</label>
           <input
             name="numTicks-double"
             type="number"
@@ -412,7 +436,7 @@ module.exports = React.createClass({
           />
         </div>
         <div className={this.disabledClass('double')}>
-          <label for="customTicks-double">Custom ticks</label>
+          <label htmlFor="customTicks-double">Custom ticks</label>
           <input
             name="customTicks-double"
             type="text"
@@ -424,31 +448,39 @@ module.exports = React.createClass({
           />
         </div>
         <br />
-        <small>Optionally, choose min and max values for the axis. In many cases, the min should be 0. <b>In all cases</b>, the min should be below your lowest data value and the max, above the highest.</small>
+        <small>
+          Optionally, choose min and max values for the axis. In many cases,
+          the min should be 0. <b>In all cases</b>, the min should be below
+          your lowest data value and the max, above the highest.
+        </small>
         <div className="form-group">
-          <label for="axis-min">Min</label>
+          <label htmlFor="axis-min">Min</label>
           <input
             name="axis-min"
             type="number"
             className="form-control minmax"
             value={this.getMinMax('min')}
-            onChange={this.setMinMax.bind(this,'min')}
+            onChange={this.setMinMax.bind(this,'min')} // eslint-disable-line
           />
         </div>
         <div className="form-group">
-          <label for="axis-max">Max</label>
+          <label htmlFor="axis-max">Max</label>
           <input
             name="axis-max"
             type="number"
             className="form-control minmax"
             value={this.getMinMax('max')}
-            onChange={this.setMinMax.bind(this,'max')}
+            onChange={this.setMinMax.bind(this,'max')} // eslint-disable-line
           />
         </div>
         <br />
-        <small>Add any needed annotations to the axis. The label is placed above the axis, while the prefix and suffix are placed before and after each tick on the axis, for example, currency symbols.</small>
+        <small>
+          Add any needed annotations to the axis. The label is placed above
+          the axis, while the prefix and suffix are placed before and after
+          each tick on the axis, for example, currency symbols.
+        </small>
         <div className="form-group">
-          <label for="axis-label">Label</label>
+          <label htmlFor="axis-label">Label</label>
           <input
             name="axis-label"
             type="text"
@@ -458,7 +490,7 @@ module.exports = React.createClass({
           />
         </div>
         <div className="form-group">
-          <label for="axis-prefix">Prefix</label>
+          <label htmlFor="axis-prefix">Prefix</label>
           <input
             name="axis-prefix"
             type="text"
@@ -468,7 +500,7 @@ module.exports = React.createClass({
           />
         </div>
         <div className="form-group">
-          <label for="axis-suffix">Suffix</label>
+          <label htmlFor="axis-suffix">Suffix</label>
           <input
             name="axis-suffix"
             type="text"
@@ -478,7 +510,7 @@ module.exports = React.createClass({
           />
         </div>
       </div>
-    )
-  }
+    );
+  },
 
 });

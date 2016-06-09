@@ -1,21 +1,18 @@
-"use strict";
-var React = require('react');
+import React from 'react';
 
-var Tabs = require('./../tabs/index.jsx');
-var Nav = require('./../tabs/Nav.jsx');
+import Tabs from './../tabs/index.jsx';
+import Nav from './../tabs/Nav.jsx';
 
-module.exports = React.createClass({
-  propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object,
-  },
+const Editor = (props) => (
+  <div id="editor-pane" className="clearfix" role="tabpanel">
+    <Nav />
+    <Tabs {...props} />
+  </div>
+);
 
-  render: function() {
-    return (
-      <div id="editor-pane" className="clearfix" role="tabpanel">
-        <Nav />
-        <Tabs {...this.props} />
-      </div>
-    );
-  }
-});
+Editor.propTypes = {
+  actions: React.PropTypes.object,
+  werk: React.PropTypes.object,
+};
+
+export default Editor;

@@ -1,7 +1,6 @@
-"use strict";
-var types = require('../constants/actions');
-var assign = require('object-assign');
-var _ = require('lodash');
+import * as types from '../constants/actions';
+import assign from 'object-assign';
+import _ from 'lodash';
 
 /**
  * datamap reducer
@@ -11,73 +10,66 @@ var _ = require('lodash');
  *                              action params.
  * @returns {Object} nextState  Next redux store state tree.
  */
-module.exports = function(datamap, action){
+export default (datamap, action) => {
+  const initialState = {
+    base: null,
+    group: null,
+    series: [],
+    annotations: [],
+    ignore: [],
+  };
 
-    var initialState = {
-        base: null,
-        group: null,
-        series: [],
-        annotations: [],
-        ignore: []
-    };
+  if (typeof datamap === 'undefined') {
+    return initialState;
+  }
 
-    if (typeof datamap === 'undefined') {
-        return initialState
-    }
+  let nextState = assign({}, datamap);
 
-    var nextState = assign({},datamap);
-
-    switch(action.type){
+  switch (action.type) {
     case types.API_DATAMAP:
-        nextState = _.merge({}, nextState, action.datamap);
-        nextState.series = _.uniq(nextState.series);
-        nextState.ignore = _.uniq(nextState.ignore);
-        nextState.annotations = _.uniq(nextState.annotations);
-        break;
+      nextState = _.merge({}, nextState, action.datamap);
+      nextState.series = _.uniq(nextState.series);
+      nextState.ignore = _.uniq(nextState.ignore);
+      nextState.annotations = _.uniq(nextState.annotations);
+      break;
     case types.ADD_BASE:
-        nextState.base = action.column;
-        break;
+      nextState.base = action.column;
+      break;
     case types.ADD_GROUP:
-        nextState.group = action.column;
-        break;
+      nextState.group = action.column;
+      break;
     case types.ADD_SERIES:
-        nextState.series.push(action.column);
-        break;
+      nextState.series.push(action.column);
+      break;
     case types.ADD_IGNORE:
-        nextState.ignore.push(action.column);
-        break;
+      nextState.ignore.push(action.column);
+      break;
     case types.ADD_ANNOTATIONS:
-        nextState.annotations.push(action.column);
-        break;
+      nextState.annotations.push(action.column);
+      break;
     case types.REMOVE_BASE:
-        nextState.base = null;
-        break;
+      nextState.base = null;
+      break;
     case types.REMOVE_GROUP:
-        nextState.group = null;
-        break;
+      nextState.group = null;
+      break;
     case types.REMOVE_SERIES:
-        _.remove(nextState.series,
-            function(n){
-                return n == action.column;
-        });
-        break;
+      _.remove(nextState.series,
+          n => n === action.column);
+      break;
     case types.REMOVE_IGNORE:
-        _.remove(nextState.ignore,
-            function(n){
-                return n == action.column;
-        });
-        break;
+      _.remove(nextState.ignore,
+          n => n === action.column);
+      break;
     case types.REMOVE_ANNOTATIONS:
-        _.remove(nextState.annotations,
-            function(n){
-                return n == action.column;
-        });
-        break;
+      _.remove(nextState.annotations,
+          n => n === action.column);
+      break;
     case types.RESET_DATAMAP:
-        nextState = initialState;
-        break;
+      nextState = initialState;
+      break;
     default:
-        return datamap;
-    }
-    return nextState;
+      return datamap;
+  }
+  return nextState;
 };

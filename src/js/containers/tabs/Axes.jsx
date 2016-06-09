@@ -1,24 +1,18 @@
-"use strict";
-var React = require('react');
-// Components
-var BaseAxis = require('../../components/axes/BaseAxis.jsx');
-var ValueAxis = require('../../components/axes/ValueAxis.jsx');
+import React from 'react';
 
-module.exports = React.createClass({
+import BaseAxis from '../../components/axes/BaseAxis.jsx';
+import ValueAxis from '../../components/axes/ValueAxis.jsx';
 
-  propTypes: {
-      actions: React.PropTypes.object,
-      werk: React.PropTypes.object
-  },
+const Axes = (props) => (
+  <div role="tabpanel" className="tab-pane" id="axes">
+    <BaseAxis {...props} />
+    <ValueAxis {...props} />
+  </div>
+);
 
-  render: function() {
+Axes.propTypes = {
+  actions: React.PropTypes.object,
+  werk: React.PropTypes.object,
+};
 
-    return (
-      <div role="tabpanel" className="tab-pane" id="axes">
-        <BaseAxis {...this.props} />
-        <ValueAxis {...this.props} />
-      </div>
-    );
-  },
-
-});
+export default Axes;

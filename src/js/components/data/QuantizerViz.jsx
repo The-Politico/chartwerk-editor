@@ -1,26 +1,32 @@
-"use strict";
-var React           = require('react');
-var ReactDOM        = require('react-dom');
-var _               = require('lodash');
-var colors          = require('../../constants/colors');
-var viz             = require('./QuantizerViz-d3');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import _ from 'lodash';
+import viz from './QuantizerViz-d3';
 
 
-module.exports = React.createClass({
+export default React.createClass({
 
-  getInitialState: function(){
+  propTypes: {
+    werk: React.PropTypes.object,
+    thresholds: React.PropTypes.array,
+    colorRange: React.PropTypes.array,
+    dragThreshold: React.PropTypes.func,
+  },
+
+
+  getInitialState() {
     return {
       chartProps: {
         margin: {
           top: 30,
           right: 10,
           bottom: 10,
-          left: 10
+          left: 10,
         },
         width: 450,
-        height: 60
-      }
-    }
+        height: 60,
+      },
+    };
   },
 
   /**
@@ -28,18 +34,18 @@ module.exports = React.createClass({
    * @return {Object} Data array, thresholds array (including min value)
    *                       and color range array
    */
-  getChartState: function() {
-    var data = _.map(
+  getChartState() {
+    const data = _.map(
       this.props.werk.data,
       this.props.werk.axes.color.quantizeProps.column
     );
 
-    var dataMin = _.min(data);
+    const dataMin = _.min(data);
 
     return {
-      data: data,
+      data,
       thresholds: [dataMin].concat(this.props.thresholds),
-      colorRange: this.props.colorRange
+      colorRange: this.props.colorRange,
     };
   },
 
@@ -47,28 +53,28 @@ module.exports = React.createClass({
    * After first render, chart SVG els for chart.
    * @return {void}
    */
-  componentDidMount: function(){
-    var el = ReactDOM.findDOMNode(this);
+  componentDidMount() {
+    const el = ReactDOM.findDOMNode(this);
     viz.create(
       el,
       this.state.chartProps,
       this.getChartState(),
       this
-    )
+    );
   },
 
   /**
    * On subsequent renders, update SVG els.
    * @return {void}
    */
-  componentDidUpdate: function(){
-      var el = ReactDOM.findDOMNode(this);
-      viz.update(
-        el,
-        this.state.chartProps,
-        this.getChartState(),
-        this
-      );
+  componentDidUpdate() {
+    const el = ReactDOM.findDOMNode(this);
+    viz.update(
+      el,
+      this.state.chartProps,
+      this.getChartState(),
+      this
+    );
   },
 
   /**
@@ -79,8 +85,8 @@ module.exports = React.createClass({
    * @return {void}
    */
   dragThreshold: _.debounce(
-    function(i,v){
-      this.props.dragThreshold(i,v);
+    function(i, v){ // eslint-disable-line
+      this.props.dragThreshold(i, v);
     }, 100
   ),
 
@@ -88,10 +94,10 @@ module.exports = React.createClass({
    * Renders SVG container.
    * @return {JSX} Chart container.
    */
-  render: function(){
+  render() {
     return (
       <div id="quantize-viz"></div>
     );
-  }
+  },
 
-})
+});
