@@ -324,7 +324,8 @@ export default React.createClass({
             >HTML</button>
 
           </div>
-          <ApiExplorer werk={this.props.werk} />
+
+          {this.state.editing === 'JS' ? <ApiExplorer werk={this.props.werk} /> : null}
 
             {this.getJSSwitch()}
 

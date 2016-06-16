@@ -1,8 +1,8 @@
 import React from 'react';
-import Select from 'react-select';
-var Typeahead = require('react-typeahead').Typeahead;
+import { Typeahead } from 'react-typeahead';
 import _ from 'lodash';
 import copy from 'copy-to-clipboard';
+import ellipsize from 'ellipsize';
 
 
 export default React.createClass({
@@ -62,6 +62,17 @@ export default React.createClass({
     copy(this.state.value);
   },
 
+  currentValue() {
+    if (!this.endPoint()) {
+      return null;
+    }
+    return ellipsize(
+      JSON.stringify(
+        _.get(this.props.werk, this.state.value.substring(10))
+      ), 70
+    );
+  },
+
   render() {
     return (
       <div className="apiExplorer">
@@ -83,6 +94,9 @@ export default React.createClass({
         >
           <i className="fa fa-clipboard" aria-hidden="true"></i>
         </button>
+        <div className="current-value">
+          {this.currentValue()}
+        </div>
       </div>
     );
   },

@@ -159,6 +159,7 @@
         border: 1px solid $lightgrey;
         font-family: monospace;
         letter-spacing:-1px;
+        padding-right: 35px;
       }
       .typeahead-selector{
         width:400px;
@@ -167,7 +168,10 @@
         padding-left: 10px;
         max-height: 80px;
         overflow-y: scroll;
+        overflow-x: hidden;
         border: 1px solid $lightgrey;
+        background-color: $white;
+        z-index: 2;
         li{
           a.typeahead-option{
             color:$grey;
@@ -186,6 +190,16 @@
       margin-top: -4px;
       font-size: 14px;
       border: 1px solid $lightgrey;
+    }
+
+    .current-value {
+      margin-left: 82px;
+      color: $grey;
+      margin-top: -7px;
+      position: absolute;
+      z-index: 0;
+      font-size: 13px;
+      font-style: italic;
     }
 
   }
