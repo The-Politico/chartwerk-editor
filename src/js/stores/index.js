@@ -1,11 +1,11 @@
-import reducer from '../reducers';
+import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import actions from '../actions';
 import thunk from 'redux-thunk';
 
 import * as api from '../misc/api';
 
-const store = createStore(reducer, compose(
+const store = createStore(reducers, compose(
   applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ));

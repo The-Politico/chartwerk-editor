@@ -1,0 +1,26 @@
+
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    background-color: $white;
+    margin-top: 15px;
+    margin-left: -20px;
+    width: calc(100% + 40px);
+    padding-left: 40px;
+}
+.nav-tabs>li>a{
+  padding:15px;
+}
+.nav>li>a:hover, .nav>li>a:focus{
+  background-color: $white;
+
+}
+.nav-tabs>li>a:hover{
+  border-color:transparent;
+  border-bottom: 1px solid $grey;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+  border-color:transparent;
+  border-bottom: 1px solid $red;
+  color:$red;
+}

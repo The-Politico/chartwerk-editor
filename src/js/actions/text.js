@@ -87,3 +87,9 @@ export const changeAnnotationSize = (index, size) => ({
   index,
   size,
 });
+
+export const changeAnnotationColor = (index, color) => ({
+  type: types.CHANGE_ANNOTATION_COLOR,
+  index,
+  color,
+});

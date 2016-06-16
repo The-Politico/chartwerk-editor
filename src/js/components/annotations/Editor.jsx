@@ -1,8 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
-
 import marked from './../../misc/utils';
-
+import ColorPicker from './ColorPicker.jsx';
+import { black } from './../../constants/colors';
 
 export default React.createClass({
 
@@ -19,7 +19,6 @@ export default React.createClass({
     if ($('#chart').length) {
       this.renderEditable();
     } else {
-      console.log('WAITS');
       setTimeout(() => this.renderEditable(), 500);
     }
   },
@@ -36,6 +35,7 @@ export default React.createClass({
       fontSize: 'm',
       background: true,
       text: '',
+      color: black,
     };
 
     actions.addAnnotation(newNote);
@@ -43,7 +43,9 @@ export default React.createClass({
 
   focusNote(i) {
     $('.annotation.label').removeClass('editing');
-    $('.annotation-formats').slideUp(250);
+    $('.annotation-formats')
+      .not(`#annotation-editor-${i} .annotation-formats`)
+      .slideUp(250);
     $(`.annotation.label[data-id='${i}']`).addClass('editing');
     $(`#annotation-editor-${i} .annotation-formats`).slideDown(250);
   },
@@ -151,6 +153,7 @@ export default React.createClass({
           top: d.y,
           width: d.w,
           height: 'auto',
+          color: d.color || black,
         })
         .addClass(() => {
           let cls = `${d.align} ${d.fontSize}`;
@@ -177,14 +180,20 @@ export default React.createClass({
             src="img/icons/singleColumn.png"
             title="Single column"
             className={(() => (d.size === 's' ? 'active' : 'inactive'))()}
-            onClick={() => actions.changeAnnotationSize(i, 's')}
+            onClick={() => {
+              actions.changeAnnotationSize(i, 's');
+              this.focusNote(i);
+            }}
             alt="Single column"
           />
           <img
             src="img/icons/doubleColumn.png"
             title="Double column"
             className={(() => (d.size === 'd' ? 'active' : 'inactive'))()}
-            onClick={() => actions.changeAnnotationSize(i, 'd')}
+            onClick={() => {
+              actions.changeAnnotationSize(i, 'd');
+              this.focusNote(i);
+            }}
             alt="Double column"
           />
         </div>
@@ -236,9 +245,10 @@ export default React.createClass({
             <button type="button" className="btn btn-sm btn-secondary" title="Background"
               onClick={() => actions.changeAnnotationBackground(i)}
             >
-              <i className="fa fa-square-o fa-lg" aria-hidden="true"></i>
+              BG
             </button>
           </div>
+          <ColorPicker {...this.props} index={i} />
           <span>
             <em>_italic_</em> <strong>**bold**</strong>
           </span>

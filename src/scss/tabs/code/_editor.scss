@@ -35,6 +35,59 @@
     }
   }
 
+  /*Dependency editor*/
+  .dependencies{
+    input{
+      width:400px;
+      display:inline-block;
+      margin:5px 0 0;
+      padding-right:25px;
+    }
+    .fa-times {
+      cursor: pointer;
+      color: $lightgrey;
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 22px;
+      vertical-align: -3px;
+      &:hover{
+        color:$red;
+      }
+    }
+    .fa-check{
+      display:inline-block;
+      color: $green;
+      margin-left: -20px;
+      margin-right: 10px;
+    }
+    .fa-exclamation{
+      display:inline-block;
+      color: $orange;
+      margin-left: -15px;
+      margin-right: 14px;
+    }
+    .add-btn{
+      color:$lightgrey;
+      cursor:pointer;
+      border:1px solid transparent;
+      display:inline-block;
+      padding:5px;
+      border-radius:2px;
+      font-size: 12px;
+      margin-left:10px;
+      vertical-align: 2px;
+      &:hover{
+        color:$grey;
+        border:1px solid $lightgrey;
+      }
+    }
+    .sync-btn{
+      display:block;
+      margin-top: 10px;
+    }
+  }
+
+
 }
 
 .ReactModalPortal{
@@ -71,6 +124,7 @@
 
   .right-align{
     text-align: right;
+    float: right;
     small{
       margin-right: 15px;
     }
@@ -82,5 +136,60 @@
       }
     }
   }
+
+  .apiExplorer{
+    display:inline-block;
+
+    h5{
+      display: inline-block;
+      margin-left: 25px;
+      font: 26px/30px 'Russo One';
+      color: $grey;
+      vertical-align: -3px;
+    }
+
+    .typeahead{
+      width: 400px;
+      display: inline-block;
+      margin: 10px 0 0 10px;
+      input{
+        font-size: 18px;
+        line-height: 30px;
+        width:100%;
+        border: 1px solid $lightgrey;
+        font-family: monospace;
+        letter-spacing:-1px;
+      }
+      .typeahead-selector{
+        width:400px;
+        position:absolute;
+        list-style-type: none;
+        padding-left: 10px;
+        max-height: 80px;
+        overflow-y: scroll;
+        border: 1px solid $lightgrey;
+        li{
+          a.typeahead-option{
+            color:$grey;
+            font-family: monospace;
+          }
+        }
+      }
+    }
+    i.fa-check{
+      margin-left: -28px;
+      margin-right: 10px;
+      font-size: 20px;
+      color:$green;
+    }
+    .copy-btn{
+      margin-top: -4px;
+      font-size: 14px;
+      border: 1px solid $lightgrey;
+    }
+
+  }
+
+
 
 }

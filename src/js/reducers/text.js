@@ -79,6 +79,9 @@ export default (texts, action) => {
     case types.CHANGE_ANNOTATION_SIZE:
       nextState.annotations[action.index].size = action.size;
       break;
+    case types.CHANGE_ANNOTATION_COLOR:
+      nextState.annotations[action.index].color = action.color;
+      break;
     default:
       return texts;
   }

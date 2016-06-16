@@ -60,9 +60,44 @@
         margin-left: 10px;
       }
     }
-
-
-
   }
+
+
+
+
+
+
+
+    .colorpicker-panel{
+        position: absolute;
+        display:inline;
+        box-shadow: $boxshadow;
+        width: 118px;
+        background-color: white;
+        border: 1px solid $lightgrey;
+        z-index: 999;
+        left:92%;
+        top:-10px;
+        padding:3px;
+
+        .color-square{
+            margin:1px;
+            border-radius: 2px;
+            float:left;
+            border: 1px solid rgba(0,0,0,.2);
+            width:20px;
+            height:20px;
+            display: inline-block;
+            background-color: red;
+            cursor:pointer;
+            box-shadow: none;
+            &:hover{
+                border:2px solid $grey;
+            }
+        }
+    }
+
+
+
 
 }

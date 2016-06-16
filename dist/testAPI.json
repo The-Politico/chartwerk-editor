@@ -147,7 +147,8 @@
 				"align": "l",
 				"fontSize": "m",
 				"background": false,
-				"text": "This is the note that tells it all."
+				"text": "This is the note that tells it all.",
+				"color": "#2d3035"
 			},
 			{
 				"size": "d",
@@ -157,7 +158,8 @@
 				"align": "l",
 				"fontSize": "m",
 				"background": false,
-				"text": "This is the other point."
+				"text": "This is the other point.",
+				"color": "#2d3035"
 			}
 		]
 	},

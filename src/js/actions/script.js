@@ -24,3 +24,8 @@ export const setHTML = html => ({
   type: types.SET_HTML,
   html,
 });
+
+export const setDependencies = dependencies => ({
+  type: types.SET_DEPENDENCIES,
+  dependencies,
+});

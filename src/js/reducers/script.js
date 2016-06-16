@@ -43,6 +43,10 @@ export default (scripts, action) => {
     case types.SET_HTML:
       nextState.html = action.html;
       break;
+    case types.SET_DEPENDENCIES:
+      nextState.dependencies.scripts = action.dependencies.scripts.slice();
+      nextState.dependencies.styles = action.dependencies.styles.slice();
+      break;
     default:
       return scripts;
   }

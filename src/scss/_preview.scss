@@ -1,9 +1,10 @@
 #preview-pane{
 	width:650px;
-	height:700px;
+	height:100%;
 	float:left;
     padding:0 10px;
 	overflow-y:scroll;
+	background-color:$white;
 
     &::-webkit-scrollbar{
         display: none;

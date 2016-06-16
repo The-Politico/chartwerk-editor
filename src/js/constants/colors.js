@@ -15,14 +15,14 @@
 export default {
   categorical: {
     default: [
-      '#55ABE1',
-      '#E6644D',
-      '#9BC453',
-      '#C9C9C9',
-      '#F59636',
-      '#AA70BA',
+      '#329CEB',
+      '#E34E36',
+      '#FF8F24',
       '#FEC44F',
-      '#7FD8EB',
+      '#52B033',
+      '#8554BF',
+      '#6DCCF2',
+      '#C9C9C9',
     ],
   },
   sequential: {
@@ -90,3 +90,5 @@ export default {
     ],
   },
 };
+
+export const black = '#2d3035'; // Used as default color for annotation text

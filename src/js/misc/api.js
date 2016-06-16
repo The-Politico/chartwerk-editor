@@ -53,6 +53,16 @@ export const injectDependencies = (dependencies) => {
   }
 };
 
+export const removeDependencies = (dependencies) => {
+  _.forEach(dependencies.scripts, src => {
+    $(`script[src='${src}']`).remove();
+  });
+
+  _.forEach(dependencies.styles, (href) => {
+    $(`link[href='${href}']`).remove();
+  });
+};
+
 export const redraw = _.throttle(() => {
     // Remove all drawn elements before redraw, not including free annotations
   if (document.getElementById('chart')) {

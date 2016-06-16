@@ -9,7 +9,7 @@ import Preview from './panes/Preview.jsx';
 const App = (props) => {
   const actions = bindActionCreators(Actions, props.dispatch);
   return (
-    <div>
+    <div className="clearfix">
       <Preview werk={props.werk} actions={actions} />
       <Editor werk={props.werk} actions={actions} />
     </div>

@@ -3,6 +3,8 @@ import AceEditor from 'react-ace';
 import Modal from 'react-modal';
 import Toggle from 'react-toggle';
 import _ from 'lodash';
+import Dependencies from './Dependencies.jsx';
+import ApiExplorer from './ApiExplorer.jsx';
 
 require('brace/mode/javascript');
 require('brace/mode/scss');
@@ -134,12 +136,6 @@ export default React.createClass({
       'btn script-switch active' : 'btn script-switch';
   },
 
-  switchScript(type) {
-    this.setState({
-      editing: type,
-    });
-  },
-
   getEditor(type) {
     const name = `${type}-code-editor`;
     const height = type === 'panel' ? '600px' : '80%';
@@ -198,6 +194,20 @@ export default React.createClass({
         />);
         break;
       default:
+        editor = (
+          <div>
+            <small>Add additional dependencies for this chart below, specified by URL to any
+              valid javascript (js) or stylesheet (css). Once you're done editing your dependency
+              list, syncing will inject dependencies in the page <em>in the order given</em>.
+            </small>
+            <small>
+              Be aware that making too many edits to your dependency list may result in
+              strange behavior as javascript is persisted in the global namespace.
+              In that case, simply save and refresh the page.
+            </small>
+            <Dependencies {...this.props} />
+          </div>
+        );
         break;
     }
 
@@ -243,25 +253,37 @@ export default React.createClass({
         </div>
 
         <div className="right-align clearfix">
-          <small>Customize scripts and styles.</small>
-
           <button
             className={this.activeClass('JS')}
-            onClick={this.switchScript.bind(this, 'JS')}
+            onClick={() => this.setState({ editing: 'JS' })}
           >JS</button>
           <button
             className={this.activeClass('CSS')}
-            onClick={this.switchScript.bind(this, 'CSS')}
+            onClick={() => this.setState({ editing: 'CSS' })}
           >CSS</button>
           <button
             className={this.activeClass('HTML')}
-            onClick={this.switchScript.bind(this, 'HTML')}
+            onClick={() => this.setState({ editing: 'HTML' })}
           >HTML</button>
+          <button
+            className={this.activeClass('DEP')}
+            onClick={() => this.setState({ editing: 'DEP' })}
+          >
+            <i className="fa fa-plus" aria-hidden="true"></i>
+          </button>
 
-          <button className="btn btn-sm" onClick={this.applyScript}>
+          <button
+            className="btn btn-sm"
+            onClick={this.applyScript}
+            disabled={this.state.editing === 'DEP'} // Disable if editing dependencies
+          >
             <i className="fa fa-play" aria-hidden="true"></i> Apply
           </button>
-          <button className="btn btn-sm" onClick={() => this.setState({ modalIsOpen: true })}>
+          <button
+            className="btn btn-sm"
+            onClick={() => this.setState({ modalIsOpen: true })}
+            disabled={this.state.editing === 'DEP'}
+          >
             <i className="fa fa-arrows-alt" aria-hidden="true"></i>
           </button>
         </div>
@@ -290,18 +312,19 @@ export default React.createClass({
 
             <button
               className={this.activeClass('JS')}
-              onClick={this.switchScript.bind(this, 'JS')}
+              onClick={() => this.setState({ editing: 'JS' })}
             >JS</button>
             <button
               className={this.activeClass('CSS')}
-              onClick={this.switchScript.bind(this, 'CSS')}
+              onClick={() => this.setState({ editing: 'CSS' })}
             >CSS</button>
             <button
               className={this.activeClass('HTML')}
-              onClick={this.switchScript.bind(this, 'HTML')}
+              onClick={() => this.setState({ editing: 'HTML' })}
             >HTML</button>
 
           </div>
+          <ApiExplorer werk={this.props.werk} />
 
             {this.getJSSwitch()}
 
