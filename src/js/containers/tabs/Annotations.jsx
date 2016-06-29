@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Editor from './../../components/annotations/Editor.jsx';
+import Editor from './../../components/annotations/Editor';
 
 const Annotations = (props) => (
   <div role="tabpanel" className="tab-pane" id="annotations">

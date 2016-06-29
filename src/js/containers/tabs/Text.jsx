@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Inputs from './../../components/text/Inputs.jsx';
+import Inputs from './../../components/text/Inputs';
 
 
 const Text = (props) => (

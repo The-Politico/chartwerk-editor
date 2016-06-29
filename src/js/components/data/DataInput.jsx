@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { Converter } from 'csvtojson';
 import tableify from 'tableify';
 
-import DataSelect from './DataSelect.jsx';
+import DataSelect from './DataSelect';
 
 export default React.createClass({
 

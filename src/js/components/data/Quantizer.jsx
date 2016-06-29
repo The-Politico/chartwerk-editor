@@ -6,7 +6,7 @@ import chroma from 'chroma-js';
 import colors from '../../constants/colors';
 import ellipsize from 'ellipsize';
 import geostats from 'geostats';
-import QuantizerViz from './QuantizerViz.jsx';
+import QuantizerViz from './QuantizerViz';
 
 module.exports = React.createClass({
 
@@ -14,6 +14,15 @@ module.exports = React.createClass({
     actions: React.PropTypes.object,
     werk: React.PropTypes.object,
     data: React.PropTypes.object,
+  },
+
+  /**
+   * State used to track changes in color scheme, cf. componentWillReceiveProps.
+   */
+  getInitialState() {
+    return {
+      scheme: this.props.werk.axes.color.scheme,
+    };
   },
 
 
@@ -27,6 +36,21 @@ module.exports = React.createClass({
     if (werk.axes.color.quantizeProps.groups === 0) {
       actions.setQuantizeGroups(4);
       this.setQuantizeRange(4);
+    }
+  },
+
+  /**
+   * If color scheme is reset, we also reset color range here.
+   * (Why here? For non-quantized color schemes, we wait for user to pick colors
+   * that should be in color range. For quantized, we already know what colors
+   * should make up range based on Quantizer UI opts.)
+   */
+  componentWillReceiveProps(nextProps) {
+    if (this.state.scheme !== nextProps.werk.axes.color.scheme) {
+      this.setState({ scheme: nextProps.werk.axes.color.scheme });
+      this.props.actions.setQuantizeRange(
+        this.equidistantColors(nextProps.werk.axes.color.quantizeProps.groups)
+      );
     }
   },
 
@@ -398,15 +422,16 @@ module.exports = React.createClass({
     return (
       <div>
         <h4>
-          Quantize thresholds <span className="column-label">
+          <span className="column-label">
             {ellipsize(werk.axes.color.quantizeProps.column, 12)}
           </span> {reSelectSeries}
         </h4>
         <small>
-          Add or remove quantize groups. While in most cases the default
-          quantize thresholds should be used, you can adjust them in the
-          boxes below or by dragging the threshold borders in the chart.
-          The strokes above the chart represent the distribution of your data.
+          Add or remove color groups below. While in most cases the default
+          thresholds should be used, you can adjust them in the
+          boxes below, by dragging the threshold borders in the chart or by
+          choosing a calculated scheme. The strokes above the chart represent
+          the distribution of your data.
         </small>
 
         <QuantizerViz

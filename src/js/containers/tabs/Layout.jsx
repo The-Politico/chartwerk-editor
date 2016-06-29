@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Margin from './../../components/layout/Margin.jsx';
+import Margin from './../../components/layout/Margin';
 
 const Layout = (props) => (
   <div role="tabpanel" className="tab-pane" id="layout">

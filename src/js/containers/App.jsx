@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Actions from './../actions/';
 
-import Editor from './panes/Editor.jsx';
-import Preview from './panes/Preview.jsx';
+import Editor from './panes/Editor';
+import Preview from './panes/Preview';
 
 const App = (props) => {
   const actions = bindActionCreators(Actions, props.dispatch);

@@ -1,0 +1,55 @@
+#legend {
+
+  #legend-keys{
+    width: 215px;
+    display:inline-block;
+
+    .legend-key{
+
+      margin-top: 5px;
+
+      .color-square{
+        display: inline-block;
+        width: 10px;
+        height: 34px;
+        float: left;
+        margin-right: 2px;
+        border:1px solid $lightgrey;
+      }
+      input{
+        width:150px;
+      }
+      .key-sort{
+        margin-left: 5px;
+        width: 40px;
+        display: inline;
+        font-size: 30px;
+        line-height: 26px;
+        vertical-align: -6px;
+        i{
+          cursor:pointer;
+          margin-right: 4px;
+          color:$lightgrey;
+          &:hover{
+            color:$grey;
+          }
+          &.disabled{
+            pointer-events: none;
+            color:transparent;
+          }
+        }
+      }
+    }
+
+  }
+
+
+
+  #legend-display-opts{
+    width:250px;
+    margin-left: 20px;
+    display:inline-block;
+  }
+
+
+}

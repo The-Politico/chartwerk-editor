@@ -104,6 +104,11 @@ module.exports = React.createClass({
     });
   },
 
+  changeTab(e) {
+    e.preventDefault();
+    $('a[href="#publish"]').tab('show');
+  },
+
   render() {
     const werk = this.props.werk;
 
@@ -188,6 +193,14 @@ module.exports = React.createClass({
             onBlur={this.removeFocus}
             value={werk.text.author}
           />
+        </div>
+        <div className="guidepost">
+          <h4>
+            <a onClick={this.changeTab} href="">
+              <b>Next:</b> Ready to publish?
+              <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+            </a>
+          </h4>
         </div>
       </div>
     );

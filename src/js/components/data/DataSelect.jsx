@@ -3,9 +3,9 @@ import Select from 'react-select';
 import _ from 'lodash';
 import $ from 'jquery';
 import ellipsize from 'ellipsize';
-import ColorPicker from './ColorPicker.jsx';
-import ColorScheme from './ColorScheme.jsx';
-import BaseTypePicker from './BaseTypePicker.jsx';
+import ColorPicker from './ColorPicker';
+import ColorScheme from './ColorScheme';
+import BaseTypePicker from './BaseTypePicker';
 
 export default React.createClass({
 
@@ -42,11 +42,11 @@ export default React.createClass({
   setOptions() {
     const datamap = this.props.werk.datamap;
     const opts = [
-      { value: 'base', label: 'Base axis', disabled: false },
-      { value: 'series', label: 'Data series' },
-      { value: 'group', label: 'Grouping column', disabled: false },
-      { value: 'annotation', label: 'Annotation column' },
-      { value: 'ignore', label: 'Ignore column' },
+      { value: 'base', label: 'base axis', disabled: false },
+      { value: 'series', label: 'data series' },
+      { value: 'group', label: 'grouping column', disabled: false },
+      { value: 'annotation', label: 'annotation column' },
+      { value: 'ignore', label: 'ignored column' },
     ];
 
     opts[0].disabled = datamap.base;
@@ -191,6 +191,7 @@ export default React.createClass({
 
     const classifySelects = _.keys(werk.data[0]).map((column, i) => {
       let addOption;
+      let article = 'a';
 
       switch (this.traverseDatamap(column)) {
         case 'series':
@@ -222,23 +223,25 @@ export default React.createClass({
           break;
         default:
           addOption = null;
+          article = 'an';
           break;
       }
 
       return (
         <tr key={i}>
-          <td className="column-label">{ellipsize(column, 12)}</td>
-          <td>
-            <Select
-              name={column}
-              value={this.traverseDatamap(column)}
-              options={this.setOptions()}
-              onChange={this.changeValue.bind(this, column)}
-              searchable={false}
-              placeholder="Choose one"
-              clearable={false}
-            />
-            {addOption}
+          <td className="column-label">
+            <p><span className="column-label">{ellipsize(column, 12)}</span> is {article}
+              <Select
+                name={column}
+                value={this.traverseDatamap(column)}
+                options={this.setOptions()}
+                onChange={this.changeValue.bind(this, column)}
+                searchable={false}
+                placeholder="Choose one"
+                clearable={false}
+              />
+              {addOption}
+            </p>
           </td>
         </tr>
       );
@@ -249,17 +252,9 @@ export default React.createClass({
 
     return (
       <div>
-
+        <hr />
         <div id="classify-container">
-          <h4>Classify and color columns in your data&nbsp;
-            <span
-              className="glyphicon glyphicon-info-sign helper"
-              data-toggle="modal"
-              data-target=".help-modal"
-              aria-hidden="true"
-            >
-            </span>
-          </h4>
+          <h4>Describe the columns in your data</h4>
           <table id="classify-selects">
             <tbody>
               {classifySelects}

@@ -8,7 +8,7 @@
           font-weight: bold;
           i.fa-check-square-o,
           i.fa-square-o{
-            margin-right: 10px;
+            margin-left: 10px;
             margin-top: -1px;
           }
         }
@@ -75,13 +75,10 @@
         }
 
         .quantize-select{
-          margin-top: 5px;
+          margin-top: 25px;
           label{
             font-size: 16px;
             font-weight:bold;
-            i{
-              margin-left: 0px;
-            }
           }
 
         }

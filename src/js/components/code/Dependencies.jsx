@@ -113,10 +113,7 @@ export default React.createClass({
     const same = _.isEqual(this.state.scripts, deps.scripts) &&
       _.isEqual(this.state.styles, deps.styles);
 
-    console.log('SAME', same);
-    console.log(this.state.scripts, deps.scripts);
-    return !invalidScripts && !invalidStyles && !same ?
-      'btn btn-sm sync-btn' : 'btn btn-sm sync-btn disabled';
+    return invalidScripts || invalidStyles || same;
   },
 
   render() {
@@ -178,7 +175,11 @@ export default React.createClass({
         </h4>
         {styles}
 
-        <button className={this.enableSync()} onClick={this.syncDependencies}>
+        <button
+          className="btn btn-sm sync-btn btn-blue"
+          onClick={this.syncDependencies}
+          disabled={this.enableSync()}
+        >
           <i className="fa fa-refresh" aria-hidden="true"></i> Sync
         </button>
       </div>

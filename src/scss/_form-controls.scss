@@ -14,15 +14,20 @@
         color: $grey;
     }
 
-    .btn-small{
-
+    &.btn-blue{
+      background-color: $blue;
+      border: 1px solid $darkblue;
+      color: $white;
+      &:disabled{
+        background-color: $lightgrey;
+        border:$lightgrey;
+      }
     }
-
 }
 
 label{
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     cursor:pointer;
 
     input[type=checkbox] ~ i.fa{
@@ -66,6 +71,16 @@ label.section{
   padding: 5px 10px 5px 0;
   color:$grey;
   border-bottom: 1px solid $lightgrey;
+  &.section-option{
+    font-size: 16px;
+    font-weight: bold;
+
+    i.fa-square-o, i.fa-check-square-o {
+        margin-left: 10px;
+        margin-top: -1px;
+    }
+
+  }
 }
 input[type='number']{
   padding: 0 0 0 5px;
@@ -99,13 +114,13 @@ input.disabled{
     margin:0 5px 1px 0;
     cursor:pointer;
     padding:2px;
-    box-shadow: $boxshadow;
     border:1px solid $lightgrey;
     opacity:.5;
     &:hover, &.active{
       border:1px solid $grey;
     }
     &.active{
+      box-shadow: $boxshadow;
       opacity:1;
       border:1px solid $grey;
     }

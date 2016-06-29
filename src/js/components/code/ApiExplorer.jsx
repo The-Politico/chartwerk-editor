@@ -42,7 +42,7 @@ export default React.createClass({
 
 
     traverse('chartWerk', werk);
-    console.log(opts);
+    opts.sort((a, b) => a.length - b.length);
     return opts;
   },
 
@@ -73,6 +73,12 @@ export default React.createClass({
     );
   },
 
+  filter(inputValue, option) {
+    const pattern = new RegExp(`${inputValue}.*`, 'i');
+    console.log(pattern.test(option));
+    return pattern.test(option);
+  },
+
   render() {
     return (
       <div className="apiExplorer">
@@ -82,6 +88,7 @@ export default React.createClass({
           onChange={this.onChange}
           onOptionSelected={this.onSelect}
           value={this.state.value}
+          filterOption={this.filter}
         />
         <i
           className="fa fa-check"

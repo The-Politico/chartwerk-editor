@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BaseAxis from '../../components/axes/BaseAxis.jsx';
-import ValueAxis from '../../components/axes/ValueAxis.jsx';
+import BaseAxis from '../../components/axes/BaseAxis';
+import ValueAxis from '../../components/axes/ValueAxis';
 
 const Axes = (props) => (
   <div role="tabpanel" className="tab-pane" id="axes">

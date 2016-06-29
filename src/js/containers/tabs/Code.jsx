@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Editor from './../../components/code/Editor.jsx';
+import Editor from './../../components/code/Editor';
 
 const Code = (props) => (
   <div role="tabpanel" className="tab-pane" id="code">
+    <img src="img/icons/danger.png" id="advanced-users" alt="feature for advanced users" />
     <Editor {...props} />
   </div>
 );

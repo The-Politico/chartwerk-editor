@@ -93,3 +93,62 @@ export const changeAnnotationColor = (index, color) => ({
   index,
   color,
 });
+
+export const setLegendActive = () => ({
+  type: types.SET_LEGEND_ACTIVE,
+});
+
+export const setLegendKeys = (keys) => ({
+  type: types.SET_LEGEND_KEYS,
+  keys,
+});
+
+export const changeLegendKey = (index, color, text) => ({
+  type: types.CHANGE_LEGEND_KEY,
+  index,
+  color,
+  text,
+});
+
+export const changeLegendKeyOrderUp = (index) => ({
+  type: types.CHANGE_LEGEND_KEY_ORDER_UP,
+  index,
+});
+
+export const changeLegendKeyOrderDown = (index) => ({
+  type: types.CHANGE_LEGEND_KEY_ORDER_DOWN,
+  index,
+});
+
+export const changeLegendTitle = (text) => ({
+  type: types.CHANGE_LEGEND_TITLE,
+  text,
+});
+
+export const changeLegendAlign = (size) => ({
+  type: types.CHANGE_LEGEND_ALIGN,
+  size,
+});
+
+export const changeLegendBackground = (size) => ({
+  type: types.CHANGE_LEGEND_BACKGROUND,
+  size,
+});
+
+export const changeLegendInside = (size) => ({
+  type: types.CHANGE_LEGEND_INSIDE,
+  size,
+});
+
+export const changeLegendPosition = (size, x, y) => ({
+  type: types.CHANGE_LEGEND_POSITION,
+  size,
+  x,
+  y,
+});
+
+export const changeLegendWidth = (size, width) => ({
+  type: types.CHANGE_LEGEND_WIDTH,
+  size,
+  width,
+});

@@ -1,5 +1,8 @@
 #code{
 
+  #advanced-users{
+    margin: 10px auto 20px;
+  }
   .alert.alert-danger{
     color:$white;
     text-align: center;
@@ -157,7 +160,7 @@
         line-height: 30px;
         width:100%;
         border: 1px solid $lightgrey;
-        font-family: monospace;
+        font-family: $monospace;
         letter-spacing:-1px;
         padding-right: 35px;
       }
@@ -175,7 +178,7 @@
         li{
           a.typeahead-option{
             color:$grey;
-            font-family: monospace;
+            font-family: $monospace;
           }
         }
       }
@@ -189,6 +192,7 @@
     .copy-btn{
       margin-top: -4px;
       font-size: 14px;
+      height: 32px;
       border: 1px solid $lightgrey;
     }
 

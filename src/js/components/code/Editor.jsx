@@ -3,8 +3,8 @@ import AceEditor from 'react-ace';
 import Modal from 'react-modal';
 import Toggle from 'react-toggle';
 import _ from 'lodash';
-import Dependencies from './Dependencies.jsx';
-import ApiExplorer from './ApiExplorer.jsx';
+import Dependencies from './Dependencies';
+import ApiExplorer from './ApiExplorer';
 
 require('brace/mode/javascript');
 require('brace/mode/scss');
@@ -202,7 +202,7 @@ export default React.createClass({
             </small>
             <small>
               Be aware that making too many edits to your dependency list may result in
-              strange behavior as javascript is persisted in the global namespace.
+              strange behavior as javascript persists in the global namespace.
               In that case, simply save and refresh the page.
             </small>
             <Dependencies {...this.props} />
@@ -248,10 +248,6 @@ export default React.createClass({
     return (
       <div>
 
-        <div className="alert alert-danger" role="alert">
-          <i className="fa fa-diamond first"></i> This feature is for advanced users.
-        </div>
-
         <div className="right-align clearfix">
           <button
             className={this.activeClass('JS')}
@@ -273,7 +269,7 @@ export default React.createClass({
           </button>
 
           <button
-            className="btn btn-sm"
+            className="btn btn-sm btn-blue"
             onClick={this.applyScript}
             disabled={this.state.editing === 'DEP'} // Disable if editing dependencies
           >
@@ -306,7 +302,7 @@ export default React.createClass({
 
           <div className="left inline">
 
-            <button className="btn btn-sm" onClick={this.applyScript}>
+            <button className="btn btn-sm btn-blue" onClick={this.applyScript}>
               <i className="fa fa-play" aria-hidden="true"></i> Apply
             </button>
 

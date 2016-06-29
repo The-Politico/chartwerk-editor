@@ -17,10 +17,10 @@
 }
 .nav-tabs>li>a:hover{
   border-color:transparent;
-  border-bottom: 1px solid $grey;
+  border-bottom: 2px solid $grey;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
   border-color:transparent;
-  border-bottom: 1px solid $red;
+  border-bottom: 2px solid $red;
   color:$red;
 }

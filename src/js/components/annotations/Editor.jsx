@@ -1,7 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 import marked from './../../misc/utils';
-import ColorPicker from './ColorPicker.jsx';
+import ColorPicker from './ColorPicker';
+import Legend from './Legend';
 import { black } from './../../constants/colors';
 
 export default React.createClass({
@@ -258,12 +259,12 @@ export default React.createClass({
 
     return (
       <div>
-        <h1>Annotations</h1>
+        <h4>Annotations</h4>
         <button className="btn btn-sm" onClick={this.addAnnotation}>Add +</button>
         <div className="annotations">
           {notes}
         </div>
-
+        <Legend {...this.props} />
       </div>
     );
   },

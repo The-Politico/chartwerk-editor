@@ -1,5 +1,5 @@
 import React from 'react';
-import MarginViz from './MarginViz.jsx';
+import MarginViz from './MarginViz';
 
 export default React.createClass({
 
@@ -107,6 +107,11 @@ export default React.createClass({
     }
   },
 
+  changeTab(e) {
+    e.preventDefault();
+    $('a[href="#text"]').tab('show');
+  },
+
   render() {
     return (
       <div className="inline-exclusive-format clearfix">
@@ -140,6 +145,14 @@ export default React.createClass({
             size={this.state.activeOpts}
             dragMargin={this.dragMargin}
           />
+        </div>
+        <div className="guidepost">
+          <h4>
+            <a onClick={this.changeTab} href="">
+              <b>Next:</b> Text
+              <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+            </a>
+          </h4>
         </div>
       </div>
     );

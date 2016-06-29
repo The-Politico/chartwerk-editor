@@ -2,7 +2,7 @@ import React from 'react';
 import colors from '../../constants/colors';
 import _ from 'lodash';
 import Select from 'react-select';
-import Quantizer from './Quantizer.jsx';
+import Quantizer from './Quantizer';
 
 
 export default React.createClass({
@@ -161,13 +161,7 @@ export default React.createClass({
 
     // Instructions
     if (!werk.axes.color.quantize) {
-      return (
-        <div>
-          <small>Quantizing a data series reduces your data
-          to color buckets that range from low to high values. This is
-          mostly used for choropleth maps.</small>
-        </div>
-      );
+      return null;
     }
 
     if (!werk.axes.color.quantizeProps.column) {
@@ -227,6 +221,7 @@ export default React.createClass({
     const quantize = werk.axes.color.scheme.substring(0, 11) !== 'categorical' ?
                   (<div className="quantize-select">
                     <label className="section">
+                      Should colors represent numeric values in a data series?
                       <input
                         type="checkbox"
                         checked={this.props.werk.axes.color.quantize}
@@ -234,7 +229,6 @@ export default React.createClass({
                       />
                       <i className="fa fa-square-o"></i>
                       <i className="fa fa-check-square-o"></i>
-                       Quantize a data series?
                     </label>
                     {quantizer}
                   </div>
@@ -269,10 +263,10 @@ export default React.createClass({
     return (
       <div className="colorscheme-container clearfix">
         <label className="section">
+          Do you need to change the color scheme?
           <input type="checkbox" onClick={this.setVisibility} />
           <i className="fa fa-square-o"></i>
           <i className="fa fa-check-square-o"></i>
-            Adjust color scheme?
         </label>
         {schemeSelect}
       </div>

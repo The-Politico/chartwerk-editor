@@ -1,11 +1,10 @@
 import React from 'react';
 
-import DataInput from '../../components/data/DataInput.jsx';
+import DataInput from '../../components/data/DataInput';
 
 const Data = (props) => (
   <div role="tabpanel" className="tab-pane active clearfix" id="data">
     <h4>
-      <i className="fa fa-clipboard" aria-hidden="true"></i>
       Paste <b>clean</b> data
     </h4>
 

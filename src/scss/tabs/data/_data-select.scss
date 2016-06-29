@@ -1,56 +1,68 @@
 #data{
 
+    img{
+      margin: 10px 0 15px;
+    }
+
     #classify-container{
+        margin: 20px 0;
+
         #classify-selects{
           width:100%;
             tr{
                 td{
-                    padding:3px 0px;
+                    padding:3px 0px 10px;
+
+                    p{
+                      line-height: 32px;
+                    }
 
                     &:first-child{
                       width:100px;
                     }
 
                     .column-label{
-                        display:inline-block;
-                        float:left;
-                        line-height: 35px;
-                        text-align: right;
+                        font-size:18px;
+                        padding: 2px 4px;
                     }
 
                     .Select{
-                        width:160px;
-                        float:left;
-                        margin-left: 15px;
+                        width:190px;
+                        display:inline-block;
+                        margin:0 5px -12px;
                         border:1px solid $lightgrey;
+                        font-size: 16px;
+                        .Select-control{
+                          height:16px;
+                          background-color: transparent;
+                        }
+                        .Select-value{
+                          top:1px;
+                        }
+                        .Select-input{
+                          height:16px;
+                        }
                     }
+
 
                     label{
                         line-height: 35px;
                         margin-left: 15px;
                     }
                     .base-type{
-                      display: inline-block;
+                      display: inline;
                       .Select{
                         width: 135px;
                         margin-left: 5px;
                       }
                       .dateformat{
-                        color:$midgrey;
-                        margin-left: 5px;
-                        margin-top: 2px;
+                        color:$grey;
+                        display:inline-block;
                         font-style: italic;
-                        float:left;
-                        clear:left;
-
+                        margin-left: 10px;
                         &.error{
-                          background-color: $red;
-                          color:$white;
-                          padding:1px 6px;
-                          border-radius:2px;
-                          display:inline-block;
+                          color:$red;
                         }
-
                       }
 
                     }

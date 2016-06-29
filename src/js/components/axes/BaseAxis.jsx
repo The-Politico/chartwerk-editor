@@ -1,7 +1,7 @@
 import React from 'react';
 
-import DateFormat from './DateFormat.jsx';
-import NumericFormat from './NumericFormat.jsx';
+import DateFormat from './DateFormat';
+import NumericFormat from './NumericFormat';
 
 const BaseAxis = (props) => {
   if (!props.werk.datamap.base) {

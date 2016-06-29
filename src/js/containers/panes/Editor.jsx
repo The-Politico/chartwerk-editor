@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Tabs from './../tabs/index.jsx';
-import Nav from './../tabs/Nav.jsx';
+import Tabs from './../tabs/index';
+import Nav from './../tabs/Nav';
 
 const Editor = (props) => (
   <div id="editor-pane" className="clearfix" role="tabpanel">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SizeSwitch from './../../components/preview/SizeSwitch.jsx';
+import SizeSwitch from './../../components/preview/SizeSwitch';
 
 module.exports = React.createClass({
 

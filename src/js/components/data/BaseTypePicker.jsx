@@ -125,9 +125,9 @@ export default React.createClass({
     const werk = this.props.werk;
 
     const typeOptions = [
-      { value: 'categorical', label: 'Categorical' },
-      { value: 'numerical', label: 'Numerical' },
-      { value: 'date', label: 'Date' },
+      { value: 'categorical', label: 'categorical' },
+      { value: 'numerical', label: 'numerical' },
+      { value: 'date', label: 'date/time' },
     ];
 
     let i = null; // Index for datetime array
@@ -144,19 +144,20 @@ export default React.createClass({
     if (i !== null) {
       dateLabel = (
         <div className="dateformat">
-          Format: {_.map(datetime, 'human')[i]}
+          Dates parsed with format {_.map(datetime, 'human')[i]}.
         </div>
       );
     } else if (werk.axes.base.type === 'date') {
       dateLabel = (
         <div className="dateformat error">
-          Date parse error!
+          Error parsing dates!
         </div>
       );
     }
 
     return (
       <div className="base-type">
+        containing
         <Select
           name="base"
           value={this.state.type}
@@ -166,7 +167,7 @@ export default React.createClass({
           placeholder="What data type?"
           clearable={false}
         />
-        {dateLabel}
+        data{dateLabel}
       </div>
     );
   },

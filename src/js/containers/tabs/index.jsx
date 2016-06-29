@@ -1,11 +1,11 @@
 import React from 'react';
 
-import DataTab from './Data.jsx';
-import AxesTab from './Axes.jsx';
-import LayoutTab from './Layout.jsx';
-import TextTab from './Text.jsx';
-import AnnotationsTab from './Annotations.jsx';
-import CodeTab from './Code.jsx';
+import DataTab from './Data';
+import AxesTab from './Axes';
+import LayoutTab from './Layout';
+import TextTab from './Text';
+import AnnotationsTab from './Annotations';
+import CodeTab from './Code';
 
 
 const Tabs = (props) => (
