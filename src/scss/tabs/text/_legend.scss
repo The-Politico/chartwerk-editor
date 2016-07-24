@@ -3,6 +3,7 @@
   #legend-keys{
     width: 215px;
     display:inline-block;
+    float:left;
 
     .legend-key{
 
@@ -49,9 +50,14 @@
     width:250px;
     margin-left: 20px;
     display:inline-block;
+    float:left;
 
     #legend-title{
-    
+      margin-bottom: 10px;
+    }
+    #legend-inside-opts{
+      display:inline-block;
+      margin-left: 5px;
     }
 
   }

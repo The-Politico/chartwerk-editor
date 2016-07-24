@@ -155,6 +155,27 @@ export const setBaseSuffix = suffix => ({
   suffix,
 });
 
+export const addBaseShadedRegion = () => ({
+  type: types.ADD_BASE_SHADED_REGION,
+});
+
+export const setBaseShadedRegionMin = (index, min) => ({
+  type: types.SET_BASE_SHADED_REGION_MIN,
+  index,
+  min,
+});
+
+export const setBaseShadedRegionMax = (index, max) => ({
+  type: types.SET_BASE_SHADED_REGION_MAX,
+  index,
+  max,
+});
+
+export const removeBaseShadedRegion = index => ({
+  type: types.REMOVE_BASE_SHADED_REGION,
+  index,
+});
+
 // VALUE AXIS
 
 export const setValueSingleTicks = ticks => ({
@@ -200,4 +221,25 @@ export const setValuePrefix = prefix => ({
 export const setValueSuffix = suffix => ({
   type: types.SET_VALUE_SUFFIX,
   suffix,
+});
+
+export const addValueShadedRegion = () => ({
+  type: types.ADD_VALUE_SHADED_REGION,
+});
+
+export const setValueShadedRegionMin = (index, min) => ({
+  type: types.SET_VALUE_SHADED_REGION_MIN,
+  index,
+  min,
+});
+
+export const setValueShadedRegionMax = (index, max) => ({
+  type: types.SET_VALUE_SHADED_REGION_MAX,
+  index,
+  max,
+});
+
+export const removeValueShadedRegion = index => ({
+  type: types.REMOVE_VALUE_SHADED_REGION,
+  index,
 });

@@ -75,6 +75,28 @@
 
   }
 
+  .shaded-region-opts{
+    .form-group{
+      float:left;
+      margin: 5px 10px 0 0;
+      input{
+        width:150px;
+
+      }
+
+    }
+    .fa-times{
+      color: $lightgrey;
+      cursor:pointer;
+      font-size: 20px;
+      vertical-align: -38px;
+      &:hover{
+        color:$red;
+      }
+
+    }
+  }
+
 
 
 }

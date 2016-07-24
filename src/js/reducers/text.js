@@ -34,7 +34,7 @@ export default (texts, action) => {
         inside: false,
         align: 'l',
         background: true,
-        width: 150,
+        width: 250,
         position: {
           x: 10,
           y: 10,
@@ -44,7 +44,7 @@ export default (texts, action) => {
         inside: false,
         align: 'l',
         background: true,
-        width: 300,
+        width: 500,
         position: {
           x: 10,
           y: 10,
@@ -146,9 +146,9 @@ export default (texts, action) => {
       break;
     case types.CHANGE_LEGEND_ALIGN:
       if (action.size === 'single') {
-        nextState.legend.single.align = nextState.legend.single.align === 'l' ? 'r' : 'l';
+        nextState.legend.single.align = action.align;
       } else {
-        nextState.legend.double.align = nextState.legend.double.align === 'l' ? 'r' : 'l';
+        nextState.legend.double.align = action.align;
       }
       break;
     case types.CHANGE_LEGEND_BACKGROUND:

@@ -46,6 +46,7 @@ export default (axis, action) => {
           customTicks: [],
         },
       },
+      shadedRegions: [],
     },
     value: {
       min: null,
@@ -63,6 +64,7 @@ export default (axis, action) => {
           customTicks: [],
         },
       },
+      shadedRegions: [],
     },
   };
 
@@ -182,6 +184,21 @@ export default (axis, action) => {
     case types.SET_BASE_SUFFIX:
       nextState.base.suffix = action.suffix;
       break;
+    case types.ADD_BASE_SHADED_REGION:
+      nextState.base.shadedRegions.push({
+        min: null,
+        max: null,
+      });
+      break;
+    case types.SET_BASE_SHADED_REGION_MIN:
+      nextState.base.shadedRegions[action.index].min = action.min;
+      break;
+    case types.SET_BASE_SHADED_REGION_MAX:
+      nextState.base.shadedRegions[action.index].max = action.max;
+      break;
+    case types.REMOVE_BASE_SHADED_REGION:
+      nextState.base.shadedRegions.splice(action.index, 1);
+      break;
      /**
       * VALUE AXIS
       */
@@ -211,6 +228,21 @@ export default (axis, action) => {
       break;
     case types.SET_VALUE_SUFFIX:
       nextState.value.suffix = action.suffix;
+      break;
+    case types.ADD_VALUE_SHADED_REGION:
+      nextState.value.shadedRegions.push({
+        min: null,
+        max: null,
+      });
+      break;
+    case types.SET_VALUE_SHADED_REGION_MIN:
+      nextState.value.shadedRegions[action.index].min = action.min;
+      break;
+    case types.SET_VALUE_SHADED_REGION_MAX:
+      nextState.value.shadedRegions[action.index].max = action.max;
+      break;
+    case types.REMOVE_VALUE_SHADED_REGION:
+      nextState.value.shadedRegions.splice(action.index, 1);
       break;
     default:
       return axis;

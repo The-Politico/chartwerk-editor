@@ -125,9 +125,10 @@ export const changeLegendTitle = (text) => ({
   text,
 });
 
-export const changeLegendAlign = (size) => ({
+export const changeLegendAlign = (size, align) => ({
   type: types.CHANGE_LEGEND_ALIGN,
   size,
+  align,
 });
 
 export const changeLegendBackground = (size) => ({

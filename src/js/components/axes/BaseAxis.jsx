@@ -2,6 +2,7 @@ import React from 'react';
 
 import DateFormat from './DateFormat';
 import NumericFormat from './NumericFormat';
+import ShadedRegions from './ShadedRegions';
 
 const BaseAxis = (props) => {
   if (!props.werk.datamap.base) {
@@ -44,6 +45,7 @@ const BaseAxis = (props) => {
     <div>
       <h4>Base axis: <span className="basename">{props.werk.datamap.base}</span></h4>
       {baseAxis}
+      <ShadedRegions {...props} axis="base" />
       <hr />
     </div>
   );

@@ -90,7 +90,7 @@ export default React.createClass({
   resize() {
     const actions = this.props.actions;
 
-    $('.handle').on('mousedown', (e) => {
+    $('.handle', '.annotation').on('mousedown', (e) => {
       e.stopPropagation();
       if (e.button > 0) return;
 
@@ -180,7 +180,7 @@ export default React.createClass({
           <img
             src="img/icons/singleColumn.png"
             title="Single column"
-            className={(() => (d.size === 's' ? 'active' : 'inactive'))()}
+            className={d.size === 's' ? 'active' : 'inactive'}
             onClick={() => {
               actions.changeAnnotationSize(i, 's');
               this.focusNote(i);
@@ -190,7 +190,7 @@ export default React.createClass({
           <img
             src="img/icons/doubleColumn.png"
             title="Double column"
-            className={(() => (d.size === 'd' ? 'active' : 'inactive'))()}
+            className={d.size === 'd' ? 'active' : 'inactive'}
             onClick={() => {
               actions.changeAnnotationSize(i, 'd');
               this.focusNote(i);
@@ -207,9 +207,9 @@ export default React.createClass({
             onFocus={() => this.focusNote(i)}
             value={d.text}
           />
-          <i className="fa fa-times" onClick={
-              () => actions.removeAnnotation(i)
-            } title="Remove"
+          <i className="fa fa-times"
+            onClick={() => actions.removeAnnotation(i)}
+            title="Remove"
           ></i>
         </div>
         <div className="annotation-formats">
@@ -259,7 +259,7 @@ export default React.createClass({
 
     return (
       <div>
-        <h4>Annotations</h4>
+        <h4>Free Annotations</h4>
         <button className="btn btn-sm" onClick={this.addAnnotation}>Add +</button>
         <div className="annotations">
           {notes}

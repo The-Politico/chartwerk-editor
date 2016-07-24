@@ -34,7 +34,7 @@ export default React.createClass({
       const defaultText = werk.axes.color.range.map(() => '');
 
       // ...unless we're using a quantized scale, in which case we use
-      // thresholds as over-writable default text.
+      // minimum thresholds as over-writable default text.
       if (werk.axes.color.quantize) {
         // Always one less domain member as range in quantize scale. So need
         // to get the min of the dataset first.

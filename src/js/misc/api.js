@@ -64,9 +64,12 @@ export const removeDependencies = (dependencies) => {
 };
 
 export const redraw = _.throttle(() => {
-    // Remove all drawn elements before redraw, not including free annotations
+    // Remove all drawn elements before redraw,
+    // not including free annotations or chart legends
   if (document.getElementById('chart')) {
-    $('#chart').children().not('.annotation.label')
+    $('#chart').children()
+      .not('.annotation.label')
+      .not('.chart-legend-container')
       .remove();
   }
   draw(); // eslint-disable-line no-undef

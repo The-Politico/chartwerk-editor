@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 
 import NumericFormat from './NumericFormat.jsx';
+import ShadedRegions from './ShadedRegions';
 
 export default React.createClass({
 
@@ -32,6 +33,7 @@ export default React.createClass({
           actions={this.props.actions}
           type="value"
         />
+        <ShadedRegions {...this.props} axis="value" />
 
         <div className="guidepost">
           <h4>
