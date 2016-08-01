@@ -6,7 +6,7 @@ import LayoutTab from './Layout';
 import TextTab from './Text';
 import AnnotationsTab from './Annotations';
 import CodeTab from './Code';
-
+import PublishTab from './Publish';
 
 const Tabs = (props) => (
   <div className="tab-content">
@@ -16,6 +16,7 @@ const Tabs = (props) => (
     <TextTab {...props} />
     <AnnotationsTab {...props} />
     <CodeTab {...props} />
+    <PublishTab {...props} />
   </div>
 );
 

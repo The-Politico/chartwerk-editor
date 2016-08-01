@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import Modal from 'react-modal';
 import _ from 'lodash';
 import $ from 'jquery';
 import ellipsize from 'ellipsize';
@@ -14,6 +15,11 @@ export default React.createClass({
     werk: React.PropTypes.object,
   },
 
+  getInitialState() {
+    return {
+      helpModal: false,
+    };
+  },
 
   componentWillReceiveProps(nextProps) {
     const actions = this.props.actions;
@@ -189,6 +195,23 @@ export default React.createClass({
   render() {
     const werk = this.props.werk;
 
+    const modalStyles = {
+      overlay: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(255, 255, 255, 0.65)',
+        zIndex: 9,
+      },
+      content: {
+        maxWidth: '800px',
+        margin: 'auto',
+        backgroundColor: 'white',
+      },
+    };
+
     const classifySelects = _.keys(werk.data[0]).map((column, i) => {
       let addOption;
       let article = 'a';
@@ -254,7 +277,9 @@ export default React.createClass({
       <div>
         <hr />
         <div id="classify-container">
-          <h4>Describe the columns in your data</h4>
+          <h4>Describe the columns in your data
+            <a id="data-help-prompt" onClick={() => this.setState({ helpModal: true })}>Need help?</a>
+          </h4>
           <table id="classify-selects">
             <tbody>
               {classifySelects}
@@ -274,6 +299,45 @@ export default React.createClass({
             </a>
           </h4>
         </div>
+
+        <Modal
+          isOpen={this.state.helpModal}
+          onRequestClose={() => this.setState({ helpModal: false })}
+          style={modalStyles}
+        >
+          <i className="fa fa-times" onClick={() => this.setState({ helpModal: false })}></i>
+          <div id="data-help-modal-content">
+            <p>Describing your data columns tells ChartWerk how to translate your data
+              into the chart features they are meant to represent.
+              To do that, you can use a very simple grammar,
+              consisting of five types:
+            </p>
+            <h4>Base axis</h4>
+            <p>A column classified as a base axis contains data like
+              dates or categorical values. These are values <em>by
+              which</em> numeric data are charted. Stock prices <em>by day</em>.
+              Mortality rates <em>by state</em>. Units produced <em>by company</em>.
+              For scatterplots, the base axis contains the numeric data plotted
+              along the X axis.
+            </p>
+            <h4>Data series</h4>
+            <p>Data series columns always contain naked numeric data. Remember no
+              text annotations like dollar signs or percent symbols should be in
+              this data.
+            </p>
+            <h4>Grouping column</h4>
+            <p>A grouping column always contains categorical data used to group your data
+            into subgroups or to create small-multiple or faceted charts. For example,
+            in a grouped bar chart with quarterly returns for several companies, the
+            column with the company names is used to group the data together.</p>
+            <h4>Annotation column</h4>
+            <p>Some charts allow you to include a column of annotations used in
+            tooltips or other labels for each data point.</p>
+            <h4>Ignored column</h4>
+            <p>Sure, you could've just not copied that column over, but why not be really
+            explicit about it.</p>
+          </div>
+        </Modal>
       </div>
 
     );

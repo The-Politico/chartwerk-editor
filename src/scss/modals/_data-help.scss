@@ -1,0 +1,26 @@
+#data-help-modal-content{
+  padding:20px 0;
+
+  p:first-child{
+    font-size: 14px;
+  }
+  p{
+    font-size: 14px;
+  }
+  h4{
+    background-color:$grey;
+    color:white;
+    padding:2px 4px;
+    display:inline-block;
+    border-radius: 2px;
+    font-size: 16px;
+  }
+
+}
+
+#data-help-prompt{
+  margin-left: 10px;
+  font-size: 14px;
+  cursor:pointer;
+  font-style: italic;
+}

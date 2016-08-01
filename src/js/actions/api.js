@@ -1,5 +1,7 @@
 require('es6-promise').polyfill();
+
 import fetch from 'isomorphic-fetch';
+import { locations } from './../misc/config';
 
 import * as uiActions from './ui';
 import * as dataActions from './data';
@@ -10,7 +12,7 @@ import * as textActions from './text';
 
 
 export function fetchWerk() {
-  return dispatch => fetch('./testAPI.json')
+  return dispatch => fetch(locations.werk)
     .then(
       response => response.json()
     )
