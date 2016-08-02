@@ -1,6 +1,5 @@
 # Werk API
 
-## Data mapping
 
 Because of the many types of data schema ChartWerk has to ingest while creating charts it's necessary to abstractly represent the relationship between schema and chart.
 
@@ -12,25 +11,25 @@ Put more formally, the grammar minimizes schema entropy, but because users are a
 
 There are six ways to classify a data column:
 
-#### Base axis
+### Base axis
 
 A column classified as a base axis most often contains data like time series dates or categorical values. These are values _by which_ numeric data are charted. Mortality rates _by occupation_. Stock prices _by company_.
 
 The base axis corresponds to the traditional X axis in the case of horizontal line and bar charts. It can also represent a column of state names used to chart data in a choropleth map.
 
-#### Value axis
+### Value axis
 
 A value axis is a single column of numeric data used to determine positional attributes of a data point. For example, the height on the Y axis of a point in a scatterplot.
 
-#### Scale axis
+### Scale axis
 
 Scale axis data is used to set the size or color of a data point. It can contain numeric or categorical data.
 
 By design, ChartWerk does not allow for multiple scale axes, for example, scaling a data point by size and color.
 
-#### Data series
+### Data series
 
-Often, it is more natural to keep data in a crosstab format than in a [flat table schema that neatly](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#tidy-data) corresponds to base, value and scale axes. Data series accommodate that convenience.
+Often, it is more natural to keep data in a crosstab format than in a [flat table schema](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#tidy-data) that neatly corresponds to base, value and scale axes. Data series accommodate that convenience.
 
 Data series are cross-tabbed columns always containing numeric values, never categorical data. These data are always translated to a positional dimension on the chart _and_ to a color range.
 
@@ -38,7 +37,7 @@ The data series classifications are mutually exclusive with value axis and scale
 
 Take, for example, these two table schemas:
 
-##### Crosstab
+#### Crosstab
 
 | Date     | Male | Female |
 |----------|------|--------|
@@ -49,7 +48,7 @@ Take, for example, these two table schemas:
 - `Male` -> data series
 - `Female` -> data series
 
-##### Flat table schema
+#### Flat table schema
 
 | Date     | Gender | Age |
 |----------|--------|-----|
@@ -62,20 +61,21 @@ Take, for example, these two table schemas:
 - `Gender` -> scale axis
 - `Age` -> value axis
 
+In the crosstab, the `Male` and `Female` columns will represent both a color and a position, whereas in the flat table, `Gender` is discretely a scale axis and `Age`, a value axis.
 
-#### Faceting column
+### Faceting column
 
 Faceting columns are always categorical data used to create sub-groups of data that are drawn in facets of charts.
 
-#### Annotation column
+### Annotation column
 
 Annotations are text labels paired with data points.
 
 Users are also given the option to ignore a column in the data, in which case the column is not made available through the Werk API.
 
-### Examples of the grammar
+## Examples of the grammar
 
-### Bar chart
+#### Bar chart
 
 A 2-column dataset of percent of executive jobs held by women by company.
 
@@ -149,18 +149,18 @@ A 2-column dataset of infant mortality rates by state.
 A 2-column dataset of states who voted for each political party.
 
 - `State` -> base axis
-- `Republican or Democrat` -> grouping column
+- `Republican or Democrat` -> scale axis
 
 #### Dot maps
 
 A 3-column dataset of minority population growth rates by city.
 
-- `Latitute` -> base axis
-- `Longitude` -> value axis
+- `Longitude` -> base axis
+- `Latitute` -> value axis
 - `Population growth` -> scale axis
 
 A 3-column dataset of cities that are above or below an EPA smog threshold.
 
-- `Latitute` -> base axis
-- `Longitude` -> value axis
-- `Above or below` -> grouping column
+- `Longitude` -> base axis
+- `Latitute` -> value axis
+- `Above or below` -> scale axis
