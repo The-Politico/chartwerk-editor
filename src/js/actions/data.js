@@ -15,8 +15,13 @@ export const addBase = column => ({
   column,
 });
 
-export const addGroup = column => ({
-  type: types.ADD_GROUP,
+export const addValue = column => ({
+  type: types.ADD_VALUE,
+  column,
+});
+
+export const addScale = column => ({
+  type: types.ADD_SCALE,
   column,
 });
 
@@ -25,8 +30,9 @@ export const addSeries = column => ({
   column,
 });
 
-export const addIgnore = column => ({
-  type: types.ADD_IGNORE,
+
+export const addFacet = column => ({
+  type: types.ADD_FACET,
   column,
 });
 
@@ -35,12 +41,21 @@ export const addAnnotations = column => ({
   column,
 });
 
+export const addIgnore = column => ({
+  type: types.ADD_IGNORE,
+  column,
+});
+
 export const removeBase = () => ({
   type: types.REMOVE_BASE,
 });
 
-export const removeGroup = () => ({
-  type: types.REMOVE_GROUP,
+export const removeValue = () => ({
+  type: types.REMOVE_VALUE,
+});
+
+export const removeScale = () => ({
+  type: types.REMOVE_SCALE,
 });
 
 export const removeSeries = column => ({
@@ -48,13 +63,17 @@ export const removeSeries = column => ({
   column,
 });
 
-export const removeIgnore = column => ({
-  type: types.REMOVE_IGNORE,
-  column,
+export const removeFacet = () => ({
+  type: types.REMOVE_FACET,
 });
 
 export const removeAnnotations = column => ({
   type: types.REMOVE_ANNOTATIONS,
+  column,
+});
+
+export const removeIgnore = column => ({
+  type: types.REMOVE_IGNORE,
   column,
 });
 

@@ -4,7 +4,6 @@ import _ from 'lodash';
 import d3 from 'd3';
 import chroma from 'chroma-js';
 import colors from '../../constants/colors';
-import ellipsize from 'ellipsize';
 import geostats from 'geostats';
 import QuantizerViz from './QuantizerViz';
 
@@ -412,20 +411,9 @@ module.exports = React.createClass({
       )
     );
 
-    const reSelectSeries = werk.datamap.series.length > 1 ?
-      <i
-        className="fa fa-times"
-        title="Choose a different data series"
-        onClick={this.resetSeries}
-      ></i> : null;
-
     return (
-      <div>
-        <h4>
-          <span className="column-label">
-            {ellipsize(werk.axes.color.quantizeProps.column, 12)}
-          </span> {reSelectSeries}
-        </h4>
+      <div className="quantize-select">
+        <h4>Quantized color scale</h4>
         <small>
           Add or remove color groups below. While in most cases the default
           thresholds should be used, you can adjust them in the

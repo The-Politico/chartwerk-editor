@@ -13,8 +13,10 @@ import _ from 'lodash';
 export default (datamap, action) => {
   const initialState = {
     base: null,
-    group: null,
+    value: null,
+    scale: null,
     series: [],
+    facet: null,
     annotations: [],
     ignore: [],
   };
@@ -35,34 +37,50 @@ export default (datamap, action) => {
     case types.ADD_BASE:
       nextState.base = action.column;
       break;
-    case types.ADD_GROUP:
-      nextState.group = action.column;
+    case types.ADD_VALUE:
+      nextState.value = action.column;
+      nextState.series = []; // mutually exclusive with data series
+      break;
+    case types.ADD_SCALE:
+      nextState.scale = action.column;
+      nextState.series = []; // mutually exclusive with data series
       break;
     case types.ADD_SERIES:
       nextState.series.push(action.column);
+      nextState.value = null; // mutually exclusive with value axis
+      nextState.scale = null; // mutually exclusive with scale axis
       break;
-    case types.ADD_IGNORE:
-      nextState.ignore.push(action.column);
+    case types.ADD_FACET:
+      nextState.facet = action.column;
       break;
     case types.ADD_ANNOTATIONS:
       nextState.annotations.push(action.column);
       break;
+    case types.ADD_IGNORE:
+      nextState.ignore.push(action.column);
+      break;
     case types.REMOVE_BASE:
       nextState.base = null;
       break;
-    case types.REMOVE_GROUP:
-      nextState.group = null;
+    case types.REMOVE_VALUE:
+      nextState.value = null;
+      break;
+    case types.REMOVE_SCALE:
+      nextState.scale = null;
       break;
     case types.REMOVE_SERIES:
       _.remove(nextState.series,
           n => n === action.column);
       break;
-    case types.REMOVE_IGNORE:
-      _.remove(nextState.ignore,
-          n => n === action.column);
+    case types.REMOVE_FACET:
+      nextState.facet = null;
       break;
     case types.REMOVE_ANNOTATIONS:
       _.remove(nextState.annotations,
+          n => n === action.column);
+      break;
+    case types.REMOVE_IGNORE:
+      _.remove(nextState.ignore,
           n => n === action.column);
       break;
     case types.RESET_DATAMAP:

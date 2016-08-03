@@ -16,7 +16,8 @@ export default (axis, action) => {
       domain: [],
       range: [],
       scheme: 'categorical.default',
-      byGroup: false,
+      byFacet: false,
+      ignoreScale: false,
       quantize: false,
       quantizeProps: {
         column: null,
@@ -85,8 +86,11 @@ export default (axis, action) => {
     case types.SET_COLOR_SCHEME:
       nextState.color.scheme = action.path;
       break;
-    case types.COLOR_BY_GROUP:
-      nextState.color.byGroup = !nextState.color.byGroup;
+    case types.COLOR_BY_FACET:
+      nextState.color.byFacet = !nextState.color.byFacet;
+      break;
+    case types.IGNORE_SCALE:
+      nextState.color.ignoreScale = !nextState.color.ignoreScale;
       break;
     case types.SET_QUANTIZE:
       nextState.color.quantize = true;

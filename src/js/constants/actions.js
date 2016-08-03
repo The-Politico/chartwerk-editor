@@ -1,17 +1,22 @@
 
 // DATA COLUMN MAPPING
 export const API_DATAMAP = 'API_DATAMAP';
+
 export const ADD_BASE = 'ADD_BASE';
-export const ADD_GROUP = 'ADD_GROUP';
+export const ADD_VALUE = 'ADD_VALUE';
+export const ADD_SCALE = 'ADD_SCALE';
 export const ADD_SERIES = 'ADD_SERIES';
-export const ADD_IGNORE = 'ADD_IGNORE';
+export const ADD_FACET = 'ADD_FACET';
 export const ADD_ANNOTATIONS = 'ADD_ANNOTATIONS';
+export const ADD_IGNORE = 'ADD_IGNORE';
 
 export const REMOVE_BASE = 'REMOVE_BASE';
-export const REMOVE_GROUP = 'REMOVE_GROUP';
+export const REMOVE_VALUE = 'REMOVE_VALUE';
+export const REMOVE_SCALE = 'REMOVE_SCALE';
 export const REMOVE_SERIES = 'REMOVE_SERIES';
-export const REMOVE_IGNORE = 'REMOVE_IGNORE';
+export const REMOVE_FACET = 'REMOVE_FACET';
 export const REMOVE_ANNOTATIONS = 'REMOVE_ANNOTATIONS';
+export const REMOVE_IGNORE = 'REMOVE_IGNORE';
 
 export const RESET_DATAMAP = 'RESET_DATAMAP';
 
@@ -27,7 +32,8 @@ export const SET_COLOR_SCHEME = 'SET_COLOR_SCHEME';
 export const SET_COLOR = 'SET_COLOR';
 export const UNSET_COLOR = 'UNSET_COLOR';
 export const RESET_COLOR = 'RESET_COLOR';
-export const COLOR_BY_GROUP = 'COLOR_BY_GROUP';
+export const COLOR_BY_FACET = 'COLOR_BY_FACET';
+export const IGNORE_SCALE = 'IGNORE_SCALE';
 export const SET_QUANTIZE = 'SET_QUANTIZE';
 export const UNSET_QUANTIZE = 'UNSET_QUANTIZE';
 export const SET_QUANTIZE_COLUMN = 'SET_QUANTIZE_COLUMN';

@@ -7,6 +7,7 @@ import ellipsize from 'ellipsize';
 import ColorPicker from './ColorPicker';
 import ColorScheme from './ColorScheme';
 import BaseTypePicker from './BaseTypePicker';
+import Quantizer from './Quantizer';
 
 export default React.createClass({
 
@@ -33,8 +34,8 @@ export default React.createClass({
             _.keys(nextProps.werk.data[0]).sort() // New props
         )
     ) {
-      if (this.props.werk.axes.color.byGroup) {
-        this.props.actions.colorByGroup();
+      if (this.props.werk.axes.color.byFacet) {
+        this.props.actions.colorByFacet();
       }
       actions.resetDatamap();
       actions.resetColor();
@@ -49,14 +50,22 @@ export default React.createClass({
     const datamap = this.props.werk.datamap;
     const opts = [
       { value: 'base', label: 'base axis', disabled: false },
-      { value: 'series', label: 'data series' },
-      { value: 'group', label: 'grouping column', disabled: false },
+      { value: 'value', label: 'value axis', disabled: false },
+      { value: 'scale', label: 'scale axis', disabled: false },
+      { value: 'series', label: 'data series', disabled: false },
+      { value: 'facet', label: 'faceting column', disabled: false },
       { value: 'annotation', label: 'annotation column' },
       { value: 'ignore', label: 'ignored column' },
     ];
 
     opts[0].disabled = datamap.base;
-    opts[2].disabled = datamap.group;
+    opts[1].disabled = datamap.value;
+    opts[2].disabled = datamap.scale;
+    // Data series are mutually exclusive with value and scale axis
+    if (datamap.series.length > 0) {
+      opts.splice(1, 2);
+    }
+    opts[3].disabled = datamap.value;
 
     return opts;
   },
@@ -78,16 +87,20 @@ export default React.createClass({
       case 'base':
         actions.removeBase();
         break;
-      case 'group':
-        actions.removeGroup();
+      case 'value':
+        actions.removeValue();
+        actions.unsetColor(column);
+        break;
+      case 'scale':
+        actions.removeScale();
         actions.resetColor();
-        if (this.props.werk.axes.color.byGroup) {
-          actions.colorByGroup();
-        }
         break;
       case 'series':
         actions.removeSeries(column);
         actions.unsetColor(column);
+        break;
+      case 'facet':
+        actions.removeFacet();
         break;
       case 'annotation':
         actions.removeAnnotations(column);
@@ -106,11 +119,19 @@ export default React.createClass({
       case 'base':
         actions.addBase(column);
         break;
-      case 'group':
-        actions.addGroup(column);
+      case 'value':
+        actions.addValue(column);
+        break;
+      case 'scale':
+        actions.addScale(column);
+        actions.resetColor();
+        this.scaleSniffer(column);
         break;
       case 'series':
         actions.addSeries(column);
+        break;
+      case 'facet':
+        actions.addFacet(column);
         break;
       case 'annotation':
         actions.addAnnotations(column);
@@ -132,25 +153,71 @@ export default React.createClass({
     const datamap = this.props.werk.datamap;
 
     if (datamap.base === column) { return 'base'; }
-    if (datamap.group === column) { return 'group'; }
-    if (datamap.annotations.indexOf(column) > -1) { return 'annotation'; }
+    if (datamap.value === column) { return 'value'; }
+    if (datamap.scale === column) { return 'scale'; }
     if (datamap.series.indexOf(column) > -1) { return 'series'; }
+    if (datamap.facet === column) { return 'facet'; }
+    if (datamap.annotations.indexOf(column) > -1) { return 'annotation'; }
     if (datamap.ignore.indexOf(column) > -1) { return 'ignore'; }
 
     return null;
   },
 
-  colorGroupSwitch() {
-    if (this.props.werk.axes.color.byGroup) {
+  /**
+   * Returns data attributes for Quantizer props.
+   * @return {Obj} Object with series and extent properties.
+   */
+  getQuantizeData() {
+    const werk = this.props.werk;
+    const series = _.map(werk.data, werk.axes.color.quantizeProps.column);
+    const extent = [
+      _.min(series),
+      _.max(series),
+    ];
+    return {
+      series,
+      extent,
+    };
+  },
+
+  /**
+   * Sniffs whether scale axis column is numeric or categorical
+   * and sets quantize state accordingly.
+   * @return {null}
+   */
+  scaleSniffer(scaleColumn) {
+    const werk = this.props.werk;
+    const actions = this.props.actions;
+
+    const scaleArray = werk.data.map((d) => d[scaleColumn]);
+    if (!scaleArray.some(isNaN)) {
+      actions.setQuantizeColumn(scaleColumn);
+      actions.setQuantize();
+    } else {
+      actions.unsetQuantize();
+    }
+  },
+
+  colorFacetSwitch() {
+    if (this.props.werk.axes.color.byFacet) {
       this.props.actions.resetColor();
     }
-    this.props.actions.colorByGroup();
+    this.props.actions.colorByFacet();
+  },
+
+  changeIgnoreScale() {
+    this.props.actions.resetColor();
+    this.props.actions.setIgnoreScale();
   },
 
   groupColors() {
+    console.log('Group colors!');
     const werk = this.props.werk;
-    const column = werk.datamap.group;
-    const groups = _.sortedUniq(werk.data.map((datum) => datum[column]));
+    const column = werk.datamap.scale && !werk.axes.color.quantize ?
+      werk.datamap.scale : werk.datamap.facet;
+    const groups = _.uniq(werk.data.map((datum) => datum[column]));
+    groups.sort();
+    console.log('GROUPS!', groups);
 
     if (groups.length > 8) {
       return (
@@ -179,7 +246,7 @@ export default React.createClass({
 
     return (
       <div>
-        <h4>Groups</h4>
+        <h4>Color scale groups</h4>
         <table id="group-selects">
           <tbody>{selects}</tbody>
         </table>
@@ -194,6 +261,7 @@ export default React.createClass({
 
   render() {
     const werk = this.props.werk;
+    const actions = this.props.actions;
 
     const modalStyles = {
       overlay: {
@@ -217,30 +285,56 @@ export default React.createClass({
       let article = 'a';
 
       switch (this.traverseDatamap(column)) {
-        case 'series':
-          addOption = !this.props.werk.axes.color.byGroup &&
-            !this.props.werk.axes.color.quantize ?
+        case 'value':
+          /**
+           * If there's not a scale axis or the scale axis is explicitly
+           * ignored for color, give a color picker on the value axis.
+           */
+          addOption = !werk.datamap.scale ||
+            werk.axes.color.ignoreScale ?
             <ColorPicker
               column={column}
-              werk={this.props.werk}
-              actions={this.props.actions}
+              werk={werk}
+              actions={actions}
+            /> : null;
+          break;
+        case 'series':
+          addOption = !werk.axes.color.byFacet &&
+            !werk.axes.color.quantize ?
+            <ColorPicker
+              column={column}
+              werk={werk}
+              actions={actions}
             />
             : null;
           break;
-        case 'group':
+        case 'facet':
           addOption = (
             <label>
-              <input type="checkbox" value="" onChange={this.colorGroupSwitch} />
+              <input type="checkbox" value="" onChange={this.colorFacetSwitch} />
               <i className="fa fa-square-o"></i>
-              <i className="fa fa-check-square-o"></i> Color by groups?
+              <i className="fa fa-check-square-o"></i> Color by facet?
+            </label>
+          );
+          break;
+        case 'scale':
+          addOption = (
+            <label>
+              <input
+                type="checkbox"
+                onChange={() => this.changeIgnoreScale()}
+                checked={werk.axes.color.ignoreScale}
+              />
+              <i className="fa fa-square-o"></i>
+              <i className="fa fa-check-square-o"></i> Scale by size, not color?
             </label>
           );
           break;
         case 'base':
           addOption = (
             <BaseTypePicker
-              werk={this.props.werk}
-              actions={this.props.actions}
+              werk={werk}
+              actions={actions}
             />
           );
           break;
@@ -261,7 +355,7 @@ export default React.createClass({
                 onChange={this.changeValue.bind(this, column)}
                 searchable={false}
                 placeholder="Choose one"
-                clearable={false}
+                clearable
               />
               {addOption}
             </p>
@@ -270,15 +364,33 @@ export default React.createClass({
       );
     });
 
-    const groups = this.props.werk.axes.color.byGroup ? this.groupColors() : null;
+    /**
+     * If we're coloring by facets OR there's a scale axis that is neither
+     * quantized nor ignored, give group color pickers.
+     */
+    const groups = werk.axes.color.byFacet ||
+      (
+        werk.datamap.scale &&
+        !werk.axes.color.quantize &&
+        !werk.axes.color.ignoreScale
+      ) ?
+      this.groupColors() : null;
 
+    const quantizer = werk.axes.color.quantize ?
+    (<Quantizer
+      werk={this.props.werk}
+      actions={this.props.actions}
+      data={this.getQuantizeData()}
+    />) : null;
 
     return (
       <div>
         <hr />
         <div id="classify-container">
           <h4>Describe the columns in your data
-            <a id="data-help-prompt" onClick={() => this.setState({ helpModal: true })}>Need help?</a>
+            <a id="data-help-prompt"
+              onClick={() => this.setState({ helpModal: true })}
+            >Need help?</a>
           </h4>
           <table id="classify-selects">
             <tbody>
@@ -287,9 +399,10 @@ export default React.createClass({
           </table>
         </div>
         {groups}
+        {quantizer}
 
 
-        <ColorScheme werk={this.props.werk} actions={this.props.actions} />
+        <ColorScheme werk={werk} actions={actions} />
 
         <div className="guidepost">
           <h4>

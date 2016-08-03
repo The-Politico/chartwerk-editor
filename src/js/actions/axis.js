@@ -19,8 +19,12 @@ export const setColorScheme = path => ({
   path,
 });
 
-export const colorByGroup = () => ({
-  type: types.COLOR_BY_GROUP,
+export const colorByFacet = () => ({
+  type: types.COLOR_BY_FACET,
+});
+
+export const setIgnoreScale = () => ({
+  type: types.IGNORE_SCALE,
 });
 
 export const setQuantize = () => ({
