@@ -43,7 +43,7 @@ export default React.createClass({
   },
 
   /**
-   * Select component options. Conditional for base and group classifications.
+   * Select dropdown options.
    * @returns {array}     Array of options.
    */
   setOptions() {
@@ -61,6 +61,7 @@ export default React.createClass({
     opts[0].disabled = datamap.base;
     opts[1].disabled = datamap.value;
     opts[2].disabled = datamap.scale;
+    opts[4].disabled = datamap.facet;
     // Data series are mutually exclusive with value and scale axis
     if (datamap.series.length > 0) {
       opts.splice(1, 2);
@@ -206,18 +207,28 @@ export default React.createClass({
   },
 
   changeIgnoreScale() {
-    this.props.actions.resetColor();
-    this.props.actions.setIgnoreScale();
+    const werk = this.props.werk;
+    const actions = this.props.actions;
+
+    actions.resetColor();
+    /**
+     * If scale axis currently ignored, run the scale sniffer to reset quantized
+     * or categorical color scale. Otherwise, remove the quantize flag.
+     */
+    if (werk.axes.color.ignoreScale) {
+      this.scaleSniffer(werk.datamap.scale);
+    } else {
+      actions.unsetQuantize();
+    }
+    actions.setIgnoreScale();
   },
 
   groupColors() {
-    console.log('Group colors!');
     const werk = this.props.werk;
     const column = werk.datamap.scale && !werk.axes.color.quantize ?
       werk.datamap.scale : werk.datamap.facet;
     const groups = _.uniq(werk.data.map((datum) => datum[column]));
     groups.sort();
-    console.log('GROUPS!', groups);
 
     if (groups.length > 8) {
       return (
@@ -422,27 +433,45 @@ export default React.createClass({
           <div id="data-help-modal-content">
             <p>Describing your data columns tells ChartWerk how to translate your data
               into the chart features they are meant to represent.
-              To do that, you can use a very simple grammar,
-              consisting of five types:
+              To do that, you can use a very simple grammar:
             </p>
             <h4>Base axis</h4>
-            <p>A column classified as a base axis contains data like
+            <p>A column classified as a base axis often contains data like
               dates or categorical values. These are values <em>by
               which</em> numeric data are charted. Stock prices <em>by day</em>.
-              Mortality rates <em>by state</em>. Units produced <em>by company</em>.
-              For scatterplots, the base axis contains the numeric data plotted
-              along the X axis.
+              Mortality rates <em>by state</em>. For scatterplots, the base axis
+              will contain numeric data plotted along the X axis.
+            </p>
+            <h4>Value axis</h4>
+            <p>
+              A single column, always of naked numeric data, used to position data
+              points on the chart.
+            </p>
+            <h4>Scale axis</h4>
+            <p>
+              A single column of numeric or categorical data used to set the
+              size or color of data points.
             </p>
             <h4>Data series</h4>
-            <p>Data series columns always contain naked numeric data. Remember no
-              text annotations like dollar signs or percent symbols should be in
-              this data.
+            <p>
+              Often you structure your data such that a column represents
+              both the position and color of data points. These data are in the form
+              of a crosstab, where each column is a subgroup, or series, of the
+              same data. For example, a column of stock prices for Company A and
+              another for Company B. In this way, data series columns are a
+              shortcut for a value axis and categorical scale axis (mutually
+              exclusive options).
             </p>
-            <h4>Grouping column</h4>
-            <p>A grouping column always contains categorical data used to group your data
-            into subgroups or to create small-multiple or faceted charts. For example,
-            in a grouped bar chart with quarterly returns for several companies, the
-            column with the company names is used to group the data together.</p>
+            <p>
+              Data series always contain naked numeric data, and each column
+              represents a categorical color.
+            </p>
+            <h4>Faceting column</h4>
+            <p>
+              Faceting columns always contain categorical data used to create
+              subgroups of data that are drawn in faceted, or small-multiple,
+              charts.
+            </p>
             <h4>Annotation column</h4>
             <p>Some charts allow you to include a column of annotations used in
             tooltips or other labels for each data point.</p>

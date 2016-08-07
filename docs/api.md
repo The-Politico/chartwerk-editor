@@ -15,7 +15,7 @@ There are six ways to classify a data column:
 
 A column classified as a base axis most often contains data like time series dates or categorical values. These are values _by which_ numeric data are charted. Mortality rates _by occupation_. Stock prices _by company_.
 
-The base axis corresponds to the traditional X axis in the case of horizontal line and bar charts. It can also represent a column of state names used to chart data in a choropleth map.
+The base axis corresponds to the traditional X axis in the case of horizontal line and bar charts. It can also represent a column of state names used to chart data in a choropleth map or also a column of numeric values plotted along the X axis of a scatterplot.
 
 ### Value axis
 
@@ -65,7 +65,7 @@ In the crosstab, the `Male` and `Female` columns will represent both a color and
 
 ### Faceting column
 
-Faceting columns are always categorical data used to create sub-groups of data that are drawn in facets of charts.
+Faceting columns are always categorical data used to create sub-groups of data that are drawn as faceted of charts.
 
 ### Annotation column
 

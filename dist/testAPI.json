@@ -1,85 +1,80 @@
 {
 	"datamap": {
-		"base": "Date",
-		"group": null,
-		"series": [
-			"CBM",
-			"GPS"
-		],
+		"base": "base_ex",
+		"value": "value_ex",
+		"scale": "scale_ex",
+		"series": [],
+		"facet": null,
 		"annotations": [],
 		"ignore": []
 	},
 	"data": [
 		{
-			"Date": "2015-08-24",
-			"CBM": 45.47,
-			"GPS": 32.84
+			"base_ex": 23,
+			"value_ex": 12,
+			"scale_ex": 123
 		},
 		{
-			"Date": "2015-08-17",
-			"CBM": 45.14,
-			"GPS": 32.19
+			"base_ex": 24,
+			"value_ex": 13,
+			"scale_ex": 221
 		},
 		{
-			"Date": "2015-08-10",
-			"CBM": 49.05,
-			"GPS": 34.23
+			"base_ex": 25,
+			"value_ex": 14,
+			"scale_ex": 125
 		},
 		{
-			"Date": "2015-08-03",
-			"CBM": 50.32,
-			"GPS": 34.89
+			"base_ex": 26,
+			"value_ex": 15,
+			"scale_ex": 311
 		},
 		{
-			"Date": "2015-07-27",
-			"CBM": 49.25,
-			"GPS": 36.48
+			"base_ex": 27,
+			"value_ex": 16,
+			"scale_ex": 167
 		},
 		{
-			"Date": "2015-07-20",
-			"CBM": 48.91,
-			"GPS": 35.98
+			"base_ex": 28,
+			"value_ex": 17,
+			"scale_ex": 210
 		},
 		{
-			"Date": "2015-07-13",
-			"CBM": 49.04,
-			"GPS": 37.64
+			"base_ex": 29,
+			"value_ex": 18,
+			"scale_ex": 194
 		},
 		{
-			"Date": "2015-07-06",
-			"CBM": 45.61,
-			"GPS": 37.58
+			"base_ex": 30,
+			"value_ex": 19,
+			"scale_ex": 130
 		}
 	],
 	"axes": {
 		"color": {
 			"domain": [
-				45.47,
-				45.61,
-				48.91,
-				49.05,
-				49.25
+				170,
+				217,
+				264
 			],
 			"range": [
 				"#08306b",
-				"#155ea6",
-				"#3c8bc3",
-				"#76b4d8",
-				"#b6d4e9",
+				"#2e7cbb",
+				"#8ec1dd",
 				"#deebf7"
 			],
 			"scheme": "sequential.blue",
-			"byGroup": false,
+			"byFacet": false,
+			"ignoreScale": false,
 			"quantize": true,
 			"quantizeProps": {
-				"column": "CBM",
-				"groups": 6,
-				"reverseColors": true
+				"column": "scale_ex",
+				"groups": 4,
+				"reverseColors": false
 			}
 		},
 		"base": {
 			"type": "date",
-			"dateFormat": "%Y-%m-%d",
 			"min": null,
 			"max": null,
 			"label": "",
@@ -98,7 +93,8 @@
 					"ticks": 7,
 					"customTicks": []
 				}
-			}
+			},
+			"shadedRegions": []
 		},
 		"value": {
 			"min": null,
@@ -115,7 +111,8 @@
 					"ticks": 7,
 					"customTicks": []
 				}
-			}
+			},
+			"shadedRegions": []
 		}
 	},
 	"margins": {
@@ -161,7 +158,49 @@
 				"text": "This is the other point.",
 				"color": "#2d3035"
 			}
-		]
+		],
+		"legend": {
+			"active": true,
+			"keys": [
+				{
+					"text": "123",
+					"color": "#08306b"
+				},
+				{
+					"text": "170",
+					"color": "#2e7cbb"
+				},
+				{
+					"text": "217",
+					"color": "#8ec1dd"
+				},
+				{
+					"text": "264",
+					"color": "#deebf7"
+				}
+			],
+			"title": "",
+			"single": {
+				"inside": false,
+				"align": "l",
+				"background": true,
+				"width": 250,
+				"position": {
+					"x": 10,
+					"y": 10
+				}
+			},
+			"double": {
+				"inside": false,
+				"align": "l",
+				"background": true,
+				"width": 500,
+				"position": {
+					"x": 10,
+					"y": 10
+				}
+			}
+		}
 	},
 	"scripts": {
 		"draw": "function draw(){\n    \n    var werk = window.chartWerk;\n    \n\tvar svg = d3.select(\"#chart\")\n\t    .append(\"svg\")\n\t    .attr({\n\t        \"width\": werk.ui.size === 'single' ? 290 : 600,\n\t        \"height\": 300\n\t    })\n\t    .style({\n\t        \"background\": \"pink\"\n\t    });\n\t\n\twerkHelper.dataX.map(function(d, i){\n\t    svg.append(\"rect\")\n\t        .attr({\n\t            x: d,\n\t            y: werkHelper.dataY[i],\n\t            width: 40,\n\t            height: 40\n\t        })\n\t        .style({\n\t            fill: \"rgb(110,140,250)\"\n\t        });\n\t})\n}",
@@ -178,7 +217,7 @@
 		}
 	},
 	"ui": {
-		"rawData": "Date\tCBM\tGPS\n2015-08-24\t45.47\t32.84\n2015-08-17\t45.14\t32.19\n2015-08-10\t49.05\t34.23\n2015-08-03\t50.32\t34.89\n2015-07-27\t49.25\t36.48\n2015-07-20\t48.91\t35.98\n2015-07-13\t49.04\t37.64\n2015-07-06\t45.61\t37.58\n",
+		"rawData": "base_ex\tvalue_ex\tscale_ex\n23\t12\t123\n24\t13\t221\n25\t14\t125\n26\t15\t311\n27\t16\t167\n28\t17\t210\n29\t18\t194\n30\t19\t130\n",
 		"size": "single"
 	}
 }

@@ -32,6 +32,13 @@ export default React.createClass({
 
   renderLegend() {
     const werk = this.props.werk;
+
+    if (werk.axes.color.ignoreScale) {
+      $('#chart-legend').empty();
+      $('#chart .chart-legend-container').remove();
+      return null;
+    }
+
     const display = werk.text.legend[werk.ui.size];
     const background = display.background ? 'bg' : '';
     const align = display.align;
@@ -195,7 +202,7 @@ export default React.createClass({
   render() {
     const werk = this.props.werk;
 
-    if (werk.axes.color.range.length < 2) {
+    if (werk.axes.color.range.length < 2 || werk.axes.color.ignoreScale) {
       return null;
     }
     return (
