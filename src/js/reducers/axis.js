@@ -109,7 +109,7 @@ export default (axis, action) => {
       nextState.color.domain = action.domain;
       break;
     case types.SET_QUANTIZE_RANGE:
-      nextState.color.range = action.range;
+      nextState.color.range = action.range.slice();
       break;
     case types.SET_QUANTIZE_GROUPS:
       nextState.color.quantizeProps.groups = action.groups;

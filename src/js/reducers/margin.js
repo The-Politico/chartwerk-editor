@@ -30,7 +30,7 @@ export default (margins, action) => {
     return initialState;
   }
 
-  let nextState = assign({},margins);
+  let nextState = assign({}, margins);
 
   switch (action.type) {
     case types.API_MARGINS:

@@ -327,9 +327,10 @@ module.exports = React.createClass({
    */
   reverseColor() {
     const actions = this.props.actions;
-    const quantizeProps = this.props.werk.axes.color.quantizeProps;
 
     actions.setQuantizeReverse();
+
+    const quantizeProps = this.props.werk.axes.color.quantizeProps;
 
     actions.setQuantizeRange(
       this.equidistantColors(quantizeProps.groups)

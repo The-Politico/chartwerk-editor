@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToStaticMarkup as staticRender } from 'react-dom/server';
 import $ from 'jquery';
-import Keys from './Keys';
+import Keys from './LegendKeys';
 import marked from './../../misc/utils';
 import LegendDisplay from './LegendDisplay';
 import _ from 'lodash';
@@ -114,6 +114,7 @@ export default React.createClass({
 
     this.resizeLegend();
     this.moveLegend();
+    return null;
   },
 
 
