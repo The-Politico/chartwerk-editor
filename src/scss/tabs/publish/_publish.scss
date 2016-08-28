@@ -1,0 +1,89 @@
+#publish{
+
+  h4{
+    margin-top:20px;
+  }
+
+  input{
+    font-size: 26px;
+    line-height: 36px;
+    border: 0;
+    border-bottom: 1px dotted $grey;
+    background: none;
+    box-shadow: none;
+    outline: none;
+    color: $grey;
+    padding: 5px 5px 0px;
+    height: auto;
+    margin-bottom: 30px;
+  }
+
+  #chart-save-alerts{
+    padding:5px 0;
+    width:100%;
+  }
+
+  .react-toggle svg{
+    display:block;
+  }
+
+  .section-option{
+    margin-top: 5px;
+    font-weight: normal;
+    font-size: 14px;
+    border: 0;
+  }
+
+  .fifty-fifty{
+    width:50%;
+    display:inline-block;
+    text-align:center;
+    float:left;
+  }
+}
+
+.btn-huge{
+  font-size: 26px;
+  margin: 20px auto 30px;
+  display: block;
+  transition:color .2s;
+
+  &:hover{
+    color:$green;
+    &:disabled {
+      color: $grey;
+    }
+  }
+
+  &:focus{
+    outline: none;
+  }
+
+}
+
+
+.template-tag-option{
+  display: inline-block;
+  border: 1px solid $lightgrey;
+  color: $lightgrey;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 2px;
+  transition: all .2s;
+  &:hover{
+    border:1px solid $green;
+    color:green;
+  }
+  &.active{
+    border:1px solid $green;
+    color:$green;
+    &:hover{
+      border:1px solid $red;
+      color:$red;
+    }
+  }
+}
+
+.section.section-option.borderless{
+  border-bottom:0px;
+}

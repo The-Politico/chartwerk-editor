@@ -1,11 +1,12 @@
 {
-  "name": "chartwerkstatt",
+  "name": "chartwerk-editor",
   "version": "0.0.1",
   "description": "",
-  "main": "./src/js/app.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register --recursive",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "postinstall": "./bin/move_assets.js"
   },
   "babel": {
     "presets": [
@@ -70,8 +71,10 @@
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
+    "html2canvas": "^0.5.0-beta4",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.2",
+    "js-cookie": "^2.1.2",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.1.0",
     "leaflet": "^0.7.7",
@@ -87,6 +90,7 @@
     "react-modal": "^1.2.1",
     "react-redux": "^4.4.1",
     "react-select": "^1.0.0-beta13",
+    "react-simplemde-editor": "^3.3.0",
     "react-toggle": "^2.1.0",
     "react-toggle-switch": "^2.0.0",
     "react-typeahead": "^2.0.0-alpha.5",
@@ -99,6 +103,7 @@
     "to-markdown": "^3.0.0",
     "typed.js": "^1.1.1",
     "underscore": "^1.8.3",
+    "url-join": "^1.1.0",
     "validator": "^5.5.0",
     "velocity-react": "^1.1.4",
     "vinyl-buffer": "^1.0.0",
@@ -107,6 +112,8 @@
     "zeroclipboard": "^2.2.0"
   },
   "dependencies": {
-    "brace": "^0.8.0"
+    "brace": "^0.8.0",
+    "inquirer": "^1.1.2",
+    "vinyl-fs": "^2.4.3"
   }
 }

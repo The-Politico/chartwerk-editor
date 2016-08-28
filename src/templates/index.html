@@ -1,22 +1,51 @@
 {% extends "base.html" %}
 
 {%block custom_head%}
+<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/css/vendor.css" media="screen" title="no title" charset="utf-8">
 <link rel="stylesheet" href="/css/main.css" media="screen" title="no title" charset="utf-8">
 {%endblock%}
 
 {%block custom_js%}
+<script type="text/javascript">
+  window.chartwerkConfig = {
+    staticPrefix: '',
+    chart_api: '.',
+    chart_id: 'testAPI.json',
+    template_api: '.',
+    template_id: 'testAPI.json',
+    template_tags_api: './testTemplateAPI.json',
+  };
+</script>
 <script type="text/javascript" src="/js/vendor.js"></script>
 <script type="text/javascript" src="/js/bundle.js"></script>
 {%endblock%}
 
 {%block content%}
 
+<div class="header">
+    <img src="img/tdmn.png">
+    <h1>
+        <a href="">ChartWerk</a>
+        <span class="header-nav">
+            <a href="">Start</a>
+            <a href="">Browse</a>
+            <a href="">MyWerk</a>
+        </span>
+    </h1>
+</div>
+
 <div id="chartwerk-app" class="clearfix"></div>
 
 {%endblock%}
 
 {%block modals%}
-{% include "partials/modals/loading.html" %}
+
+<div id="loading-modal">
+    <div class="loading-overlay"></div>
+    <div class="loading-text"><span>Loading</span><img src="img/loader.gif"></div>
+</div>
+
 {% include "partials/modals/data-preview.html" %}
 {%endblock%}

@@ -153,3 +153,8 @@ export const changeLegendWidth = (size, width) => ({
   size,
   width,
 });
+
+export const setChartTitle = (title) => ({
+  type: types.SET_CHART_TITLE,
+  title,
+});

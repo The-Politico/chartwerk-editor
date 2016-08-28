@@ -25,6 +25,7 @@ export default (texts, action) => {
     footnote: '',
     source: '',
     author: '',
+    title: '',
     annotations: [],
     legend: {
       active: false,
@@ -76,6 +77,9 @@ export default (texts, action) => {
       break;
     case types.SET_AUTHOR:
       nextState.author = action.author;
+      break;
+    case types.SET_CHART_TITLE:
+      nextState.title = action.title;
       break;
     case types.ADD_ANNOTATION:
       nextState.annotations.push(action.annotation);

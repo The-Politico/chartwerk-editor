@@ -34,6 +34,7 @@ module.exports = React.createClass({
     switch (type) {
       case 'head':
         actions.setHeadline(e.target.value);
+        actions.setChartTitle(e.target.value);
         $('#chartWerk #headline').html(
           marked.inlineLexer(e.target.value, [])
         );
@@ -106,7 +107,8 @@ module.exports = React.createClass({
 
   changeTab(e) {
     e.preventDefault();
-    $('a[href="#publish"]').tab('show');
+    $('a[href="#annotations"]').tab('show');
+    $('#editor-pane').animate({ scrollTop: 0 }, 300);
   },
 
   render() {
@@ -197,7 +199,7 @@ module.exports = React.createClass({
         <div className="guidepost">
           <h4>
             <a onClick={this.changeTab} href="">
-              <b>Next:</b> Ready to publish?
+              <b>Next:</b> Annotations
               <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
             </a>
           </h4>

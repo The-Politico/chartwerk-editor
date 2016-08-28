@@ -384,17 +384,17 @@ export default React.createClass({
           <label>Size</label>
           <img
             onClick={this.switchOpts.bind(this,'single')} // eslint-disable-line
-            src="img/icons/singleColumn.png"
-            title="Single column"
+            src={`${window.chartwerkConfig.staticPrefix}img/icons/singleColumn.png`}
+            title="Single-wide"
             className={this.activeClass('single')}
-            alt="Single column"
+            alt="Single-wide"
           />
           <img
             onClick={this.switchOpts.bind(this,'double')} // eslint-disable-line
-            src="img/icons/doubleColumn.png"
-            title="Double column"
+            src={`${window.chartwerkConfig.staticPrefix}img/icons/doubleColumn.png`}
+            title="Double-wide"
             className={this.activeClass('double')}
-            alt="Double column"
+            alt="Double-wide"
           />
         </div>
         <div className={this.disabledClass('single')} >

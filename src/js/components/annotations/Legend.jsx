@@ -85,7 +85,7 @@ export default React.createClass({
 
     const legend = (
       <div
-        className={`chart-legend-container ${align} ${background}`}
+        className={`chart-legend-container clearfix ${align} ${background}`}
         style={legendStyles}
       >
         <div className="title">

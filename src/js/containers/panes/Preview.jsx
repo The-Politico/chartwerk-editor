@@ -34,7 +34,7 @@ module.exports = React.createClass({
         <p>
           Pictures of Goats section #twittermakesyoustupid, curation Nook
           newspaper strike gotta grok it before you rock it newsonomics
-          copyright bot paidContent, hot news doctrine media diet audience
+          copyright bot paidContent, Wilonsky hot news doctrine media diet audience
           atomization overcome iPhone app filters horse-race coverage Gutenberg
           parenthesis. Josh Marshall just across the wire the audience knows
           more than I do social media Romenesko open source Sulzberger

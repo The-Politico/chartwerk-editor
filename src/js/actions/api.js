@@ -9,15 +9,21 @@ import * as axisActions from './axis';
 import * as marginActions from './margin';
 import * as scriptActions from './script';
 import * as textActions from './text';
+import * as templateActions from './template';
 
 
 export function fetchWerk() {
-  return dispatch => fetch(locations.werk)
+  const endpoint = window.chartwerkConfig.chart_id !== '' ?
+    locations.chart : locations.template;
+  console.log('API FETCH', endpoint);
+  return dispatch => fetch(endpoint)
     .then(
       response => response.json()
     )
     .then(
-      data => {
+      response => {
+        console.log('API RESPONSE', response);
+        const data = response.data;
         // Dispatch API actions for data props
         if (data.data) {
           dispatch(dataActions.apiData(data.data));
@@ -39,6 +45,9 @@ export function fetchWerk() {
         }
         if (data.text) {
           dispatch(textActions.apiText(data.text));
+        }
+        if (data.template) {
+          dispatch(templateActions.apiTemplate(data.template));
         }
       }
     )

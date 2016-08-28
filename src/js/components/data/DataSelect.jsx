@@ -268,6 +268,7 @@ export default React.createClass({
   changeTab(e) {
     e.preventDefault();
     $('a[href="#axes"]').tab('show');
+    $('#editor-pane').animate({ scrollTop: 0 }, 300);
   },
 
   render() {

@@ -24,13 +24,13 @@ export default React.createClass({
           type="radio" checked={this.getChecked('single')}
         />
         <label htmlFor="size-mobile" onClick={() => this.changeSize('single')}>
-          Single Column
+          Single-wide
         </label>
         <input id="size-desktop" className="rebuild" name="size-select"
           type="radio" checked={this.getChecked('double')}
         />
         <label htmlFor="size-desktop" onClick={() => this.changeSize('double')}>
-          Double Column
+          Double-wide
         </label>
         <a></a>
       </div>

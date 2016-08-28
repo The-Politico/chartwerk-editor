@@ -1,5 +1,6 @@
 import React from 'react';
 import MarginViz from './MarginViz';
+import $ from 'jquery';
 
 export default React.createClass({
 
@@ -110,6 +111,7 @@ export default React.createClass({
   changeTab(e) {
     e.preventDefault();
     $('a[href="#text"]').tab('show');
+    $('#editor-pane').animate({ scrollTop: 0 }, 300);
   },
 
   render() {
@@ -125,17 +127,17 @@ export default React.createClass({
           <label>Size</label>
           <img
             onClick={this.switchOpts.bind(this, 'single')}
-            src="img/icons/singleColumn.png"
-            title="Single column"
+            src={`${window.chartwerkConfig.staticPrefix}img/icons/singleColumn.png`}
+            title="Single-wide"
             className={this.activeClass('single')}
-            alt="Single column"
+            alt="Single-wide"
           />
           <img
             onClick={this.switchOpts.bind(this, 'double')}
-            src="img/icons/doubleColumn.png"
-            title="Double column"
+            src={`${window.chartwerkConfig.staticPrefix}img/icons/doubleColumn.png`}
+            title="Double-wide"
             className={this.activeClass('double')}
-            alt="Double column"
+            alt="Double-wide"
           />
         </div>
         <div>

@@ -178,24 +178,24 @@ export default React.createClass({
       <div key={i} id={`annotation-editor-${i}`} className="annotation-editor">
         <div className="form-group size-switch">
           <img
-            src="img/icons/singleColumn.png"
-            title="Single column"
+            src={`${window.chartwerkConfig.staticPrefix}img/icons/singleColumn.png`}
+            title="Single-wide"
             className={d.size === 's' ? 'active' : 'inactive'}
             onClick={() => {
               actions.changeAnnotationSize(i, 's');
               this.focusNote(i);
             }}
-            alt="Single column"
+            alt="Single-wide"
           />
           <img
-            src="img/icons/doubleColumn.png"
-            title="Double column"
+            src={`${window.chartwerkConfig.staticPrefix}img/icons/doubleColumn.png`}
+            title="Double-wide"
             className={d.size === 'd' ? 'active' : 'inactive'}
             onClick={() => {
               actions.changeAnnotationSize(i, 'd');
               this.focusNote(i);
             }}
-            alt="Double column"
+            alt="Double-wide"
           />
         </div>
         <div>

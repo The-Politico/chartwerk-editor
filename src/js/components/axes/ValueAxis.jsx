@@ -14,13 +14,15 @@ export default React.createClass({
   changeTab(e) {
     e.preventDefault();
     $('a[href="#layout"]').tab('show');
+    $('#editor-pane').animate({ scrollTop: 0 }, 300);
   },
 
   render() {
-    if (this.props.werk.datamap.series < 1) {
+    if (this.props.werk.datamap.series < 1 &&
+      !this.props.werk.datamap.value) {
       return (
         <div>
-          <h4>Waiting for a data series from the Data tab.</h4>
+          <h4>Waiting for a value axis or data series from the Data tab.</h4>
         </div>
       );
     }
