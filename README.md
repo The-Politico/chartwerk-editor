@@ -1,8 +1,10 @@
-# ChartWerkstatt
+# chartwerk-editor
 
-The chart Werkstatt (studio) is a react.js-based live editor for ChartWerk charts.
+A React/Redux live editor for Chartwerk charts.
 
-### Setup
-- Clone this repository
-- Run `npm install` and `bower install`
-- Run `gulp` and begin developing in `src`
+## Documentation
+
+- [datamap API](docs/datamap)
+- [legends](docs/legends)
+- [annotations](docs/annotations)
+- [scripts](docs/scripts)

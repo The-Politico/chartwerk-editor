@@ -1,7 +1,7 @@
-# Werk API
+# datamap API
 
 
-Because of the many types of data schema ChartWerk has to ingest while creating charts it's necessary to abstractly represent the relationship between schema and chart.
+Because of the many types of data schema Chartwerk has to ingest while creating charts it's necessary to abstractly represent the relationship between schema and chart.
 
 Most common representations of that relationship don't span the gap between these two domains. For example, using a mapping between data columns and traditional X and Y axes is tied too closely to the hard rules of a chart's coordinate plane. What happens when we want to use the same logic in terms of X & Y axes to draw both a horizontal and a vertical bar chart?
 
@@ -71,7 +71,7 @@ Faceting columns are always categorical data used to create sub-groups of data t
 
 Annotations are text labels paired with data points.
 
-Users are also given the option to ignore a column in the data, in which case the column is not made available through the Werk API.
+Users are also given the option to ignore a column in the data, in which case the column is not made available through the datamap API.
 
 ## Examples of the grammar
 
