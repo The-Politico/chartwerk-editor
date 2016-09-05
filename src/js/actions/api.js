@@ -15,14 +15,12 @@ import * as templateActions from './template';
 export function fetchWerk() {
   const endpoint = window.chartwerkConfig.chart_id !== '' ?
     locations.chart : locations.template;
-  console.log('API FETCH', endpoint);
   return dispatch => fetch(endpoint)
     .then(
       response => response.json()
     )
     .then(
       response => {
-        console.log('API RESPONSE', response);
         const data = response.data;
         // Dispatch API actions for data props
         if (data.data) {

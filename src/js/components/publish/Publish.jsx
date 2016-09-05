@@ -6,7 +6,8 @@ import html2canvas from 'html2canvas';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 import urljoin from 'url-join';
-import SimpleMDE from 'react-simplemde-editor';
+import SimpleMDE from './MDEditor';
+import _ from 'lodash';
 
 
 export default React.createClass({
@@ -21,21 +22,100 @@ export default React.createClass({
       screenshotChatter: false,
       templateTags: [],
       newTemplate: false,
+      chartTitle: null,
+      templateTitle: null,
+      templateDescription: null,
     };
+  },
+
+  dispatchChartTitle() {
+    // Debounce pattern
+    this.props.actions.setChartTitle(this.state.chartTitle);
+  },
+
+  dispatchTemplateTitle() {
+    // Debounce pattern
+    this.props.actions.setTemplateTitle(this.state.templateTitle);
+  },
+
+  dispatchTemplateDescription() {
+    // Debounce pattern
+    this.props.actions.setTemplateDescription(this.state.templateDescription);
+  },
+
+  componentWillMount() {
+    this.dispatchChartTitle = _.debounce(this.dispatchChartTitle, 200);
+    this.dispatchTemplateDescription = _.debounce(this.dispatchTemplateDescription, 200);
+    this.dispatchTemplateTitle = _.debounce(this.dispatchTemplateTitle, 200);
+  },
+
+  componentWillReceiveProps(nextProps) {
+    // Update state only after returning initial data from the API.
+    // These depend on initial state being null for these props in reducer.
+    if (this.state.chartTitle === null) {
+      this.setState({
+        chartTitle: nextProps.werk.text.title,
+      });
+    }
+    if (this.state.templateTitle === null) {
+      this.setState({
+        templateTitle: nextProps.werk.template.title,
+      });
+    }
+    if (this.state.templateDescription === null) {
+      this.setState({
+        templateDescription: nextProps.werk.template.description,
+      });
+    }
+  },
+
+  shouldComponentUpdate(nextProps) {
+    // We prohibit the component from updating if all that's changing is
+    // the redux state because we are controlling inputs with local state.
+    const werk = this.props.werk;
+    if (nextProps.werk.text.title !== werk.text.title &&
+      this.state.chartTitle !== null) {
+      return false;
+    }
+    if (nextProps.werk.template.title !== werk.template.title &&
+      this.state.templateTitle !== null) {
+      return false;
+    }
+    if (nextProps.werk.template.description !== werk.template.description &&
+      this.state.templateDescription !== null) {
+      return false;
+    }
+    return true;
+  },
+
+  setChartTitle(value) {
+    // Immediately set state. Debounced dispatch.
+    this.setState({ chartTitle: value });
+    this.dispatchChartTitle();
+  },
+
+  setTemplateTitle(value) {
+    // Immediately set state. Debounced dispatch.
+    this.setState({ templateTitle: value });
+    this.dispatchTemplateTitle();
+  },
+
+  setTemplateDescription(value) {
+    // Immediately set state. Debounced dispatch.
+    this.setState({ templateDescription: value });
+    this.dispatchTemplateDescription();
   },
 
   componentDidMount() {
     // Get template tag options
     // Template tags are expected to be formated as objects like
     // {slug: 'some-tag', property: 'Some tag'}
-    console.log('TEMPLATE TAG API', locations.templateTag);
     fetch(locations.templateTag)
       .then(
         response => response.json()
       )
       .then(
         data => {
-          console.log('TEMPLATE TAG DATA', data);
           this.setState({ templateTags: data.map(d => ({
             slug: d.slug,
             property: d.property,
@@ -68,21 +148,28 @@ export default React.createClass({
       $('#save-chart-spinner').hide();
     }
 
-    // If updating an existing chart
-    if (window.chartwerkConfig.chart_id) {
+    function waiting() {
       $('#save-chart-check').hide();
       $('#save-chart-spinner').show();
+    }
+
+    const data = JSON.stringify({
+      title: this.props.werk.text.title,
+      data: this.props.werk,
+    });
+
+    // If updating an existing chart
+    if (window.chartwerkConfig.chart_id) {
+      waiting();
       $.ajax({
         url: locations.chart,
-        data: JSON.stringify({
-          title: this.props.werk.text.title,
-          data: this.props.werk,
-        }),
+        data,
         type: 'PATCH',
         contentType: 'application/json',
+        dataType: 'json',
       })
-      .done((data) => {
-        console.log('Successful save.', data);
+      .done((response) => {
+        console.log('Successful save.', response);
         reset();
         $('#chart-save-alerts .alert-success').slideDown();
         setTimeout(() => {
@@ -98,19 +185,16 @@ export default React.createClass({
       });
     // If creating a new chart
     } else {
-      $('#save-chart-check').hide();
-      $('#save-chart-spinner').show();
+      waiting();
       $.ajax({
         url: locations.chart,
-        data: JSON.stringify({
-          title: this.props.werk.text.title,
-          data: this.props.werk,
-        }),
+        data,
         type: 'POST',
         contentType: 'application/json',
+        dataType: 'json',
       })
-      .done((data) => {
-        console.log('Successful save.', data);
+      .done((response) => {
+        console.log('Successful save.', response);
         window.chartwerkConfig.chart_id = data.slug;
         locations.chart = `${urljoin(
           window.chartwerkConfig.chart_api,
@@ -120,14 +204,14 @@ export default React.createClass({
         $('#chart-save-alerts .alert-success').slideDown();
         setTimeout(() => {
           $('#chart-save-alerts .alert-success').slideUp();
-        }, 4000);
+        }, 3500);
       })
       .fail(() => {
         reset();
         $('#chart-save-alerts .alert-danger').slideDown();
         setTimeout(() => {
           $('#chart-save-alerts .alert-danger').slideUp();
-        }, 2500);
+        }, 3500);
       });
     }
   },
@@ -136,6 +220,11 @@ export default React.createClass({
     function reset() {
       $('#save-template-check').show();
       $('#save-template-spinner').hide();
+    }
+
+    function waiting() {
+      $('#save-template-check').hide();
+      $('#save-template-spinner').show();
     }
 
     const data = JSON.stringify({
@@ -149,13 +238,13 @@ export default React.createClass({
 
     // If updating an existing template
     if (window.chartwerkConfig.template_id && !this.state.newTemplate) {
-      $('#save-template-check').hide();
-      $('#save-template-spinner').show();
+      waiting();
       $.ajax({
         url: locations.template,
         data,
         type: 'PATCH',
         contentType: 'application/json',
+        dataType: 'json',
       })
       .done((response) => {
         console.log('Successful save.', response);
@@ -174,20 +263,13 @@ export default React.createClass({
       });
     // If creating a new template
     } else {
-      $('#save-template-check').hide();
-      $('#save-template-spinner').show();
+      waiting();
       $.ajax({
         url: window.chartwerkConfig.template_api,
-        data: JSON.stringify({
-          title: this.props.werk.template.title,
-          description: this.props.werk.template.description,
-          template_properties: this.props.werk.template.tags.map(tag => ({
-            slug: tag,
-          })),
-          data,
-        }),
+        data,
         type: 'POST',
         contentType: 'application/json',
+        dataType: 'json',
       })
       .done((response) => {
         console.log('Successful save.', response);
@@ -200,20 +282,16 @@ export default React.createClass({
         $('#template-save-alerts .alert-success').slideDown();
         setTimeout(() => {
           $('#template-save-alerts .alert-success').slideUp();
-        }, 4000);
+        }, 3500);
       })
       .fail(() => {
         reset();
         $('#template-save-alerts .alert-danger').slideDown();
         setTimeout(() => {
           $('#template-save-alerts .alert-danger').slideUp();
-        }, 2500);
+        }, 3500);
       });
     }
-  },
-
-  saveTemplateImage() {
-
   },
 
   screenshot() {
@@ -298,8 +376,8 @@ export default React.createClass({
               placeholder="What will we call it?"
               maxLength="100"
               type="text"
-              value={werk.text.title}
-              onChange={(e) => actions.setChartTitle(e.target.value)}
+              value={this.state.chartTitle}
+              onChange={(e) => this.setChartTitle(e.target.value)}
             />
           </div>
           <button
@@ -361,8 +439,8 @@ export default React.createClass({
               className="form-control"
               id="template-title"
               placeholder="e.g., Scatterplot with linear trendline"
-              value={werk.template.title}
-              onChange={(e) => { actions.setTemplateTitle(e.target.value); }}
+              value={this.state.templateTitle}
+              onChange={(e) => this.setTemplateTitle(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -371,12 +449,12 @@ export default React.createClass({
             </label>
             <SimpleMDE
               id="template-description"
-              onChange={(value) => { actions.setTemplateDescription(value); }}
-              value={werk.template.description}
+              onChange={(value) => { this.setTemplateDescription(value); }}
+              value={this.state.templateDescription}
               options={{
-                autofocus: true,
+                autofocus: false,
                 spellChecker: false,
-                initialValue: werk.template.description,
+                initialValue: this.state.templateDescription,
               }}
             />
           </div>

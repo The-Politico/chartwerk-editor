@@ -136,6 +136,8 @@ export default (axis, action) => {
     case types.RESET_COLOR:
       nextState.color.domain = [];
       nextState.color.range = [];
+      nextState.color.quantize = false;
+      nextState.color.quantizeProps = initialState.color.quantizeProps;
       break;
      /**
       * BASE AXIS

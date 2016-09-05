@@ -98,6 +98,10 @@ export const setLegendActive = () => ({
   type: types.SET_LEGEND_ACTIVE,
 });
 
+export const unsetLegend = () => ({
+  type: types.UNSET_LEGEND,
+});
+
 export const setLegendKeys = (keys) => ({
   type: types.SET_LEGEND_KEYS,
   keys,

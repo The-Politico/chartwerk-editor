@@ -20,12 +20,12 @@ function arrayMove(x, from, to) {
  */
 export default (texts, action) => {
   const initialState = {
-    headline: '',
-    chatter: '',
-    footnote: '',
-    source: '',
-    author: '',
-    title: '',
+    headline: null,
+    chatter: null,
+    footnote: null,
+    source: null,
+    author: null,
+    title: null,
     annotations: [],
     legend: {
       active: false,
@@ -121,6 +121,9 @@ export default (texts, action) => {
       break;
     case types.SET_LEGEND_ACTIVE:
       nextState.legend.active = !nextState.legend.active;
+      break;
+    case types.UNSET_LEGEND:
+      nextState.legend = assign({}, initialState.legend);
       break;
     case types.SET_LEGEND_KEYS:
       nextState.legend.keys = action.keys;

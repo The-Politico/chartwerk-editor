@@ -27,15 +27,21 @@ export default React.createClass({
   componentDidUpdate() {
     if (this.props.werk.text.legend.active) {
       this.renderLegend();
+    } else {
+      this.resetLegend();
     }
+  },
+
+  resetLegend() {
+    $('#chart-legend').empty();
+    $('#chart .chart-legend-container').remove();
   },
 
   renderLegend() {
     const werk = this.props.werk;
 
     if (werk.axes.color.ignoreScale) {
-      $('#chart-legend').empty();
-      $('#chart .chart-legend-container').remove();
+      this.resetLegend();
       return null;
     }
 

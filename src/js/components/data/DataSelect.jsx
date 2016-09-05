@@ -39,6 +39,7 @@ export default React.createClass({
       }
       actions.resetDatamap();
       actions.resetColor();
+      actions.unsetLegend();
     }
   },
 
@@ -46,7 +47,7 @@ export default React.createClass({
    * Select dropdown options.
    * @returns {array}     Array of options.
    */
-  setOptions() {
+  setOptions(column) {
     const datamap = this.props.werk.datamap;
     const opts = [
       { value: 'base', label: 'base axis', disabled: false },
@@ -62,11 +63,20 @@ export default React.createClass({
     opts[1].disabled = datamap.value;
     opts[2].disabled = datamap.scale;
     opts[4].disabled = datamap.facet;
-    // Data series are mutually exclusive with value and scale axis
-    if (datamap.series.length > 0) {
-      opts.splice(1, 2);
+    // Data series are mutually exclusive with value and scale axis.
+    // So if there is more than one data series, or the one data series
+    // is the option set we're getting.
+    if (
+      datamap.series.length > 1 ||
+      (datamap.series[0] !== column && datamap.series.length > 0)
+    ) {
+      // opts.splice(1, 2);
+      opts[1].disabled = true;
+      opts[2].disabled = true;
     }
-    opts[3].disabled = datamap.value;
+    opts[3].disabled = (datamap.value && datamap.scale) ||
+      (datamap.value && datamap.value !== column) ||
+      (datamap.scale && datamap.scale !== column);
 
     return opts;
   },
@@ -95,6 +105,7 @@ export default React.createClass({
       case 'scale':
         actions.removeScale();
         actions.resetColor();
+        actions.unsetLegend();
         break;
       case 'series':
         actions.removeSeries(column);
@@ -116,6 +127,9 @@ export default React.createClass({
     /**
      * Update datamap store.
      */
+    if (!_.has(v, 'value')) {
+      return;
+    }
     switch (v.value) {
       case 'base':
         actions.addBase(column);
@@ -363,7 +377,7 @@ export default React.createClass({
               <Select
                 name={column}
                 value={this.traverseDatamap(column)}
-                options={this.setOptions()}
+                options={this.setOptions(column)}
                 onChange={this.changeValue.bind(this, column)}
                 searchable={false}
                 placeholder="Choose one"

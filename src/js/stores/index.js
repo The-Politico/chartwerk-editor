@@ -14,7 +14,7 @@ const store = createStore(reducers, compose(
 store.subscribe(() => {
   window.chartWerk = store.getState();
   api.redraw();
-  console.log(store.getState());
+  // console.log(store.getState());
   // console.log( JSON.stringify(store.getState(), null, '\t' ) );
   return;
 });

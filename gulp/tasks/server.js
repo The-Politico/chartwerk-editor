@@ -1,17 +1,15 @@
-var browserSync = require('browser-sync').create();
-var gulp        = require('gulp');
+const browserSync = require('browser-sync').create();
+const gulp = require('gulp');
 
-module.exports = function(){
-
+module.exports = () => {
   browserSync.init({
-        files: ['./dist/**/*'],
-        server: {
-            baseDir: "./dist/"
-        },
-        ghostMode: false
-    });
+    files: ['./dist/**/*'],
+    server: {
+      baseDir: './dist/',
+    },
+    ghostMode: false,
+  });
 
   gulp.watch(['./src/templates/**/*.html'], ['nunjucks']);
   gulp.watch(['./src/scss/**/*.scss'], ['sass']);
-
 };
