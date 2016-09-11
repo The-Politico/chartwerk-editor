@@ -4,7 +4,7 @@ import Editor from './../../components/code/Editor';
 
 const Code = (props) => (
   <div role="tabpanel" className="tab-pane" id="code">
-    <img src={`${window.chartwerkConfig.staticPrefix}img/icons/danger.png`}
+    <img src={`${window.chartwerkConfig.static_prefix}img/icons/danger.png`}
       id="advanced-users" alt="feature for advanced users"
     />
     <Editor {...props} />

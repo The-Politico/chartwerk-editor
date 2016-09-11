@@ -8,7 +8,7 @@ const Data = (props) => (
       Paste <b>clean</b> data
     </h4>
 
-    <img src={`${window.chartwerkConfig.staticPrefix}img/icons/disallowed.png`} alt="disallowed" />
+    <img src={`${window.chartwerkConfig.static_prefix}img/icons/disallowed.png`} alt="disallowed" />
     <small>
       No commas, currency symbols, percent signs or
       other textual notations on numbers. Your data <b>must</b> have a header row.

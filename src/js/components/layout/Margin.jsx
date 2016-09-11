@@ -127,14 +127,14 @@ export default React.createClass({
           <label>Size</label>
           <img
             onClick={this.switchOpts.bind(this, 'single')}
-            src={`${window.chartwerkConfig.staticPrefix}img/icons/singleColumn.png`}
+            src={`${window.chartwerkConfig.static_prefix}img/icons/singleColumn.png`}
             title="Single-wide"
             className={this.activeClass('single')}
             alt="Single-wide"
           />
           <img
             onClick={this.switchOpts.bind(this, 'double')}
-            src={`${window.chartwerkConfig.staticPrefix}img/icons/doubleColumn.png`}
+            src={`${window.chartwerkConfig.static_prefix}img/icons/doubleColumn.png`}
             title="Double-wide"
             className={this.activeClass('double')}
             alt="Double-wide"

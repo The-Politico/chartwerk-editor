@@ -12,7 +12,8 @@
 {%block custom_js%}
 <script type="text/javascript">
   window.chartwerkConfig = {
-    staticPrefix: '/static/chartwerk/',
+    user: '{{user}}',
+    static_prefix: '/static/chartwerk/',
     chart_api: '{{chart_api}}',
     chart_id: '{{chart_id}}',
     template_api: "{{template_api}}",

@@ -76,14 +76,14 @@ export default React.createClass({
         </small>
         <div className="form-group size-switch">
           <img
-            src={`${window.chartwerkConfig.staticPrefix}img/icons/singleColumn.png`}
+            src={`${window.chartwerkConfig.static_prefix}img/icons/singleColumn.png`}
             title="Single-wide"
             className={this.state.activeOpts === 'single' ? 'active' : 'inactive'}
             onClick={() => this.setState({ activeOpts: 'single' })}
             alt="Single-wide"
           />
           <img
-            src={`${window.chartwerkConfig.staticPrefix}img/icons/doubleColumn.png`}
+            src={`${window.chartwerkConfig.static_prefix}img/icons/doubleColumn.png`}
             title="Double-wide"
             className={this.state.activeOpts === 'single' ? 'inactive' : 'active'}
             onClick={() => this.setState({ activeOpts: 'double' })}

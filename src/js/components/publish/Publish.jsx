@@ -156,6 +156,7 @@ export default React.createClass({
     const data = JSON.stringify({
       title: this.props.werk.text.title,
       data: this.props.werk,
+      author: window.chartwerkConfig.user,
     });
 
     // If updating an existing chart
@@ -234,6 +235,7 @@ export default React.createClass({
         slug: tag,
       })),
       data: this.props.werk,
+      author: window.chartwerkConfig.user,
     });
 
     // If updating an existing template
