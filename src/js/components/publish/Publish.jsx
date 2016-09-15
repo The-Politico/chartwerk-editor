@@ -3,11 +3,11 @@ import Modal from 'react-modal';
 import fetch from 'isomorphic-fetch';
 import { locations } from './../../misc/config';
 import html2canvas from 'html2canvas';
-import $ from 'jquery';
 import Cookies from 'js-cookie';
 import urljoin from 'url-join';
 import SimpleMDE from './MDEditor';
 import _ from 'lodash';
+import EmbedCode from './EmbedCode';
 
 
 export default React.createClass({
@@ -22,6 +22,7 @@ export default React.createClass({
       screenshotChatter: false,
       templateTags: [],
       newTemplate: false,
+      newChart: false,
       chartTitle: null,
       templateTitle: null,
       templateDescription: null,
@@ -159,8 +160,10 @@ export default React.createClass({
       author: window.chartwerkConfig.user,
     });
 
+    const newChart = this.state.newChart;
+
     // If updating an existing chart
-    if (window.chartwerkConfig.chart_id) {
+    if (window.chartwerkConfig.chart_id && !newChart) {
       waiting();
       $.ajax({
         url: locations.chart,
@@ -188,7 +191,7 @@ export default React.createClass({
     } else {
       waiting();
       $.ajax({
-        url: locations.chart,
+        url: newChart ? window.chartwerkConfig.chart_api : locations.chart,
         data,
         type: 'POST',
         contentType: 'application/json',
@@ -196,7 +199,7 @@ export default React.createClass({
       })
       .done((response) => {
         console.log('Successful save.', response);
-        window.chartwerkConfig.chart_id = data.slug;
+        window.chartwerkConfig.chart_id = response.slug;
         locations.chart = `${urljoin(
           window.chartwerkConfig.chart_api,
           window.chartwerkConfig.chart_id
@@ -206,6 +209,25 @@ export default React.createClass({
         setTimeout(() => {
           $('#chart-save-alerts .alert-success').slideUp();
         }, 3500);
+
+        /*
+          For cloned charts, we redirect to the URL of the new chart after save.
+          This parses the current URL, presuming the URL is constructed
+          RESTfully, and replaces the chart ID as the last path param of the
+          target URL.
+         */
+        if (newChart) {
+          $('#loading-modal .loading-text span').text('Redirecting');
+          $('#loading-modal').show();
+          const url = window.location.href;
+          const i = url
+                      .substr(0, url.length - 1) // With or w/o trailing slash
+                      .lastIndexOf('/');
+          const newUrl = `${url.substr(0, i)}/${response.slug}/`;
+          setTimeout(() => {
+            window.location.href = newUrl;
+          }, 2000);
+        }
       })
       .fail(() => {
         reset();
@@ -391,7 +413,20 @@ export default React.createClass({
             <i id="save-chart-spinner" className="fa fa-circle-o-notch fa-spin" hidden></i>
             &nbsp;Save chart
           </button>
+          <div>
+            <label className="section section-option right borderless">
+              Clone to new chart?
+              <input
+                type="checkbox"
+                checked={this.state.newChart}
+                onClick={() => this.setState({ newChart: !this.state.newChart })}
+              />
+              <i className="fa fa-square-o"></i>
+              <i className="fa fa-check-square-o"></i>
+            </label>
+          </div>
         </div>
+        <EmbedCode {...this.props} />
         <div className="fifty-fifty">
           <h4>Download an image</h4>
           <button

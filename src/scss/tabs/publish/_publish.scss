@@ -32,6 +32,9 @@
     font-weight: normal;
     font-size: 14px;
     border: 0;
+    &.right{
+      text-align: right;
+    }
   }
 
   .fifty-fifty{
@@ -39,6 +42,38 @@
     display:inline-block;
     text-align:center;
     float:left;
+  }
+
+  #embed-opts{
+    margin-top:50px;
+    button {
+      width: 50%;
+      border-radius: 0px;
+      display: inline-block;
+    }
+    .embed-code-copy {
+      background: $shadowgrey;
+      border: 1px solid $lightgrey;
+      color: grey;
+      width: calc(100% - 80px);
+      margin-top: 10px;
+      float: left;
+      display: inline-block;
+      font-size: 18px;
+      height: 40px;
+      padding: 0 10px;
+    }
+    .embed-copy-btn{
+      width: 80px;
+      margin-top: 10px;
+      height: 40px;
+      transition: all .2s;
+      outline:none;
+      &.success{
+        color: $green;
+        border: 1px solid $green;
+      }
+    }
   }
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import Select from 'react-select';
 import Modal from 'react-modal';
 import _ from 'lodash';
-import $ from 'jquery';
 import ellipsize from 'ellipsize';
 import ColorPicker from './ColorPicker';
 import ColorScheme from './ColorScheme';

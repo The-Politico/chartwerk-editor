@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import { Converter } from 'csvtojson';
 import tableify from 'tableify';
 

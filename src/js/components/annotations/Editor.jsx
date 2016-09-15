@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import marked from './../../misc/utils';
 import ColorPicker from './ColorPicker';
 import Legend from './Legend';
@@ -170,6 +169,12 @@ export default React.createClass({
     this.resize();
   },
 
+  changeTab(e) {
+    e.preventDefault();
+    $('a[href="#publish"]').tab('show');
+    $('#editor-pane').animate({ scrollTop: 0 }, 300);
+  },
+
   render() {
     const werk = this.props.werk;
     const actions = this.props.actions;
@@ -265,6 +270,15 @@ export default React.createClass({
           {notes}
         </div>
         <Legend {...this.props} />
+
+        <div className="guidepost">
+          <h4>
+            <a onClick={this.changeTab} href="">
+              <b>Next:</b> Publish
+              <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+            </a>
+          </h4>
+        </div>
       </div>
     );
   },

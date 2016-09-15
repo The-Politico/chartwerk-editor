@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderToStaticMarkup as staticRender } from 'react-dom/server';
-import $ from 'jquery';
 import Keys from './LegendKeys';
 import marked from './../../misc/utils';
 import LegendDisplay from './LegendDisplay';
@@ -213,7 +212,7 @@ export default React.createClass({
       return null;
     }
     return (
-      <div id="legend">
+      <div id="legend" className="clearfix">
         <div>
           <label className="section section-option">
             Do you want a color legend?

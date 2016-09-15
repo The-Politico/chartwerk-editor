@@ -10,5 +10,8 @@
     "no-eval": 0,
     "react/jsx-no-bind": 0,
     "react/sort-comp": 0,
-  }
+  },
+  "globals": {
+    "$": false,
+  },
 }

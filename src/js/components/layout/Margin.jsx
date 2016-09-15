@@ -1,6 +1,5 @@
 import React from 'react';
 import MarginViz from './MarginViz';
-import $ from 'jquery';
 
 export default React.createClass({
 

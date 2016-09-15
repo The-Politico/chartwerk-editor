@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 
 import NumericFormat from './NumericFormat.jsx';
 import ShadedRegions from './ShadedRegions';

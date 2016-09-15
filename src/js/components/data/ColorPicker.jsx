@@ -28,10 +28,14 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    this.props.actions.setColor(
-      this.props.column,
-      this.state.selectedColor
-    );
+    // Skip if ColorPicker is initialized without a column.
+    // This sometimes happens when switching between datasets.
+    if (this.props.column) {
+      this.props.actions.setColor(
+        this.props.column,
+        this.state.selectedColor
+      );
+    }
   },
 
   showPicker() {

@@ -1,7 +1,6 @@
 // Adapted from https://github.com/benrlodge/react-simplemde-editor
 import React from 'react';
 import SimpleMDE from 'simplemde';
-import $ from 'jquery';
 
 let genID = 0;
 
