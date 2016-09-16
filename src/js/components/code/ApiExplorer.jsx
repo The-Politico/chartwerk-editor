@@ -75,7 +75,6 @@ export default React.createClass({
 
   filter(inputValue, option) {
     const pattern = new RegExp(`${inputValue}.*`, 'i');
-    console.log(pattern.test(option));
     return pattern.test(option);
   },
 

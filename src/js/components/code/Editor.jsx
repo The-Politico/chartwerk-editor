@@ -106,13 +106,11 @@ export default React.createClass({
     switch (this.state.editing) {
       case 'CSS':
         actions.setStyles(scripts.styles);
-        console.log('CSS>>', JSON.stringify(werk.scripts.styles));
         addStyleString(scripts.styles);
         break;
       case 'JS': {
         const script = this.state.editHelper ?
           this.state.scripts.helper : this.state.scripts.draw;
-        console.log('JS>>', JSON.stringify(script));
         eval.apply(null, [script]);
         if (this.state.editHelper) {
           actions.setHelperScript(scripts.helper);
@@ -123,7 +121,6 @@ export default React.createClass({
       }
       case 'HTML':
         actions.setHTML(scripts.html);
-        console.log('HTML>>', JSON.stringify(scripts.html));
         chartWerkEl.innerHTML = scripts.html;
         break;
       default:
@@ -138,7 +135,7 @@ export default React.createClass({
 
   getEditor(type) {
     const name = `${type}-code-editor`;
-    const height = type === 'panel' ? '600px' : '80%';
+    const height = type === 'panel' ? '600px' : 'calc(100% - 100px)';
     const scripts = this.state.scripts;
     const jsScript = this.state.editHelper ?
           scripts.helper : scripts.draw;
@@ -239,11 +236,17 @@ export default React.createClass({
         zIndex: 9,
       },
       content: {
-        maxWidth: '1200px',
+        top: '20px',
+        bottom: '20px',
+        maxWidth: '1600px',
         margin: 'auto',
+        padding: '10px 20px 0px',
         backgroundColor: 'white',
       },
     };
+
+    const explorer = this.state.editing === 'JS' ?
+      <ApiExplorer werk={this.props.werk} /> : null;
 
     return (
       <div>
@@ -321,9 +324,9 @@ export default React.createClass({
 
           </div>
 
-          {this.state.editing === 'JS' ? <ApiExplorer werk={this.props.werk} /> : null}
+          {explorer}
 
-            {this.getJSSwitch()}
+          {this.getJSSwitch()}
 
         </Modal>
       </div>
