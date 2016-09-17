@@ -19,9 +19,8 @@ module.exports = () => {
   };
 
   const bundler = watchify(browserify(props).transform(babelify, {
-    global: !!util.env.production,
+    global: false,
     presets: ['es2015', 'react'],
-    ignore: !!util.env.production ? /\/node_modules\/(?!react)/ : null, // transform react modules
   }));
 
   function bundle() {

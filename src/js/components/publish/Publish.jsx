@@ -8,6 +8,7 @@ import urljoin from 'url-join';
 import SimpleMDE from './MDEditor';
 import _ from 'lodash';
 import EmbedCode from './EmbedCode';
+import inliner from 'svg-style-inliner';
 
 
 export default React.createClass({
@@ -320,6 +321,8 @@ export default React.createClass({
 
   screenshot() {
     const selector = this.state.screenshotChatter ? '#chartWerk' : '#chart';
+    // Inline all styles before taking screenshot.
+    inliner($('#chartWerk #chart')[0]);
     html2canvas($(selector),
       {
         onrendered(canvas) {

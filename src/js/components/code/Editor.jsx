@@ -5,6 +5,7 @@ import Toggle from 'react-toggle';
 import _ from 'lodash';
 import Dependencies from './Dependencies';
 import ApiExplorer from './ApiExplorer';
+import JSONTree from 'react-json-tree';
 
 require('brace/mode/javascript');
 require('brace/mode/scss');
@@ -83,7 +84,6 @@ export default React.createClass({
 
   applyScript() {
     const actions = this.props.actions;
-    const werk = this.props.werk;
     const scripts = this.state.scripts;
 
     let styleEl = document.getElementById('injected-chart-styles');
@@ -301,8 +301,13 @@ export default React.createClass({
 
           <i className="fa fa-times" onClick={() => this.setState({ modalIsOpen: false })}></i>
 
+
             {this.getEditor('modal')}
 
+          <div id="editor-react-tree" hidden={this.state.editing !== 'JS'}>
+            <h5>chartWerk API map</h5>
+            <JSONTree data={this.props.werk} />
+          </div>
           <div className="left inline">
 
             <button className="btn btn-sm btn-blue" onClick={this.applyScript}>

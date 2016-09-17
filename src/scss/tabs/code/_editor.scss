@@ -211,3 +211,31 @@
 
 
 }
+
+#editor-react-tree {
+  position:absolute;
+  top:54px;
+  right:35px;
+  width:240px;
+  max-height:500px;
+  overflow-y:scroll;
+  background-color: white;
+  z-index:1;
+  &::-webkit-scrollbar{
+      display: none;
+  }
+  h5{
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    background-color: #666;
+    padding: 7px 5px 5px 7px;
+  }
+  // react-tree overrides...
+  ul{
+    background-color: white !important;
+    margin-top: 0px !important;
+    margin-left: 10px !important;
+  }
+}
