@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import $ from 'jquery';
+import ellipsize from 'ellipsize';
 import marked from './utils';
 
 export const applyScripts = (scripts) => {
@@ -16,7 +16,7 @@ export const applyScripts = (scripts) => {
 
   const applyHTML = (html) => {
     document
-      .getElementById('chartWerk')
+      .getElementById('chartwerk')
       .innerHTML = html;
   };
 
@@ -72,7 +72,11 @@ export const redraw = _.throttle(() => {
       .not('.chart-legend-container')
       .remove();
   }
-  draw(); // eslint-disable-line no-undef
+  try {
+    window.draw();
+  } catch (err) {
+    window.chartwerkErr(`CHART FAILED TO DRAW: ${ellipsize(err.message, 40)}`);
+  }
 }, 1000);
 
 export const initialize = () => {
@@ -82,9 +86,9 @@ export const initialize = () => {
   }, 3000);
 
 
-  $('#chartWerk #headline').html(marked.inlineLexer(window.chartWerk.text.headline, []));
-  $('#chartWerk #chatter').html(marked.inlineLexer(window.chartWerk.text.chatter, []));
-  $('#chartWerk #footnote').html(marked.inlineLexer(window.chartWerk.text.footnote, []));
-  $('#chartWerk #source').html(marked.inlineLexer(window.chartWerk.text.source, []));
-  $('#chartWerk #author').html(marked.inlineLexer(window.chartWerk.text.author, []));
+  $('#chartwerk #headline').html(marked.inlineLexer(window.chartwerk.text.headline, []));
+  $('#chartwerk #chatter').html(marked.inlineLexer(window.chartwerk.text.chatter, []));
+  $('#chartwerk #footnote').html(marked.inlineLexer(window.chartwerk.text.footnote, []));
+  $('#chartwerk #source').html(marked.inlineLexer(window.chartwerk.text.source, []));
+  $('#chartwerk #author').html(marked.inlineLexer(window.chartwerk.text.author, []));
 };

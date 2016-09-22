@@ -13,7 +13,7 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      value: 'chartWerk',
+      value: 'chartwerk',
       options: this.drawMap(),
     };
   },
@@ -41,7 +41,7 @@ export default React.createClass({
     }
 
 
-    traverse('chartWerk', werk);
+    traverse('chartwerk', werk);
     opts.sort((a, b) => a.length - b.length);
     return opts;
   },

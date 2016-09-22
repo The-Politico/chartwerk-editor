@@ -320,9 +320,9 @@ export default React.createClass({
   },
 
   screenshot() {
-    const selector = this.state.screenshotChatter ? '#chartWerk' : '#chart';
+    const selector = this.state.screenshotChatter ? '#chartwerk' : '#chart';
     // Inline all styles before taking screenshot.
-    inliner($('#chartWerk #chart')[0]);
+    inliner($('#chartwerk #chart')[0]);
     html2canvas($(selector),
       {
         onrendered(canvas) {

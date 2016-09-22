@@ -34,31 +34,31 @@ module.exports = React.createClass({
       case 'head':
         actions.setHeadline(e.target.value);
         actions.setChartTitle(e.target.value);
-        $('#chartWerk #headline').html(
+        $('#chartwerk #headline').html(
           marked.inlineLexer(e.target.value, [])
         );
         break;
       case 'chat':
         actions.setChatter(e.target.value);
-        $('#chartWerk #chatter').html(
+        $('#chartwerk #chatter').html(
           marked.inlineLexer(e.target.value, [])
         );
         break;
       case 'foot':
         actions.setFootnote(e.target.value);
-        $('#chartWerk #footnote').html(
+        $('#chartwerk #footnote').html(
           marked.inlineLexer(e.target.value, [])
         );
         break;
       case 'data':
         actions.setDataSource(e.target.value);
-        $('#chartWerk #source').html(
+        $('#chartwerk #source').html(
           marked.inlineLexer(e.target.value, [])
         );
         break;
       case 'auth':
         actions.setAuthor(e.target.value);
-        $('#chartWerk #author').html(
+        $('#chartwerk #author').html(
           marked.inlineLexer(e.target.value, [])
         );
         break;

@@ -34,9 +34,41 @@
         }
     }
 
+		#chart-edit-alerts{
+			width: calc(100% - 20px);
+
+			.alert-warning{
+				h4{
+					background-color: $orange;
+					color:white;
+				}
+			}
+			.alert-danger{
+				h4{
+					background-color: $red;
+					color:white;
+				}
+			}
+			.alert{
+				padding:0px 0px 5px;
+				margin-bottom: 0;
+				border-radius: 0;
+				background-color: white;
+				color:$grey;
+				h4{
+					padding:2px 5px;
+					font-family: 'Open Sans', arial, sans-serif;
+					.display{
+						font-family: 'kraftwerk';
+						letter-spacing: 1px;
+					}
+				}
+			}
+		}
+
     p{
     	font: $body-font;
     	margin:18px 0;
     }
-		
+
 }

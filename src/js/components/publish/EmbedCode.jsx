@@ -27,17 +27,17 @@ export default React.createClass({
     let double = 0;
 
     if (size === 'single') {
-      single = $('#chartWerk').height();
+      single = $('#chartwerk').height();
       actions.changePreview('double');
       setTimeout(() => {
-        double = $('#chartWerk').height();
+        double = $('#chartwerk').height();
         actions.changePreview(size);
       }, 1000); // Allow 1 sec for rendering
     } else {
-      double = $('#chartWerk').height();
+      double = $('#chartwerk').height();
       actions.changePreview('single');
       setTimeout(() => {
-        single = $('#chartWerk').height();
+        single = $('#chartwerk').height();
         actions.changePreview(size);
       }, 1000);
     }

@@ -67,6 +67,10 @@ export default (axis, action) => {
       },
       shadedRegions: [],
     },
+    scale: {
+      prefix: '',
+      suffix: '',
+    },
   };
 
   if (typeof axis === 'undefined') {
@@ -137,7 +141,7 @@ export default (axis, action) => {
       nextState.color.domain = [];
       nextState.color.range = [];
       nextState.color.quantize = false;
-      nextState.color.quantizeProps = initialState.color.quantizeProps;
+      nextState.color.quantizeProps = assign({}, initialState.color.quantizeProps);
       break;
      /**
       * BASE AXIS
@@ -249,6 +253,12 @@ export default (axis, action) => {
       break;
     case types.REMOVE_VALUE_SHADED_REGION:
       nextState.value.shadedRegions.splice(action.index, 1);
+      break;
+    case types.SET_SCALE_PREFIX:
+      nextState.scale.prefix = action.prefix;
+      break;
+    case types.SET_SCALE_SUFFIX:
+      nextState.scale.suffix = action.suffix;
       break;
     default:
       return axis;

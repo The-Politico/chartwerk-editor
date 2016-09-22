@@ -11,6 +11,7 @@ require('brace/mode/javascript');
 require('brace/mode/scss');
 require('brace/mode/html');
 require('brace/theme/monokai');
+require('brace/ext/searchbox');
 
 export default React.createClass({
 
@@ -41,7 +42,7 @@ export default React.createClass({
 
   /**
    * This is an antipattern for the sake of accomodating the API, which needs
-   * to re-seed state after fetching a ChartWerk object.
+   * to re-seed state after fetching a Chartwerk object.
    * https://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html
    * @param  {[type]} nextProps [description]
    * @return {[type]}           [description]
@@ -87,7 +88,7 @@ export default React.createClass({
     const scripts = this.state.scripts;
 
     let styleEl = document.getElementById('injected-chart-styles');
-    const chartWerkEl = document.getElementById('chartWerk');
+    const chartwerkEl = document.getElementById('chartwerk');
 
     function addStyleEl() {
       const node = document.createElement('style');
@@ -121,7 +122,7 @@ export default React.createClass({
       }
       case 'HTML':
         actions.setHTML(scripts.html);
-        chartWerkEl.innerHTML = scripts.html;
+        chartwerkEl.innerHTML = scripts.html;
         break;
       default:
         break;
@@ -297,7 +298,7 @@ export default React.createClass({
           style={modalStyles}
         >
 
-          <h4><span className="display">ChartWerk</span> Editor</h4>
+          <h4><span className="display">Chartwerk</span> Editor</h4>
 
           <i className="fa fa-times" onClick={() => this.setState({ modalIsOpen: false })}></i>
 
@@ -305,7 +306,7 @@ export default React.createClass({
             {this.getEditor('modal')}
 
           <div id="editor-react-tree" hidden={this.state.editing !== 'JS'}>
-            <h5>chartWerk API map</h5>
+            <h5>chartwerk API map</h5>
             <JSONTree data={this.props.werk} />
           </div>
           <div className="left inline">

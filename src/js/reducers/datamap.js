@@ -84,7 +84,7 @@ export default (datamap, action) => {
           n => n === action.column);
       break;
     case types.RESET_DATAMAP:
-      nextState = initialState;
+      nextState = assign({}, initialState);
       break;
     default:
       return datamap;

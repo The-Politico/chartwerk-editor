@@ -9,6 +9,49 @@ module.exports = React.createClass({
     werk: React.PropTypes.object,
   },
 
+  componentWillMount() {
+    /**
+     * Global warning messenger that can be thrown with custom alerts from
+     * within a chart template.
+     * @param  {String} message An alert message.
+     * @return {null}
+     */
+    window.chartwerkWarn = (message) => {
+      const alert = $('#chart-edit-alerts .alert-warning');
+      const ul = $('ul', alert);
+      if ($('li', ul).length < 3) {
+        $('<li/>').text(message).appendTo(ul);
+      } else if ($('li', ul).length === 3) {
+        $('<li/>').html('<em>& more...</em>').appendTo(ul);
+      }
+      alert.slideDown();
+      clearTimeout(window.chartwerkWarnTimeout);
+      window.chartwerkWarnTimeout = setTimeout(() => {
+        alert.slideUp(() => ul.empty());
+      }, 5000);
+    };
+    /**
+     * Global error messenger that can be thrown with custom alerts from
+     * within a chart template.
+     * @param  {String} message An alert message.
+     * @return {null}
+     */
+    window.chartwerkErr = (message) => {
+      const alert = $('#chart-edit-alerts .alert-danger');
+      const ul = $('ul', alert);
+      if ($('li', ul).length < 3) {
+        $('<li/>').text(message).appendTo(ul);
+      } else if ($('li', ul).length === 3) {
+        $('<li/>').html('<em>& more...</em>').appendTo(ul);
+      }
+      alert.slideDown();
+      clearTimeout(window.chartwerkWarnTimeout);
+      window.chartwerkWarnTimeout = setTimeout(() => {
+        alert.slideUp(() => ul.empty());
+      }, 5000);
+    };
+  },
+
   getSize() {
     return this.props.werk.ui.size === 'single' ?
       'single' : 'double';
@@ -18,13 +61,23 @@ module.exports = React.createClass({
     return (
       <div id="preview-pane">
         <SizeSwitch {...this.props} />
+        <div id="chart-edit-alerts">
+          <div className="alert alert-warning" hidden>
+            <h4><span className="display">Chartwerk</span> Warning</h4>
+            <ul></ul>
+          </div>
+          <div className="alert alert-danger" hidden>
+            <h4><span className="display">Chartwerk</span> Error</h4>
+            <ul></ul>
+          </div>
+        </div>
         <p>
           Patch backpack journalist commenters newsroom cafe paywall he said
           she said reporting, analytics crowdfunding advertising just across
           the wire monetization blowing up on Twitter paidContent.
         </p>
 
-        <div id="chartWerk" className={this.getSize()}></div>
+        <div id="chartwerk" className={this.getSize()}></div>
 
         <p>
           Article Skimmer Groupon should isn't a business model digital first

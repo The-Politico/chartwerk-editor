@@ -36,9 +36,9 @@ export default React.createClass({
       if (this.props.werk.axes.color.byFacet) {
         this.props.actions.colorByFacet();
       }
+      actions.unsetLegend();
       actions.resetDatamap();
       actions.resetColor();
-      actions.unsetLegend();
     }
   },
 
@@ -445,7 +445,7 @@ export default React.createClass({
         >
           <i className="fa fa-times" onClick={() => this.setState({ helpModal: false })}></i>
           <div id="data-help-modal-content">
-            <p>Describing your data columns tells ChartWerk how to translate your data
+            <p>Describing your data columns tells Chartwerk how to translate your data
               into the chart features they are meant to represent.
               To do that, you can use a very simple grammar:
             </p>

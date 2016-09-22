@@ -4,12 +4,12 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './stores/';
 
-const ChartWerk = () =>
+const Chartwerk = () =>
   <Provider store={store}>
     <App />
   </Provider>;
 
 ReactDOM.render(
-  <ChartWerk />,
+  <Chartwerk />,
   document.getElementById('chartwerk-app')
 );

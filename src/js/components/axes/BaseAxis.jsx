@@ -40,12 +40,15 @@ const BaseAxis = (props) => {
       break;
   }
 
+  const shadedOpts = props.werk.axes.base.type === 'categorical' ?
+    null : (<ShadedRegions {...props} axis="base" />);
+
 
   return (
     <div>
       <h4>Base axis: <span className="basename">{props.werk.datamap.base}</span></h4>
       {baseAxis}
-      <ShadedRegions {...props} axis="base" />
+      {shadedOpts}
       <hr />
     </div>
   );

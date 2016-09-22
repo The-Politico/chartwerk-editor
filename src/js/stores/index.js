@@ -2,6 +2,7 @@ import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import actions from '../actions';
 import thunk from 'redux-thunk';
+import assign from 'object-assign';
 
 import * as api from '../misc/api';
 
@@ -12,7 +13,7 @@ const store = createStore(reducers, compose(
 
 // const unsubscribe =
 store.subscribe(() => {
-  window.chartWerk = store.getState();
+  window.chartwerk = assign({}, store.getState());
   api.redraw();
   // console.log(store.getState());
   // console.log( JSON.stringify(store.getState(), null, '\t' ) );
@@ -23,8 +24,8 @@ store.subscribe(() => {
 
 store.dispatch(actions.fetchWerk())
     .then(() => {
-      api.injectDependencies(window.chartWerk.scripts.dependencies);
-      api.applyScripts(window.chartWerk.scripts);
+      api.injectDependencies(window.chartwerk.scripts.dependencies);
+      api.applyScripts(window.chartwerk.scripts);
       api.initialize();
     });
 

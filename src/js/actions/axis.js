@@ -247,3 +247,13 @@ export const removeValueShadedRegion = index => ({
   type: types.REMOVE_VALUE_SHADED_REGION,
   index,
 });
+
+export const setScalePrefix = prefix => ({
+  type: types.SET_SCALE_PREFIX,
+  prefix,
+});
+
+export const setScaleSuffix = suffix => ({
+  type: types.SET_SCALE_SUFFIX,
+  suffix,
+});
