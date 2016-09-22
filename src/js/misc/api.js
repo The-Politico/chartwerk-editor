@@ -75,7 +75,7 @@ export const redraw = _.throttle(() => {
   try {
     window.draw();
   } catch (err) {
-    window.chartwerkErr(`CHART FAILED TO DRAW: ${ellipsize(err.message, 40)}`);
+    window.chartwerkAlert.error(ellipsize(err.message, 40));
   }
 }, 1000);
 

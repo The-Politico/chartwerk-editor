@@ -10,45 +10,49 @@ module.exports = React.createClass({
   },
 
   componentWillMount() {
-    /**
-     * Global warning messenger that can be thrown with custom alerts from
-     * within a chart template.
-     * @param  {String} message An alert message.
-     * @return {null}
-     */
-    window.chartwerkWarn = (message) => {
-      const alert = $('#chart-edit-alerts .alert-warning');
-      const ul = $('ul', alert);
-      if ($('li', ul).length < 3) {
-        $('<li/>').text(message).appendTo(ul);
-      } else if ($('li', ul).length === 3) {
-        $('<li/>').html('<em>& more...</em>').appendTo(ul);
-      }
-      alert.slideDown();
-      clearTimeout(window.chartwerkWarnTimeout);
-      window.chartwerkWarnTimeout = setTimeout(() => {
-        alert.slideUp(() => ul.empty());
-      }, 5000);
-    };
-    /**
-     * Global error messenger that can be thrown with custom alerts from
-     * within a chart template.
-     * @param  {String} message An alert message.
-     * @return {null}
-     */
-    window.chartwerkErr = (message) => {
-      const alert = $('#chart-edit-alerts .alert-danger');
-      const ul = $('ul', alert);
-      if ($('li', ul).length < 3) {
-        $('<li/>').text(message).appendTo(ul);
-      } else if ($('li', ul).length === 3) {
-        $('<li/>').html('<em>& more...</em>').appendTo(ul);
-      }
-      alert.slideDown();
-      clearTimeout(window.chartwerkWarnTimeout);
-      window.chartwerkWarnTimeout = setTimeout(() => {
-        alert.slideUp(() => ul.empty());
-      }, 5000);
+    window.chartwerkAlert = {
+      /**
+       * Global warning messenger that can be thrown with custom alerts from
+       * within a chart template.
+       * @param  {String} message An alert message.
+       * @return {null}
+       */
+      warn(message) {
+        const alert = $('#chart-edit-alerts .alert-warning');
+        const ul = $('ul', alert);
+        if ($('li', ul).length < 3) {
+          $('<li/>').text(message).appendTo(ul);
+        } else if ($('li', ul).length === 3) {
+          $('<li/>').html('<em>& more...</em>').appendTo(ul);
+        }
+        alert.slideDown();
+        clearTimeout(window.chartwerkWarnTimeout);
+        window.chartwerkWarnTimeout = setTimeout(() => {
+          alert.slideUp(() => ul.empty());
+          delete window.chartwerkWarnTimeout;
+        }, 5000);
+      },
+      /**
+       * Global error messenger that can be thrown with custom alerts from
+       * within a chart template.
+       * @param  {String} message An alert message.
+       * @return {null}
+       */
+      error(message) {
+        const alert = $('#chart-edit-alerts .alert-danger');
+        const ul = $('ul', alert);
+        if ($('li', ul).length < 3) {
+          $('<li/>').text(message).appendTo(ul);
+        } else if ($('li', ul).length === 3) {
+          $('<li/>').html('<em>& more...</em>').appendTo(ul);
+        }
+        alert.slideDown();
+        clearTimeout(window.chartwerkErrorTimeout);
+        window.chartwerkErrorTimeout = setTimeout(() => {
+          alert.slideUp(() => ul.empty());
+          delete window.chartwerkErrorTimeout;
+        }, 5000);
+      },
     };
   },
 
