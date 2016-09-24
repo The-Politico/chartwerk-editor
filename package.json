@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DallasMorningNews/chartwerk-editor.git"
+  },
   "scripts": {
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch",
@@ -60,7 +64,7 @@
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
-    "html2canvas": "^0.5.0-beta4",
+    "html2canvas": "git+https://github.com/DallasMorningNews/html2canvas.git",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.2",
     "js-cookie": "^2.1.2",
