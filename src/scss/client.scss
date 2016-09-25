@@ -1,0 +1,14 @@
+@import 'colors';
+@import 'variables';
+@import 'annotations';
+@import 'legend';
+
+/* Remove editing styles */
+#chart .annotation {
+  pointer-events: none;
+}
+#chart-legend, #chart{
+  .chart-legend-container{
+    pointer-events: none;
+  }
+}

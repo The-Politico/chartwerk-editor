@@ -7,37 +7,50 @@ const sourcemaps = require('gulp-sourcemaps');
 const watchify = require('watchify');
 const gutil = require('gulp-util');
 const babelify = require('babelify');
+const rename = require('gulp-rename');
 const util = require('gulp-util');
+const es = require('event-stream');
 
 module.exports = () => {
-  const props = {
-    entries: './src/js/app.js',
-    extensions: ['.js', '.jsx'],
-    cache: {},
-    packageCache: {},
-    debug: true,
-  };
+  const files = [
+    'app.js',
+    'client.js',
+  ];
 
-  const bundler = watchify(browserify(props).transform(babelify, {
-    global: false,
-    presets: ['es2015', 'react'],
-  }));
+  const tasks = files.map((entry) => {
+    const props = {
+      entries: `./src/js/${entry}`,
+      extensions: ['.js', '.jsx'],
+      cache: {},
+      packageCache: {},
+      debug: true,
+    };
 
-  function bundle() {
-    return bundler.bundle()
-    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-    .pipe(source('bundle.js'))
-    .pipe(buffer())
-    .pipe(!!util.env.production ? sourcemaps.init({ loadMaps: true }) : util.noop())
-    .pipe(!!util.env.production ?
-      uglify({ mangle: false, compress: true }).on('error', gutil.log) : util.noop()
-    )
-    .pipe(!!util.env.production ? sourcemaps.write('./') : util.noop())
-    .pipe(gulp.dest('./dist/js/'));
-  }
+    const bundler = watchify(browserify(props).transform(babelify, {
+      global: false,
+      presets: ['es2015', 'react'],
+    }));
 
-  bundler.on('log', gutil.log);
-  bundler.on('update', bundle);
+    function bundle() {
+      return bundler.bundle()
+      .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+      .pipe(source(entry))
+      .pipe(buffer())
+      .pipe(!!util.env.production ? sourcemaps.init({ loadMaps: true }) : util.noop())
+      .pipe(!!util.env.production ?
+        uglify({ mangle: false, compress: true }).on('error', gutil.log) : util.noop()
+      )
+      .pipe(rename({
+        extname: '.bundle.js',
+      }))
+      .pipe(!!util.env.production ? sourcemaps.write('./') : util.noop())
+      .pipe(gulp.dest('./dist/js/'));
+    }
 
-  return bundle();
+    bundler.on('log', gutil.log);
+    bundler.on('update', bundle);
+
+    return bundle();
+  });
+  return es.merge.apply(null, tasks);
 };
