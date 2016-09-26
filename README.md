@@ -1,10 +1,8 @@
-# chartwerk-editor
+# <a href='https://dallasmorningnews.github.io/chartwerk/'><img src='docs/logo.png' height='55'></a>
 
-A React/Redux live editor for Chartwerk charts.
 
-## Documentation
+A [React](https://facebook.github.io/react/)/[Redux](http://redux.js.org/)-based live editor for [Chartwerk](https://dallasmorningnews.github.io/chartwerk/) charts.
 
-- [datamap API](docs/datamap.md)
-- [legends](docs/legends.md)
-- [annotations](docs/annotations.md)
-- [scripts](docs/scripts.md)
+This repository only contains the chart editor. For the full, deployable Chartwerk app, see [django-chartwerk](https://github.com/DallasMorningNews/django-chartwerk-redux).
+
+For a fuller description of the Chartwerk project, see its [homepage](https://dallasmorningnews.github.io/chartwerk/).
