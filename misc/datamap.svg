@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="datamap.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.94"
+     inkscape:cx="257.44681"
+     inkscape:cy="520"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1301"
+     inkscape:window-height="744"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4146"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:monospace;-inkscape-font-specification:monospace;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(133.89464,-79.290934)"
+       inkscape:export-xdpi="77.266495"
+       inkscape:export-ydpi="77.266495"
+       inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/data_numerical.png"><flowRegion
+         id="flowRegion4148"><rect
+           id="rect4150"
+           width="186.8421"
+           height="52.631573"
+           x="144.73685"
+           y="401.04642"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:monospace;-inkscape-font-specification:monospace;fill:#333333" /></flowRegion><flowPara
+         id="flowPara4152"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:Cabin;-inkscape-font-specification:Cabin;fill:#333333">123</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4146-4"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:monospace;-inkscape-font-specification:monospace;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(277.0939,-79.290934)"
+       inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/data_categorical.png"
+       inkscape:export-xdpi="68.34742"
+       inkscape:export-ydpi="68.34742"><flowRegion
+         id="flowRegion4148-1"><rect
+           id="rect4150-6"
+           width="186.8421"
+           height="52.631573"
+           x="144.73685"
+           y="401.04642"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:monospace;-inkscape-font-specification:monospace;fill:#333333" /></flowRegion><flowPara
+         id="flowPara4152-5"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#333333">T</flowPara></flowRoot>    <g
+       id="g4689">
+      <circle
+         inkscape:export-ydpi="45.000027"
+         inkscape:export-xdpi="45.000027"
+         inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/chart_size.png"
+         r="8"
+         cy="565.67853"
+         cx="214.04955"
+         id="path4263"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#333333;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <circle
+         inkscape:export-ydpi="45.000027"
+         inkscape:export-xdpi="45.000027"
+         inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/chart_size.png"
+         r="15.5"
+         cy="558.17853"
+         cx="242.23373"
+         id="path4263-7"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#333333;stroke-width:4.00000048;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <circle
+         inkscape:export-ydpi="45.000027"
+         inkscape:export-xdpi="45.000027"
+         inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/chart_size.png"
+         r="23"
+         cy="550.67853"
+         cx="285.41794"
+         id="path4263-7-8"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#333333;stroke-width:3.99999976;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4651"
+       inkscape:export-xdpi="37.681789"
+       inkscape:export-ydpi="37.681789">
+      <circle
+         r="17.5"
+         cy="557.67853"
+         cx="393.71216"
+         id="path4295"
+         style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#333333;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <circle
+         r="17.5"
+         cy="533.96796"
+         cx="426.6398"
+         id="path4295-5"
+         style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#333333;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <circle
+         r="17.5"
+         cy="557.67853"
+         cx="459.56744"
+         id="path4295-5-9"
+         style="opacity:1;fill:#008000;fill-opacity:1;stroke:#333333;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4618"
+       inkscape:export-xdpi="63.261726"
+       inkscape:export-ydpi="63.261726"
+       style="fill:#333333"
+       inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/data_datetime.png">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4367"
+         d="M 96.647672,365.53111 C 96.32289,365.37107 95.842714,364.959 95.5806,364.61542 l -0.476552,-0.62468 -0.04829,-11.17367 -0.04829,-11.17368 15.658062,0 15.65808,0 -0.0483,11.17368 -0.0483,11.17367 -0.47903,0.62794 c -0.97198,1.2741 -0.1946,1.21198 -15.10921,1.20747 -12.042861,-0.004 -13.460184,-0.0336 -13.990866,-0.29504 z m 6.192598,-4.68054 0,-2.84551 -2.845514,0 -2.845497,0 0,2.84551 0,2.84551 2.845497,0 2.845514,0 0,-2.84551 z m 7.11377,0 0,-2.84551 -2.84551,0 -2.84551,0 0,2.84551 0,2.84551 2.84551,0 2.84551,0 0,-2.84551 z m 7.11376,0 0,-2.84551 -2.84551,0 -2.8455,0 0,2.84551 0,2.84551 2.8455,0 2.84551,0 0,-2.84551 z m 7.11377,0 0,-2.84551 -2.84551,0 -2.8455,0 0,2.84551 0,2.84551 2.8455,0 2.84551,0 0,-2.84551 z m -21.3413,-7.11376 0,-2.84551 -2.845514,0 -2.845497,0 0,2.84551 0,2.84551 2.845497,0 2.845514,0 0,-2.84551 z m 7.11377,0 0,-2.84551 -2.84551,0 -2.84551,0 0,2.84551 0,2.84551 2.84551,0 2.84551,0 0,-2.84551 z m 7.11376,0 0,-2.84551 -2.84551,0 -2.8455,0 0,2.84551 0,2.84551 2.8455,0 2.84551,0 0,-2.84551 z m 7.11377,0 0,-2.84551 -2.84551,0 -2.8455,0 0,2.84551 0,2.84551 2.8455,0 2.84551,0 0,-2.84551 z m -21.3413,-7.11378 0,-2.8455 -2.845514,0 -2.845497,0 0,2.8455 0,2.84551 2.845497,0 2.845514,0 0,-2.84551 z m 7.11377,0 0,-2.8455 -2.84551,0 -2.84551,0 0,2.8455 0,2.84551 2.84551,0 2.84551,0 0,-2.84551 z m 7.11376,0 0,-2.8455 -2.84551,0 -2.8455,0 0,2.8455 0,2.84551 2.8455,0 2.84551,0 0,-2.84551 z m 7.11377,0 0,-2.8455 -2.84551,0 -2.8455,0 0,2.8455 0,2.84551 2.8455,0 2.84551,0 0,-2.84551 z m -29.137721,-8.32871 c 0.05539,-1.77025 0.09899,-1.97716 0.539232,-2.55372 0.805042,-1.05436 1.361796,-1.21097 4.305185,-1.21097 l 2.596314,0 0,-1.77845 c 0,-1.54131 0.0475,-1.82587 0.35569,-2.13412 0.45284,-0.45284 0.96991,-0.45284 1.42275,0 0.30826,0.30825 0.35569,0.59281 0.35569,2.13412 l 0,1.77845 6.04669,0 6.04671,0 0,-1.77845 c 0,-1.54131 0.0474,-1.82587 0.35569,-2.13412 0.19563,-0.19564 0.51575,-0.35569 0.71137,-0.35569 0.19564,0 0.51577,0.16005 0.71139,0.35569 0.30825,0.30825 0.35569,0.59281 0.35569,2.13412 l 0,1.77845 2.59631,0 c 2.94338,0 3.50015,0.15661 4.30519,1.21097 0.44021,0.57656 0.4839,0.78347 0.53922,2.55372 l 0.0602,1.92632 -15.68177,0 -15.681749,0 0.06021,-1.92632 z m 9.951461,0.52449 c 0.90896,-0.90894 0.96472,-1.84795 0.16214,-2.73024 l -0.52831,-0.5808 -0.005,1.11153 c -0.006,1.20576 -0.36868,1.8229 -1.07228,1.8229 -0.69456,0 -1.06706,-0.61888 -1.06706,-1.77286 0,-1.17734 -0.22517,-1.287 -0.76525,-0.37271 -0.8461,1.43233 0.19735,3.19621 1.89769,3.20791 0.56511,0.004 0.81104,-0.1185 1.37829,-0.68573 z m 14.22754,0 c 0.90895,-0.90894 0.96471,-1.84795 0.16215,-2.73024 l -0.52832,-0.5808 -0.005,1.11153 c -0.006,1.20576 -0.36868,1.8229 -1.07228,1.8229 -0.69456,0 -1.06707,-0.61888 -1.06707,-1.77286 0,-1.17734 -0.22515,-1.287 -0.76524,-0.37271 -0.84611,1.43233 0.19735,3.19621 1.89769,3.20791 0.56511,0.004 0.81103,-0.1185 1.3783,-0.68573 z"
+         style="fill:#333333" />
+    </g>
+    <rect
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:#333333;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4369-0"
+       width="2.1276596"
+       height="55.319153"
+       x="573.05084"
+       y="-125.53189"
+       transform="matrix(0,1,-1,0,0,0)"
+       inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/chart_position.png"
+       inkscape:export-xdpi="50.429203"
+       inkscape:export-ydpi="50.429203" />
+    <rect
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:#333333;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4369-0-8"
+       width="2.1276596"
+       height="43.617027"
+       x="-72.340416"
+       y="-575.17853"
+       transform="scale(-1,-1)"
+       inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/chart_position.png"
+       inkscape:export-xdpi="50.429203"
+       inkscape:export-ydpi="50.429203" />
+    <g
+       id="g4560"
+       transform="matrix(1.3199999,0,0,1.3199999,-501.40422,-499.85442)"
+       inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/chart_position.png"
+       inkscape:export-xdpi="50.429203"
+       inkscape:export-ydpi="50.429203">
+      <rect
+         transform="scale(-1,-1)"
+         y="-809.2771"
+         x="-453.6933"
+         height="26.595751"
+         width="1.0036131"
+         id="rect4369-0-8-8-0"
+         style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.75757581;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         transform="matrix(0,-1,1,0,0,0)"
+         y="439.89362"
+         x="-796.48102"
+         height="26.595751"
+         width="1.0036131"
+         id="rect4369-0-8-8-4-8"
+         style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.75757581;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <circle
+         r="8.0138502"
+         cy="795.97925"
+         cx="453.1915"
+         id="path4519-4"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#1a1a1a;stroke-width:1.8939395;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4638"
+       transform="translate(237.23403,-98.161964)"
+       inkscape:export-xdpi="47.665535"
+       inkscape:export-ydpi="47.665535"
+       style="fill:#333333">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4576"
+         d="m 325.10526,673.64399 -3.29093,-0.0858 -9.09333,-6.99118 -9.09334,-6.99116 0,-9.34683 0,-9.34684 9.26655,-7.12253 9.26654,-7.12252 37.23938,-5.3e-4 c 20.48166,-2.3e-4 39.46075,0.0778 42.17577,0.17345 l 4.93639,0.17386 0,23.42831 0,23.4283 -39.05805,-0.0553 c -21.48194,-0.0304 -40.53898,-0.094 -42.34898,-0.14123 z m 80.12267,-23.19643 c 0.11752,-12.42609 0.18176,-22.61308 0.14281,-22.63776 -0.039,-0.0247 -18.69922,-0.10425 -41.46722,-0.17683 l -41.39632,-0.13194 -8.77229,6.71624 -8.77231,6.71624 -0.1837,9.05255 -0.18371,9.05254 8.9567,6.86624 8.95671,6.86623 33.42815,0.0693 c 18.38547,0.0381 36.94925,0.0988 41.25285,0.1347 l 7.82472,0.0653 0.21364,-22.59289 z m -91.7275,4.21978 c -3.53697,-1.25679 -4.74399,-4.30159 -2.83149,-7.14258 1.18956,-1.76707 4.44981,-2.79635 7.09468,-2.23984 1.86539,0.3925 4.05735,1.88889 4.59121,3.13428 1.80531,4.21144 -3.68434,8.08522 -8.8544,6.24814 z m 4.88406,-0.80421 c 2.87488,-1.00519 3.97452,-3.47169 2.49571,-5.59787 -0.99273,-1.42731 -2.62739,-2.16171 -4.81164,-2.16171 -4.78615,0 -6.94845,4.55338 -3.3803,7.11825 1.68267,1.20955 3.48932,1.41296 5.69623,0.64133 z"
+         style="fill:#333333" />
+      <flowRoot
+         transform="matrix(0.78759896,0,0,0.78759896,112.97099,29.547245)"
+         style="font-style:normal;font-weight:normal;font-size:32.3583374px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4578"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4580"><rect
+             y="767.534"
+             x="279.47327"
+             height="52.496235"
+             width="159.2099"
+             id="rect4582"
+             style="fill:#333333" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Cabin;-inkscape-font-specification:Cabin;fill:#333333"
+           id="flowPara4584">Label</flowPara></flowRoot>    </g>
+  </g>
+</svg>

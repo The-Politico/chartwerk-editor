@@ -408,6 +408,19 @@ export default React.createClass({
       data={this.getQuantizeData()}
     />) : null;
 
+    const smallIconStyle = {
+      height: '16px',
+      margin: '0 3px',
+    };
+
+    const largeIconStyle = {
+      height: '25px',
+      border: '1px solid grey',
+      borderRadius: '4px',
+      padding: '4px 5px',
+      marginRight: '5px',
+    };
+
     return (
       <div>
         <hr />
@@ -446,49 +459,202 @@ export default React.createClass({
           <i className="fa fa-times" onClick={() => this.setState({ helpModal: false })}></i>
           <div id="data-help-modal-content">
             <p>Describing your data columns tells Chartwerk how to translate your data
-              into the chart features they are meant to represent.
-              To do that, you can use a very simple grammar:
+              into the chart features they are meant to represent. To make that translation,
+              you need to be aware of both sides of the equation: what type of
+              data your column contains and what chart feature that data should
+              be translated to.
+            </p>
+            <p>Data types include <b>datetime</b> (
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_datetime.png`}
+                alt="datetime data"
+                style={smallIconStyle}
+              />), <b>categorical</b> (
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_categorical.png`}
+                alt="categorical data"
+                style={smallIconStyle}
+              />
+              ) or <b>numerical</b> (
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_numerical.png`}
+                alt="numerical data"
+                style={smallIconStyle}
+              />
+              ) data.
+            </p>
+            <p>
+              Chart features can either <b>position</b> (
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_position.png`}
+                alt="position chart elements"
+                style={smallIconStyle}
+              />
+              ), <b>color</b> (
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_color.png`}
+                alt="color chart elements"
+                style={smallIconStyle}
+              />
+              ), <b>size</b> (
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_size.png`}
+                alt="size chart elements"
+                style={smallIconStyle}
+              />
+              ), or be used to <b>annotate</b> (
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_label.png`}
+                alt="label chart elements"
+                style={smallIconStyle}
+              />
+              ) chart elements.
+            </p>
+            <p>
+              Once you know what data you're working with and what chart features
+              they should represent, you can classify your columns using this
+              simple grammar:
             </p>
             <h4>Base axis</h4>
             <p>A column classified as a base axis often contains data like
               dates or categorical values. These are values <em>by
               which</em> numeric data are charted. Stock prices <em>by day</em>.
-              Mortality rates <em>by state</em>. For scatterplots, the base axis
-              will contain numeric data plotted along the X axis.
+              Mortality rates <em>by state</em>.
+            </p>
+            <p>Data types can be <b>datetime</b>, <b>categorical</b> or <b>numerical</b>
+              &nbsp;(scatterplots), which will be used to <b>position</b> chart
+              elements.
+            </p>
+            <p>
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_datetime.png`}
+                alt="datatime data"
+                style={largeIconStyle}
+              />
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_categorical.png`}
+                alt="categorical data"
+                style={largeIconStyle}
+              />
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_numerical.png`}
+                alt="numerical data"
+                style={largeIconStyle}
+              />| <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_position.png`}
+                alt="position chart elements"
+                style={largeIconStyle}
+              />
             </p>
             <h4>Value axis</h4>
             <p>
-              A single column, always of naked numeric data, used to position data
+              A single column, always of numeric data, used to position data
               points on the chart.
+            </p>
+            <p>
+              Data can only be <b>numerical</b>, which will be used
+              to <b>position</b> chart elements.
+            </p>
+            <p>
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_numerical.png`}
+                alt="numerical data"
+                style={largeIconStyle}
+              />| <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_position.png`}
+                alt="position chart elements"
+                style={largeIconStyle}
+              />
             </p>
             <h4>Scale axis</h4>
             <p>
-              A single column of numeric or categorical data used to set the
-              size or color of data points.
+              A single column of numerical or categorical data used to set the
+              color or size of data points.
+            </p>
+            <p>
+              Data types can inlude <b>categorical</b> or <b>numerical</b> data,
+              which will be used to <b>color</b> or <b>size</b> chart elements.
+            </p>
+            <p>
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_categorical.png`}
+                alt="categorical data"
+                style={largeIconStyle}
+              />
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_numerical.png`}
+                alt="numerical data"
+                style={largeIconStyle}
+              />| <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_color.png`}
+                alt="color chart elements"
+                style={largeIconStyle}
+              />
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_size.png`}
+                alt="size chart elements"
+                style={largeIconStyle}
+              />
             </p>
             <h4>Data series</h4>
             <p>
-              Often you structure your data such that a column represents
-              both the position and color of data points. These data are in the form
-              of a crosstab, where each column is a subgroup, or series, of the
-              same data. For example, a column of stock prices for Company A and
-              another for Company B. In this way, data series columns are a
-              shortcut for a value axis and categorical scale axis (mutually
-              exclusive options).
+              Often your data is structured so that a column represents
+              both the position <em>and</em> color of your data points. These
+              data are cross-tabbed, so each column is a subgroup, or series,
+              of the same numeric type. For example, a column of stock prices
+              for Company A and another for Company B. Data series columns are a
+              shortcut for a value axis and a (categorical) scale axis.
             </p>
             <p>
-              Data series always contain naked numeric data, and each column
-              represents a categorical color.
+              Data can only be <b>numerical</b>, which will be used to both <b>position</b>
+              &nbsp;and <b>color</b> chart elements by column.
+            </p>
+            <p>
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_numerical.png`}
+                alt="numerical data"
+                style={largeIconStyle}
+              />| <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_position.png`}
+                alt="position chart elements"
+                style={largeIconStyle}
+              />and&nbsp;
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_color.png`}
+                alt="annotate chart elements"
+                style={largeIconStyle}
+              />
             </p>
             <h4>Faceting column</h4>
             <p>
               Faceting columns always contain categorical data used to create
-              subgroups of data that are drawn in faceted, or small-multiple,
+              subgroups of data that are drawn as faceted, or small-multiple,
               charts.
+            </p>
+            <p>
+              Data can only be <b>categorical</b>.
+            </p>
+            <p>
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/data_categorical.png`}
+                alt="categorical data"
+                style={largeIconStyle}
+              />
             </p>
             <h4>Annotation column</h4>
             <p>Some charts allow you to include a column of annotations used in
             tooltips or other labels for each data point.</p>
+            <p>
+              Data can be any textual notes, which will be
+              used to annotate data points.
+            </p>
+            <p>
+              <img
+                src={`${window.chartwerkConfig.static_prefix}img/icons/chart_label.png`}
+                alt="annotate chart elements"
+                style={largeIconStyle}
+              />
+            </p>
             <h4>Ignored column</h4>
             <p>Sure, you could've just not copied that column over, but why not be really
             explicit about it.</p>
