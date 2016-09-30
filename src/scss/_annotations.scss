@@ -66,13 +66,15 @@
       text-align: right;
     }
 
-    // Font size
-    &.s .inner > p{
-      font: 10px/12px arial, sans-serif;
+    // Default Font size
+    &.s p{
+      font-size: 11px;
+      line-height: 12px;
     }
 
-    &.m .inner > p{
-      font: 12px/13px arial, sans-serif;
+    &.m p{
+      font-size: 13px;
+      line-height: 14px;
     }
 
 

@@ -1,3 +1,3 @@
-import renderer from './client/';
+import renderer from './client/index.js';
 
 renderer.render();
