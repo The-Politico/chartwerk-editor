@@ -86,7 +86,7 @@ A 2-column dataset of percent of executive jobs held by women by company.
 
 A 2-column dataset of leading causes of death among 100 teens.
 
-- `Cause of death` -> base axis
+- `Cause of death` -> scale axis (color)
 - `Number of dead` -> value axis
 
 #### Line chart
