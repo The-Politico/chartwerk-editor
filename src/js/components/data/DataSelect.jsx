@@ -240,7 +240,8 @@ export default React.createClass({
     const werk = this.props.werk;
     const column = werk.datamap.scale && !werk.axes.color.quantize ?
       werk.datamap.scale : werk.datamap.facet;
-    const groups = _.uniq(werk.data.map((datum) => datum[column]));
+    // Ternary prevents ColorPicker being initialized on an array with undefined members.
+    const groups = column ? _.uniq(werk.data.map((datum) => datum[column])) : [];
     groups.sort();
 
     if (groups.length > 8) {
@@ -484,7 +485,7 @@ export default React.createClass({
               ) data.
             </p>
             <p>
-              Chart features can either <b>position</b> (
+              Chart features represent the <b>position</b> (
               <img
                 src={`${window.chartwerkConfig.static_prefix}img/icons/chart_position.png`}
                 alt="position chart elements"
@@ -502,13 +503,13 @@ export default React.createClass({
                 alt="size chart elements"
                 style={smallIconStyle}
               />
-              ), or be used to <b>annotate</b> (
+              ), or <b>annotations</b> (
               <img
                 src={`${window.chartwerkConfig.static_prefix}img/icons/chart_label.png`}
                 alt="label chart elements"
                 style={smallIconStyle}
               />
-              ) chart elements.
+              ) associated with data points.
             </p>
             <p>
               Once you know what data you're working with and what chart features
@@ -522,8 +523,7 @@ export default React.createClass({
               Mortality rates <em>by state</em>.
             </p>
             <p>Data types can be <b>datetime</b>, <b>categorical</b> or <b>numerical</b>
-              &nbsp;(scatterplots), which will be used to <b>position</b> chart
-              elements.
+              &nbsp;(scatterplots), which will be used to <b>position</b> data points.
             </p>
             <p>
               <img
@@ -553,7 +553,7 @@ export default React.createClass({
             </p>
             <p>
               Data can only be <b>numerical</b>, which will be used
-              to <b>position</b> chart elements.
+              to <b>position</b> data points.
             </p>
             <p>
               <img
@@ -568,12 +568,8 @@ export default React.createClass({
             </p>
             <h4>Scale axis</h4>
             <p>
-              A single column of numerical or categorical data used to set the
-              color or size of data points.
-            </p>
-            <p>
-              Data types can inlude <b>categorical</b> or <b>numerical</b> data,
-              which will be used to <b>color</b> or <b>size</b> chart elements.
+              A single column of <b>categorical</b> or <b>numerical</b> data,
+              which will be used to <b>color</b> or <b>size</b> data points.
             </p>
             <p>
               <img
@@ -607,7 +603,7 @@ export default React.createClass({
             </p>
             <p>
               Data can only be <b>numerical</b>, which will be used to both <b>position</b>
-              &nbsp;and <b>color</b> chart elements by column.
+              &nbsp;and <b>color</b> data points by column.
             </p>
             <p>
               <img
