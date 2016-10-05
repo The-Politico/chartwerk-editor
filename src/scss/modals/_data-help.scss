@@ -1,19 +1,24 @@
 #data-help-modal-content{
   padding:20px 0;
 
-  p:first-child{
-    font-size: 14px;
-  }
+
   p{
-    font-size: 14px;
+    font-size: 18px;
+    line-height: 27px;
   }
+
+  img{
+    display:block;
+    margin: 15px auto 25px;
+  }
+
   h4{
     background-color:$grey;
     color:white;
     padding:2px 4px;
     display:inline-block;
     border-radius: 2px;
-    font-size: 16px;
+    font-size: 20px;
   }
 
 }

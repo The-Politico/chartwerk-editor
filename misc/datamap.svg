@@ -74,8 +74,8 @@
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:monospace;-inkscape-font-specification:monospace;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        transform="translate(277.0939,-79.290934)"
        inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/data_categorical.png"
-       inkscape:export-xdpi="68.34742"
-       inkscape:export-ydpi="68.34742"><flowRegion
+       inkscape:export-xdpi="81.241188"
+       inkscape:export-ydpi="81.241188"><flowRegion
          id="flowRegion4148-1"><rect
            id="rect4150-6"
            width="186.8421"
@@ -84,7 +84,7 @@
            y="401.04642"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:monospace;-inkscape-font-specification:monospace;fill:#333333" /></flowRegion><flowPara
          id="flowPara4152-5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#333333">T</flowPara></flowRoot>    <g
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#333333">C</flowPara></flowRoot>    <g
        id="g4689">
       <circle
          inkscape:export-ydpi="45.000027"
@@ -200,30 +200,29 @@
          id="path4519-4"
          style="opacity:1;fill:none;fill-opacity:1;stroke:#1a1a1a;stroke-width:1.8939395;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
-    <g
-       id="g4638"
-       transform="translate(237.23403,-98.161964)"
+    <path
+       style="fill:#000000"
+       d="m 560.56265,575.48203 -3.01869,-0.0858 -8.34113,-6.99118 -8.34114,-6.99116 0,-9.34683 0,-9.34684 8.50001,-7.12253 8.50003,-7.12252 34.15892,-5.3e-4 c 18.78742,-2.3e-4 36.19655,0.0778 38.68698,0.17345 l 4.52804,0.17386 0,23.42831 0,23.4283 -35.82716,-0.0553 c -19.70494,-0.0304 -37.18557,-0.094 -38.84586,-0.14123 z m 73.49491,-23.19643 c 0.10789,-12.42609 0.16674,-22.61308 0.13105,-22.63776 -0.0358,-0.0247 -17.15241,-0.10425 -38.03704,-0.17683 l -37.97201,-0.13194 -8.04663,6.71624 -8.04668,6.71624 -0.16849,9.05255 -0.16852,9.05254 8.2158,6.86624 8.21581,6.86623 30.66296,0.0693 c 16.86464,0.0381 33.89281,0.0988 37.84041,0.1347 l 7.17745,0.0653 0.19598,-22.59289 z m -84.13978,4.21978 c -3.24438,-1.25679 -4.35157,-4.30159 -2.59726,-7.14258 1.09116,-1.76707 4.08172,-2.79635 6.5078,-2.23984 1.71109,0.3925 3.72174,1.88889 4.21143,3.13428 1.65596,4.21144 -3.37957,8.08522 -8.12197,6.24814 z m 4.48006,-0.80421 c 2.63707,-1.00519 3.64575,-3.47169 2.28925,-5.59787 -0.9106,-1.42731 -2.41004,-2.16171 -4.41361,-2.16171 -4.39024,0 -6.37368,4.55338 -3.10069,7.11825 1.54349,1.20955 3.20069,1.41296 5.22505,0.64133 z"
+       id="path4576"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/chart_label.png"
        inkscape:export-xdpi="47.665535"
-       inkscape:export-ydpi="47.665535"
-       style="fill:#333333">
-      <path
-         inkscape:connector-curvature="0"
-         id="path4576"
-         d="m 325.10526,673.64399 -3.29093,-0.0858 -9.09333,-6.99118 -9.09334,-6.99116 0,-9.34683 0,-9.34684 9.26655,-7.12253 9.26654,-7.12252 37.23938,-5.3e-4 c 20.48166,-2.3e-4 39.46075,0.0778 42.17577,0.17345 l 4.93639,0.17386 0,23.42831 0,23.4283 -39.05805,-0.0553 c -21.48194,-0.0304 -40.53898,-0.094 -42.34898,-0.14123 z m 80.12267,-23.19643 c 0.11752,-12.42609 0.18176,-22.61308 0.14281,-22.63776 -0.039,-0.0247 -18.69922,-0.10425 -41.46722,-0.17683 l -41.39632,-0.13194 -8.77229,6.71624 -8.77231,6.71624 -0.1837,9.05255 -0.18371,9.05254 8.9567,6.86624 8.95671,6.86623 33.42815,0.0693 c 18.38547,0.0381 36.94925,0.0988 41.25285,0.1347 l 7.82472,0.0653 0.21364,-22.59289 z m -91.7275,4.21978 c -3.53697,-1.25679 -4.74399,-4.30159 -2.83149,-7.14258 1.18956,-1.76707 4.44981,-2.79635 7.09468,-2.23984 1.86539,0.3925 4.05735,1.88889 4.59121,3.13428 1.80531,4.21144 -3.68434,8.08522 -8.8544,6.24814 z m 4.88406,-0.80421 c 2.87488,-1.00519 3.97452,-3.47169 2.49571,-5.59787 -0.99273,-1.42731 -2.62739,-2.16171 -4.81164,-2.16171 -4.78615,0 -6.94845,4.55338 -3.3803,7.11825 1.68267,1.20955 3.48932,1.41296 5.69623,0.64133 z"
-         style="fill:#333333" />
-      <flowRoot
-         transform="matrix(0.78759896,0,0,0.78759896,112.97099,29.547245)"
-         style="font-style:normal;font-weight:normal;font-size:32.3583374px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         id="flowRoot4578"
-         xml:space="preserve"><flowRegion
-           id="flowRegion4580"><rect
-             y="767.534"
-             x="279.47327"
-             height="52.496235"
-             width="159.2099"
-             id="rect4582"
-             style="fill:#333333" /></flowRegion><flowPara
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Cabin;-inkscape-font-specification:Cabin;fill:#333333"
-           id="flowPara4584">Label</flowPara></flowRoot>    </g>
-  </g>
+       inkscape:export-ydpi="47.665535" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4146-4-6"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:monospace;-inkscape-font-specification:monospace;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(1.1134752,0,0,1.1134752,417.54385,77.904443)"
+       inkscape:export-filename="/home/jon/DMN/Scripts/django-chartwerk/chartwerk/static/chartwerk/img/icons/chart_label.png"
+       inkscape:export-xdpi="47.665535"
+       inkscape:export-ydpi="47.665535"><flowRegion
+         id="flowRegion4148-1-9"><rect
+           id="rect4150-6-4"
+           width="186.8421"
+           height="52.631573"
+           x="144.73685"
+           y="401.04642"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:monospace;-inkscape-font-specification:monospace;fill:#333333" /></flowRegion><flowPara
+         id="flowPara4152-5-8"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#333333">A</flowPara></flowRoot>  </g>
 </svg>
