@@ -1,5 +1,5 @@
 import React from 'react';
-import colors, { black } from '../../constants/colors';
+import colors, { black, white } from '../../constants/colors';
 import _ from 'lodash';
 
 export default React.createClass({
@@ -53,9 +53,19 @@ export default React.createClass({
         style={{ backgroundColor: black }}
         onClick={this.selectColor}
       ></div>
-  );
+    );
+
+    const defaultWhite = (
+      <div
+        className="color-square"
+        color={white}
+        style={{ backgroundColor: white }}
+        onClick={this.selectColor}
+      ></div>
+    );
 
     choices.unshift(defaultBlack);
+    choices.push(defaultWhite);
 
     const picker = this.state.pickerVisible ?
       <div className="colorpicker-panel clearfix">

@@ -122,3 +122,4 @@ export default {
 };
 
 export const black = '#2d3035'; // Used as default color for annotation text
+export const white = '#ffffff';
