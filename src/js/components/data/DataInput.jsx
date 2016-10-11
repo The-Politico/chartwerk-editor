@@ -69,6 +69,7 @@ export default React.createClass({
      */
     function parse(format, jsonObj) {
       actions.attachData(jsonObj);
+      actions.setHeaderSort(Object.keys(jsonObj[0]));
       this.setState({ format });
     }
 

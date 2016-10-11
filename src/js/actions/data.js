@@ -85,3 +85,8 @@ export const attachData = data => ({
   type: types.ATTACH_DATA,
   data,
 });
+
+export const setHeaderSort = data => ({
+  type: types.SET_HEADER_SORT,
+  data,
+});

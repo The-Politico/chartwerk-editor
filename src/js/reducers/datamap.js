@@ -19,6 +19,7 @@ export default (datamap, action) => {
     facet: null,
     annotations: [],
     ignore: [],
+    sort: [],  // The original sort order of the raw data headers.
   };
 
   if (typeof datamap === 'undefined') {
@@ -82,6 +83,9 @@ export default (datamap, action) => {
     case types.REMOVE_IGNORE:
       _.remove(nextState.ignore,
           n => n === action.column);
+      break;
+    case types.SET_HEADER_SORT:
+      nextState.sort = action.data.slice();
       break;
     case types.RESET_DATAMAP:
       nextState = assign({}, initialState);

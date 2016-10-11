@@ -163,6 +163,8 @@ export default React.createClass({
 
     const newChart = this.state.newChart;
 
+    const component = this;
+
     // If updating an existing chart
     if (window.chartwerkConfig.chart_id && !newChart) {
       waiting();
@@ -229,6 +231,8 @@ export default React.createClass({
             window.location.href = newUrl;
           }, 2000);
         }
+
+        component.forceUpdate(); // Force update to activate embed options.
       })
       .fail(() => {
         reset();
