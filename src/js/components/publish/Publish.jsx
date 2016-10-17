@@ -144,8 +144,52 @@ export default React.createClass({
     }
   },
 
+  getDimensions() {
+    const actions = this.props.actions;
+    const size = this.props.werk.ui.size;
+    const that = this;
+
+    const singleDims = {};
+    const doubleDims = {};
+
+    $('#loading-modal .loading-text span').text('Saving');
+    $('#loading-modal').show();
+
+    if (size === 'single') {
+      singleDims.height = $('#chartwerk').height();
+      singleDims.width = $('#chartwerk').width();
+      actions.changePreview('double');
+      setTimeout(() => {
+        doubleDims.height = $('#chartwerk').height();
+        doubleDims.width = $('#chartwerk').width();
+        actions.changePreview(size);
+      }, 1000); // Allow 1 sec for rendering
+    } else {
+      doubleDims.height = $('#chartwerk').height();
+      doubleDims.width = $('#chartwerk').width();
+      actions.changePreview('single');
+      setTimeout(() => {
+        singleDims.height = $('#chartwerk').height();
+        singleDims.width = $('#chartwerk').width();
+        actions.changePreview(size);
+      }, 1000);
+    }
+
+    setTimeout(() => {
+      const dimensions = {
+        single: singleDims,
+        double: doubleDims,
+      };
+
+      actions.setEmbedDimensions(dimensions);
+
+      that.saveChart();
+    }, 2250);
+  },
+
   saveChart() {
     function reset() {
+      $('#loading-modal').hide();
       $('#save-chart-check').show();
       $('#save-chart-spinner').hide();
     }
@@ -155,10 +199,13 @@ export default React.createClass({
       $('#save-chart-spinner').show();
     }
 
+    const actions = this.props.actions;
+
     const data = JSON.stringify({
       title: this.props.werk.text.title,
       data: this.props.werk,
       author: window.chartwerkConfig.user,
+      embed_data: this.props.werk.embed.dimensions,
     });
 
     const newChart = this.state.newChart;
@@ -413,7 +460,7 @@ export default React.createClass({
           </div>
           <button
             className="btn btn-lg btn-huge"
-            onClick={this.saveChart}
+            onClick={this.getDimensions}
             disabled={!werk.text.title}
           >
             <i id="save-chart-check" className="fa fa-check-circle-o" aria-hidden="true"></i>
@@ -433,7 +480,7 @@ export default React.createClass({
             </label>
           </div>
         </div>
-        <EmbedCode {...this.props} />
+        <EmbedCode {...this.props} location={locations.chart} />
         <div className="fifty-fifty">
           <h4>Download an image</h4>
           <button

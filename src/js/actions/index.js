@@ -6,6 +6,7 @@ import * as templateActions from './template';
 import * as scriptActions from './script';
 import * as apiActions from './api';
 import * as uiActions from './ui';
+import * as embedActions from './embed';
 
 import _ from 'lodash';
 
@@ -17,5 +18,6 @@ export default _.assign({},
   scriptActions,
   apiActions,
   templateActions,
-  uiActions
+  uiActions,
+  embedActions
 );

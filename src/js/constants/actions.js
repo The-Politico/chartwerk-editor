@@ -151,3 +151,7 @@ export const REMOVE_TEMPLATE_TAG = 'REMOVE_TEMPLATE_TAG';
 export const API_UI = 'API_UI';
 export const SET_RAW_DATA = 'SET_RAW_DATA';
 export const CHANGE_PREVIEW = 'CHANGE_PREVIEW';
+
+// EMBED
+export const API_EMBED = 'API_EMBED';
+export const SET_EMBED_DIMENSIONS = 'SET_EMBED_DIMENSIONS';

@@ -10,6 +10,7 @@ import * as marginActions from './margin';
 import * as scriptActions from './script';
 import * as textActions from './text';
 import * as templateActions from './template';
+import * as embedActions from './embed';
 
 
 export function fetchWerk() {
@@ -46,6 +47,9 @@ export function fetchWerk() {
         }
         if (data.template) {
           dispatch(templateActions.apiTemplate(data.template));
+        }
+        if (data.embed) {
+          dispatch(embedActions.apiEmbed(data.embed));
         }
       }
     )

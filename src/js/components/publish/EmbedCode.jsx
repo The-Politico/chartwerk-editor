@@ -5,51 +5,14 @@ export default React.createClass({
   propTypes: {
     actions: React.PropTypes.object,
     werk: React.PropTypes.object,
+    location: React.PropTypes.string,
   },
 
   getInitialState() {
     return {
       single: true,
       code: '',
-      heights: {
-        single: 0,
-        double: 0,
-      },
     };
-  },
-
-  getHeights() {
-    const actions = this.props.actions;
-    const size = this.props.werk.ui.size;
-    const that = this;
-
-    let single = 0;
-    let double = 0;
-
-    if (size === 'single') {
-      single = $('#chartwerk').height();
-      actions.changePreview('double');
-      setTimeout(() => {
-        double = $('#chartwerk').height();
-        actions.changePreview(size);
-      }, 1000); // Allow 1 sec for rendering
-    } else {
-      double = $('#chartwerk').height();
-      actions.changePreview('single');
-      setTimeout(() => {
-        single = $('#chartwerk').height();
-        actions.changePreview(size);
-      }, 1000);
-    }
-
-    setTimeout(() => {
-      that.setState({
-        heights: {
-          single,
-          double,
-        },
-      });
-    }, 2000);
   },
 
   copyVal() {
@@ -61,34 +24,28 @@ export default React.createClass({
     }, 2000);
   },
 
-
   getEmbedCode(size) {
-    const that = this;
-    $('#loading-modal .loading-text span').text('Generating');
-    $('#loading-modal').show();
+    const werk = this.props.werk;
+    const chartURI = window.encodeURIComponent(this.props.location);
 
-    this.getHeights(); // 2 sec round-trip
+    const code = window.chartwerkConfig.oembed === '' ?
+    `<div
+      class="chartwerk"
+      data-id="${window.chartwerkConfig.chart_id}"
+      data-embed="${JSON.stringify(werk.embed.dimensions).replace(/"/g, '&quot;')}"
+      data-size="${size}">
+    </div>
+    <script src="${window.chartwerkConfig.embed_src}"></script>` :
+    `${window.chartwerkConfig.oembed}?url=${chartURI}&size=${size}`;
 
-    setTimeout(() => {
-      const code = `<div
-        class="chartwerk"
-        data-id="${window.chartwerkConfig.chart_id}"
-        data-height-single="${this.state.heights.single}"
-        data-height-double="${this.state.heights.double}"
-        data-size="${size}">
-      </div>
-      <script src="${window.chartwerkConfig.embed_src}"></script>`;
-
-      that.setState({
-        code: code
-          .replace(/[\t\n]/g, '') // Remove whitespaces...
-          .replace(/\s{2}/g, ' ')
-          .replace(/\s{2}/g, ' ')
-          .replace(/\s{2}/g, ' ')
-          .replace(/> </g, '><'),
-      });
-      $('#loading-modal').fadeOut(250);
-    }, 2500);
+    this.setState({
+      code: code
+        .replace(/[\t\n]/g, '') // Remove whitespaces from HTML...
+        .replace(/\s{2}/g, ' ')
+        .replace(/\s{2}/g, ' ')
+        .replace(/\s{2}/g, ' ')
+        .replace(/> </g, '><'),
+    });
   },
 
   render() {

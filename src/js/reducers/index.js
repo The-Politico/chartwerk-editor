@@ -7,6 +7,7 @@ import scripts from './script';
 import template from './template';
 import text from './text';
 import ui from './ui';
+import embed from './embed';
 
 export default combineReducers({
   axes,
@@ -17,4 +18,5 @@ export default combineReducers({
   template,
   text,
   ui,
+  embed,
 });
