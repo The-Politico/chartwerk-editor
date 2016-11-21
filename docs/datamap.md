@@ -68,6 +68,8 @@ Faceting columns are always categorical data used to create sub-groups of data f
 
 Annotations are text labels paired with data points. These are often used to pass data to tooltips.
 
+### Ignored column
+
 Users are also given the option to ignore a column in the data, in which case the column is not made available through the datamap API.
 
 ## Examples of the grammar
@@ -128,6 +130,14 @@ A 4-column dataset of state SAT scores.
 - `Student poverty rate` -> scale axis
 - `State name` -> annotation column
 
+#### Boxplots
+
+A 3-column dataset of medical [utilization rates](https://www.cms.gov/research-statistics-data-and-systems/statistics-trends-and-reports/medicare-provider-charge-data/physician-and-other-supplier.html) by doctor by practice specialty.
+
+- `specialty` -> base axis
+- `utilization rate` -> value axis
+- `doctor NPI` -> ignored column
+
 #### Polar line chart
 
 A 3-column dataset comparing two players performance stats.
@@ -153,11 +163,11 @@ A 2-column dataset of states who voted for each political party.
 A 3-column dataset of minority population growth rates by city.
 
 - `Longitude` -> base axis
-- `Latitute` -> value axis
+- `Latitude` -> value axis
 - `Population growth` -> scale axis
 
 A 3-column dataset of cities that are above or below an EPA smog threshold.
 
 - `Longitude` -> base axis
-- `Latitute` -> value axis
+- `Latitude` -> value axis
 - `Above or below` -> scale axis

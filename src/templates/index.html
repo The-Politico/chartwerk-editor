@@ -12,11 +12,11 @@
   window.chartwerkConfig = {
     user: '',
     static_prefix: '',
-    chart_api: '.',
-    chart_id: 'testAPI.json',
-    template_api: '.',
-    template_id: 'testAPI.json',
-    template_tags_api: './testTemplateAPI.json',
+    chart_api: 'http://localhost:25252/api/charts/',
+    chart_id: '',
+    template_api: 'http://localhost:25252/api/templates/',
+    template_id: 'line-chart',
+    template_tags_api: 'http://localhost:25252/api/template-property/',
     oembed: 'http://some-site.com/api/oembed/',
     embed_src: 'http://some-site.com/js/embed.js',
   };
@@ -28,7 +28,6 @@
 {%block content%}
 
 <div class="header">
-    <img src="img/tdmn.png">
     <h1>
         <a href="">Chartwerk</a>
         <span class="header-nav">

@@ -19,6 +19,7 @@ export default (datamap, action) => {
     facet: null,
     annotations: [],
     ignore: [],
+    custom: [],
     sort: [],  // The original sort order of the raw data headers.
   };
 

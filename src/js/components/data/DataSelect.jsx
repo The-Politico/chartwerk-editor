@@ -48,34 +48,71 @@ export default React.createClass({
    */
   setOptions(column) {
     const datamap = this.props.werk.datamap;
-    const opts = [
-      { value: 'base', label: 'base axis', disabled: false },
-      { value: 'value', label: 'value axis', disabled: false },
-      { value: 'scale', label: 'scale axis', disabled: false },
-      { value: 'series', label: 'data series', disabled: false },
-      { value: 'facet', label: 'faceting column', disabled: false },
-      { value: 'annotation', label: 'annotation column' },
-      { value: 'ignore', label: 'ignored column' },
-    ];
+    const ui = this.props.werk.ui;
 
-    opts[0].disabled = datamap.base;
-    opts[1].disabled = datamap.value;
-    opts[2].disabled = datamap.scale;
-    opts[4].disabled = datamap.facet;
-    // Data series are mutually exclusive with value and scale axis.
-    // So if there is more than one data series, or the one data series
-    // is the option set we're getting.
+    // Start with available options
+    const opts = _.filter(ui.datamap, { available: true }).map(d => ({
+      value: d.class,
+      label: d.alias,
+    }));
+
+    /**
+     * DISABLING OPTIONS
+     * We set some hard logic for disabling options based on other
+     * selections below.
+     */
+
+    /**
+     * Disables options for which only one column can be selected, namely,
+     * base, value, scale and facet options.
+     * @param  {string} valueString String that matches value prop on datamap
+     *                              object.
+     * @return {void}
+     */
+    const disableExclusiveOpt = (valueString) => {
+      const i = _.indexOf(opts, _.find(opts, { value: valueString }));
+      if (i === -1) { return; }
+      opts[i].disabled = datamap[valueString];
+    };
+
+    disableExclusiveOpt('base');
+    disableExclusiveOpt('value');
+    disableExclusiveOpt('scale');
+    disableExclusiveOpt('facet');
+
+    /**
+     * Manually set disabled prop. Logic for conditions below.
+     * @param {string} valueString String that matches value prop on datamap
+     *                             object.
+     * @param {boolean} disabled    Whether option should be disabled.
+     */
+    const setDisabled = (valueString, disabled) => {
+      const i = _.indexOf(opts, _.find(opts, { value: valueString }));
+      if (i === -1) { return; }
+      opts[i].disabled = disabled;
+    };
+
+    /**
+     * Data series are mutually exclusive with value and scale axes.
+     * So if there is more than one data series, or there is one data series
+     * but it's not the option set we're creating, disable value and scale.
+     */
     if (
       datamap.series.length > 1 ||
-      (datamap.series[0] !== column && datamap.series.length > 0)
+      (datamap.series.length === 1 && datamap.series[0] !== column)
     ) {
-      // opts.splice(1, 2);
-      opts[1].disabled = true;
-      opts[2].disabled = true;
+      setDisabled('value', true);
+      setDisabled('scale', true);
     }
-    opts[3].disabled = (datamap.value && datamap.scale) ||
+    /**
+     * Disable dataseries when value or scale axis is selected, unless only one
+     * is selected and that is the option set we're creating.
+     */
+    setDisabled('series',
+      (datamap.value && datamap.scale) ||
       (datamap.value && datamap.value !== column) ||
-      (datamap.scale && datamap.scale !== column);
+      (datamap.scale && datamap.scale !== column)
+    );
 
     return opts;
   },

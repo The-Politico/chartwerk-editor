@@ -123,3 +123,78 @@
 .section.section-option.borderless{
   border-bottom:0px;
 }
+
+#template-datamap-options{
+  margin-bottom: 40px;
+  div.data-class-options{
+    margin:5px 0;
+    div{
+      display: inline-block;
+    }
+  }
+  #template-datamap-header{
+    margin-bottom: -12px;
+    div{
+      padding:0 10px;
+      font-weight: bold;
+      small{
+        margin-bottom: 0;
+      }
+    }
+  }
+  .data-class{
+    display: inline-block;
+    width:100px;
+  }
+  .alias{
+    display: inline-block;
+    width:150px;
+  }
+  .remove{
+    display: inline-block;
+    width:50px;
+  }
+  input{
+    display: inline-block;
+    margin: 0 5px;
+    border:0;
+    box-shadow: none;
+    border-bottom: 2px solid $lightgrey;
+    &[readonly]{
+      background-color: #fff;
+      color:$disabledgrey;
+    }
+    &:active, &:focus{
+      border-bottom: 2px solid $blue;
+    }
+  }
+  .available-switch{
+    display:inline-block;
+    width:50px;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-top: 5px;
+    height: 40px;
+    vertical-align: bottom;
+    line-height: 54px;
+    .fa{
+        cursor:pointer;
+        opacity:.6;
+        &.fa-check{
+          color:$green;
+        }
+        &.fa-times{
+          position:inherit;
+          color:$red;
+        }
+        &.notempty{
+          pointer-events: none;
+          color:$lightgrey;
+          opacity:1;
+        }
+        &:hover{
+          opacity:1;
+        }
+    }
+  }
+}
