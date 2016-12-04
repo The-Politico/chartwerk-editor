@@ -4,11 +4,15 @@ import NumericFormat from './NumericFormat.jsx';
 import ShadedRegions from './ShadedRegions';
 
 const ValueAxis = (props) => {
+  const valueLabel = props.werk.datamap.value ?
+    props.werk.ui.datamap.filter(d => d.class === 'value')[0].alias :
+    props.werk.ui.datamap.filter(d => d.class === 'series')[0].alias;
+
   if (props.werk.datamap.series < 1 &&
     !props.werk.datamap.value) {
     return (
       <div>
-        <h4>No value axis or data series selected on the Data tab.</h4>
+        <h4>No {valueLabel} selected on the Data tab.</h4>
         <hr />
       </div>
     );
@@ -16,7 +20,7 @@ const ValueAxis = (props) => {
 
   return (
     <div>
-      <h4>Value axis</h4>
+      <h4>{valueLabel}</h4>
       <NumericFormat {...props} type="value" />
       <ShadedRegions {...props} axis="value" />
       <hr />

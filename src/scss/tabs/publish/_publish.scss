@@ -132,14 +132,42 @@
       display: inline-block;
     }
   }
-  #template-datamap-header{
-    margin-bottom: -12px;
+  .template-datamap-header{
+    margin-bottom: -5px;
     div{
       padding:0 10px;
       font-weight: bold;
       small{
         margin-bottom: 0;
+        font-weight: bold;
       }
+    }
+  }
+  #template-datamap-default{
+    width:350px;
+    display:inline-block;
+    float:left;
+  }
+  #template-datamap-custom{
+    width:350px;
+    display:inline-block;
+    float:left;
+    margin-left: 20px;
+
+    // .click-opts{
+    //   width:130px;
+    //   line-height: 45px;
+    // }
+    .btn-sm{
+      margin-top: 10px;
+    }
+    .btn-sync{
+      margin-left: 10px;
+    }
+    .alert-danger{
+      margin-bottom: 0px;
+      padding:7px 10px;
+      margin-top: 15px;
     }
   }
   .data-class{
@@ -168,7 +196,7 @@
       border-bottom: 2px solid $blue;
     }
   }
-  .available-switch{
+  .click-opts{
     display:inline-block;
     width:50px;
     font-size: 20px;

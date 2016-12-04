@@ -25,3 +25,8 @@ export const setDataClassAlias = (dataClass, alias) => ({
   dataClass,
   alias,
 });
+
+export const syncCustomClasses = (classes) => ({
+  type: types.SYNC_CUSTOM_CLASSES,
+  classes,
+});

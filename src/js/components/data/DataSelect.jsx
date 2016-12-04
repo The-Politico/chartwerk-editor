@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'react-select';
-import Modal from 'react-modal';
 import _ from 'lodash';
 import ellipsize from 'ellipsize';
 import ColorPicker from './ColorPicker';
@@ -56,6 +55,11 @@ export default React.createClass({
       label: d.alias,
     }));
 
+    // Helper to get index of opt object
+    const getOptIndex = (classification) => _.indexOf(
+      opts, _.find(opts, { value: classification })
+    );
+
     /**
      * DISABLING OPTIONS
      * We set some hard logic for disabling options based on other
@@ -70,7 +74,7 @@ export default React.createClass({
      * @return {void}
      */
     const disableExclusiveOpt = (valueString) => {
-      const i = _.indexOf(opts, _.find(opts, { value: valueString }));
+      const i = getOptIndex(valueString);
       if (i === -1) { return; }
       opts[i].disabled = datamap[valueString];
     };
@@ -80,6 +84,16 @@ export default React.createClass({
     disableExclusiveOpt('scale');
     disableExclusiveOpt('facet');
 
+    // All custom classifications are exclusive opts
+    _.forOwn(datamap.custom, (value, classification) => {
+      const i = getOptIndex(classification);
+      /**
+       * If value of datamap custom prop is empty, then do not disable.
+       * If not empty, then check whether value is this column. If not, disable.
+       */
+      opts[i].disabled = value === '' ? false : value !== column;
+    });
+
     /**
      * Manually set disabled prop. Logic for conditions below.
      * @param {string} valueString String that matches value prop on datamap
@@ -87,7 +101,7 @@ export default React.createClass({
      * @param {boolean} disabled    Whether option should be disabled.
      */
     const setDisabled = (valueString, disabled) => {
-      const i = _.indexOf(opts, _.find(opts, { value: valueString }));
+      const i = getOptIndex(valueString);
       if (i === -1) { return; }
       opts[i].disabled = disabled;
     };
@@ -118,19 +132,22 @@ export default React.createClass({
   },
 
   /**
-   * Changes value of Select component via setState
+   * Set value
    * @param  {string} column  column name
-   * @param  {string} v   Value selected
+   * @param  {string} v   Value selected, ie, data classification
    * @returns {void}
    */
   changeValue(column, v) {
     const actions = this.props.actions;
+    const dataClass = this.traverseDatamap(column);
 
     /**
      * Remove the previously selected value from datamap and do any
      * necessary cleanup.
      */
-    switch (this.traverseDatamap(column)) {
+    switch (dataClass) {
+      case null:
+        break;
       case 'base':
         actions.removeBase();
         break;
@@ -150,13 +167,11 @@ export default React.createClass({
       case 'facet':
         actions.removeFacet();
         break;
-      case 'annotation':
-        actions.removeAnnotations(column);
-        break;
       case 'ignore':
         actions.removeIgnore(column);
         break;
       default:
+        actions.setCustomValue(dataClass, '');
         break;
     }
 
@@ -184,21 +199,19 @@ export default React.createClass({
       case 'facet':
         actions.addFacet(column);
         break;
-      case 'annotation':
-        actions.addAnnotations(column);
-        break;
       case 'ignore':
         actions.addIgnore(column);
         break;
       default:
+        actions.setCustomValue(v.value, column);
         break;
     }
   },
 
   /**
-   * Traverses the data map API and returns the type for the column
+   * Traverses the data map API and returns the classification for the column
    * @param  {String} column column name
-   * @return {String}        Data type
+   * @return {String}        Data classification
    */
   traverseDatamap(column) {
     const datamap = this.props.werk.datamap;
@@ -208,10 +221,9 @@ export default React.createClass({
     if (datamap.scale === column) { return 'scale'; }
     if (datamap.series.indexOf(column) > -1) { return 'series'; }
     if (datamap.facet === column) { return 'facet'; }
-    if (datamap.annotations.indexOf(column) > -1) { return 'annotation'; }
     if (datamap.ignore.indexOf(column) > -1) { return 'ignore'; }
-
-    return null;
+    const customClass = _.findKey(datamap.custom, d => d === column);
+    return customClass || null;
   },
 
   /**
@@ -403,7 +415,7 @@ export default React.createClass({
           break;
         default:
           addOption = null;
-          article = 'an';
+          article = 'a';
           break;
       }
 
@@ -450,11 +462,7 @@ export default React.createClass({
       <div>
         <hr />
         <div id="classify-container">
-          <h4>Describe the columns in your data
-            <a id="data-help-prompt"
-              onClick={() => this.setState({ helpModal: true })}
-            >Need help?</a>
-          </h4>
+          <h4>Describe the columns in your data</h4>
           <table id="classify-selects">
             <tbody>
               {classifySelects}
@@ -475,87 +483,6 @@ export default React.createClass({
             </a>
           </h4>
         </div>
-
-        <Modal
-          isOpen={this.state.helpModal}
-          onRequestClose={() => this.setState({ helpModal: false })}
-          style={modalStyles}
-        >
-          <i className="fa fa-times" onClick={() => this.setState({ helpModal: false })}></i>
-          <div id="data-help-modal-content">
-            <p>
-              You need to define your data columns so Chartwerk can interpret
-              them and produce a chart. Here’s a quick guide to help you
-              pick the appropriate definition:
-            </p>
-            <h4>Base axis</h4>
-            <p>
-              This column contains data like dates or names. These are the
-              values <em>by which</em> your numbers are charted. Examples include stock
-              prices <em>by day</em>, mortality rates <em>by state</em> and
-              salaries <em>by profession</em>. This can also be a column
-              of numbers plotted along the X axis in the case of a scatterplot.
-            </p>
-            <p>
-              <img
-                src={`${window.chartwerkConfig.static_prefix}img/icons/base.png`}
-                alt="base axis"
-                style={{ height: '100px' }}
-              />
-            </p>
-            <h4>Value axis</h4>
-            <p>
-              This column contains the numeric data that you're charting. It’s
-              what determines the position of your data points, like the height
-              of your bars or the plot of your line graph.
-            </p>
-            <p>
-              <img
-                src={`${window.chartwerkConfig.static_prefix}img/icons/value.png`}
-                alt="value axis"
-                style={{ height: '100px' }}
-              />
-            </p>
-            <h4>Scale axis</h4>
-            <p>
-              This column has text or values used to color or size your data points.
-            </p>
-            <p>
-              <img
-                src={`${window.chartwerkConfig.static_prefix}img/icons/scale.png`}
-                alt="scale axis"
-                style={{ height: '110px' }}
-              />
-            </p>
-            <h4>Data series</h4>
-            <p>
-              Often your data is structured so that a column represents both
-              the position <em>and</em> color of your data points. Data series columns
-              are a shortcut for a value axis <em>and</em> a (categorical) scale axis.
-            </p>
-            <p>
-              <img
-                src={`${window.chartwerkConfig.static_prefix}img/icons/data_series.png`}
-                alt="data series"
-                style={{ height: '65px' }}
-              />
-            </p>
-            <h4>Faceting column</h4>
-            <p>
-              These columns always contain categorical text used to create
-              subgroups of your data for “small-multiple” charts.
-            </p>
-            <h4>Annotation column</h4>
-            <p>
-              For some chart templates, if you want to add callouts to certain data
-              points, you can designate a column that contains the text used to
-              annotate them.
-            </p>
-            <h4>Ignored column</h4>
-            <p>Sure, you could've just not copied that column over, but why not be really
-            explicit about it.</p>
-          </div>
-        </Modal>
       </div>
 
     );

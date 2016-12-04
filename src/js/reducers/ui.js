@@ -1,62 +1,7 @@
 import * as types from '../constants/actions';
+import defaultDatamap from '../constants/datamap';
 import assign from 'object-assign';
 import _ from 'lodash';
-
-
-/**
- * Default datamap options.
- *
- * Available prop represents whether an option is surfaced to the user
- * in datamap dropdown, while disabled logic in DataSelect.jsx determines
- * whether option should be disabled based on other selections. editableValue
- * prop determines whether value prop is editable, which is false for
- * all defaults.
- * @type {Array}
- */
-const defaultDatamap = [
-  {
-    class: 'base',
-    alias: 'base axis',
-    available: true,
-    editableValue: false,
-  },
-  {
-    class: 'value',
-    alias: 'value axis',
-    available: true,
-    editableValue: false,
-  },
-  {
-    class: 'scale',
-    alias: 'scale axis',
-    available: true,
-    editableValue: false,
-  },
-  {
-    class: 'series',
-    alias: 'data series',
-    available: true,
-    editableValue: false,
-  },
-  {
-    class: 'facet',
-    alias: 'faceting column',
-    available: true,
-    editableValue: false,
-  },
-  {
-    class: 'annotation',
-    alias: 'annotation column',
-    available: true,
-    editableValue: false,
-  },
-  {
-    class: 'ignore',
-    alias: 'ignored column',
-    available: true,
-    editableValue: false,
-  },
-];
 
 
 /**
@@ -94,6 +39,28 @@ export default (ui, action) => {
     return map;
   };
 
+  /**
+   * Parses classes to retain all default class objects
+   * and add new class objects.
+   * @param  {array} classes Incomplete classes array.
+   * @return {array}         New array of classes object.
+   */
+  const syncClasses = (classes) => {
+    const defaultClasses = defaultDatamap.map(d => d.class);
+    const retainClasses = _.filter(nextState.datamap,
+      d => defaultClasses.indexOf(d.class) > -1
+    );
+    const newClasses = classes.slice().map(d => {
+      const fullObject = {
+        class: d.class,
+        alias: d.alias,
+        available: true,
+      };
+      return fullObject;
+    });
+    return retainClasses.concat(newClasses);
+  };
+
   switch (action.type) {
     case types.API_UI:
       nextState = _.merge({}, nextState, action.ui);
@@ -109,6 +76,9 @@ export default (ui, action) => {
       break;
     case types.SET_DATA_CLASS_ALIAS:
       nextState.datamap = setAlias(action.dataClass, action.alias);
+      break;
+    case types.SYNC_CUSTOM_CLASSES:
+      nextState.datamap = syncClasses(action.classes);
       break;
     default:
       return ui;

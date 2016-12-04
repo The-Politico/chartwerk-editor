@@ -30,14 +30,8 @@ export const addSeries = column => ({
   column,
 });
 
-
 export const addFacet = column => ({
   type: types.ADD_FACET,
-  column,
-});
-
-export const addAnnotations = column => ({
-  type: types.ADD_ANNOTATIONS,
   column,
 });
 
@@ -67,11 +61,6 @@ export const removeFacet = () => ({
   type: types.REMOVE_FACET,
 });
 
-export const removeAnnotations = column => ({
-  type: types.REMOVE_ANNOTATIONS,
-  column,
-});
-
 export const removeIgnore = column => ({
   type: types.REMOVE_IGNORE,
   column,
@@ -89,4 +78,15 @@ export const attachData = data => ({
 export const setHeaderSort = data => ({
   type: types.SET_HEADER_SORT,
   data,
+});
+
+export const setCustomKeys = (keys) => ({
+  type: types.SET_CUSTOM_KEYS,
+  keys,
+});
+
+export const setCustomValue = (key, value) => ({
+  type: types.SET_CUSTOM_VALUE,
+  key,
+  value,
 });
