@@ -1,22 +1,35 @@
 # datamap API
 
-Because of the many types of data schema Chartwerk has to ingest while creating charts it's necessary to abstractly represent the relationship between schema and chart.
+Because of the many types of data schema Chartwerk has to parse while creating charts it's necessary to abstractly represent the relationship between schema and chart.
 
-Most common representations of that relationship don't span the gap between these two domains. For example, using a mapping between data columns and traditional X and Y axes is tied too closely to the hard rules of a chart's coordinate plane. What happens when we want to use the same logic in terms of X & Y axes to draw both a horizontal and a vertical bar chart?
+Most common dataviz terms don't span that gap. For example, describing data columns as traditional X and Y axes is tied too closely to the hard rules of a chart's coordinate plane. What happens when we want to use the same logic in terms of X & Y axes to draw both a horizontal and a vertical bar chart?
 
-Chartwerk uses a coarse, high-level grammar to describe tabular data in terms that represent a column-wise mapping to the dimensions of a chart. That grammar describes the schema with the bare minimum information needed to identify chart features.
+Chartwerk introduces a coarse, high-level grammar to describe tabular data in terms that represent a column-wise mapping to the dimensions of a chart. That grammar describes the schema with the bare minimum information needed to identify chart features, like the position or color of chart elements.
 
-There are six ways to classify a data column:
+In practice, the columns of a user's data are classified using the grammar's terms. While the terms are necessarily abstract from the perspective of template developers, in the editor, these classifications can be aliased to terms more familiar to chart creators. Once a user classifies the columns in their data, the editor renders the appropriate controls to specify chart features.
+
+There are six data classifications built in to Chartwerk. Template developers can also add custom data classifications for individual templates.
+
+
+## Default classifications
 
 ### Base axis
 
-A column classified as a base axis most often contains data like time series dates or categorical values. Commonly, these are values _by which_ numeric data are charted. Mortality rates _by occupation_. Stock prices _by company_.
+A data column classified as a base axis most often contains data like time series dates or categorical values. Commonly, these are values _by which_ numeric data are charted. Mortality rates _by occupation_. Stock prices _by company_.
 
 The base axis corresponds to the traditional X axis in the case of horizontal line and bar charts. It can also represent a column of state names used to chart data in a choropleth map or a column of numeric values plotted along the X axis of a scatterplot.
+
+<img src="img/datamap/base.png" style="margin:20px auto; width:300px;" />
+
+The API endpoint for the base axis is  `chartwerk.datamap.base`.
 
 ### Value axis
 
 A value axis is a single column of numeric data used to determine positional attributes of a data point. For example, the height on the Y axis of a point in a scatterplot or the number of units to draw in a unit chart.
+
+<img src="img/datamap/value.png" style="margin:20px auto; width:300px;" />
+
+The API endpoint for the value axis is  `chartwerk.datamap.value`.
 
 ### Scale axis
 
@@ -24,11 +37,19 @@ Scale axis data is used to set the color or size of a data point. It can contain
 
 By design, Chartwerk does not allow for multiple scale axes, for example, scaling a data point by size and color.
 
+<img src="img/datamap/scale.png" style="margin:20px auto; width:300px;" />
+
+The API endpoint for the scale axis is  `chartwerk.datamap.scale`.
+
 ### Data series
 
 Often, it is more natural to keep data in a crosstab format than in a [flat table schema](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#tidy-data) that neatly corresponds to base, value and scale axes. Data series accommodate that convenience.
 
 Data series are crosstabbed columns always containing numeric values, never categorical data. These data are always translated to a positional dimension on the chart _and_ to a categorical color range.
+
+<img src="img/datamap/data_series.png" style="margin:20px auto; width:300px;" />
+
+The API endpoint for data series is  `chartwerk.datamap.series`.
 
 The data series classifications are mutually exclusive with value axis and scale axis options because they contain the same data, simply represented differently in the table schema.
 
@@ -58,19 +79,69 @@ Take, for example, these two table schemas:
 - `Gender` -> scale axis
 - `Age` -> value axis
 
-In the crosstab, the `Male` and `Female` columns will represent both a color and a position, whereas in the flat table, `Gender` is discretely a scale axis and `Age`, a value axis.
+In the crosstab, the `Male` and `Female` columns will represent both a color and a position, whereas in the flat table, `Gender` is a scale axis and `Age`, a value axis.
 
 ### Faceting column
 
 Faceting columns are always categorical data used to create sub-groups of data for small multiples, i.e., faceted charts.
 
-### Annotation column
+The API endpoint for the faceting column is  `chartwerk.datamap.facet`.
 
-Annotations are text labels paired with data points. These are often used to pass data to tooltips.
 
-Users are also given the option to ignore a column in the data, in which case the column is not made available through the datamap API.
+### Ignored column
+
+Users are also given the option to specify columns to ignore in their data.
+
+The API endpoint for ignored columns is  `chartwerk.datamap.ignore`.
+
+### API
+
+`chartwerk.datamap`
+
+```
+{
+  base: 'baseColumn',
+  value: 'valueColumn',
+  scale: 'scaleColumn',
+  series: ['series1', 'series2'],
+  facet: 'facetColumn',
+  ignore: ['ignore1', 'ignore2'],
+  ...
+}
+```
+
+### Aliasing default classifications
+
+While the default classification names are hard-coded into Chartwerk's API, they can be aliased in the editor's interface to terms more familiar to chart creators.
+
+For example, a base axis in a line chart template might be aliased to "X axis." The chart creator would choose the alias from a dropdown, but the chart developer would see the column selected in the API at `chartwerk.datamap.base`.
+
+Aliases are specified in the save template modal on the Publish tab in the editor.
+
+## Custom data classifications
+
+Template creators can specify custom data classifications in the save template modal on the Publish tab in the editor.
+
+Custom data classifications require both a class name and an alias.
+
+Class names will be camel-cased and represented in the API at `chartwerk.datamap.custom.<className>`. They must be unique.
+
+Custom data classifications can only specify a single data column.
+
+### API
+
+`chartwerk.datamap.custom`
+
+```
+{
+  className1: 'Alias 1',
+  className2: 'Alias 2'
+}
+```
 
 ## Examples of the grammar
+
+The following are some examples of the datamap API applied to different chart types.
 
 #### Bar chart
 
@@ -126,7 +197,15 @@ A 4-column dataset of state SAT scores.
 - `Student testing rate` -> base axis
 - `SAT score` -> value axis
 - `Student poverty rate` -> scale axis
-- `State name` -> annotation column
+- `State name` -> custom column 'tooltip'
+
+#### Boxplots
+
+A 3-column dataset of medical [utilization rates](https://www.cms.gov/research-statistics-data-and-systems/statistics-trends-and-reports/medicare-provider-charge-data/physician-and-other-supplier.html) by doctor by practice specialty.
+
+- `specialty` -> base axis
+- `utilization rate` -> value axis
+- `doctor NPI` -> ignored column
 
 #### Polar line chart
 
@@ -153,11 +232,11 @@ A 2-column dataset of states who voted for each political party.
 A 3-column dataset of minority population growth rates by city.
 
 - `Longitude` -> base axis
-- `Latitute` -> value axis
+- `Latitude` -> value axis
 - `Population growth` -> scale axis
 
 A 3-column dataset of cities that are above or below an EPA smog threshold.
 
 - `Longitude` -> base axis
-- `Latitute` -> value axis
+- `Latitude` -> value axis
 - `Above or below` -> scale axis

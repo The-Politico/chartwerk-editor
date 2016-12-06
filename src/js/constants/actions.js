@@ -7,7 +7,6 @@ export const ADD_VALUE = 'ADD_VALUE';
 export const ADD_SCALE = 'ADD_SCALE';
 export const ADD_SERIES = 'ADD_SERIES';
 export const ADD_FACET = 'ADD_FACET';
-export const ADD_ANNOTATIONS = 'ADD_ANNOTATIONS';
 export const ADD_IGNORE = 'ADD_IGNORE';
 
 export const REMOVE_BASE = 'REMOVE_BASE';
@@ -15,8 +14,10 @@ export const REMOVE_VALUE = 'REMOVE_VALUE';
 export const REMOVE_SCALE = 'REMOVE_SCALE';
 export const REMOVE_SERIES = 'REMOVE_SERIES';
 export const REMOVE_FACET = 'REMOVE_FACET';
-export const REMOVE_ANNOTATIONS = 'REMOVE_ANNOTATIONS';
 export const REMOVE_IGNORE = 'REMOVE_IGNORE';
+
+export const SET_CUSTOM_KEYS = 'SET_CUSTOM_KEYS';
+export const SET_CUSTOM_VALUE = 'SET_CUSTOM_VALUE';
 
 export const SET_HEADER_SORT = 'SET_HEADER_SORT';
 
@@ -151,6 +152,9 @@ export const REMOVE_TEMPLATE_TAG = 'REMOVE_TEMPLATE_TAG';
 export const API_UI = 'API_UI';
 export const SET_RAW_DATA = 'SET_RAW_DATA';
 export const CHANGE_PREVIEW = 'CHANGE_PREVIEW';
+export const SET_AVAILABLE_DATA_CLASS = 'SET_AVAILABLE_DATA_CLASS';
+export const SET_DATA_CLASS_ALIAS = 'SET_DATA_CLASS_ALIAS';
+export const SYNC_CUSTOM_CLASSES = 'SYNC_CUSTOM_CLASSES';
 
 // EMBED
 export const API_EMBED = 'API_EMBED';

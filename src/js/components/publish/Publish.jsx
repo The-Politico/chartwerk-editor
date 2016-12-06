@@ -8,6 +8,7 @@ import urljoin from 'url-join';
 import SimpleMDE from './MDEditor';
 import _ from 'lodash';
 import EmbedCode from './EmbedCode';
+import DatamapOpts from './DatamapOpts';
 import inliner from 'svg-style-inliner';
 
 
@@ -519,12 +520,14 @@ export default React.createClass({
           style={modalStyles}
         >
           <i className="fa fa-times" onClick={() => this.setState({ templateModal: false })}></i>
-          <h4>Saving as a template</h4>
-          <p>Template developers can save charts as templates, which allows other
+          <p>
+            <em>Template developers can save charts as templates, which allows other
             users to more easily create similar charts.
+            </em>
           </p>
           <div className="form-group">
-            <label htmlFor="template-title">What's the title of this template?</label>
+            <h4>Metadata</h4>
+            <label htmlFor="template-title">What&rsquo;s the title of this template?</label>
             <input
               type="text"
               className="form-control"
@@ -549,7 +552,9 @@ export default React.createClass({
               }}
             />
           </div>
+          <DatamapOpts {...this.props} />
           <div className="form-group">
+            <h4>Tags</h4>
             <label>Add all appropriate tags for this template.</label>
             <div>
               {templateTags}
@@ -560,7 +565,8 @@ export default React.createClass({
               <strong>Nice werk!</strong> Successfully saved your template.
             </div>
             <div className="alert alert-danger" hidden>
-              <strong>Ack!</strong> There was an error and your template wasn't saved. Try again?
+              <strong>Ack!</strong> There was an error and your
+                template wasn&rsquo;t saved. Try again?
             </div>
           </div>
           <div className="form-group">

@@ -30,13 +30,22 @@
     }
     .key{
       display: inline-block;
-      margin-right: 5px;
+      margin-right: 8px;
       pointer-events: none;
       .key-color, .key-label{
         display:inline-block;
       }
+      .key-color{
+        display:inline-block;
+        width:.8em;
+        height:.8em;
+        margin-top:.05em;
+        float:left;
+        margin-right:2px;
+      }
       .key-label{
         font: $chart-legend-label-font;
+        float:left;
       }
 
       &.quantized{

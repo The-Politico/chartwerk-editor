@@ -46,8 +46,8 @@ export default function () {
         `<div class="key">
           <div
             class="key-color"
-            style="color: ${k.color};"
-          >&#9724;</div>
+            style="background-color: ${k.color};"
+          ></div>
           <div class="key-label">${marked.inlineLexer(k.text, [])}</div>
         </div>`
       :

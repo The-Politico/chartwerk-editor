@@ -5,10 +5,12 @@ import NumericFormat from './NumericFormat';
 import ShadedRegions from './ShadedRegions';
 
 const BaseAxis = (props) => {
+  const baseLabel = props.werk.ui.datamap.filter(d => d.class === 'base')[0].alias;
+
   if (!props.werk.datamap.base) {
     return (
       <div>
-        <h4>Waiting for a base axis from the Data tab.</h4>
+        <h4>Waiting for a {baseLabel} from the Data tab.</h4>
         <hr />
       </div>
     );
@@ -43,10 +45,9 @@ const BaseAxis = (props) => {
   const shadedOpts = props.werk.axes.base.type === 'categorical' ?
     null : (<ShadedRegions {...props} axis="base" />);
 
-
   return (
     <div>
-      <h4>Base axis: <span className="basename">{props.werk.datamap.base}</span></h4>
+      <h4>{baseLabel}: <span className="basename">{props.werk.datamap.base}</span></h4>
       {baseAxis}
       {shadedOpts}
       <hr />

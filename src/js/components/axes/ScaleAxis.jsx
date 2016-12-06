@@ -18,10 +18,12 @@ export default React.createClass({
     const werk = this.props.werk;
     const actions = this.props.actions;
 
+    const scaleLabel = werk.ui.datamap.filter(d => d.class === 'scale')[0].alias;
+
     if (!werk.datamap.scale) {
       return (
         <div>
-          <h4>No scale axis selected on the Data tab.</h4>
+          <h4>No {scaleLabel} selected on the Data tab.</h4>
 
           <div className="guidepost">
             <h4>
@@ -66,7 +68,7 @@ export default React.createClass({
 
     return (
       <div>
-        <h4>Scale axis: <span className="basename">{werk.datamap.scale}</span></h4>
+        <h4>{scaleLabel}: <span className="basename">{werk.datamap.scale}</span></h4>
 
         {prefixSuffix}
 

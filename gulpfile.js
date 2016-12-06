@@ -9,7 +9,8 @@ const gulp = require('./gulp')([
   'server',
   'vendor',
   'docs',
+  'api',
 ]);
 
-gulp.task('build', ['nunjucks', 'sass', 'browserify', 'server']);
+gulp.task('build', ['nunjucks', 'sass', 'browserify', 'server', 'api']);
 gulp.task('default', ['build']);

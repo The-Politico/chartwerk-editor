@@ -14,3 +14,19 @@ export const changePreview = size => ({
   type: types.CHANGE_PREVIEW,
   size,
 });
+
+export const setAvailableDataClass = dataClass => ({
+  type: types.SET_AVAILABLE_DATA_CLASS,
+  dataClass,
+});
+
+export const setDataClassAlias = (dataClass, alias) => ({
+  type: types.SET_DATA_CLASS_ALIAS,
+  dataClass,
+  alias,
+});
+
+export const syncCustomClasses = (classes) => ({
+  type: types.SYNC_CUSTOM_CLASSES,
+  classes,
+});

@@ -17,8 +17,8 @@ export default (datamap, action) => {
     scale: null,
     series: [],
     facet: null,
-    annotations: [],
     ignore: [],
+    custom: {},
     sort: [],  // The original sort order of the raw data headers.
   };
 
@@ -33,7 +33,6 @@ export default (datamap, action) => {
       nextState = _.merge({}, nextState, action.datamap);
       nextState.series = _.uniq(nextState.series);
       nextState.ignore = _.uniq(nextState.ignore);
-      nextState.annotations = _.uniq(nextState.annotations);
       break;
     case types.ADD_BASE:
       nextState.base = action.column;
@@ -54,9 +53,6 @@ export default (datamap, action) => {
     case types.ADD_FACET:
       nextState.facet = action.column;
       break;
-    case types.ADD_ANNOTATIONS:
-      nextState.annotations.push(action.column);
-      break;
     case types.ADD_IGNORE:
       nextState.ignore.push(action.column);
       break;
@@ -76,13 +72,15 @@ export default (datamap, action) => {
     case types.REMOVE_FACET:
       nextState.facet = null;
       break;
-    case types.REMOVE_ANNOTATIONS:
-      _.remove(nextState.annotations,
-          n => n === action.column);
-      break;
     case types.REMOVE_IGNORE:
       _.remove(nextState.ignore,
           n => n === action.column);
+      break;
+    case types.SET_CUSTOM_KEYS:
+      nextState.custom = _.merge({}, action.keys);
+      break;
+    case types.SET_CUSTOM_VALUE:
+      nextState.custom[action.key] = action.value;
       break;
     case types.SET_HEADER_SORT:
       nextState.sort = action.data.slice();

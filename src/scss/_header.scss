@@ -1,9 +1,12 @@
 .header{
 	font-family: 'kraftwerk';
 	background-color: $red;
+	box-shadow: $boxshadowthin;
+	position:relative;
 
 	color: white;
 	padding: 10px 15px 7px;
+
 
     img{
     	width: 130px;
@@ -11,9 +14,9 @@
     }
 
     h1{
-    	font-size: 32px;
+    	font-size: 36px;
     	margin: 0px;
-    	letter-spacing: 2.0px;
+    	letter-spacing: 1.0px;
 
         a{
         	color:white;

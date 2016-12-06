@@ -59,6 +59,7 @@
     "gulp": "^3.9.1",
     "gulp-bundle-assets": "^2.27.1",
     "gulp-documentation": "^2.2.0",
+    "gulp-json-srv": "^1.0.1",
     "gulp-nunjucks-render": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.2.0",

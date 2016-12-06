@@ -15,8 +15,8 @@ module.exports = React.createClass({
       limits: {
         head: 75,
         chat: 200,
-        foot: 100,
-        data: 75,
+        foot: 150,
+        data: 100,
         auth: 50,
       },
     };
