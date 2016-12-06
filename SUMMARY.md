@@ -1,15 +1,8 @@
-# Contents
-
-### Intro
+# Summary
 
 * [README](README.md)
-
-### Chartwerk API
-
-* [The datamap](docs/datamap.md)
-
-### Components
-
+* [datamap API](docs/datamap.md)
 * [Legends](docs/legends.md)
 * [Annotations](docs/annotations.md)
 * [Scripts](docs/scripts.md)
+
