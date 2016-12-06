@@ -57,8 +57,8 @@ export default React.createClass({
         <div className="key" key={i}>
           <div
             className="key-color"
-            style={{ color: key.color }}
-          >&#9724;</div>
+            style={{ backgroundColor: key.color }}
+          ></div>
           <div className="key-label">{marked.inlineLexer(key.text, [])}</div>
         </div>
 
