@@ -10,6 +10,7 @@ In practice, the columns of a user's data are classified using the grammar's ter
 
 There are six data classifications built in to Chartwerk. Template developers can also add custom data classifications for individual templates.
 
+
 ## Default classifications
 
 ### Base axis
