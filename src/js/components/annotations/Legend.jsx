@@ -7,7 +7,6 @@ import _ from 'lodash';
 
 
 export default React.createClass({
-
   propTypes: {
     actions: React.PropTypes.object,
     werk: React.PropTypes.object,
