@@ -5,5 +5,5 @@
 * [Legends](docs/legends.md)
 * [Annotations](docs/annotations.md)
 * [Scripts](docs/scripts.md)
-* What is Chartwerk?
+* [What is Chartwerk?](docs/what_is_chartwerk.md)
 
