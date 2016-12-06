@@ -75,7 +75,7 @@ export default React.createClass({
      */
     const disableExclusiveOpt = (valueString) => {
       const i = getOptIndex(valueString);
-      if (i === -1) { return; }
+      if (i === -1) { return; }  // Skip during API load
       opts[i].disabled = datamap[valueString];
     };
 
@@ -91,6 +91,7 @@ export default React.createClass({
        * If value of datamap custom prop is empty, then do not disable.
        * If not empty, then check whether value is this column. If not, disable.
        */
+      if (i === -1) { return; }  // Skip during API load
       opts[i].disabled = value === '' ? false : value !== column;
     });
 
@@ -102,7 +103,7 @@ export default React.createClass({
      */
     const setDisabled = (valueString, disabled) => {
       const i = getOptIndex(valueString);
-      if (i === -1) { return; }
+      if (i === -1) { return; }  // Skip during API load
       opts[i].disabled = disabled;
     };
 
