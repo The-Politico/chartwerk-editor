@@ -1,6 +1,5 @@
 # chartwerk.text.legend
 
-<img src="../img/screenshots/color_legend.png" class="screenshot" />
 
 The legends API contains properties to help you draw labels. Legends are HTML elements, either flowed above the chart or absolutely positioned within the chart space.
 
@@ -13,6 +12,8 @@ The legends API contains properties to help you draw labels. Legends are HTML el
 - [legend.{single|double}.background](#legend-size-background)
 - [legend.{single|double}.width](#legend-size-width)
 - [legend.{single|double}.position](#legend-size-position)
+
+<img src="../img/screenshots/color_legend.png" class="screenshot" />
 
 #### legend.active {#legend-active}
 
