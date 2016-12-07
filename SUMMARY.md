@@ -12,5 +12,6 @@
    * [Margins](docs/api/margins.md)
    * [Template](docs/api/template.md)
    * [Text](docs/api/text.md)
+   * UI
 * [Chart embeds](docs/embedding.md)
 
