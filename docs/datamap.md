@@ -1,4 +1,19 @@
-# datamap API
+# chartwerk.datamap
+
+- [Data classification grammar](#data-classification) 
+- [Default classifications](#default)
+  - [chartwerk.datamap.base](chartwerk-datamap-base)
+  - [chartwerk.datamap.value](chartwerk-datamap-value)
+  - [chartwerk.datamap.scale](chartwerk-datamap-scale)
+  - [chartwerk.datamap.series](chartwerk-datamap-series)
+  - [chartwerk.datamap.facet](chartwerk-datamap-facet)
+  - [chartwerk.datamap.ignore](chartwerk-datamap-ignore)
+- [Custom classifications](#custom)
+- [API example](#api-example)
+- [Examples of the grammar](#examples)
+
+
+#### Data classification {#data-classification}
 
 Because of the many types of data schema Chartwerk has to parse while creating charts it's necessary to abstractly represent the relationship between schema and chart.
 
@@ -11,45 +26,40 @@ In practice, the columns of a user's data are classified using the grammar's ter
 There are six data classifications built in to Chartwerk. Template developers can also add custom data classifications for individual templates.
 
 
-## Default classifications
+## Default classifications {#default}
 
-### Base axis
+#### chartwerk.datamap.base {#chartwerk-datamap-base}
 
-A data column classified as a base axis most often contains data like time series dates or categorical values. Commonly, these are values _by which_ numeric data are charted. Mortality rates _by occupation_. Stock prices _by company_.
+A data column classified as a **base axis** most often contains data like time series dates or categorical values. Commonly, these are values _by which_ numeric data are charted. Mortality rates _by occupation_. Stock prices _by company_.
 
 The base axis corresponds to the traditional X axis in the case of horizontal line and bar charts. It can also represent a column of state names used to chart data in a choropleth map or a column of numeric values plotted along the X axis of a scatterplot.
 
-<img src="img/datamap/base.png" style="margin:20px auto; width:300px;" />
+<img src="img/datamap/base.png" style="margin:20px auto; width:250px;" />
 
-The API endpoint for the base axis is  `chartwerk.datamap.base`.
 
-### Value axis
+#### chartwerk.datamap.value {#chartwerk-datamap-value}
 
-A value axis is a single column of numeric data used to determine positional attributes of a data point. For example, the height on the Y axis of a point in a scatterplot or the number of units to draw in a unit chart.
+A **value axis** is a single column of numeric data used to determine positional attributes of a data point. For example, the height on the Y axis of a point in a scatterplot or the number of units to draw in a unit chart.
 
-<img src="img/datamap/value.png" style="margin:20px auto; width:300px;" />
+<img src="img/datamap/value.png" style="margin:20px auto; width:250px;" />
 
-The API endpoint for the value axis is  `chartwerk.datamap.value`.
 
-### Scale axis
+#### chartwerk.datamap.scale {#chartwerk-datamap-scale}
 
-Scale axis data is used to set the color or size of a data point. It can contain numeric or categorical data.
+**Scale axis** data is used to set the color or size of a data point. It can contain numeric or categorical data.
 
 By design, Chartwerk does not allow for multiple scale axes, for example, scaling a data point by size and color.
 
-<img src="img/datamap/scale.png" style="margin:20px auto; width:300px;" />
+<img src="img/datamap/scale.png" style="margin:20px auto; width:250px;" />
 
-The API endpoint for the scale axis is  `chartwerk.datamap.scale`.
 
-### Data series
+#### chartwerk.datamap.series {#chartwerk-datamap-series}
 
-Often, it is more natural to keep data in a crosstab format than in a [flat table schema](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#tidy-data) that neatly corresponds to base, value and scale axes. Data series accommodate that convenience.
+Often, it is more natural to keep data in a crosstab format than in a [flat table schema](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#tidy-data) that neatly corresponds to base, value and scale axes. **Data series** accommodate that convenience.
 
 Data series are crosstabbed columns always containing numeric values, never categorical data. These data are always translated to a positional dimension on the chart _and_ to a categorical color range.
 
-<img src="img/datamap/data_series.png" style="margin:20px auto; width:300px;" />
-
-The API endpoint for data series is  `chartwerk.datamap.series`.
+<img src="img/datamap/data_series.png" style="margin:20px auto; width:250px;" />
 
 The data series classifications are mutually exclusive with value axis and scale axis options because they contain the same data, simply represented differently in the table schema.
 
@@ -81,34 +91,18 @@ Take, for example, these two table schemas:
 
 In the crosstab, the `Male` and `Female` columns will represent both a color and a position, whereas in the flat table, `Gender` is a scale axis and `Age`, a value axis.
 
-### Faceting column
+#### chartwerk.datamap.facet {#chartwerk-datamap-facet}
 
-Faceting columns are always categorical data used to create sub-groups of data for small multiples, i.e., faceted charts.
-
-The API endpoint for the faceting column is  `chartwerk.datamap.facet`.
+**Faceting columns** are always categorical data used to create sub-groups of data for small multiples, i.e., faceted charts.
 
 
-### Ignored column
+
+#### chartwerk.datamap.ignore {#chartwerk-datamap-ignore}
 
 Users are also given the option to specify columns to ignore in their data.
 
-The API endpoint for ignored columns is  `chartwerk.datamap.ignore`.
 
-### API
 
-`chartwerk.datamap`
-
-```
-{
-  base: 'baseColumn',
-  value: 'valueColumn',
-  scale: 'scaleColumn',
-  series: ['series1', 'series2'],
-  facet: 'facetColumn',
-  ignore: ['ignore1', 'ignore2'],
-  ...
-}
-```
 
 ### Aliasing default classifications
 
@@ -118,7 +112,7 @@ For example, a base axis in a line chart template might be aliased to "X axis." 
 
 Aliases are specified in the save template modal on the Publish tab in the editor.
 
-## Custom data classifications
+## Custom data classifications {#custom}
 
 Template creators can specify custom data classifications in the save template modal on the Publish tab in the editor.
 
@@ -128,18 +122,24 @@ Class names will be camel-cased and represented in the API at `chartwerk.datamap
 
 Custom data classifications can only specify a single data column.
 
-### API
-
-`chartwerk.datamap.custom`
+### API example {#api-example}
 
 ```
 {
-  className1: 'Alias 1',
-  className2: 'Alias 2'
+  base: 'baseColumn',
+  value: 'valueColumn',
+  scale: 'scaleColumn',
+  series: ['seriesColumn1', 'seriesColumn2'],
+  facet: 'facetColumn',
+  ignore: ['ignoreColumn1', 'ignoreColumn2'],
+  custom: {
+    myCustomClass1: 'customColumn1',
+    myCustomClass2: 'customColumn2',
+  }
 }
 ```
 
-## Examples of the grammar
+## Examples of the grammar {#examples}
 
 The following are some examples of the datamap API applied to different chart types.
 
