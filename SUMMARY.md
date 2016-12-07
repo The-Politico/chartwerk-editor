@@ -10,5 +10,6 @@
    * [Axes](docs/api/axes.md)
    * [Data](docs/api/data.md)
    * [Margins](docs/api/margins.md)
+   * Template
 * [Chart embeds](docs/embedding.md)
 
