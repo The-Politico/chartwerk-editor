@@ -1,12 +1,12 @@
 # chartwerk.scripts
 
-- [scripts.draw](#scripts.draw)
-- [scripts.helper](#scripts.helper)
-- [scripts.styles](#scripts.styles)
-- [scripts.html](#scripts.html)
-- [scripts.dependencies](#scripts.dependencies)
+- [scripts.draw](#scripts-draw)
+- [scripts.helper](#scripts-helper)
+- [scripts.styles](#scripts-styles)
+- [scripts.html](#scripts-html)
+- [scripts.dependencies](#scripts-dependencies)
 
-<a name="scripts.draw" href="#scripts.draw">#</a> scripts.<b>draw</b>
+#### scripts.draw {#scripts-draw}
 
 Contains a single javascript function which must be named `draw`. This function is called by ChartWerk to render your chart on updates from the editor.
 
@@ -21,7 +21,7 @@ draw(){
 }
 ```
 
-<a name="scripts.helper" href="#scripts.helper">#</a> scripts.<b>helper</b>
+#### scripts.helper {#scripts-helper}
 
 You may create an object with methods to help draw your chart. This object can be useful for removing boilerplate code used to parse UI options, keeping your draw function cleaner and easier to work with.
 
@@ -47,11 +47,11 @@ var werkHelper = {
 }
 ```
 
-<a name="scripts.styles" href="#scripts.styles">#</a> scripts.<b>styles</b>
+#### scripts.style {#scripts-style}
 
 CSS style rules. These are injected below any dependency stylesheets.
 
-<a name="scripts.html" href="#scripts.html">#</a> scripts.<b>html</b>
+#### scripts.html {#scripts-html}
 
 Any HTML elements specified here are appended to the element, `div#chartWerk`.
 
@@ -71,7 +71,7 @@ Any HTML elements specified here are appended to the element, `div#chartWerk`.
 </div>
 ```
 
-<a name="scripts.dependencies" href="#scripts.dependencies">#</a> scripts.<b>dependencies</b>
+#### scripts.dependencies {#scripts-dependencies}
 
 An object containing arrays of URLs for scripts and stylesheets used as dependencies by a chart template.
 
