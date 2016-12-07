@@ -8,6 +8,8 @@ Chartwerk scripts are the custom code that underlies every template in Chartwerk
 - [scripts.html](#scripts-html)
 - [scripts.dependencies](#scripts-dependencies)
 
+<img src="../img/screenshots/script_editor.png" class="screenshot" />
+
 #### scripts.draw {#scripts-draw}
 
 Contains a single javascript function which **must** be named `draw`. This function is called by Chartwerk to render your chart on updates from the editor.
