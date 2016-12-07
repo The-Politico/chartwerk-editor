@@ -10,6 +10,7 @@ The datamap contains classifications of the columns in a user's chart data. This
   - [chartwerk.datamap.series](chartwerk-datamap-series)
   - [chartwerk.datamap.facet](chartwerk-datamap-facet)
   - [chartwerk.datamap.ignore](chartwerk-datamap-ignore)
+  - [Aliasing default classifications](#aliasing)
 - [Custom classifications](#custom)
 - [API example](#api-example)
 - [Examples of the grammar](#examples)
@@ -66,7 +67,7 @@ The data series classifications are mutually exclusive with value axis and scale
 
 Take, for example, these two table schemas:
 
-#### Crosstab
+##### Crosstab
 
 | Date     | Male | Female |
 |----------|------|--------|
@@ -77,7 +78,7 @@ Take, for example, these two table schemas:
 - `Male` -> data series
 - `Female` -> data series
 
-#### Flat table schema
+##### Flat table schema
 
 | Date     | Gender | Age |
 |----------|--------|-----|
@@ -105,7 +106,7 @@ Users are also given the option to specify columns to ignore in their data.
 
 
 
-### Aliasing default classifications
+#### Aliasing default classifications {#aliasing}
 
 While the default classification names are hard-coded into Chartwerk's API, they can be aliased in the editor's interface to terms more familiar to chart creators.
 
