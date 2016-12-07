@@ -13,5 +13,6 @@
    * [Template](docs/api/template.md)
    * [Text](docs/api/text.md)
    * [UI](docs/api/ui.md)
+   * Embed
 * [Chart embeds](docs/embedding.md)
 
