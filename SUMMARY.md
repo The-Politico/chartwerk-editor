@@ -7,4 +7,5 @@
    * [Legends](docs/legends.md)
    * [Annotations](docs/annotations.md)
 * [Chart embeds](docs/embedding.md)
+* Introduction
 
