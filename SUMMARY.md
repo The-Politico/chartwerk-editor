@@ -6,6 +6,6 @@
    * [Datamap](docs/api/datamap.md)
    * [Scripts](docs/api/scripts.md)
    * [Legends](docs/api/legends.md)
-   * [Annotations](docs/annotations.md)
+   * [Annotations](docs/api/annotations.md)
 * [Chart embeds](docs/embedding.md)
 
