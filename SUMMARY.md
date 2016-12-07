@@ -9,5 +9,6 @@
    * [Annotations](docs/api/annotations.md)
    * [Axes](docs/api/axes.md)
    * [Data](docs/api/data.md)
+   * Margins
 * [Chart embeds](docs/embedding.md)
 
