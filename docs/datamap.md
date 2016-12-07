@@ -1,5 +1,7 @@
 # chartwerk.datamap
 
+The datamap contains classifications of the columns in a user's chart data. This API drives what controls are presented to a chart creator based on the types of data the data classifications denote.
+
 - [Data classification grammar](#data-classification) 
 - [Default classifications](#default)
   - [chartwerk.datamap.base](chartwerk-datamap-base)
@@ -12,8 +14,7 @@
 - [API example](#api-example)
 - [Examples of the grammar](#examples)
 
-
-#### Data classification {#data-classification}
+#### Data classification grammar {#data-classification}
 
 Because of the many types of data schema Chartwerk has to parse while creating charts it's necessary to abstractly represent the relationship between schema and chart.
 
