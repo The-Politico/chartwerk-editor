@@ -1,4 +1,4 @@
-# `chartWerk.scripts`
+# chartwerk.scripts
 
 - [scripts.draw](#scripts.draw)
 - [scripts.helper](#scripts.helper)
