@@ -74,4 +74,4 @@ An object containing `x` and `y` position of the legend container within the cha
 }
 ```
 
-<img src="../img/screenshots/color_legend.md" class="screenshot" />
+<img src="../img/screenshots/color_legend.png" class="screenshot" />
