@@ -8,5 +8,6 @@
    * [Legends](docs/api/legends.md)
    * [Annotations](docs/api/annotations.md)
    * [Axes](docs/api/axes.md)
+   * Data
 * [Chart embeds](docs/embedding.md)
 
