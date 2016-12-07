@@ -1,5 +1,7 @@
 # chartwerk.text.annotations
 
+<img src="../img/screenshots/free_annotations.png" class="screenshot" />
+
 Free text annotations are represented as an array of objects. They are rendered as absolutely positioned HTML elements.
 
 ```js
@@ -27,6 +29,3 @@ Free text annotations are represented as an array of objects. They are rendered 
 - `background` -- Boolean, whether to render an opaque background behind the annotation.
 - `text` -- Text of the annotation, formatted in markdown.
 - `color` -- Color of annotation text.
-
-
-<img src="../img/screenshots/free_annotations.png" class="screenshot" />
