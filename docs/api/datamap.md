@@ -15,6 +15,8 @@ The datamap contains classifications of the columns in a user's chart data. This
 - [API example](#api-example)
 - [Examples of the grammar](#examples)
 
+<img src="../img/screenshots/data_classify.png" class="screenshot" />
+
 #### Data classification grammar {#data-classification}
 
 Because of the many types of data schema Chartwerk has to parse while creating charts it's necessary to abstractly represent the relationship between schema and chart.
