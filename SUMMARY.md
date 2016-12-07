@@ -7,5 +7,6 @@
    * [Scripts](docs/api/scripts.md)
    * [Legends](docs/api/legends.md)
    * [Annotations](docs/api/annotations.md)
+   * Axes
 * [Chart embeds](docs/embedding.md)
 
