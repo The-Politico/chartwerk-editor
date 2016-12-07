@@ -29,4 +29,4 @@ Free text annotations are represented as an array of objects. They are rendered 
 - `color` -- Color of annotation text.
 
 
-<img src="../img/screenshots/free_annotations.png" class="screenshot" style="border:1px solid lightgrey; margin: 40px auto; box-shadow:0 2px 4px rgba(0,0,0,0.14), 1px 2px 8px rgba(0,0,0,0.18);">
+<img src="../img/screenshots/free_annotations.png" class="screenshot" />
