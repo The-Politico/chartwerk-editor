@@ -1,8 +1,12 @@
 # chartwerk.text.annotations
 
+Free text annotations are represented as an array of objects. They are rendered as absolutely positioned HTML elements.
+
+- [API](#api)
+
 <img src="../img/screenshots/free_annotations.png" class="screenshot" />
 
-Free text annotations are represented as an array of objects. They are rendered as absolutely positioned HTML elements.
+#### API {#api}
 
 ```js
 [
