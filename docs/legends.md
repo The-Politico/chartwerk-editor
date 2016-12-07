@@ -1,4 +1,4 @@
-# `chartWerk.text.legend`
+# chartwerk.text.legend
 
 The legends API contains properties to help you draw labels. Legends are HTML elements, either flowed above the chart or absolutely positioned within the chart space.
 
