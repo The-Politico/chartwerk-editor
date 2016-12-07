@@ -1,4 +1,4 @@
-# `chartWerk.text.annotations`
+# chartwerk.text.annotations
 
 Free text annotations are represented as an array of objects. They are rendered as absolutely positioned HTML elements.
 
