@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
+* [README](README.md)
 * [Chartwerk API](docs/chartwerk_api.md)
    * [Datamap](docs/datamap.md)
    * [Scripts](docs/scripts.md)
