@@ -12,7 +12,7 @@ The legends API contains properties to help you draw labels. Legends are HTML el
 - [legend.{single|double}.width](#legend.size.width)
 - [legend.{single|double}.position](#legend.size.position)
 
-<a name="legend.active" href="#legend.active">#</a> legend.<b>active</b> {#legend-active}
+#### legend.active {#legend-active}
 
 Boolean weather the user has opted to create a color legend for the chart.
 
