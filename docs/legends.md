@@ -2,7 +2,7 @@
 
 The legends API contains properties to help you draw labels. Legends are HTML elements, either flowed above the chart or absolutely positioned within the chart space.
 
-- [legend.active](#legend.active)
+- [legend.active](#legend-active)
 - [legend.keys](#legend.keys)
 - [legend.title](#legend.title)
 - [legend.{single|double}](#legend.size)
@@ -10,9 +10,9 @@ The legends API contains properties to help you draw labels. Legends are HTML el
 - [legend.{single|double}.align](#legend.size.align)
 - [legend.{single|double}.background](#legend.size.background)
 - [legend.{single|double}.width](#legend.size.width)
-- [legend.{single|double}.position](#legend.size.position)
+- [legend.{single|double}.position](#legend-size-position)
 
-#### legend.active {#legend.active}
+#### legend.active {#legend-active}
 
 Boolean weather the user has opted to create a color legend for the chart.
 
@@ -63,7 +63,7 @@ Boolean whether to draw a background behind the legend. Option only displayed wh
 
 Width in pixels of the legend container.
 
-####legend.{single|double}.position {#legend.size.position}
+####legend.{single|double}.position {#legend-size-position}
 
 An object containing `x` and `y` position of the legend container within the chart space. Option only displayed when `legend.{single|double}.inside` is `true`.
 
