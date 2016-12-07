@@ -11,6 +11,6 @@
    * [Data](docs/api/data.md)
    * [Margins](docs/api/margins.md)
    * [Template](docs/api/template.md)
-   * Text
+   * [Text](docs/api/text.md)
 * [Chart embeds](docs/embedding.md)
 
