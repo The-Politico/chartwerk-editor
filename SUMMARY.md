@@ -6,4 +6,5 @@
    * [Legends](docs/legends.md)
    * [Annotations](docs/annotations.md)
    * [Scripts](docs/scripts.md)
+* Chart embeds
 
