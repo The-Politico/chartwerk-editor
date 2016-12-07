@@ -36,14 +36,14 @@ A data column classified as a **base axis** most often contains data like time s
 
 The base axis corresponds to the traditional X axis in the case of horizontal line and bar charts. It can also represent a column of state names used to chart data in a choropleth map or a column of numeric values plotted along the X axis of a scatterplot.
 
-<img src="img/datamap/base.png" style="margin:20px auto; width:250px;" />
+<img src="../img/datamap/base.png" style="margin:20px auto; width:250px;" />
 
 
 #### chartwerk.datamap.value {#chartwerk-datamap-value}
 
 A **value axis** is a single column of numeric data used to determine positional attributes of a data point. For example, the height on the Y axis of a point in a scatterplot or the number of units to draw in a unit chart.
 
-<img src="img/datamap/value.png" style="margin:20px auto; width:250px;" />
+<img src="../img/datamap/value.png" style="margin:20px auto; width:250px;" />
 
 
 #### chartwerk.datamap.scale {#chartwerk-datamap-scale}
@@ -52,7 +52,7 @@ A **value axis** is a single column of numeric data used to determine positional
 
 By design, Chartwerk does not allow for multiple scale axes, for example, scaling a data point by size and color.
 
-<img src="img/datamap/scale.png" style="margin:20px auto; width:250px;" />
+<img src="../img/datamap/scale.png" style="margin:20px auto; width:250px;" />
 
 
 #### chartwerk.datamap.series {#chartwerk-datamap-series}
@@ -61,7 +61,7 @@ Often, it is more natural to keep data in a crosstab format than in a [flat tabl
 
 Data series are crosstabbed columns always containing numeric values, never categorical data. These data are always translated to a positional dimension on the chart _and_ to a categorical color range.
 
-<img src="img/datamap/data_series.png" style="margin:20px auto; width:250px;" />
+<img src="../img/datamap/data_series.png" style="margin:20px auto; width:250px;" />
 
 The data series classifications are mutually exclusive with value axis and scale axis options because they contain the same data, simply represented differently in the table schema.
 
