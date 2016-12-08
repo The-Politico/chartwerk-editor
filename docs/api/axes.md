@@ -45,19 +45,103 @@ The string, itself, is in the format of [d3.js's locale.format](https://github.c
 
 #### axes.base.max {#base-max}
 
+The maximum value of the axis.
+
+Only displayed if `axes.base.type` is `numerical`. 
+
 #### axes.base.min {#base-min}
+
+The minumum value of the axis.
+
+Only displayed if `axes.base.type` is `numerical`.
 
 #### axes.base.label {#base-label}
 
+A string label that can be used to label an axis. For example, _"U.S. dollars."_
+
 #### axes.base.prefix {#base-prefix}
+
+A string used to prefix tick labels on the axis. For example, _"$."_ 
+
+This is often also used to prefix numeric values in tooltips.
 
 #### axes.base.suffix {#base-suffix}
 
+A string used to suffix tick labels on the axis. For example, _"lbs."_ 
+
+This is often also used to suffix numeric values in tooltips.
+
 #### axes.base.format.{single|double} {#base-format}
+
+Specifies format options on the axis for both the single and double-wide size.
 
 #### axes.base.format.{single|double}.dateString {#base-format-dateString}
 
+A string used to format dates in axis tick labels.
+
+Usually used to create a custom [multi-scale time format](https://github.com/d3/d3-time-format/blob/master/README.md). For example:
+
+```javascript
+var formatMillisecond = d3.timeFormat(".%L"),
+    formatSecond = d3.timeFormat(":%S"),
+    formatMinute = d3.timeFormat("%I:%M"),
+    formatHour = d3.timeFormat("%I %p"),
+    formatDay = d3.timeFormat("%a %d"),
+    formatWeek = d3.timeFormat("%b %d"),
+    formatMonth = d3.timeFormat("%B"),
+    formatYear = d3.timeFormat("%Y");
+
+var s = chartwerk.ui.size;
+var dateTick;
+
+switch(chartwerk.axes.base.format[s].dateString) {
+    case 'Y':
+        dateTick = d3.timeYear;
+        formatYear = d3.timeFormat("%Y");
+        break;
+    case 'y':
+        dateTick = d3.timeYear;
+        formatYear = d3.timeFormat("'%y");
+        break;
+    case 'M':
+        dateTick = d3.timeMonth;
+        formatMonth = d3.timeFormat("%B");
+        formatYear = d3.timeFormat("Jan. '%y");
+        break;
+    case 'm':
+        dateTick = d3.timeMonth;
+        formatMonth = d3.timeFormat("%b.");
+        formatYear = d3.timeFormat("J/%y");
+        break;
+    case 'W':
+    case 'w':
+        dateTick = d3.timeWeek;
+        formatMonth = d3.timeFormat("%b.");
+        formatYear = d3.timeFormat("J/%y");
+        break;
+    case 'D':
+        dateTick = d3.timeDay;
+        formatMonth = d3.timeFormat("%b.");
+        formatYear = d3.timeFormat("J/%y");
+}
+        
+function multiFormat(date) {
+  return (d3.timeSecond(date) < date ? formatMillisecond
+      : d3.timeMinute(date) < date ? formatSecond
+      : d3.timeHour(date) < date ? formatMinute
+      : d3.timeDay(date) < date ? formatHour
+      : d3.timeMonth(date) < date ? (d3.timeWeek(date) < date ? formatDay : formatWeek)
+      : d3.timeYear(date) < date ? formatMonth
+      : formatYear)(date);
+}
+        
+werk.axes.x.tickFormat(multiFormat)
+```
+
+
 #### axes.base.format.{single|double}.frequency {#base-format-frequency}
+
+A number used to indicate the frequency 
 
 #### axes.base.format.{single|double}.ticks {#base-format-ticks}
 
