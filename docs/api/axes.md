@@ -77,7 +77,7 @@ Specifies format options on the axis for both the single and double-wide size.
 
 #### axes.base.format.{single|double}.dateString {#base-format-dateString}
 
-A string used to format dates in axis tick labels.
+A string used to format dates in axis tick labels. Represents short and long labels for date periods, for example, `Y` for four-digit year and `y` for two-digit.
 
 Usually used to create a custom [multi-scale time format](https://github.com/d3/d3-time-format/blob/master/README.md). For example:
 
@@ -91,7 +91,7 @@ var formatMillisecond = d3.timeFormat(".%L"),
     formatMonth = d3.timeFormat("%B"),
     formatYear = d3.timeFormat("%Y");
 
-var s = chartwerk.ui.size;
+var s = chartwerk.ui.size;  // either 'single' or 'double'
 var dateTick;
 
 switch(chartwerk.axes.base.format[s].dateString) {
@@ -141,7 +141,16 @@ werk.axes.x.tickFormat(multiFormat)
 
 #### axes.base.format.{single|double}.frequency {#base-format-frequency}
 
-A number used to indicate the frequency 
+An integer that represents the frequency of the axis label date period. For example, a `2` for displaying a tick every two years.
+
+```javascript
+var s = chartwerk.ui.size;  // either 'single' or 'double'
+var dateTick = d3.timeYear;
+
+werk.axes.x.ticks(
+    dateTick.every( chartwerk.axes.base.format[s].frequency )
+);
+```
 
 #### axes.base.format.{single|double}.ticks {#base-format-ticks}
 
