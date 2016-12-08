@@ -272,20 +272,59 @@ This is often also used to suffix numeric values in tooltips.
 
 #### axes.color.domain {#color-domain}
 
+The domain array of the chart's color scale.
+
 #### axes.color.range {#color-range}
+
+The range array of the chart's color scale.
 
 #### axes.color.scheme {#color-scheme}
 
+A string accessor in dot notation to an array of colors in the color object constant. For example, `"categorical.default"` to access the color array:
+
+```JSON
+{
+  categorical: {
+    default: [
+      '#329CEB',
+      '#E34E36',
+      '#FF8F24',
+      '#FEC44F',
+      '#52B033',
+      '#8554BF',
+      '#6DCCF2',
+      '#C9C9C9'
+    ]
+  }
+}
+```
+
 #### axes.color.byFacet {#color-byFacet}
+
+Boolean whether to set color domain by [faceting column](datamap.md#chartwerk-datamap-facet).
 
 #### axes.color.ignoreScale {#color-ignoreScale}
 
+Boolean whether to ignore [scale axis](datamap.md#chartwerk-datamap-scale) when setting color scale domain. Used when you want to use the scale axis to specify the size of your data points rather than their color.
+
 #### axes.color.quantize {#color-quantize}
+
+Boolean whether or not color scale is quantized, i.e., whether the domain represents continuous rather than discrete values.
 
 #### axes.color.quantizeProps {#color-quantizeProps}
 
+Contains properties used to create quantized color scale. 
+
+**Hint:** If you're using d3.js, the correct color scale to use is actually a [threshold scale](https://github.com/d3/d3-scale#threshold-scales).
+
 #### axes.color.quantizeProps.column {#color-quantizeProps-column}
+
+Specifies which data column to create the quantized color scale domain from.
 
 #### axes.color.quantizeProps.groups {#color-quantizeProps-groups}
 
+The number of color groups in the quantized color scale range.
+
 #### axes.color.quantizeProps.reverseColors {#color-quantizeProps-reverseColors}
+
+Boolean whether to reverse the direction of the color scale range. Used to emphasize minimum rather than maximum in color scheme (or vice versa).
