@@ -20,13 +20,25 @@
 
 ##### Value axis
 - [axes.value](#value)
-- [axes.scale](#scale)
-- [axes.color](#color)
-
-
-
+- [axes.value.max](#value-max)
+- [axes.value.min](#value-min)
+- [axes.value.label](#value-label)
+- [axes.value.prefix](#value-prefix)
+- [axes.value.suffix](#value-suffix)
+- [axes.value.format.{single|double}](#value-format)
+- [axes.value.format.{single|double}.ticks](#value-format-ticks)
+- [axes.value.format.{single|double}.customTicks](#value-format-customTicks)
 
 <img class="screenshot" src="../img/screenshots/value_axis.png" />
+
+##### Scale axis
+- [axes.scale](#scale)
+- [axes.scale.prefix](#scale-prefix)
+- [axes.scale.suffix](#scale-suffix)
+
+##### Color
+- [axes.color](#color)
+
 
 
 #### axes.base {#base}
@@ -176,6 +188,71 @@ An array of regions to shade on the axis. Usually used to shade date periods alo
 
 #### axes.value {#value}
 
+#### axes.value.max {#value-max}
+
+The maximum value of the axis. 
+
+#### axes.value.min {#value-min}
+
+The minumum value of the axis.
+
+#### axes.value.label {#value-label}
+
+A string label that can be used to label an axis. For example, _"U.S. dollars."_
+
+#### axes.value.prefix {#value-prefix}
+
+A string used to prefix tick labels on the axis. For example, _"$."_ 
+
+This is often also used to prefix numeric values in tooltips.
+
+#### axes.value.suffix {#value-suffix}
+
+A string used to suffix tick labels on the axis. For example, _"lbs."_ 
+
+This is often also used to suffix numeric values in tooltips.
+
+#### axes.value.format.{single|double} {#value-format}
+
+Specifies format options on the axis for both the single and double-wide size.
+
+#### axes.value.format.{single|double}.ticks {#value-format-ticks}
+
+An integer representing how many ticks to display on the axis.
+
+#### axes.value.format.{single|double}.customTicks {#value-format-customTicks}
+
+An array of custom tick values to use on the axis.
+
+#### axes.value.shadedRegions {#value-shadedRegions}
+
+An array of regions to shade on the axis.
+
+```JSON
+[
+  {
+    min: 0,
+    max: 100
+  }
+]
+```
+
+**Hint:** You can use shadedRegions to draw rectangles _and_ lines on the axis. Say a user provides the same value for max and min, draw a line at the corresponding axis point. Use free annotations to annotate what rectangles and lines represents.
+
 #### axes.scale {#scale}
+
+
+
+#### axes.scale.prefix {#scale-prefix}
+
+A string used to prefix tick labels on the axis. For example, _"$."_ 
+
+This is often also used to prefix numeric values in tooltips.
+
+#### axes.scale.suffix {#scale-suffix}
+
+A string used to suffix tick labels on the axis. For example, _"lbs."_ 
+
+This is often also used to suffix numeric values in tooltips.
 
 #### axes.color {#color}
