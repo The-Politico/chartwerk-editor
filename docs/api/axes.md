@@ -38,6 +38,16 @@
 
 ##### Color
 - [axes.color](#color)
+- [axes.color.domain](#color-domain)
+- [axes.color.range](#color-range)
+- [axes.color.scheme](#color-scheme)
+- [axes.color.byFacet](#color-byFacet)
+- [axes.color.ignoreScale](#color-ignoreScale)
+- [axes.color.quantize](#color-quantize)
+- [axes.color.quantizeProps](#color-quantizeProps)
+- [axes.color.quantizeProps.column](#color-quantizeProps-column)
+- [axes.color.quantizeProps.groups](#color-quantizeProps-groups)
+- [axes.color.quantizeProps.reverseColors](#color-quantizeProps-reverseColors)
 
 
 
