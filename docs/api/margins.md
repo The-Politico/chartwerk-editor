@@ -2,9 +2,11 @@
 
 Margins around a chart.
 
+- [margins.{single|double}](#margins)
+
 <img src="../img/screenshots/margins.png" class="screenshot" />
 
-#### margins.{single|double}
+#### margins.{single|double} {#margins}
 
 Margin dimensions expressed as a percentage of the chart container width.
 
