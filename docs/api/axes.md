@@ -153,11 +153,24 @@ werk.axes.x.ticks(
 
 #### axes.base.format.{single|double}.ticks {#base-format-ticks}
 
-
+An integer representing how many ticks to display on the axis.
 
 #### axes.base.format.{single|double}.customTicks {#base-format-customTicks}
 
+An array of custom tick values to use on the axis.
+
 #### axes.base.shadedRegions {#base-shadedRegions}
+
+An array of regions to shade on the axis. Usually used to shade date periods along a date axis. Date strings should be in the same format as dates in the base axis column.
+
+```JSON
+[
+  {
+    min: '2015-01-01',
+    max: '2015-06-30'
+  }
+]
+```
 
 #### axes.value {#value}
 
