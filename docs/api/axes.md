@@ -188,6 +188,8 @@ An array of regions to shade on the axis. Usually used to shade date periods alo
 
 #### axes.value {#value}
 
+Properties that belong to a chart's [value axis](https://hobbes7878.gitbooks.io/chartwerk-editor/content/docs/api/chartwerk-datamap-base#chartwerk-datamap-value).
+
 #### axes.value.max {#value-max}
 
 The maximum value of the axis. 
@@ -239,9 +241,10 @@ An array of regions to shade on the axis.
 
 **Hint:** You can use shadedRegions to draw rectangles _and_ lines on the axis. Say a user provides the same value for max and min, draw a line at the corresponding axis point. Use free annotations to annotate what rectangles and lines represents.
 
+
 #### axes.scale {#scale}
 
-
+Properties that belong to a chart's [scale axis](https://hobbes7878.gitbooks.io/chartwerk-editor/content/docs/api/chartwerk-datamap-base#chartwerk-datamap-scale).
 
 #### axes.scale.prefix {#scale-prefix}
 
