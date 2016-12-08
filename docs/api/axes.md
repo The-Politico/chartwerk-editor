@@ -14,6 +14,7 @@
 - [axes.base.format.{single|double}.frequency](#base-format-frequency)
 - [axes.base.format.{single|double}.ticks](#base-format-ticks)
 - [axes.base.format.{single|double}.customTicks](#base-format-customTicks)
+- [axes.base.shadedRegions](#base-shadedRegions)
 
 <img class="screenshot" src="../img/screenshots/base_axis_date.png" />
 
@@ -53,6 +54,8 @@
 #### axes.base.format.{single|double}.ticks {#base-format-ticks}
 
 #### axes.base.format.{single|double}.customTicks {#base-format-customTicks}
+
+#### axes.base.shadedRegions {#base-shadedRegions}
 
 #### axes.value {#value}
 
