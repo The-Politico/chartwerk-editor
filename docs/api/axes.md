@@ -198,7 +198,7 @@ An array of regions to shade on the axis. Usually used to shade date periods alo
 
 #### axes.value {#value}
 
-Properties that belong to a chart's [value axis](https://hobbes7878.gitbooks.io/chartwerk-editor/content/docs/api/chartwerk-datamap-base#chartwerk-datamap-value).
+Properties that belong to a chart's [value axis](datamap.md#chartwerk-datamap-value).
 
 #### axes.value.max {#value-max}
 
