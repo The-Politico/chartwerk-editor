@@ -141,18 +141,19 @@ werk.axes.x.tickFormat(multiFormat)
 
 #### axes.base.format.{single|double}.frequency {#base-format-frequency}
 
-An integer that represents the frequency of the axis label date period. For example, a `2` for displaying a tick every two years.
+An integer used to create a date interval or the frequency of the axis label date period. For example, a `2` for displaying a tick every two years.
 
 ```javascript
 var s = chartwerk.ui.size;  // either 'single' or 'double'
-var dateTick = d3.timeYear;
 
 werk.axes.x.ticks(
-    dateTick.every( chartwerk.axes.base.format[s].frequency )
+    d3.timeYear.every( chartwerk.axes.base.format[s].frequency )
 );
 ```
 
 #### axes.base.format.{single|double}.ticks {#base-format-ticks}
+
+
 
 #### axes.base.format.{single|double}.customTicks {#base-format-customTicks}
 
