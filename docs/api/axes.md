@@ -31,7 +31,7 @@
 
 #### axes.base {#base}
 
-Properties that belong to a chart's [base axis](https://hobbes7878.gitbooks.io/chartwerk-editor/content/docs/api/chartwerk-datamap-base#default).
+Properties that belong to a chart's [base axis](https://hobbes7878.gitbooks.io/chartwerk-editor/content/docs/api/chartwerk-datamap-base#chartwerk-datamap-base).
 
 #### axes.base.type {#base-type}
 
