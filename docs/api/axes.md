@@ -13,12 +13,14 @@
 - [axes.base.format.{single|double}.ticks](#base-format-ticks)
 - [axes.base.format.{single|double}.customTicks](#base-format-customTicks)
 
+<img class="screenshot" src="../img/screenshots/base_axis_date.png" />
+
 ##### Value axis
 - [axes.value](#value)
 - [axes.scale](#scale)
 - [axes.color](#color)
 
-<img class="screenshot" src="../img/screenshots/base_axis_date.png" />
+
 
 
 <img class="screenshot" src="../img/screenshots/value_axis.png" />
