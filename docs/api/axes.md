@@ -172,6 +172,8 @@ An array of regions to shade on the axis. Usually used to shade date periods alo
 ]
 ```
 
+**Hint:** You can use shadedRegions to draw rectangles _and_ lines on the axis. Say a user provides the same value for max and min, draw a line at the corresponding axis point. Use free annotations to annotate what rectangles and lines represents.
+
 #### axes.value {#value}
 
 #### axes.scale {#scale}
