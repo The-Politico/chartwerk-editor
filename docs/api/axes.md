@@ -53,7 +53,7 @@
 
 #### axes.base {#base}
 
-Properties that belong to a chart's [base axis](api/chartwerk-datamap-base#chartwerk-datamap-base).
+Properties that belong to a chart's [base axis](chartwerk-datamap-base#chartwerk-datamap-base).
 
 #### axes.base.type {#base-type}
 
