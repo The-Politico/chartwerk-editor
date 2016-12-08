@@ -11,7 +11,7 @@
    * [Template](docs/api/template.md)
    * [Text](docs/api/text.md)
    * [Annotations](docs/api/annotations.md)
-   * [Legends](docs/api/legends.md)
+   * [Legend](docs/api/legends.md)
    * [UI](docs/api/ui.md)
    * [Embed](docs/api/embed.md)
 * [Chart embeds](docs/embedding.md)
