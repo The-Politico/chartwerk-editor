@@ -6,7 +6,9 @@ Properties used to specify an embed code for a chart.
 
 #### embed.dimensions {#embed}
 
-The dimensions of the chart at both the single and double-wide size. These are queried in the DOM while saving a chart.
+The dimensions in pixels of the chart at both the single and double-wide size. 
+
+These are queried in the DOM while saving a chart in the editor. They are used in a child embed script to set the dimensions of the iframe and are passed to the client when using the oembed endpoint for chart embeds. 
 
 ```JSON
 {
