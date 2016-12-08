@@ -1,6 +1,6 @@
 # chartwerk.margins
 
-Margins around an SVG chart.
+Margins around a chart.
 
 <img src="../img/screenshots/margins.png" class="screenshot" />
 
