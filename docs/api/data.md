@@ -6,7 +6,7 @@ An array of parsed data pasted in by the chart creator in the editor.
 
 For example, the stock data in the above image would be converted to an array that looks like this:
 
-```JSON
+```javascript
 [
   {
     Date: '2015-08-24',
