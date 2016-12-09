@@ -6,11 +6,11 @@ All text elements expect certain chart elements to exist with an `id` property, 
 
 <img src="../img/screenshots/text.png" class="screenshot" />
 
-- text.headline
-- text.chatter
-- text.footnote
-- text.source
-- text.author
+- [text.headline](#headline)
+- [text.chatter](#chatter)
+- [text.footnote](#footnote)
+- [text.source](#source)
+- [text.author](#author)
 - [text.annotations](#annotations)
 - [text.legend](#legend)
 - [legend.active](#legend-active)
