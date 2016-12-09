@@ -16,6 +16,6 @@ chartwerk-editor represents the latter. You can find an example of the former at
 
 chartwerk-editor is a React/Redux-based editor for charts and chart templates.
 
-It's designed with maximum flexibility in mind for both non-coding chart creators and chart template developers so they can build almost any chart type that can be built from tabular/spreadsheet data.
+It's designed to be flexible for both non-coding chart creators and chart template developers so they can build almost any chart type that can be built from tabular/spreadsheet data.
 
 
