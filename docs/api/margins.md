@@ -1,6 +1,6 @@
 # chartwerk.margins
 
-Margins around a chart.
+The margins around a chart.
 
 - [margins.{single|double}](#margins)
 
