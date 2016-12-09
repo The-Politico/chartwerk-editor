@@ -9,7 +9,7 @@ For example, the stock data in the above image would be converted to an array th
 ```JSON
 [
   {
-    Data: '2015-08-24',
+    Date: '2015-08-24',
     CBM: 45.47,
     GQS: 32.84
   }
