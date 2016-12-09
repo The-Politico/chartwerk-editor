@@ -1,5 +1,9 @@
 # chartwerk.axes
 
+Axes options are used to construct scales and axes.
+
+This is the densest branch of the API, but that doesn't mean it's the hardest to understand. Most of these options correspond to the properties of [scales](https://github.com/d3/d3/blob/master/API.md#scales-d3-scale) and [axes](https://github.com/d3/d3/blob/master/API.md#axes-d3-axis) as implemented in [d3.js](https://d3js.org/). That said, it _is_ important that you understand the concepts used to create the [datamap](datamap.md).
+
 ##### Base axis
 - [axes.base](#base)
 - [axes.base.type](#base-type)
