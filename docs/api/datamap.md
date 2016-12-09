@@ -32,7 +32,7 @@ There are six data classifications built in to Chartwerk. Template developers ca
 
 ## Default classifications {#default}
 
-#### chartwerk.datamap.base {#chartwerk-datamap-base}
+#### datamap.base {#chartwerk-datamap-base}
 
 A data column classified as a **base axis** most often contains data like time series dates or categorical values. Commonly, these are values _by which_ numeric data are charted. Mortality rates _by occupation_. Stock prices _by company_.
 
@@ -41,14 +41,14 @@ The base axis corresponds to the traditional X axis in the case of horizontal li
 <img src="../img/datamap/base.png" style="margin:20px auto; width:250px;" />
 
 
-#### chartwerk.datamap.value {#chartwerk-datamap-value}
+#### datamap.value {#chartwerk-datamap-value}
 
 A **value axis** is a single column of numeric data used to determine positional attributes of a data point. For example, the height on the Y axis of a point in a scatterplot or the number of units to draw in a unit chart.
 
 <img src="../img/datamap/value.png" style="margin:20px auto; width:250px;" />
 
 
-#### chartwerk.datamap.scale {#chartwerk-datamap-scale}
+#### datamap.scale {#chartwerk-datamap-scale}
 
 **Scale axis** data is used to set the color or size of a data point. It can contain numeric or categorical data.
 
@@ -57,7 +57,7 @@ By design, Chartwerk does not allow for multiple scale axes, for example, scalin
 <img src="../img/datamap/scale.png" style="margin:20px auto; width:250px;" />
 
 
-#### chartwerk.datamap.series {#chartwerk-datamap-series}
+#### datamap.series {#chartwerk-datamap-series}
 
 Often, it is more natural to keep data in a crosstab format than in a [flat table schema](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#tidy-data) that neatly corresponds to base, value and scale axes. **Data series** accommodate that convenience.
 
@@ -95,13 +95,13 @@ Take, for example, these two table schemas:
 
 In the crosstab, the `Male` and `Female` columns will represent both a color and a position, whereas in the flat table, `Gender` is a scale axis and `Age`, a value axis.
 
-#### chartwerk.datamap.facet {#chartwerk-datamap-facet}
+#### datamap.facet {#chartwerk-datamap-facet}
 
 **Faceting columns** are always categorical data used to create sub-groups of data for small multiples, i.e., faceted charts.
 
 
 
-#### chartwerk.datamap.ignore {#chartwerk-datamap-ignore}
+#### datamap.ignore {#chartwerk-datamap-ignore}
 
 Users are also given the option to specify columns to ignore in their data.
 
