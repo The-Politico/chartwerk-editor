@@ -10,7 +10,6 @@
     * [Scripts](docs/api/scripts.md)
     * [Template](docs/api/template.md)
     * [Text](docs/api/text.md)
-    * [Legend](docs/api/legend.md)
     * [UI](docs/api/ui.md)
     * [Embed](docs/api/embed.md)
 * [Chart embeds](docs/embedding.md)
