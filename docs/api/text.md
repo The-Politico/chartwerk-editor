@@ -12,10 +12,20 @@
 
 #### text.headline {#headline}
 
+The headline.
+
 #### text.chatter {#chatter}
+
+The chatter.
 
 #### text.footnote {#footnote}
 
+A footnote.
+
 #### text.source {#source}
 
+The data source for the chart.
+
 #### text.author {#author}
+
+An author.
