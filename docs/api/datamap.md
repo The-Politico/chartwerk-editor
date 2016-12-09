@@ -19,13 +19,13 @@ The datamap contains classifications of the columns in a user's data. This branc
 
 #### Data classification grammar {#data-classification}
 
-Because of the many types of data schema Chartwerk has to parse while creating charts it's necessary to abstractly represent the relationship between schema and chart.
+Because of the many types of data schema Chartwerk has to parse while creating charts it's necessary to have a scheme that defines the relationship between data schema and chart.
 
-Most common dataviz terms don't span that gap. For example, describing data columns as traditional X and Y axes is tied too closely to the hard rules of a chart's coordinate plane. What happens when we want to use the same logic in terms of X & Y axes to draw both a horizontal and a vertical bar chart?
+Most common dataviz terms don't bridge that gap. For example, describing data columns as traditional X and Y axes is tied too closely to the hard rules of a chart's coordinate plane. What happens when we want to use the same logic in terms of X & Y axes to draw both a horizontal and a vertical bar chart?
 
-Chartwerk introduces a coarse, high-level grammar to describe tabular data in terms that represent a column-wise mapping to the dimensions of a chart. That grammar describes the schema with the bare minimum information needed to identify chart features, like the position or color of chart elements.
+Chartwerk introduces a coarse, high-level grammar to describe tabular (i.e., spreadsheet) data schema in terms that represent a column-wise mapping to the dimensions of a chart. For example, the grammar may describe which columns in the data schema are responsible for determining the position of chart elements and which determine their color.
 
-In practice, the columns of a user's data are classified using the grammar's terms. While the terms are necessarily abstract from the perspective of template developers, in the editor, these classifications can be aliased to terms more familiar to chart creators. Once a user classifies the columns in their data, the editor renders the appropriate controls to specify chart features.
+In practice, users classify the columns of the raw data they paste into the editor using the grammar's terms. While the terms are necessarily abstract from the perspective of template developers, in the editor, the classifications can be aliased to terms more familiar to chart creators. Once a user classifies the columns in their data, the editor renders the appropriate controls to specify other chart features, like the appropriate color scale and axes properties.
 
 There are six data classifications built in to Chartwerk. Template developers can also add custom data classifications for individual templates.
 
