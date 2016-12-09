@@ -11,7 +11,7 @@ All text elements expect certain chart elements to exist with an `id` property, 
 - text.footnote
 - text.source
 - text.author
-- [text.annotations](annotations.md)
+- [text.annotations](#annotations)
 - [text.legend](legend.md)
 
 #### text.headline {#headline}
@@ -55,3 +55,23 @@ The author of the chart. Text may contain markdown syntax. Rendered into a chart
 ```
 
 #### text.annotations {#annotations}
+
+Free text annotations are represented as an array of objects. They are rendered as absolutely positioned HTML elements.
+
+<img src="../img/screenshots/free_annotations.png" class="screenshot" />
+
+```js
+[
+  {
+    size: 's',
+    w: 100,
+    x: 10,
+    y: 15,
+    align: 'l',
+    fontSize: 'm',
+    background: false,
+    text: 'This is a **text** note.',
+    color: '#2d3035'
+  }
+]
+```
