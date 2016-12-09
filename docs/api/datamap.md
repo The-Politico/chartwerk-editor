@@ -1,6 +1,6 @@
 # chartwerk.datamap
 
-The datamap contains classifications of the columns in a user's data. This API drives what controls are presented to a chart creator in the editor.
+The datamap contains classifications of the columns in a user's data. This branch of the API drives what controls are presented to a chart creator in the editor and much of the rest of the API. That makes the datamap the most critical part of the API to understand.
 
 - [Data classification grammar](#data-classification) 
 - [Default classifications](#default)
