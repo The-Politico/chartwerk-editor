@@ -53,3 +53,5 @@ The author of the chart. Text may contain markdown syntax. Rendered into a chart
 ```HTML
 <div id="author"></div>
 ```
+
+#### text.annotations {#annotations}
