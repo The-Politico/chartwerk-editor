@@ -1,4 +1,5 @@
-# chartwerk-editor
+# <a href='https://dallasmorningnews.github.io/chartwerk/'><img src='logo.png' height='55'></a>
+
 
 ### What is Chartwerk?
 
