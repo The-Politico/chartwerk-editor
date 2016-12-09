@@ -303,6 +303,8 @@ A string accessor in dot notation to an array of colors in the color object cons
 }
 ```
 
+<img src="../img/screenshots/color_scheme.png" class="screenshot" />
+
 #### axes.color.byFacet {#color-byFacet}
 
 Boolean whether to set color domain by [faceting column](datamap.md#chartwerk-datamap-facet).
