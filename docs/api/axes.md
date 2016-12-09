@@ -317,6 +317,8 @@ Boolean whether to ignore [scale axis](datamap.md#chartwerk-datamap-scale) when 
 
 Boolean whether or not color scale is quantized, i.e., whether the domain represents continuous rather than discrete values.
 
+<img src="../img/screenshots/color_scale.png" class="screenshot" />
+
 #### axes.color.quantizeProps {#color-quantizeProps}
 
 Contains properties used to create quantized color scale. 
