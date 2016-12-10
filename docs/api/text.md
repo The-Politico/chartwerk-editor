@@ -4,8 +4,6 @@ Text elements for the chart.
 
 All text elements expect certain chart elements to exist with an `id` property, which the text elements are rendered into. See the configurable [HTML script](scripts.md#scripts-html) for an example of the minimum required structure.
 
-<img src="../img/screenshots/text.png" class="screenshot" />
-
 - [text.headline](#headline)
 - [text.chatter](#chatter)
 - [text.footnote](#footnote)
@@ -22,6 +20,8 @@ All text elements expect certain chart elements to exist with an `id` property, 
 - [text.legend.{single|double}.background](#legend-size-background)
 - [text.legend.{single|double}.width](#legend-size-width)
 - [text.legend.{single|double}.position](#legend-size-position)
+
+<img src="../img/screenshots/text.png" class="screenshot" />
 
 #### text.headline {#headline}
 
