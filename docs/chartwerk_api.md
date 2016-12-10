@@ -12,6 +12,8 @@ chartwerk.data
 
 Chart creators will likely never see the API, but template developers will interact with it directly, as it contains all the key information necessary to build a chart.
 
+Most chart templates will only use a portion of the data and options specified in the API, but in its entirety, the spec is robust enough to build dozens of chart types.
+
 #### Learning the API
 
 Complete documentation to the API is included here, but the best way to understand how the API works may be to observe it in the editor.
