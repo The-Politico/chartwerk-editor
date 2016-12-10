@@ -116,6 +116,8 @@ For example, a base axis in a line chart template might be aliased to "X axis." 
 
 Aliases are specified in the save template modal on the Publish tab in the editor.
 
+<img src="../img/screenshots/template_datamap.png" class="screenshot" />
+
 ## Custom data classifications {#custom}
 
 Template creators can specify custom data classifications in the save template modal on the Publish tab in the editor.
