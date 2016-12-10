@@ -1,6 +1,6 @@
 # chartwerk.scripts
 
-Chartwerk scripts are the custom code that underlies every template in Chartwerk. They are completely customizable JS/CSS/HTML and dependency files.
+Chartwerk scripts are the custom code that underlies every template in Chartwerk. They are completely customizable JS/CSS/HTML scripts and dependency files.
 
 - [scripts.draw](#scripts-draw)
 - [scripts.helper](#scripts-helper)
