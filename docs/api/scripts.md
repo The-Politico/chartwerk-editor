@@ -12,13 +12,13 @@ Chartwerk scripts are the custom code that underlies every template in Chartwerk
 
 #### scripts.draw {#scripts-draw}
 
-Contains a single javascript function which **must** be named `draw`. This function is called by Chartwerk to render your chart on updates from the editor.
+Contains a single javascript function which **must** be named `draw`. This function is called by Chartwerk to render your chart whenever a user chooses or changes an option in the editor.
 
 ```javascript
 draw(){
   var werk = window.chartwerk;
 
-	var svg = d3.select("#chart")
+  var svg = d3.select("#chart")
 	    .append("svg");
 
   // etc.
@@ -35,17 +35,18 @@ The object will be accessible in the global scope.
 var werkHelper = {
 
   parseAxes: function(werk){
-    // ...
+    // Do a thing...
   },
 
   parseScales: function(werk){
-    // ...
+    // Do another...
   },
 
   build: function(werk){
     parseAxes(werk);
     parseScales(werk);
     // ...
+    return werk;
   }
 
 }
@@ -53,13 +54,13 @@ var werkHelper = {
 
 #### scripts.style {#scripts-style}
 
-CSS style rules. These are injected below any dependency stylesheets.
+CSS style rules. These are injected **below** any dependency stylesheets.
 
 #### scripts.html {#scripts-html}
 
 Any HTML elements specified here are appended to the element, `div#chartwerk`.
 
-**Important:** Chartwerk expects certain elements be present to append data from the editor to. These elements are selected by their `id` property. At minimum the following elements should be present, though they need not be structured this way:
+**Important:** Chartwerk expects certain elements will be present to inject data from the editor into, specifically text elements. These elements are selected by their `id` property. At minimum the following elements should be present, though they need not _necessarily_ be structured this way:
 
 ```html
 <div id='chart-header'>
