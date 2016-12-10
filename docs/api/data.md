@@ -1,6 +1,6 @@
 # chartwerk.data
 
-An array of parsed data pasted into the editor by the chart creator.
+An array of parsed data pasted into the editor by the chart creator. This is how every chart begins.
 
 <img src="../img/screenshots/raw_data.png" class="screenshot" />
 
