@@ -14,7 +14,7 @@ Chart creators will likely never see the API, but template developers will inter
 
 #### Learning the API
 
-Complete documentation to the API is included here, but I'd recommend the best way to understand how the API works is to actually observe it in the editor.
+Complete documentation to the API is included here, but the best way to understand how the API works may be to observe it in the editor.
 
 Open the full screen JavaScript editor on the Code tab and check out the API tree chart. There you can see the API populated with real data parsed by the template and how those properties change with user input in the editor.
 
