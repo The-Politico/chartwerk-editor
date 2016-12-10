@@ -323,7 +323,7 @@ Boolean whether or not color scale is quantized, i.e., whether the domain repres
 
 Contains properties used to create quantized color scale. 
 
-**Hint:** If you're using d3.js, the correct color scale to use is actually a [threshold scale](https://github.com/d3/d3-scale#threshold-scales).
+**Hint:** If you're using d3.js, the correct color scale to use in your template is actually a [threshold scale](https://github.com/d3/d3-scale#threshold-scales).
 
 #### axes.color.quantizeProps.column {#color-quantizeProps-column}
 
