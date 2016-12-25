@@ -7,8 +7,8 @@ Chartwerk is an application for developing data visualizations and publishing th
 
 It actually consists of two applications:
 
-1. A backend application that maintains RESTFUL endpoints for charts and chart templates, serves navigational pages for users to select the type of chart template they'd like to build from and handles logic for "baking" the charts to S3 or another flat storage service.
-2. A front-end application to create and manipulate charts and chart templates before saving them to the backend app.
+1. A backend app that maintains RESTFUL endpoints for charts and chart templates, serves navigational pages for users to select the type of chart template they'd like to build from and handles logic for "baking" the charts to S3 or another flat storage service.
+2. A front-end app to create and manipulate charts and chart templates before saving them to the backend app.
 
 chartwerk-editor represents the latter. You can find an example of the former at [django-chartwerk](https://github.com/DallasMorningNews/django-chartwerk-redux).
 
