@@ -2,7 +2,6 @@
 
 * [README](README.md)
 * [Introduction](docs/introduction.md)
-    * [Why Chartwerk?](docs/intro/why-chartwerk.md)
 * [Chartwerk API](docs/chartwerk_api.md)
     * [Data](docs/api/data.md)
     * [Datamap](docs/api/datamap.md)
