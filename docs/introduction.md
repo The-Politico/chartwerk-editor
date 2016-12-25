@@ -9,7 +9,9 @@ Chartwerk is an application for developing data visualizations and publishing th
 
 Like many other chart builders, Chartwerk provides an interface for non-coders to easily create interactive and static charts. However, you may find, like we did, that most chart makers are set-and-forget systems that aren't well designed to grow with the needs of your team.
 
-Chartwerk was designed to be more flexible and a more collaborative tool between coders and non-coders. It lets developers easily build and tweak charts directly alongside non-coding creators. It accomplishes this by exposing a robust internal API that translates tabular data into discrete dataviz properties developers can build chart templates on top of on the fly.
+Chartwerk was designed to be a more collaborative tool between coders and non-coders. It lets developers easily build and modify charts on the fly directly alongside users by exposing a robust internal API that translates tabular data into discrete dataviz properties. 
+
+Because chart templates in Chartwerk are simply functions written to consume Chartwerk's API, developers have complete control of the logic used to draw charts and the freedom to include any third-party library in the process they like.
 
 At *The Dallas Morning News*, Chartwerk helps us develop dataviz quickly in response to the needs of beat reporters and scale our development time multiplied by every chart our reporters build from the templates we create.
 
