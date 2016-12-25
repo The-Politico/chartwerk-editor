@@ -11,7 +11,7 @@ Like many other chart builders, Chartwerk provides an interface for non-coders t
 
 Chartwerk was designed to be a more collaborative tool between coders and non-coders. It lets developers easily build and modify charts on the fly directly alongside users by exposing a robust internal API that translates tabular data into discrete dataviz properties. 
 
-Because chart templates in Chartwerk are simply functions written to consume Chartwerk's API, developers have complete control of the logic used to draw charts and the freedom to include any third-party library in the process they like.
+Because chart templates in Chartwerk are arbitrary functions written to consume Chartwerk's API, developers have complete control of the logic used to draw charts and the freedom to use any third-party library they like.
 
 At *The Dallas Morning News*, Chartwerk helps us develop dataviz quickly in response to the needs of beat reporters and scale our development time multiplied by every chart our reporters build from the templates we create.
 
@@ -19,9 +19,9 @@ That said, Chartwerk may not be the best choice among all other chart builders f
 
 ### What's in it?
 
-Chartwerk actually consists of two applications:
+Chartwerk actually consists of **two** applications:
 
-1. A backend app that maintains RESTFUL endpoints for charts and chart templates, serves navigational pages for users to select the type of chart they'd like to build and handles logic for user accounts and for "baking" the charts to S3 or another flat storage service.
+1. A backend app that maintains RESTFUL endpoints for charts and chart templates, serves navigational pages for users to select the type of chart they'd like to build and handles logic for user accounts and for "baking" charts to S3 or another flat storage service.
 2. A front-end app to create and manipulate charts and chart templates before saving them to the backend.
 
 chartwerk-editor represents the latter. You can find an example of the former at [django-chartwerk](https://github.com/DallasMorningNews/django-chartwerk-redux).
