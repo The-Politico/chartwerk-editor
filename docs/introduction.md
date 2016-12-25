@@ -19,8 +19,8 @@ That said, Chartwerk may not be the best choice among all other chart builders f
 
 Chartwerk actually consists of two applications:
 
-1. A backend app that maintains RESTFUL endpoints for charts and chart templates, serves navigational pages for users to select the type of chart they'd like to build and handles logic for "baking" the charts to S3 or another flat storage service.
-2. A front-end app to create and manipulate charts and chart templates before saving them to the backend app.
+1. A backend app that maintains RESTFUL endpoints for charts and chart templates, serves navigational pages for users to select the type of chart they'd like to build and handles logic for user accounts and for "baking" the charts to S3 or another flat storage service.
+2. A front-end app to create and manipulate charts and chart templates before saving them to the backend.
 
 chartwerk-editor represents the latter. You can find an example of the former at [django-chartwerk](https://github.com/DallasMorningNews/django-chartwerk-redux).
 
@@ -28,7 +28,7 @@ chartwerk-editor represents the latter. You can find an example of the former at
 
 chartwerk-editor is a React/Redux-based editor for charts and chart templates. It is the heart of Chartwerk.
 
-It's designed to be flexible for both non-coding chart creators and chart template developers so they can build almost any chart type that can be built from tabular/spreadsheet data.
+It's designed to be flexible for both non-coding chart creators and chart template developers so they can build almost any chart type that can be represented with tabular/spreadsheet data.
 
 
 
