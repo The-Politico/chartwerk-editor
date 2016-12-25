@@ -32,6 +32,14 @@ chartwerk-editor is a React/Redux-based editor for charts and chart templates. I
 
 It's designed to be flexible for both non-coding chart creators and chart template developers so they can build almost any chart type that can be represented with tabular/spreadsheet data.
 
+Read on in these docs to learn more about how it works and how you can integrate it into your own application or into a backend like `django-chartwerk`.
+
+- How Chartwerk makes charts
+- Chart template basics
+- [Chartwerk's API](/docs/chartwerk_api.md)
+- Integrating chartwerk-editor with a backend
+- Developing chartwerk-editor
+
 
 
 
