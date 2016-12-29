@@ -1,5 +1,7 @@
 # How chartwerk makes charts
 
+Chartwerk leans heavily on the idea of separating the individually specified chart from the template that actually draws it. 
+
 ### How data becomes a chart
 
 The following flow chart represents how Chartwerk turns tabular data into a chart.
