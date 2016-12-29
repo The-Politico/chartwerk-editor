@@ -26,7 +26,7 @@ Ownership of the steps is broken down in the diagram. Basically, a user supplies
 
 ### From a developer's perspective
 
-It's important to understand that the previous process diagram is a little backwards from the perspective of a chart template developer. She builds templates long before a user builds any charts with them and will not be an _active_ part of the process once the template is complete, though she can jump back in on any individual chart to tweak her code or update the template.
+The previous process diagram may seem a little backwards from the perspective of a chart template developer. She builds templates long before a user builds any charts with them and will not be an _active_ part of the process once the template is complete, though she can jump back in on any individual chart to tweak her code or update the template.
 
 
 
