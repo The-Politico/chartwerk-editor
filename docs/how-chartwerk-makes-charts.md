@@ -1,12 +1,10 @@
 # How chartwerk makes charts
 
-Chartwerk is built around the idea of separating the individually specified chart from the template that draws it. Each individual chart starts with a set of data and ends with that data consumed by the template and used to draw a chart.
-
-Strictly speaking, the process flow from data to chart in Chartwerk is like most other chart builders, except that the handoffs between data and  happens a little more out in the open in Chartwerk's Editor.
+Each individual chart in Chartwerk starts with a set of data and ends with a chart drawn from a template that has consumed that data. Strictly speaking, the process flow from data to chart in Chartwerk is like most other chart builders, except that the process happens more out in the open in Chartwerk's Editor. 
 
 ### How data becomes a chart
 
-The following flow chart represents how Chartwerk turns tabular data into a chart.
+The following chart represents the basic flow of how Chartwerk turns tabular data into a chart.
 
 <br/><br/>
 
