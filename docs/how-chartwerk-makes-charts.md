@@ -2,7 +2,7 @@
 
 ### How data becomes a chart
 
-The following flow chart represents how Chartwerk turns tabular data into a chart. It's important to understand that this process is a little backwards from the perspective of a chart template developer, who builds templates long before a user builds any charts with them and who will not be an active part of the process of building a chart once the template is complete.
+The following flow chart represents how Chartwerk turns tabular data into a chart. It's important to understand that this process is a little backwards from the perspective of a chart template developer, who builds templates long before a user builds any charts with them and who will not be an active part of this process flow once the template is complete.
 
 <br/><br/>
 
