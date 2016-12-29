@@ -34,7 +34,7 @@ It's designed to be flexible for both non-coding chart creators and chart templa
 
 Read on in these docs to learn more about how it works and how you can integrate it into your own application or into a backend like `django-chartwerk`.
 
-- How Chartwerk makes charts
+- [How Chartwerk makes charts](/docs/how-chartwerk-makes-charts.md)
 - Chart template basics
 - [Chartwerk's API](/docs/chartwerk_api.md)
 - Integrating chartwerk-editor with a backend
