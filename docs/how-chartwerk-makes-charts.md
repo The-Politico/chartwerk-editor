@@ -4,7 +4,7 @@ Each chart in Chartwerk starts with a set of data and ends with a chart drawn fr
 
 ### How data becomes a chart
 
-The following chart represents the basic flow of how Chartwerk turns tabular data into a chart.
+The following diagram represents the basic flow of how Chartwerk turns tabular data into a chart.
 
 <br/><br/>
 
