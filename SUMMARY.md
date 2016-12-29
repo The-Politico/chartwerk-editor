@@ -13,4 +13,5 @@
     * [UI](docs/api/ui.md)
     * [Embed](docs/api/embed.md)
 * [Chart embeds](docs/embedding.md)
+* [How Chartwerk makes charts](docs/how-chartwerk-makes-charts.md)
 
