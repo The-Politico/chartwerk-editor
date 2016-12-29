@@ -12,15 +12,17 @@ The following flow chart represents how Chartwerk turns tabular data into a char
 
 #### Steps
 
-1. A user supplies tabular data to the Chartwerk Editor. This step presumes the user has already determined which chart type she wants to make and the Editor is preloaded with that type's corresponding chart template.
+1. A user supplies tabular data to the Chartwerk Editor. This step presumes the user has already determined which chart type she wants to make and the Editor is preloaded with that chart template.
 2. User makes selections in the Editor that determine how different features of this chart should be formatted, for example, axes and labels.
 3. Chartwerk takes those user selections and any defaults which are part of the chart template and turns them into an API, which is defined as a global object, `chartwerk`.
 4. The chart template has scripts which are written to consume the API and draw the chart using whatever dependencies needed. These scripts are called in the editor (namely, the `draw()` function) and create a live preview for the user.
 5. After a user saves their chart, the Chartwerk backend app takes the API and the chart scripts and saves them to a flat HTML file (two files, actually: one for for each size of chart, double and single-wide). The flat file will call the chart's drawing function, just as in the Editor, and draw the chart on the page.
 
+### Ownership
+Ownership of the steps is broken down in the diagram. Basically, a user supplies the data and uses the Editor's UI to specify chart formatting. She doesn't interact with the API or with the chart scripts in any way. The developer writes the chart scripts to consume the API. The backend application does the rest.
 
 ### From a developer's perspective
-It's important to understand that the previous process diagram is a little backwards from the perspective of a chart template developer, who builds templates long before a user builds any charts with them and who will not be an active part of this process flow once the template is complete.
+It's important to understand that the previous process diagram is a little backwards from the perspective of a chart template developer. She builds templates long before a user builds any charts with them and will not be an active part of the process once the template is complete.
 
 
 
