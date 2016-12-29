@@ -21,9 +21,11 @@ The following chart represents the basic flow of how Chartwerk turns tabular dat
 5. After a user saves their chart, the Chartwerk backend app takes the API and the chart scripts and saves them to a flat HTML file (two files, actually: one for for each size of chart, double and single-wide). The flat file will call the chart's drawing function, just as in the Editor, and draw the chart on the page. The file is saved on Amazon S3 or another hosting service or server.
 
 ### Ownership
+
 Ownership of the steps is broken down in the diagram. Basically, a user supplies the data and uses the Editor's UI to specify chart formatting. She doesn't interact with the API or with the chart scripts in any way. The developer writes the chart scripts to consume the API. The backend application does the rest.
 
 ### From a developer's perspective
+
 It's important to understand that the previous process diagram is a little backwards from the perspective of a chart template developer. She builds templates long before a user builds any charts with them and will not be an _active_ part of the process once the template is complete, though she can jump back in on any individual chart to tweak her code or update the template.
 
 
