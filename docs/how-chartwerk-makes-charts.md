@@ -1,6 +1,8 @@
 # How chartwerk makes charts
 
-Chartwerk is built around the idea of separating the individually specified chart from the template that actually draws it.
+Chartwerk is built around the idea of separating the individually specified chart from the template that draws it. Each individual chart starts with a set of data and ends with that data consumed by the template and used to draw a chart.
+
+Strictly speaking, the process flow from data to chart in Chartwerk is like most other chart builders, except that the handoffs between data and  happens a little more out in the open in Chartwerk's Editor.
 
 ### How data becomes a chart
 
@@ -18,7 +20,7 @@ The following flow chart represents how Chartwerk turns tabular data into a char
 2. User makes selections in the Editor that determine how different features of this chart should be formatted, for example, axes and labels.
 3. Chartwerk takes those user selections and any defaults which are part of the chart template and turns them into an API, which is defined as a global object, `chartwerk`.
 4. The chart template has scripts which are written to consume the API and draw the chart using whatever dependencies needed. These scripts are called in the Editor -- namely, the `draw()` function -- and create a live preview of the chart for the user.
-5. After a user saves their chart, the Chartwerk backend app takes the API and the chart scripts and saves them to a flat HTML file (two files, actually: one for for each size of chart, double and single-wide). The flat file will call the chart's drawing function, just as in the Editor, and draw the chart on the page.
+5. After a user saves their chart, the Chartwerk backend app takes the API and the chart scripts and saves them to a flat HTML file (two files, actually: one for for each size of chart, double and single-wide). The flat file will call the chart's drawing function, just as in the Editor, and draw the chart on the page. The file is saved on Amazon S3 or another hosting service or server.
 
 ### Ownership
 Ownership of the steps is broken down in the diagram. Basically, a user supplies the data and uses the Editor's UI to specify chart formatting. She doesn't interact with the API or with the chart scripts in any way. The developer writes the chart scripts to consume the API. The backend application does the rest.
