@@ -7,7 +7,7 @@ The entire UI state in the editor is also represented in the API's JSON, making 
 In the editor, the API is accessed via the `chartwerk` global object. When you write template code, you'll get chart data and options through that object. For example:
 
 ```javascript
-chartwerk.data
+var myChartData = chartwerk.data;
 ```
 
 Chart creators will likely never see the API, but template developers will interact with it directly, as it contains all the key information necessary to build a chart.
