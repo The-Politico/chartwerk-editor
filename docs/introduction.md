@@ -38,6 +38,7 @@ Read on in these docs to learn more about how it works and how you can integrate
 - Chart template basics
 - [Chartwerk's API](/docs/chartwerk_api.md)
 - Integrating chartwerk-editor with a backend
+- [Embedding Chartwerk charts in your CMS](/docs/embedding.md)
 - Developing chartwerk-editor
 
 
