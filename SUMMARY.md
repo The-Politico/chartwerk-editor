@@ -2,7 +2,7 @@
 
 * [README](README.md)
 * [Introduction](docs/introduction.md)
-* [Chartwerk API](docs/chartwerk_api.md)
+* [Chartwerk API](docs/chartwerk-api.md)
     * [Data](docs/api/data.md)
     * [Datamap](docs/api/datamap.md)
     * [Axes](docs/api/axes.md)
