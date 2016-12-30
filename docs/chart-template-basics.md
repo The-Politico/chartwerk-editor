@@ -1,2 +1,0 @@
-# Chart template basics
-
