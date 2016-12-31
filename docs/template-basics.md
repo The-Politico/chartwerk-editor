@@ -89,6 +89,30 @@ A separate script, `client.bundle.js`, will render [these](https://github.com/Da
 
 In most cases, we've found we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js.
 
+Most of these functions can be performed in sequence once and then handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like this:
+
+```javascript
+var werkHelper = {
+  parse: function(werk) {
+    // ...
+  },
+  
+  scales: function (werk) {
+    // ...
+  },
+  
+  // etc.
+  
+  build: function(werk) {
+    this.parse(werk);
+    this.scales(werk);
+    // etc.
+    return werk;
+  }
+}
+```
+
+You'll notice a parameter is passed between all the methods above. This is usually an object we can hang various properties on, like d3 scale functions and axes.
 
 ```javascript
 function draw(){
