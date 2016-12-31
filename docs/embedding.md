@@ -1,4 +1,4 @@
-# Chart embeds
+# Embedding Chartwerk charts
 
 ### Rendering the chart
 

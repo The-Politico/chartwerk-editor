@@ -1,4 +1,4 @@
-# Developing
+# Developing chartwerk-editor
 
 ### Development API
 
