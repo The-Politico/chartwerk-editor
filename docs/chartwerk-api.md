@@ -1,4 +1,4 @@
-# Chartwerk API
+# Chartwerk's API
 
 The Chartwerk API is a complete JSON representation of every chart  Chartwerk makes, from the raw data a user pastes into the editor to the individual options she chooses for things like colors and text labels to the template code that parses those options to create the chart.
 

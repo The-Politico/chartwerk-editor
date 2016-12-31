@@ -4,7 +4,7 @@
 * [Introduction](docs/introduction.md)
 * [How Chartwerk makes charts](docs/how-chartwerk-makes-charts.md)
 * [Chart template basics](docs/template-basics.md)
-* [Chartwerk API](docs/chartwerk-api.md)
+* [Chartwerk's API](docs/chartwerk-api.md)
     * [Data](docs/api/data.md)
     * [Datamap](docs/api/datamap.md)
     * [Axes](docs/api/axes.md)
