@@ -1,4 +1,4 @@
-#Chart template basicsh
+#Chart template basics
 
 This section will walk you through the basics of writing the code behind a chart template in Chartwerk.
 
@@ -49,6 +49,6 @@ Chartwerk assumes ownership of many parts of the annotation layer for charts.
 
 The rendering scripts for these features are built into the Editor preview. 
 
-A separate script, `client.bundle.js`, will render the these text elements in the embeddable flat file and should be inlined on that page by the backend app. 
+A separate script, `client.bundle.js`, will render [these](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/legend.js) [text](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/annotations.js) [elements](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/text.js) in the embeddable flat file and should be inlined on that page by the backend app. 
 
 ### Best practices {#best-practices}
