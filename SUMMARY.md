@@ -2,6 +2,8 @@
 
 * [README](README.md)
 * [Introduction](docs/introduction.md)
+* [How Chartwerk makes charts](docs/how-chartwerk-makes-charts.md)
+* [Chart template basics](docs/template-basics.md)
 * [Chartwerk API](docs/chartwerk-api.md)
     * [Data](docs/api/data.md)
     * [Datamap](docs/api/datamap.md)
@@ -12,7 +14,7 @@
     * [Template](docs/api/template.md)
     * [UI](docs/api/ui.md)
     * [Embed](docs/api/embed.md)
-* [Chart embeds](docs/embedding.md)
-* [How Chartwerk makes charts](docs/how-chartwerk-makes-charts.md)
-* [Chart template basics](docs/chart-template-basics.md)
+* [Integrating with a backend](docs/chartwerk-backend.md)
+* [Embedding Chartwerk charts](docs/embedding.md)
+* [Developing](docs/developing.md)
 
