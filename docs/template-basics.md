@@ -24,8 +24,9 @@ function draw(){
 It will be called in the Editor everytime a user makes a selection in the Editor's UI. It will also be called inline on the embeddable page, though only once.
 
 
+##### Idempotence
 
-Though the draw function is called multiple times in the Editor, it _does not necessarily_ need to be idempotent[*](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning). Chartwerk presumes your chart function will only be called once in the embeddable page and tolerates multiple calls in the Editor by [removing all children](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/misc/api.js#L67-L74) of the `#chart` container before each call.
+Though the draw function is called multiple times in the Editor, it _does not necessarily_ need to be idempotent[*](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning). Chartwerk presumes your chart function will only be called once in the embeddable page and tolerates multiple calls in the Editor by [removing all children](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/misc/api.js#L67-L74) of the `#chart` container before each call, basically giving you a blank slate each time.
 
 ### The "helper" object {#helper-object}
 
