@@ -131,7 +131,7 @@ function draw(){
           double: { width: 540, height: 250}
         },
     };
-  // Pass the object to a special method on the helper object.   
+  // Pass the object to the build method on the helper object.   
   var werk = werkHelper.build(initialProps);  
 }
 ```
