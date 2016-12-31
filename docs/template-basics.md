@@ -11,7 +11,7 @@ This section will walk you through the basics of writing the code behind a chart
 
 ### The "draw" function {#draw-function}
 
-Chartwerk will call a global function to draw your chart everytime a user makes a selection in the Editor.
+Chartwerk will call a single, named global function to draw your chart.
 
 This function **must be** named "draw", as in:
 
@@ -20,6 +20,10 @@ function draw(){
   // your chart code here...
 }
 ```
+
+It will be called in the Editor everytime a user makes a selection in the Editor's UI. It will also be called inline on the embeddable page, though only once.
+
+Though the draw function is called multiple times in the Editor, it _does not necessarily_ need to be idempotent[*](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning). Chartwerk presumes your chart function will only be called once in the embedded page and tolerates multiple calls in the Editor by [removing all children](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/misc/api.js#L67-L74) of the `#chart` container before each call.
 
 ### The "helper" object {#helper-object}
 
