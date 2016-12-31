@@ -2,14 +2,18 @@
 
 This section will walk you through the basics of writing the code behind a chart template in Chartwerk.
 
-- [The draw function](#draw-function)
+- [The "draw" function](#draw-function)
+- [The "helper" object](#helper-object)
+- [Chart styles](#chart-styles)
+- [Including dependencies](#dependencies)
 - [Ownership of annotations](#ownership-annotations)
+- [Best practices](#best-practices)
 
 ### The "draw" function {#draw-function}
 
 Chartwerk will call a global function to draw your chart everytime a user makes a selection in the Editor.
 
-This function **must be named "draw"**, as in:
+This function **must be** named "draw", as in:
 
 ```javascript
 function draw(){
@@ -17,8 +21,11 @@ function draw(){
 }
 ```
 
+### The "helper" object {#helper-object}
 
+### Chart styles {#chart-styles}
 
+### Including dependencies {#dependencies}
 
 
 ### Ownership of annotations {#ownership-annotations}
@@ -37,3 +44,5 @@ Chartwerk assumes ownership of many parts of the annotation layer for charts.
 The rendering scripts for these features are built into the Editor preview. 
 
 A separate script, `client.bundle.js`, will render the these text elements in the embeddable flat file and should be inlined on that page by the backend app. 
+
+### Best practices {#best-practices}
