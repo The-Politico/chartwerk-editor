@@ -89,16 +89,22 @@ A separate script, `client.bundle.js`, will render [these](https://github.com/Da
 
 In most cases, we've found we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js.
 
-Most of these functions can be performed in sequence once and then handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like this:
+Most of these functions can be performed in sequence once and then handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like the `build` method below:
 
 ```javascript
 var werkHelper = {
   parse: function(werk) {
-    // ...
+    werk.data = chartwerk.data.map( ... )
   },
   
   scales: function (werk) {
-    // ...
+    werk.scales = {
+      x: d3.linearScale
+        .domain([min, max])
+        // ...
+        ,
+      y: //...
+    }
   },
   
   // etc.
@@ -112,19 +118,20 @@ var werkHelper = {
 }
 ```
 
-You'll notice a parameter is passed between all the methods above. This is usually an object we can hang various properties on, like d3 scale functions and axes.
+You'll notice the `werk` parameter is passed between all the methods above. This is usually an object we can hang various properties on, like d3 scale functions and axes. We'll usually create that object in the Editor:
 
 ```javascript
 function draw(){
   // Define an object that you can pass to the helper object
-  // with any initial properties you know, for example, chart dimensions.
+  // with any initial properties you know, for example,
+  // chart dimensions we'll need to define our scale ranges.
   var initialProps = {
         dims: {
           single: { width: 260, height: 225 },
           double: { width: 540, height: 250}
         },
     };
-  // Pass the object to a special method on the helper object    
+  // Pass the object to a special method on the helper object.   
   var werk = werkHelper.build(initialProps);  
 }
 ```
