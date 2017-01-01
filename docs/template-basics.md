@@ -87,24 +87,18 @@ A separate script, `client.bundle.js`, will render [these](https://github.com/Da
 
 #### Working with the helper object
 
-In most cases, we've found we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js.
+In most cases, we've found we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js. Relegating these tasks to helper object methods keeps our draw function cleaner and its code more explicitly tied to actually drawing SVG elements. 
 
-Most of these functions can be performed in sequence once and then handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like the `build` method below:
+Most of these helper methods can be performed in sequence once and then handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like the `build` method below:
 
 ```javascript
 var werkHelper = {
   parse: function(werk) {
-    werk.data = chartwerk.data.map( ... )
+    // ...
   },
   
   scales: function (werk) {
-    werk.scales = {
-      x: d3.linearScale
-        .domain([min, max])
-        // ...
-        ,
-      y: //...
-    }
+    // ...
   },
   
   // etc.
@@ -118,11 +112,11 @@ var werkHelper = {
 }
 ```
 
-You'll notice the `werk` parameter is passed between all the methods above. This is usually an object we can hang various properties on, like d3 scale functions and axes. We'll usually create that object in the Editor:
+You'll notice the `werk` parameter is passed between all the methods above. This is usually an object we can hang various properties on, like d3 scale functions and axes. We'll usually create that object in the draw function with any initial properties we know upfront:
 
 ```javascript
 function draw(){
-  // Define an object that you can pass to the helper object
+  // An object that you can pass to the helper object
   // with any initial properties you know, for example,
   // chart dimensions we'll need to define our scale ranges.
   var initialProps = {
@@ -136,4 +130,62 @@ function draw(){
 }
 ```
 
+Then we'll hang named properties on that object in the helper.
+
+Here's a complete example using the above `initialProps` and defining parsed data and scales:
+
+```javascript
+var werkHelper = {
+
+  // Method that parses raw user data into data our template can use.
+  parse: function(werk) {
+    // First, define some parsers for our data formats.
+    // Dates for the x axis, numbers for the y.
+    werk.parsers = {
+      x: d3.timeParse( chartwerk.axes.base.dateFormat ),
+      y: function(d){ return +d; }
+    };
+    
+    // Now use those parsers to create a new dataset with properties x & y.
+    // *Checkout the datamap API section if datamap.base/value are confusing.
+    werk.data = chartwerk.data.map(function(d){
+      return {
+        x: werk.parsers.x(d[chartwerk.datamap.base]),
+        y: werk.parsers.y(d[chartwerk.datamap.value[0])
+      };
+    })
+        
+  },
+  
+  // Method that defines d3 scales for both axes in our chart
+  scales: function(werk) {
+    // Get the max dimensions of the chart, based on which
+    // preview size is active.
+    var s = chartwerk.ui.size,
+        w = werk.dims[s].width,
+        h = werk.dims[s].height;
+
+    // Get the extents (min/max) of the X & Y data    
+    var xExtent = d3.extent(werk.data, function(d) { return d.x; }),
+        yExtent = d3.extent(werk.data, function(d) { return d.y; });
+      
+    // Define scales and hang them on the werk object.
+    werk.scales = {
+      x: d3.scaleTime()
+          .domain(xExtent)
+          .range([0, w]),
+      y: d3.scaleLinear()
+          .domain(yExtent)
+          .range([h, 0])
+    };
+  },
+  
+  // Build function that calls each of the above
+  build: function(werk) {
+    this.parse(werk);
+    this.scales(werk);
+    return werk;
+  }
+}
+```
 
