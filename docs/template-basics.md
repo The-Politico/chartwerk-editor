@@ -85,11 +85,35 @@ A separate script, `client.bundle.js`, will render [these](https://github.com/Da
 
 ### Best practices {#best-practices}
 
+#### Writing template code to handle both chart sizes
+
+Your chart template must accomodate both single and double-wide chart sizes. But you shouldn't need to write large blocks of code or if/then statements. You can write objects that use the API's active chart size key at `chartwerk.ui.size` to access the appropriate properties for your user's chart.
+
+For example:
+
+```javascript
+// An object with SVG dimensions for both single and
+// double-wide chart sizes.
+var dims = {
+  single: { width: 260, height: 225 },
+  double: { width: 540, height: 250}
+};
+
+// Now in your template access the appropriate property
+// by the size key.
+d3.select("#chart").append("svg")
+  .attr("width", dims[chartwerk.ui.size].width)
+  .attr("height", dims[chartwerk.ui.size].height);
+
+```
+
+The above code will now work regardless of which chart size is active. Simple!
+
 #### Working with the helper object
 
-In most cases, we've found we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js. Relegating these tasks to helper object methods keeps our draw function cleaner and its code more explicitly tied to actually drawing SVG elements. 
+In most cases, we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js. Relegating these tasks to helper object methods keeps our draw function cleaner and its code more explicitly tied to actually drawing SVG elements. 
 
-Most of these helper methods can be performed in sequence once and then handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like the `build` method below:
+Most of these helper methods can be performed in sequence once and then the data handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like the `build` method below:
 
 ```javascript
 var werkHelper = {
@@ -112,7 +136,7 @@ var werkHelper = {
 }
 ```
 
-You'll notice the `werk` parameter is passed between all the methods above. This is usually an object we can hang various properties on, like d3 scale functions and axes. We'll usually create that object in the draw function with any initial properties we know upfront:
+You'll notice the `werk` parameter is passed to all the methods above. This is usually an object we can hang various properties on, like d3 scale functions and axes. We'll usually create that object in the draw function with any initial properties we know upfront:
 
 ```javascript
 function draw(){
@@ -132,12 +156,13 @@ function draw(){
 
 Then we'll hang named properties on that object in the helper.
 
-Here's a complete example using the above `initialProps` and defining parsed data and scales:
+Here's a complete example using the above `initialProps` and defining parsed data and scales on the `werk` object:
 
 ```javascript
 var werkHelper = {
 
-  // Method that parses raw user data into data our template can use.
+  // Method that parses raw user data into an array of
+  // data objects our template can use.
   parse: function(werk) {
     // First, define some parsers for our data formats.
     // Dates for the x axis, numbers for the y.
@@ -146,12 +171,13 @@ var werkHelper = {
       y: function(d){ return +d; }
     };
     
-    // Now use those parsers to create a new dataset with properties x & y.
-    // *Checkout the datamap API section if datamap.base/value are confusing.
+    // Now use those parsers to create a new array of data objects
+    // which have properties x & y.
+    // * Checkout the datamap API section if datamap.base/value are confusing.
     werk.data = chartwerk.data.map(function(d){
       return {
         x: werk.parsers.x(d[chartwerk.datamap.base]),
-        y: werk.parsers.y(d[chartwerk.datamap.value[0])
+        y: werk.parsers.y(d[chartwerk.datamap.value[0]])
       };
     })
         
@@ -165,7 +191,7 @@ var werkHelper = {
         w = werk.dims[s].width,
         h = werk.dims[s].height;
 
-    // Get the extents (min/max) of the X & Y data    
+    // Get the extents (min/max) of the X & Y data. 
     var xExtent = d3.extent(werk.data, function(d) { return d.x; }),
         yExtent = d3.extent(werk.data, function(d) { return d.y; });
       
