@@ -85,6 +85,65 @@ A separate script, `client.bundle.js`, will render [these](https://github.com/Da
 
 ### Best practices {#best-practices}
 
+#### Writing template code to accomodate user data.
+
+First, checkout the [datamap API documentation](/docs/api/datamap.md) if you haven't yet. It's critical to understanding how data is represented in Chartwerk.
+
+Take some user data about fatality rates at different ages for a scatterplot that looks like this:
+
+```javascript
+[
+  {
+    age: 23,
+    fatality: .0005
+  },
+  {
+    age: 28,
+    fatality: .0012
+  }
+]
+```
+
+Obviously, writing template code with explicit calls to the `age` and `fatality` properties is a bad idea. Instead, though, we could recast our data to have predictable properties like `x` and `y` that will make our template code abstractable across any arbitrary data scheme.
+
+So how do we know which property in the original user data belongs to `x` and which to `y`?
+
+Use the datamap API!
+
+In our case, `chartwerk.datamap.base` would represent the `x` property, which the user tells us is `age`. And `chartwerk.datamap.value` would be our `y` property, `fatality`.
+
+```javascript
+chartwerk.datamap.base
+// 'age'
+chartwerk.datamap.value
+// 'fatality'
+```
+
+Putting it all together, we can accomodate any arbitrary user data using a pattern like this:
+
+```javascript
+// Recast data as an array of objects with predictable properties.
+var chartData = chartwerk.data.map(function(d){
+  return {
+    x: d[chartwerk.datamap.base],
+    y: d[chartwerk.datamap.value]
+  };
+});
+
+
+// Pass the new array as data to draw SVG elements.
+var circles = d3.selectAll("circle")
+                .data(chartData);
+
+// Use the new properties to access the data you need.
+circles
+  .append("circle")
+    .attr("r", 5)
+    .attr("cx", function(d){ return d.x; })
+    .attr("cy", function(d){ return d.y; });
+
+```
+
 #### Writing template code to handle both chart sizes
 
 Your chart template must accomodate both single and double-wide chart sizes. But you shouldn't need to write large blocks of code or if/then statements. You can write objects that use the API's active chart size key at `chartwerk.ui.size` to access the appropriate properties for your user's chart.
