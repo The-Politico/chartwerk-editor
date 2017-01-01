@@ -282,3 +282,95 @@ var werkHelper = {
 }
 ```
 
+#### Dealing with date formatting
+
+Date formatting is always a finnicky part of every chart template. It's important that users have some flexibility to choose date formats appropriate for their chart.
+
+The code below is a complete example of a chart that has a date-typed X axis and uses Chartwerk's API to appropriately format dates for tick labels along the axis.
+
+You'll notice heavy doses of d3's [datetime formatting](https://github.com/d3/d3-time-format/blob/master/README.md#locale_format), [locales](https://github.com/d3/d3-time-format/blob/master/README.md#locales) and [multi-scale time formats](https://github.com/d3/d3-time-format#d3-time-format), so you may need to read up on their use to understand what's going on in this snippet. You'll also want to take a look at the [base axis format API](/docs/api/axes.md#base-format-dateString) to see how users can specify their preferred formatting options.
+
+This code is usually part of a helper object method but could easily be abstracted into a dependency script.
+
+```javascript
+ if (chartwerk.axes.base.type !== 'date') {
+    return;
+}
+
+// Define a custom locale according to our house style.
+var customLocale = {
+  "dateTime": "%x, %X",
+  "date": "%-m/%-d/%Y",
+  "time": "%-I:%M:%S %p",
+  "periods": ["AM", "PM"],
+  "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  "shortDays": ["S", "M", "T", "W", "T", "F", "S"],
+  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+}
+
+d3.timeFormatDefaultLocale(customLocale);
+
+// Set up default formats for each time unit which users can later override.
+var formatMillisecond = d3.timeFormat(".%L"),
+    formatSecond = d3.timeFormat(":%S"),
+    formatMinute = d3.timeFormat("%I:%M"),
+    formatHour = d3.timeFormat("%I %p"),
+    formatDay = d3.timeFormat("%a %d"),
+    formatWeek = d3.timeFormat("%b %d"),
+    formatMonth = d3.timeFormat("%B"),
+    formatYear = d3.timeFormat("%Y");
+
+
+// Use user's preferred formats to overwrite defaults.
+var s = chartwerk.ui.size;
+var dateTick; // Will use this to specify frequency of date ticks later
+switch(chartwerk.axes.base.format[s].dateString) {
+    case 'Y': // Long year
+        dateTick = d3.timeYear;
+        formatYear = d3.timeFormat("%Y");
+        break;
+    case 'y': // Short year
+        dateTick = d3.timeYear;
+        formatYear = d3.timeFormat("'%y");
+        break;
+    case 'M': // etc. ...
+        dateTick = d3.timeMonth;
+        formatMonth = d3.timeFormat("%B");
+        formatYear = d3.timeFormat("Jan. '%y");
+        break;
+    case 'm':
+        dateTick = d3.timeMonth;
+        formatMonth = d3.timeFormat("%b.");
+        formatYear = d3.timeFormat("J/%y");
+        break;
+    case 'W':
+    case 'w':
+        dateTick = d3.timeWeek;
+        formatMonth = d3.timeFormat("%b.");
+        formatYear = d3.timeFormat("J/%y");
+        break;
+    case 'D':
+        dateTick = d3.timeDay;
+        formatMonth = d3.timeFormat("%b.");
+        formatYear = d3.timeFormat("J/%y");
+}
+
+// Multi-scale time format using formats defined above
+function multiFormat(date) {
+  return (d3.timeSecond(date) < date ? formatMillisecond
+      : d3.timeMinute(date) < date ? formatSecond
+      : d3.timeHour(date) < date ? formatMinute
+      : d3.timeDay(date) < date ? formatHour
+      : d3.timeMonth(date) < date ? (d3.timeWeek(date) < date ? formatDay : formatWeek)
+      : d3.timeYear(date) < date ? formatMonth
+      : formatYear)(date);
+}
+
+werk.axes.x.tickFormat(multiFormat)
+
+// Set tick frequency on axis
+werk.axes.x.ticks(
+    dateTick.every( chartwerk.axes.base.format[s].frequency )
+);
+```
