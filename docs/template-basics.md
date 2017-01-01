@@ -180,7 +180,7 @@ var werkHelper = {
     };
   },
   
-  // Build function that calls each of the above
+  // Build function that calls each of the above methods
   build: function(werk) {
     this.parse(werk);
     this.scales(werk);
