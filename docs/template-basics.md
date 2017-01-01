@@ -85,7 +85,7 @@ A separate script, `client.bundle.js`, will render [these](https://github.com/Da
 
 ### Best practices {#best-practices}
 
-#### Writing template code to accomodate user data.
+#### Writing template code to accomodate arbitrary user data.
 
 First, checkout the [datamap API documentation](/docs/api/datamap.md) if you haven't yet. It's critical to understanding how data is represented in Chartwerk.
 
@@ -104,13 +104,15 @@ Take some user data about fatality rates at different ages for a scatterplot tha
 ]
 ```
 
-Obviously, writing template code with explicit calls to the `age` and `fatality` properties is a bad idea. Instead, though, we could recast our data to have predictable properties like `x` and `y` that will make our template code abstractable across any arbitrary data scheme.
+Obviously, writing template code with explicit calls to the `age` and `fatality` properties is a bad idea for reusability.
+
+Instead, we could recast our data to have predictable properties like `x` and `y` that will make our template code abstractable across any arbitrary data scheme.
 
 So how do we know which property in the original user data belongs to `x` and which to `y`?
 
 Use the datamap API!
 
-In our case, `chartwerk.datamap.base` would represent the `x` property, which the user tells us is `age`. And `chartwerk.datamap.value` would be our `y` property, `fatality`.
+In our case, `chartwerk.datamap.base` would represent the `x` property, which is `age`. And `chartwerk.datamap.value` would be our `y` property, `fatality`.
 
 ```javascript
 chartwerk.datamap.base
