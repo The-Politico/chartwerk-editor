@@ -87,9 +87,11 @@ A separate script, `client.bundle.js`, will render [these](https://github.com/Da
 
 #### Writing template code to accomodate arbitrary user data.
 
-First, checkout the [datamap API documentation](/docs/api/datamap.md) if you haven't yet. It's critical to understanding how data is represented in Chartwerk.
+Chart templates should anticipate any data users can throw at them without relying on set header names in the data schema.
 
-Take some user data about fatality rates at different ages for a scatterplot that looks like this:
+You can use the [datamap API](/docs/api/datamap.md) to write templates that are agnostic to how your user's data is formatted.
+
+Take some user data about fatality rates at different ages for a scatterplot that, after parseing, looks like this:
 
 ```javascript
 [
@@ -145,10 +147,12 @@ circles
     .attr("cy", function(d){ return d.y; });
 
 ```
+The different properties in the datamap API can be used to create template code for dozens of chart types that can handle any arbitrary tabular data. Read those [API docs](/docs/api/datamap.md)!
+
 
 #### Writing template code to handle both chart sizes
 
-Your chart template must accomodate both single and double-wide chart sizes. But you shouldn't need to write large blocks of code or if/then statements. You can write objects that use the API's active chart size key at `chartwerk.ui.size` to access the appropriate properties for your user's chart.
+Your chart template must accomodate both single and double-wide chart sizes. But you shouldn't need to write large blocks of code or if/then statements. You can write objects that use the API's active chart size key at `chartwerk.ui.size` to access the appropriate properties for your chart.
 
 For example:
 
@@ -168,7 +172,9 @@ d3.select("#chart").append("svg")
 
 ```
 
-The above code will now work regardless of which chart size is active. Simple!
+The above code will now work regardless of which chart size is active. 
+
+(Switching the `chartwerk.ui.size` property is also how Chartwerk's backend bakes out each chart size, so it's important your template's code responds to it.)
 
 #### Working with the helper object
 
