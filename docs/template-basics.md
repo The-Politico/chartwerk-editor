@@ -152,7 +152,7 @@ The different properties in the datamap API can be used to create template code 
 
 #### Writing template code to handle both chart sizes
 
-Your chart template must accomodate both single and double-wide chart sizes. But you shouldn't need to write large blocks of code or if/then statements. You can write objects that use the API's active chart size key at `chartwerk.ui.size` to access the appropriate properties for your chart.
+Your chart template must accomodate both single and double-wide chart sizes. But you shouldn't need to write large blocks of code or lengthy if/then statements. You can write objects that use the API's active chart size key at `chartwerk.ui.size` to access the appropriate properties for your chart.
 
 For example:
 
