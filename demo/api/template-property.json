@@ -1,1 +1,0 @@
-[{"url":"http://localhost:25252/api/template-property/1/","finder":[],"template":["line-chart"],"slug":"time-series","property":"Time series"},{"url":"http://localhost:25252/api/template-property/2/","finder":[],"template":["us-state-choropleth-map"],"slug":"map","property":"Map"}]
