@@ -153,7 +153,7 @@ The different properties in the datamap API can be used to create template code 
 
 #### Writing template code to handle both chart sizes
 
-Your chart template must accomodate both single and double-wide chart sizes. But you shouldn't need to write large blocks of code or lengthy if/then statements. You can write objects that use the API's active chart size key at `chartwerk.ui.size` to access the appropriate properties for your chart.
+Your chart template must accommodate both single and double-wide chart sizes. But you shouldn't need to write large blocks of code or lengthy if/then statements. You can write objects that use the API's active chart size key at `chartwerk.ui.size` to access the appropriate properties for your chart.
 
 For example:
 
@@ -285,7 +285,7 @@ var werkHelper = {
 
 #### Dealing with date formatting
 
-Date formatting is always a finnicky part of every chart template. It's important that users have some flexibility to choose date formats appropriate for their chart.
+Date formatting is always a finicky part of every chart template. It's important that users have some flexibility to choose date formats appropriate for their chart.
 
 The code below is a complete example of a chart that has a date-typed X axis and uses Chartwerk's API to appropriately format dates for tick labels along the axis.
 
