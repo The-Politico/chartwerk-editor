@@ -20,11 +20,22 @@ Your backend can serve Chartwerk embeds as you like. For example, django-chartwe
 ```html
 <div
     class="chartwerk"
-    data-id="{Your Chartwerk chart ID}"
-    data-embed="{}"
-    data-size="{}"
+    data-id="ABCDEF"
+    data-size="double"
+    data-embed="{\"double\": {\"height\": 705, \"width\": 600}, \"single\": {\"height\": 431, \"width\": 290}}"
 ></div>
+<script src="https://yourdomain.com/chartwerk/parent_embed_script.js"></script>
 ```
+
+A `div` with four properties:
+
+- **class** -- Always `"chartwerk"`.
+- **data-id** -- Your chart's ID (as supplied by backend).
+- **data-size** -- Your preferred Chartwerk chart size, either `"double"` or `"single"`.
+- **data-embed** -- A JSON string that represents an object with the height and width in pixels of both of your Chartwerk chart sizes. This data is usually used by your parent embed script to determine the correct size of the chart to display and to set the height of the iframe on the parent page.
+
+A script tag whose source is the parent embed script.
+
 ### Parent embed script {#parent-embed}
 
 The parent page embed script is executed on the page on which you'd like to embed your chart.
@@ -74,7 +85,7 @@ While we presume that you will write your own parent embed script, here's an exa
 
 ### Child embed script
 
-The `client.bundle.js` script will render text elements, annotations and legends; size the chart appropriately and call the global `draw` function that actually draws your chart or map.
+The `client.bundle.js` script will render text elements, annotations and legends; size the chart appropriately and call the global `draw` function that actually draws your chart or map. This script is baked into the flat page of each chart by the backend.
 
 
 
