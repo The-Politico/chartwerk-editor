@@ -2,11 +2,11 @@
 
 Chartwerk offers a high level of customization when it comes to embedding your charts so you can build embeds that fit the particulars of your CMS.
 
-At it's core, Chartwerk embeds are simple iframes of the flat files baked out by Chartwerk's backend. There are two scripts, one for the parent page and one for child.
+At it's core, Chartwerk embeds are simple iframes of the flat files baked out by Chartwerk's backend. We assume a little markup and two scripts, one for the parent page and one for child.
 
 The parent page embed script is customized to your CMS and can handle logic like switching between a double or single-wide chart page based on the available width of the embed's container.
 
-The child embed script renders text elements like chart chatter and HTML annotations and also calls the chart's `draw` function. It is supplied by Chartwerk.
+The child embed script renders text elements like chart chatter and HTML annotations and also calls the chart's `draw` function. It is supplied by Chartwerk, baked into the child page by the backend.
 
 Your backend can serve Chartwerk embeds as you like. For example, django-chartwerk offers an oEmbed option.
 
