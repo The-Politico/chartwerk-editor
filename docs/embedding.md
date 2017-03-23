@@ -15,7 +15,7 @@ Your backend can serve Chartwerk embeds as you like. For example, django-chartwe
 - [Child embed script](#child-embed)
 
 
-### Required markup
+### Required markup {#html}
 
 ```html
 <div
