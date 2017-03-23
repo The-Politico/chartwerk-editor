@@ -1,14 +1,39 @@
 # Embedding Chartwerk charts
 
-### Rendering the chart
+Chartwerk offers a high level of customization when it comes to embedding your charts so you can build embeds that fit the particulars of your CMS.
 
-The `client.bundle.js` script will render text elements, annotations and legends; size the chart appropriately and call the global `draw` function that actually draws your chart or map.
+At it's core, Chartwerk embeds are simple iframes of the flat files baked out by Chartwerk's backend. There are two scripts, one for the parent page and one for child.
 
-### Embed script
+The parent page embed script is customized to your CMS and can handle logic like switching between a double or single-wide chart page based on the available width of the embed's container.
 
-You will also need an embed script on the parent page you're embedding your chart into.
+The child embed script renders text elements like chart chatter and HTML annotations and also calls the chart's `draw` function. It is supplied by Chartwerk.
 
-Here's an example:
+Your backend can serve Chartwerk embeds as you like. For example, django-chartwerk offers an oEmbed option.
+
+- [Required markup](#html)
+- [Parent embed script](#parent-embed)
+- [Child embed script](#child-embed)
+
+
+### Required markup
+
+```html
+<div
+    class="chartwerk"
+    data-id="{Your Chartwerk chart ID}"
+    data-embed="{}"
+    data-size="{}"
+></div>
+```
+### Parent embed script {#parent-embed}
+
+The parent page embed script is executed on the page on which you'd like to embed your chart.
+
+This script can be custom written for your CMS to do things like accomodate the width of your content well. It's main function is to insert an iframe with the appropriate src, either the double or single-wide chart.
+
+It's expected that you will write your own parent embed script and host it. The URL for the parent embed script is then passed to chartwerk-editor as context, namely `embed_src`.
+
+While we presume that you will write your own parent embed script, here's an example that will suit most cases:
 
 ```javascript
 (function(){
@@ -46,3 +71,10 @@ Here's an example:
     }
 })();
 ```
+
+### Child embed script
+
+The `client.bundle.js` script will render text elements, annotations and legends; size the chart appropriately and call the global `draw` function that actually draws your chart or map.
+
+
+
