@@ -66,3 +66,5 @@ var chartwerk = {{werk.data|jsonify}};
 {% endautoescape %}
 </script>
 ```
+
+\* `jsonify` simply dumps JSON using Python's standard module
