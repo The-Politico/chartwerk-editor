@@ -50,7 +50,7 @@ In django-chartwerk, we do this via a post-save signal on the chart model, using
 
 The chart scripts themselves are also inlined. A `chartwerk` global object is created which the draw function ingests. In that way, a chart is rendered in the baked page almost identically as it is rendered in chartwerk-editor.
 
-Here's an example (using Django templating syntax) of how we bake a chart's scripts:
+Here's an example from django-chartwerk (using Django's templating syntax) of how we bake a chart's scripts into a single script tag:
 
 ```html
 <script type="text/javascript">
